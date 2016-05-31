@@ -1,0 +1,64 @@
+\documentclass[a4paper,11pt,twoside]{StyleThese}
+\newcommand{\included}{}
+\include{formatAndDefs}
+\sloppy
+\begin{document}
+
+\include{page_de_garde}
+
+    \makeflyleaf
+
+
+\dominitoc
+
+\pagenumbering{roman}
+
+ \cleardoublepage
+
+\section*{Remerciements}
+
+%Comme cette page que vous venez de tourner, la fin d'une thèse représente la fin d'une page, ou plutôt d'un chapitre dans le livre d'une vie. Ce chapitre qu'est la thèse représente l'accomplissement de 10 années d'études et il me revient ici de remercier les personnes qui m'ont aidé à l'écrire jusqu'au bout.
+%Mes premiers remerciements vont donc à ... qui m'a aider à écrire une histoire de qualité.
+...
+%ancre -> amis
+%Enfin je voudrais remercier ceux qui m'ont fournis le livre
+%Pierre et Anne, parents + famille
+
+\tableofcontents
+
+\mainmatter
+
+\include{Resume}
+\include{Abstract}
+\include{Introduction}
+\include{Chapter1}
+\include{Chapter2}
+\include{Chapter3}
+\include{Chapter4}
+\include{Chapter5}
+\include{Conclusion}
+
+
+\appendix
+
+\include{Annexe1}
+
+\bibliographystyle{StyleThese}
+%\bibliographystyle{plain}
+\bibliography{hri,intention,situation_assessment,plan_recognition}
+
+%\printnomenclature
+
+\cleardoublepage
+\begin{vcenterpage}
+\noindent\rule[2pt]{\textwidth}{0.5pt}
+\\
+{\large\textbf{Résumé :}}
+resume
+{\large\textbf{Mots clés :}}
+mots, clefs
+\\
+\noindent\rule[2pt]{\textwidth}{0.5pt}
+\end{vcenterpage}
+
+\end{document}

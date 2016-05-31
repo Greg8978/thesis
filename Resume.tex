@@ -1,0 +1,31 @@
+\ifdefined\included
+\else
+\documentclass[a4paper,11pt,twoside]{StyleThese}
+\include{formatAndDefs}
+\sloppy
+\begin{document}
+\fi
+
+
+\chapter*{Résumé}
+\addstarredchapter{Résumé} %Sinon cela n'apparait pas dans la table des matières
+Les premiers robots sont apparus dans les usines, sous la forme d'automates programmables. Ces premières formes robotiques ont le plus souvent un nombre très limité de capteurs et se contentent de répéter une séquence de mouvements et d'actions. De nos jours, de plus en plus de robots ont à intéragir ou coopérer avec l'homme, que se soit sur le lieu de travail avec les robots coéquipiers ou dans les foyers avec les robots d'assistance.
+
+Mettre un robot dans un environnement humain soulève de nombreuses problèmatiques.
+En effet, pour évoluer dans le même environnement que l'homme et comprendre cet environnement, le robot doit être doté de capacités cognitives appropriées.
+
+
+Au delà de la compréhension de l'environnement matériel, le robot doit être capable de raisonner sur partenaires humains afin de pouvoir collaborer avec eux ou les servir au mieux. Lorsque le robot interagit avec des humains, l'accomplissement de la tâche n'est pas un critère suffisant pour quantifier la qualité de l'interaction. En effet, l'homme étant un être social, il est important que le robot puisse avoir des mécanismes de raisonnement lui permettant d'estimer également l'état mental de l'homme pour améliorer sa compréhension et son efficacité, mais aussi pour exhiber des comportements sociaux afin de se faire accepter et d'assurer le confort de l'humain.
+
+Dans ce manuscrit, nous présentons tout d'abord une infrastructure logicielle générique (indépendante de la plateforme robotique et des capteurs utilisés) qui permet de construire et maintenir une représentation de l'état du monde à l'aide de l'aggrégation des données d'entrée et d'hypothèses sur l'environnement. Cette infrastructure est également en charge de l'évaluation de la situation. En utilisant l'état du monde qu'il maintient à jour, le système est capable de mettre en oeuvre divers raisonnements spatio-temporels afin d'évaluer la situation de l'environnement et des agents (humains et robots) présents. Cela permet ainsi d'élaborer et de maintenir une représentation symbolique de l'état du monde et d'avoir une connaissance en permanence de la situation des agents.
+Dans un second temps, pour aller plus loin dans la compréhension de la situation des humains, nous expliquerons comment nous avons doté notre robot de la capacité connue en psychologie développementale et cognitive sous le nom de “théorie de l'esprit” concrétisée ici par des mécanismes permettant de raisonner en se mettant à la place de l'humain, c'est à dire d'être doté de “prise de perspective”.
+Par la suite nous expliquerons comment l'évaluation de la situation permet d'établir un dialogue situé avec l'homme, et en quoi la capacité de gérer explicitement des croyances divergentes permet d'améliorer la qualité de l'interaction et la compréhension de l'homme par le robot.
+Nous montrerons également comment la connaissance de la situation et la possibilité de raisonner en se mettant à la place de l'homme permet une reconnaissance d'intentions appropriée de celui-ci et comment nous avons pu grâce à cela doter notre robot de comportements proactifs pour venir en aide à l'homme .
+Pour finir, nous présenterons une étude présentant un système de maintien d'un modèle des connaissances de l'homme sur diverses tâches et qui permet une gestion adaptée de l'interaction lors de l'élaboration interactive et l'accomplissement d'un plan partagé.
+
+\ifdefined\included
+\else
+\bibliographystyle{acm}
+\bibliography{These}
+\end{document}
+\fi

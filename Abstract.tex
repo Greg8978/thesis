@@ -1,0 +1,70 @@
+\ifdefined\included
+\else
+\documentclass[a4paper,11pt,twoside]{StyleThese}
+\include{formatAndDefs}
+\sloppy
+\begin{document}
+\fi
+
+
+\chapter*{Abstract}
+\addstarredchapter{Abstract} %Sinon cela n'apparait pas dans la table des matières
+
+The first robots appeared in factories, 
+in the form of programmable controllers.
+These first robotic forms usually had a 
+very limited number of sensors and simply 
+repeated a small set of sequences of motions and actions.
+
+Nowadays, more and more robots have to interact
+ or cooperate with humans, whether at the workplace 
+ with teammate robots or at home with assistance robots.
+
+Introducing a robot in a human environment raises many challenges.
+Indeed, to evolve in the same environment as humans, and to understand 
+this environment, the robot must be equipped with appropriate cognitive abilities.
+
+Beyond understanding the physical environment, the robot must 
+be able to reason about human partners in order to work with 
+them or serve them best. When the robot interacts with humans, 
+the fulfillment of the task is not a sufficient criterion to 
+quantify the quality of the interaction. Indeed, as the human is a 
+social being, it is important that the robot can have reasoning 
+mechanisms allowing it to assess the mental state of the human
+to improve his understanding and efficiency, but also to exhibit 
+social behaviors in order to be accepted and to ensure the comfort of the human.
+
+In this manuscript, we first present a generic framework (independent of the robotic platform and 
+sensors used) to build and maintain a representation 
+of the state of the world by using the aggregation of data entry 
+and hypotheses on the environment. This infrastructure is also 
+in charge of assessing the situation. Using the state of the world it maintains, 
+the system is able to utilize 
+various spatio-temporal reasoning to assess the situation of the environment 
+and the situation of the present agents (humans and robots). This allows 
+the creation and maintenance of a symbolic representation of the state 
+of the world and to keep awareness of each agent status.
+
+Second, to go further in understanding the situation of the humans, 
+we will explain how we designed our robot with the capacity known in 
+developmental and cognitive psychology as "theory of mind",
+embodied here by mechanisms allowing the system to reason by putting itself in the 
+human situation, that is to be equipped with "perspective-taking" ability.
+Later we will explain how the assessment of the situation enables 
+a situated dialogue with the human, and how the ability to explicitly 
+manage conflicting beliefs can improve the quality of interaction 
+and understanding of the human by the robot.
+We will also show how knowledge of the situation and the perspective taking ability allows proper recognition 
+of human intentions and how we enhanced the robot 
+with proactive behaviors to help the human.
+Finally, we present a study where a system maintains a human model 
+of knowledge on various tasks to improve the management of the 
+interaction during the interactive development and fulfillment of a shared plan.
+ 
+
+\ifdefined\included
+\else
+\bibliographystyle{acm}
+\bibliography{These}
+\end{document}
+\fi
