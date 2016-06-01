@@ -19,8 +19,8 @@ Comme présenté dans le chapitre précédent, il est primordial que le robot co
 Ainsi il est primordial que le robot comprènne son environnement et sa situation mais également celle des humains présent dans cet environnement.
 Nous avons déjà présenté au chapitre précédent, comment certains composants du système d'évaluation de situation permettent d'obtenir des informations sur l'homme, notamment en \ref{sec:situationAgents}. Ici nous allons aller plus loin en considérant non seulement la situation spatiale de l'homme mais aussi sa situation mentale.
 
-\section{Théorie de l'Esprit}
-\subsection{Littérature Psychologique}
+\section{Théorie de l'esprit}
+\subsection{Littérature psychologique}
 \label{sec:psy}
 
 Afin de savoir comment le robot doit intéragir avec l'homme, il est important d'étudier tout d'abord comment les hommes interagissent entre eux.
@@ -48,7 +48,7 @@ Cette supposition que Bob fait de l'état de croyance d'Alice peut différer de 
 \begin{figure}[ht!]
  \centering
   \includegraphics[width=0.49\linewidth]{./img/conceptual.jpg} 
-  \caption {Illustration de la prise de perspective conceptuelle. Ici Bob attribue une croyance à Alice concernant la contenance de la boîte. Il suppose qu'elle croit que la boîte est vide. Cette faculté d'imputer des croyances aux autres s'appelle la prise de perspective conceptuelle (ou prise de prespective de niveau deux).}
+  \caption {Illustration de la prise de perspective conceptuelle. Ici Bob attribue une croyance à Alice concernant la contenance de la boîte. Il suppose qu'elle croit que la boîte est vide. Cette faculté d'imputer des croyances aux autres s'appelle la prise de perspective conceptuelle (ou prise de perspective de niveau deux).}
   \label{fig:conceptual}
 \end{figure}
 
@@ -101,7 +101,7 @@ Ainsi, dans la psychologie développementale, la faculté de comprendre qu'un au
 
 % ROMAN TOASTER 2016
 
-\subsection{Usage en Robotique}
+\subsection{Usage en robotique}
 
 Comme indiqué dans la partie \ref{sec:motivation}, pouvoir percevoir et raisonner sur l'environnement qui l'entoure sont des capacités nécéssaires pour le robot mais non suffisantes lorsqu'il intéragit avec des humains. Pour pouvoir comprendre la situation de l'humain, des recherches récentes ont tenté d'implémenter une sorte de théorie de l'esprit, en permettant au robot d'avoir la faculté de prise de perspective de niveau un (perceptuelle). Cynthia Breazeal présente dans \cite{breazeal2006} un algorithme d'apprentissage qui prends en compte l'information concernant le point de vue visuel de l'instructeur afin d'apprendre convenablement une tâche. Dans \cite{Johnson2005}, les auteurs appliquent la prise de perspective visuelle pour la reconnaissance d'action entre deux systèmes robotiques. Gregory Trafton dans \cite{Trafton2005} utilise à la fois la prise de perspective visuelle et spatiale pour identifier le référent indiqué par un partenaire humain. Dans \cite{ros2010one} la prise de perspective visuelle est utilisée pour simplifier la clarification de déclarations référentielles (referential utterances) dans des scénarios impliquant plusieurs objets.
 
@@ -152,9 +152,9 @@ Pour pleinnement comprendre et se faire comprendre par l'homme, certaines étude
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Prise de Perspective et État Mental}
+\section{Prise de perspective et état mental}
 
-\subsection{Prise de Perspective Perceptuelle}
+\subsection{Prise de perspective perceptuelle}
 \label{sec:perceptuelle}
 
 Dans notre système, pour donner au robot la capacité de se mettre à la place de l'homme et de comprendre ce qu'il est capable de percevoir et les éléments qui sont à sa porté, nous avons ajouté le calcul de deux faits basés sur la représentation tridimensionnelle de l'état du monde expliquée au chapitre précédent. Le premier permet de connaître ce qui est visible par l'homme, c'est à dire ce qui se trouve dans son champs visuel et n'est pas caché (ou tout du moins qui est suffisemment visible).
@@ -166,8 +166,20 @@ Dans notre système, pour donner au robot la capacité de se mettre à la place 
 % Concerning the reachability, a threshold of 1 meter is used to determine if the human can reach an object or not.
 
 
-Ainsi, dans la figure \ref{fig:occludedHuman}, l'humain en bleu est incapable de voir l'objet à droite (WHITE\_BOOK) car il est caché par la boîte grise (GREY\_BOX).
+Ainsi, dans la figure \ref{fig:occludedHuman}, l'humain en bleu est incapable de voir l'objet à droite (\textit{WHITE\_BOOK}) car il est caché par la boîte grise (GREY\_BOX). Le système robotique est capable, en utilisant la position de la tête de l'homme et le modèle de l'environnement, de savoir quels objets sont visibles de l'homme et quel pourcentage de l'objet est visible.
+En utilisant ce pourcentage, le système peut générer un fait concernant la visibilité de l'objet avec une confidance associée. Par exemple ici, le fait serait:
 
+\begin{scriptsize}
+\begin{verbatim}
+
+Subject   property  target    value
+
+ROBOT     canSee  WHITE_BOOK  true
+HUMAN     canSee  WHITE_BOOK  false
+\end{verbatim}
+%\end{small}
+%\end{footnotesize}
+\end{scriptsize}
 
 %TODO: surligné l'objet occlut
 \begin{figure}[ht!]
@@ -178,16 +190,16 @@ Ainsi, dans la figure \ref{fig:occludedHuman}, l'humain en bleu est incapable de
 \end{figure}
 
 
-Le robot est donc capable de savoir ce qu'il est capable de percevoir (moyennant éventuellement un mouvement de tête), mais également ce que l'homme peut ou non percevoir. Nous vérons dans le chapitre suivant comment cela peut être utilisé durant une intéraction, notamment pour améliorer le dialogue situé en terme d'éfficacité.
+Le robot est donc capable de savoir ce qu'il est capable de percevoir (moyennant éventuellement un mouvement de tête), mais également ce que l'homme peut ou non percevoir. Nous vérons dans le chapitre suivant comment cela peut être utilisé durant une interaction, notamment pour améliorer le dialogue situé en terme d'éfficacité.
 
-Le second fait ajouté concerne le calcul permettant de savoir si les objets qui entourent l'homme sont à sa porté. En utilisant la bibliothèque 3D Move3D  \cite{Simeon2001}, il est en effet possible de calculer la cinématique d'un agent et de planifier ses mouvements. Grâce à cela, il est donc possible de savoir si un objet est accécible à cet agent. Ce calcule est illustré par l'image \ref{fig:reach}, où le robot calcul l'accéssibilité d'un objet par rapport à lui même et à l'homme présent dans la scène.
+Le second fait ajouté concerne le calcul permettant de savoir si les objets qui entourent l'homme sont à sa porté. En utilisant la bibliothèque 3D Move3D  \cite{Simeon2001}, il est en effet possible de calculer la cinématique d'un agent et de planifier ses mouvements. Grâce à cela, il est donc possible de savoir quels objets sont accécibles aux agents de la scène. Ce calcul est illustré par l'image \ref{fig:reach}, où le robot calcul l'accéssibilité d'un objet par rapport à lui même et à l'homme présent dans la scène.
 
 
 
 \begin{figure}[ht!]
  \centering
   \includegraphics[width=0.99\linewidth]{./img/reach.jpg} 
-  \caption {Exemple d'état du monde où le système calcul si l'homme est capable d'atteindre un objet. Sur l'image de gauche, le robot est capable de calculer qu'il peut attrapper l'objet gris. Il peut également calculer que l'homme peut attraper l'objet gris, comme illustré par l'image centrale. Si l'homme avait été placé plus loin, il aurait été incapable de l'attrapé, comme illustré par l'image de droite.}
+  \caption {Exemple d'état du monde où le système calcul si les agents sont capables d'atteindre un objet. Sur l'image de gauche, le robot est capable de calculer qu'il peut attrapper l'objet gris. Il calcul également que l'homme peut attraper l'objet gris, comme illustré par l'image centrale. Si l'homme avait été placé plus loin, le robot aurait pu calculé que l'objet était inaccessible pour l'homme, comme illustré par l'image de droite.}
   \label{fig:reach}
 \end{figure}
 
@@ -207,21 +219,20 @@ HUMAN     canReach  GREY_OBJ  true         HUMAN     canReach  GREY_OBJ  false
 %\end{footnotesize}
 \end{scriptsize}
 
-Pouvoir connaître quels objets sont à la porté de l'homme permets au robot de générer des plans collaboratifs prenant en compte cette donnée pour l'allocation de tâche.
-%TODO cite paper
+Pouvoir connaître quels objets sont à la porté de l'homme permets au robot de générer des plans collaboratifs prenant en compte cette donnée pour l'allocation de tâche, comme dans \cite{gharbi2015}.
 Par exemple, si la tâche collaborative est de ranger des livres dans une boîte, si on a les faits:
 
 \begin{scriptsize}
 \begin{verbatim}
 
-                                   Subject   property  target     value
+Subject   property  target     value
 
-                                   ROBOT     canReach  BLUE_BOOK   true
-                                   ROBOT     canReach  WHITE_BOOK  false
-                                   ROBOT     canReach  BASKET      false
-                                   HUMAN     canReach  BLUE_BOOK   false
-                                   HUMAN     canReach  WHITE_BOOK  true
-                                   HUMAN     canReach  BASKET      true
+ROBOT     canReach  BLUE_BOOK   true
+ROBOT     canReach  WHITE_BOOK  false
+ROBOT     canReach  BASKET      false
+HUMAN     canReach  BLUE_BOOK   false
+HUMAN     canReach  WHITE_BOOK  true
+HUMAN     canReach  BASKET      true
 \end{verbatim}
 %\end{small}
 %\end{footnotesize}
@@ -230,39 +241,36 @@ Par exemple, si la tâche collaborative est de ranger des livres dans une boîte
 le plan généré prendra en compte que le livre bleu (BLUE\_BOOK) et le panier (BASKET) sont atteignables par le robot pour lui assigner la tâche de ranger ce livre. De même, comme le livre blanc (WHITE\_BOOK) et le panier sont atteignables par l'homme, la tâche de le ranger lui sera assignée.
 Ce fait peut également aider à la désambiguation, par exemple si l'homme demande au robot d'amener un objet, il est peu probable que l'homme parle d'un objet qui soit à sa porté.
 
-
-%TODO conclude on perspective taking with those two facts: helps to compute collaborative plan and blabla
-%TODO introduce the following
-
 %mais également comprendre la situation de l'homme avec lequel il intéragit.
 Pour comprendre l'homme, il est également important de comprendre sa situation spatiale, à savoir comment celui-ci est entouré et comment il est suceptible de décrire ce qui l'entour par rapport à sa position.
 
-%TODO spatial situation
-%Perspective taking?
-To improve this component from our previous work, we added requests concerning the relative position of entities toward an agent's point of view. When requested, it can tell on which side is an entity (left, right, back, front). It can also tell the relative position of an entity, compared to another, from the agent's perspective. For example, it makes possible for the robot to tell to the human "the mug you are looking for is \textbf{on your right}" or "please give me the book which is \textbf{for you on the left of the red mug}".
-This kind of requests enhance the robot with a geometrical perspective taking ability to talk to the human with his own references, improving the social aspect of the system.
+Nous avons donc ajouté dans notre système d'évaluation de la situation la possibilité de faire des requètes pour obtenir la position d'une entité du point de vue d'un agent. Il est par exemple possible de calculer de quel côté une entité se trouve (gauche, droite, avant, arrière).
+De plus, il est aussi possible d'obtenir la position d'une entité comparativement à une autre du point de vue d'un agent. Par exemple, il est possible pour le robot de dire à l'homme "la tasse que vous cherchez est \textbf{à votre droite}" ou "Donnez moi le livre qui est \textbf{pour vous à gauche de la tasse rouge}".
+Ces requètes permettent donc au robot d'avoir une prise de perspective géométrique et ainsi de parler à l'homme en prenant son propre référentiel, améliorant ainsi les performances sociales du robot.
 
 \begin{figure}[ht!]
  \centering
   \includegraphics[width=0.59\linewidth]{./img/relative_position.jpg} 
-  \caption {}
+  \caption {Illustration du découpage géométrique pour désigner les emplacements en prenant l'homme comme référentiel.}
   \label{fig:relativePose}
 \end{figure}
 
 
-\subsection{Prise de Perspective Conceptuelle}
+\subsection{Prise de perspective conceptuelle}
 \label{sec:beliefm}
-%\subsubsection{Suivi des États Mentaux}
-Nous avons expliqué dans le chapitre 2 qu'il est important de faire des hypothèses sur la position des objets pour pouvoir en assurer le suivi. Bien que nécéssaire, le fait de créer des hypothèse implique la possibilité de se tromper.
-En conclusion du chapitre 2, nous avons expliqué comment il est possible de probabiliser l'état du monde pour prendre en compte l'incertitude du robot.
-Dans cette section nous allons expliquer comment la prise de perspective va permettre au robot d'avoir connaissance de l'état croyances des hommes avec lesquels il intéragit et ainsi savoir lorsqu'ils ont une croyance erronnée concernant l'environnement.
+\subsubsection{Modélisation des états mentaux}
+Nous avons expliqué dans le chapitre \ref{chapter1} qu'il est important de faire des hypothèses sur la position des objets pour pouvoir en assurer le suivi. Bien que nécéssaire, le fait de créer des hypothèse implique la possibilité de se tromper.
+%En conclusion du chapitre 2, nous avons expliqué comment il est possible de probabiliser l'état du monde pour prendre en compte l'incertitude du robot.
+Dans cette section nous allons expliquer comment la prise de perspective va permettre au robot d'avoir connaissance de l'état de croyances des hommes avec lesquels il interagit et ainsi savoir lorsqu'ils ont une croyance erronnée concernant l'environnement.
 
-La première étape pour pouvoir connaître l'état mental d'un humain est d'avoir connaissance des informations qu'il reçoit. L'humain peut recevoir des informations sur son environnement de deux façons: soit il les reçoit dirèctement (ou les déduit) de ses capacités perceptive, soit d'un autre agent à travers le dialogue.
+La première étape pour pouvoir connaître l'état mental d'un humain est d'avoir connaissance des informations qu'il reçoit. L'humain peut recevoir des informations sur son environnement de deux façons: soit il les reçoit dirèctement (ou les déduit) de ses capacités perceptives, soit il les reçoit d'un autre agent à travers le dialogue.
 Pour donner au robot la capacité de prise de perspective décrite en \ref{sec:psy}, nous nous focalisons dans un premier temps sur la perception et sur le dialogue homme-robot pour déduire quelles informations l'humain peut aquérir.
 
 Grâce aux calculs des affordances des agents expliqués en \ref{sec:perceptuelle}, il est possible de savoir lorsqu'un agent perçoit un objet. Lorsqu'un humain voit un objet, cela implique qu'il aquiert la connaissance de sa localistion, et donc mets à jour cette information dans son état d'esprit. Cela permets donc de suivre l'état de connaissance de chaque agent.
 
 L'état mental de chaque agent (tel qu'il est estimé par le robot) est ainsi concervé et mis à jour dans un modèle séparé de l'état de connaissance que le robot lui-même possède sur l'environnement. Ainsi, le modèle représentant l'état mental de chaque agent se traduit par une liste de faits. Chaque modèle est indépendant et cohérent d'un point de vu logique.
+
+%TODO speak about database implementation?
 
 % In SPARK we have the position of humans (see III 1.). We use it to
 % calculate affordances of each human toward elements of the scene he can interact with.
@@ -276,9 +284,10 @@ L'état mental de chaque agent (tel qu'il est estimé par le robot) est ainsi co
 %  même tout petit pour mettre les idées en place ?}
 
 
-%\subsubsection{Géstion de Croyance Divergente}
+\subsubsection{Géstion de Croyance Divergente}
+\label{sec:divB}
 Dans certains cas, l'homme et le robot peuvent avoir un modèle qui contient des valeurs différentes. Cela peut provenir d'une vision différente de la scène (e.g. certaines propriétés sont accessibles uniquement au robot, donc l'homme n'en a pas connaissance).
-Cela peut provenir de croyances divergentes entre l'homme et le robot (e.g. l'homme croit qu'un objet a la propriété P alors que le robot sait que cette propriété est fausse). Dans ce second cas, la prise de perspective n'est pas suffisante pour comprendre la croyance erronnée de l'homme. Il est nécéssaire de mettre en place la gestion de croyance divergente (divergent belief management en Anglais).
+Cela peut provenir de croyances divergentes entre l'homme et le robot (e.g. l'homme croit qu'un objet a la propriété \textit{P} alors que le robot sait que cette propriété est fausse). Dans ce second cas, la prise de perspective n'est pas suffisante pour comprendre la croyance erronnée de l'homme. Il est nécéssaire de mettre en place la gestion de croyance divergente (divergent belief management en Anglais).
 
 
 % This Management relies on data from the environment as well as from
@@ -292,7 +301,7 @@ Cela peut provenir de croyances divergentes entre l'homme et le robot (e.g. l'ho
 %   \caption {Schema of SPARK reasoning to generate beliefs}
 %   \label{beliefs_fg}
 % \end{figure}
-Par exemple, si on considère qu'un humain appellé \textit{GREG} quitte la zone d'intéraction avec la croyance qu'un objet \textit{Obj} a la propriété \textit{Prop} dans un état \textit{e1}. 
+Par exemple, si on considère qu'un humain appelé \textit{GREG} quitte la zone d'intéraction avec la croyance qu'un objet \textit{Obj} a la propriété \textit{Prop} dans un état \textit{e1}. 
 
 On présente ci-dessous l'état de connaissance du robot et celui de \textit{GREG} tel qu'il est modélisé par le robot.
 
@@ -366,7 +375,7 @@ Pour illustrer, on peut prendre comme objet une radio (\textit{RADIO}) et comme 
 
 
 
-On peut prendre cette fois comme exemple un livre (\textit{BOOK}) ayant comme propriété une position (\textit{isOn}) et pour valeur le meuble sur lequel il se trouve (\textit{LIVINGROOM\_TABLE}, \textit{BEDSIDE\_TABLE}). Si \textit{GREG} quite la scène en sachant que le livre est sur la table du salon, lorsqu'il revient, s'il observe que le livre n'est plus à sa place, il aura alors connaissance que la propriété de position a changé de valeur sans être capable de savoir la nouvelle valeur de celle-ci tant qu'il n'aura pas vu l'objet.
+On peut prendre cette fois comme exemple un livre (\textit{BOOK}) ayant comme propriété une position (\textit{isOn}) et pouvant avoir pour valeur le meuble sur lequel il se trouve (\textit{LIVINGROOM\_TABLE}, \textit{BEDSIDE\_TABLE}, \textit{BEDROOM\_SHELF}). Si \textit{GREG} quite la scène en sachant que le livre est sur la table du salon, lorsqu'il revient, s'il observe que le livre n'est plus à sa place, il aura alors connaissance que la propriété de position a changé de valeur sans être capable de savoir la nouvelle valeur de celle-ci tant qu'il n'aura pas vu l'objet.
 
 \begin{scriptsize}
 \begin{verbatim}
@@ -379,7 +388,7 @@ On peut prendre cette fois comme exemple un livre (\textit{BOOK}) ayant comme pr
 
 
 
-\item Dans la troisième situation, l'homme est incapable de remarquer que la propriété a changée. L'humain va alors garder sa croyance erronnée concernant la propriété jusqu'à ce qu'il puisse constater un changement ou que le robot l'informe de l'évolution de la propriété. 
+\item Dans la troisième situation, l'homme est incapable de remarquer que la propriété a changé. L'humain va alors garder sa croyance erronée concernant la propriété jusqu'à ce qu'il puisse constater un changement ou que le robot l'informe de l'évolution de la propriété. 
 
 \begin{scriptsize}
 \begin{verbatim}
@@ -390,7 +399,7 @@ On peut prendre cette fois comme exemple un livre (\textit{BOOK}) ayant comme pr
 %\end{footnotesize}
 \end{scriptsize}
 
-Pour prendre un dernier exemple, si l'objet est une boîte de cookies (\textit{COOKIE\_BOX}) opaque et que la propriété décrit la présence de cookies à l'intérieur de la boîte (\textit{isFull}), pouvant prendre pour valeurs pleine (\textit{TRUE}) ou vide (\textit{FALSE}). Si lorsque \textit{GREG} quite la scène il pense que la boîte est vide, si celle-ci a été remplit pendant son absence, \textit{GREG} sera incapable de savoir que la boîte est apprésent remplie tant que celle-ci sera fermée.
+Pour prendre un dernier exemple, si l'objet est une boîte de cookies (\textit{COOKIE\_BOX}) opaque et que la propriété décrit la présence de cookies à l'intérieur de la boîte (\textit{isFull}), pouvant prendre pour valeurs pleine (\textit{TRUE}) ou vide (\textit{FALSE}). Si lorsque \textit{GREG} quite la scène il pense que la boîte est vide, si celle-ci a été remplit pendant son absence, \textit{GREG} sera incapable de savoir que la boîte est à présent remplie tant que celle-ci sera fermée (et donc l'état de la propriété \textit{isFull} non observable).
 
 \begin{scriptsize}
 \begin{verbatim}
@@ -408,44 +417,89 @@ COOKIE_BOX isFULL TRUE        COOKIE_BOX isFULL FALSE
 
 
 
-Knowing these beliefs is a great help to the robot to understand human and interact with him.
-The robot takes human's perception into account to have appropriate interpretation of human requests, to proactively inform or warn the human about a missing or wrong belief and also to generate a collaborative plan. 
-Thus, the robot has to reason on what a human can see, reach and
-knows to get these skills.
+% Knowing these beliefs is a great help to the robot to understand human and interact with him.
+% The robot takes human's perception into account to have appropriate interpretation of human requests, to proactively inform or warn the human about a missing or wrong belief and also to generate a collaborative plan. 
+% Thus, the robot has to reason on what a human can see, reach and
+% knows to get these skills.
 
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-ROMAN2016 INTENTION
-We consider our world as a dynamic environment, where entities can move, objects' properties can change and actions can be performed.  We define an action as a tuple $(name, preconditions, target, postconditions)$. The $name$ of an action is a unique string that identifies it. The $preconditions$ are a list of properties that must be true in order to realize the action. In our system, an action is executed on a $target$, which can be a physical object, like a cup, but also an area of the environment, like a room. The $postconditions$ are the set of properties, and their values, affected by the action's execution.
+% ROMAN2016 INTENTION
+% We consider our world as a dynamic environment, where entities can move, objects' properties can change and actions can be performed.  We define an action as a tuple $(name, preconditions, target, postconditions)$. The $name$ of an action is a unique string that identifies it. The $preconditions$ are a list of properties that must be true in order to realize the action. In our system, an action is executed on a $target$, which can be a physical object, like a cup, but also an area of the environment, like a room. The $postconditions$ are the set of properties, and their values, affected by the action's execution.
 
-Since we are interested, in this paper, on reasoning and not perceptual aspects, we use inference, as explained in Sec. \ref{sec:intention_recognition}, in order to understand when a human has performed an action. Through the predefined $postconditions$ of actions we can also infer changes in object properties, e.g. the human opens a box, so the box is now open. 
+% Since we are interested, in this paper, on reasoning and not perceptual aspects, we use inference, as explained in Sec. \ref{sec:intention_recognition}, in order to understand when a human has performed an action. Through the predefined $postconditions$ of actions we can also infer changes in object properties, e.g. the human opens a box, so the box is now open. 
 
-Since the environment is dynamic, agents can have divergent representations of the world. To model this aspect, the information produced by perception, geometrical reasoning and inference, are collected by the robot in \textit{belief models}, built for itself and for each agent. A \textit{belief model} is a symbolic representation of the world state, as known by an agent. In a model, the world state is represented by properties and values. To represent the lack of knowledge of an agent, the value of a property can be \textit{unknown}.
-We created a rule based framework in order to build beliefs of each agent and update them when needed. Human belief models are updated using the perspective taking skills of the robot. When the robot detects the execution of an action in the world, it updates the belief model for itself and for every human that can perceive the action, adding the action's $postconditions$ to their models. When an action is not perceived by a human (e.g. the user was in an other room), his belief model won't be updated, as he is not aware of the changes that occurred.
-
-However, when he comes back and looks at the environment, we assign him a new belief state following a set of rules, which we will now explain. We call $H$ the agent, $HB$ his belief model, and $RB$ the robot's belief model. We also create the following predicates: $obs(p)$ means that the instance of property $p$ is observable, $valid(p,x)$ means that the instance of property $p$ doesn't contradict the current perception data of agent $x$, $value(p,m)$ is the value of predicate $p$ in belief model $m$, and $vis(p,x)$ means that agent $x$ has visibility on the linked entities of property $p$. The rules for the $valid$ predicate will be different in each property. For example the property \textit{MUG isOn TABLE} won't be valid for agent Max if he can see that there is no mug on the table. For each property $p\in HB \cup RB$:
-\begin{itemize}
-\item if $p \in RB, \quad p\not\in HB,\quad obs(p),\quad vis(p,H) \rightarrow value(p,HB)=value(p,RB)$.
-\item if $p \not \in RB,\quad p\in HB,\quad obs(p),\quad vis(p,H) \rightarrow remove\quad $p$ \quad from \quad HB$.
-\item if $p\in RB,\quad p\in HB$ then:
-	\begin{itemize}
-      \item if $value(p,HB)\neq value(p,RB),\\ \quad obs(p),\quad vis(p,H) \rightarrow \\ value(p,HB)=value(p,RB)$.
-      \item if $value(p,HB)\neq value(p,RB),\\ \quad !obs(p),\quad !valid(p,H) \rightarrow \\ value(p,HB)=\textit{unknown}$.
-	\end{itemize}
-\end{itemize}
-The idea of this set of rules is updating an agent's mental belief model for a property only if it's observable, or if it's not observable and perception data contradicts the current value of the property (e.g. the mug was moved from the table to the kitchen while the agent was in another room: while the agent can not see where is the mug, he can see it is no longer on the table).
+% Since the environment is dynamic, agents can have divergent representations of the world. To model this aspect, the information produced by perception, geometrical reasoning and inference, are collected by the robot in \textit{belief models}, built for itself and for each agent. A \textit{belief model} is a symbolic representation of the world state, as known by an agent. In a model, the world state is represented by properties and values. To represent the lack of knowledge of an agent, the value of a property can be \textit{unknown}.
+% We created a rule based framework in order to build beliefs of each agent and update them when needed. Human belief models are updated using the perspective taking skills of the robot. When the robot detects the execution of an action in the world, it updates the belief model for itself and for every human that can perceive the action, adding the action's $postconditions$ to their models. When an action is not perceived by a human (e.g. the user was in an other room), his belief model won't be updated, as he is not aware of the changes that occurred.
 
 
 
 \section{Implémentation}
 %BASE DE DONNÉE
 %(Implémentation)
+
+\subsection{Traitement générique de la mise à jour de l'état de croyance}
+Pour pouvoir avoir un état du monde symbolique pour chaque agent afin de représenter la conception mentale que celui-ci a de l'environnement, il est possible d'ajouter une table dans la base de données temporelle.
+Cette table est comparable à la table \textit{ROBOT\_WS\_TBL} décrite en section \ref{sec:dbd} et qui contient une liste de faits décrivant l'état du monde perçu par le robot lui-même.
+De même que cette table contenant la représentation symbolique de l'environnement par rapport à l'état mental d'un agent tel qu'il est estimé par le robot, nous ajoutons également une table mémoire pour chaque agent. Cette table représente l'état de croyance passée de l'agent courant. Elle est comparable à la table \textit{ROBOT\_MEM\_TBL} décrite en section \ref{sec:dbt}.
+
+Cependant, pour le robot la mise à jour de ces tables repose dirèctement sur la perception de l'environnement basée sur les différents modules de TOASTER décrits en section \ref{sec:calculs} et sur le module de gestion des hypothèses décrit en section \ref{sec:hypo}. Pour pouvoir mettre à jour les croyances de l'homme, il faut pouvoir mettre en place une gestion des croyances tel que décrite en section \ref{sec:divB}.
+
+Pour se faire, comme expliqué en section \ref{sec:divB}, lorsqu'un agent ne peut percevoir un événement, son état mental reste inchangé.
+Toute la difficulté ici est de parvenir à estimer lorsque l'homme est capable ou non de mettre à jour son état de croyance.
+En effet, selon la propriété concernée, l'état peut être plus ou moins observable ou inférée selon divers moyens de perception.
+
+Par exemple, la propriété de localistion d'un objet est une propriété directement observable. En effet, si un homme observe un objet, il aura dirèctement la connaissance de sa position. Par contre, si l'on reprend l'exemple de la boîte de cookies, l'observabilité de la propriété de contenance dépends de la propriété relative à l'ouverture de cette boîte. Ainsi, il est possible d'observer la contenance de la boîte de cookie seulement si celle-ci est ouverte.
+De plus, la perception peut passer par divers modalité. Par exemple pour savoir qu'une tasse est chaude il est possible soit de percevoir de la fumée émanant de la tasse, soit de ressentir la chaleure de celle-ci dans la main.
+Enfin, l'observabilité est également liée aux capacités de perception de chaque agent. Ainsi, si l'on reprend l'exemple de la radio, une personne sourde ne sera pas en capacité de savoir si celle-ci est allumée ou éteinte.
+
+Afin de proposer une première implémentation et de mettre en place une gestion générique des hypothèses et du maintien de l'état mental de chaque agent, nous avons ajouté à chaque fait une notion d'observabilité, correspondant au champ \textit{factObservability} déjà présenté en section \ref{sec:facts} lors de la présentation de la structure de \textit{fait}.
+L'observabilité représente la probabilité qu'un agent puisse aquérir l'état d'une propriété lorsque le sujet (\textit{subject}) du fait est visible.
+
+Pour gérer la mise à jour nous utilisons les règles suivantes qui sont une adaptation des règles énnoncées en section \ref{sec:divB}. 
+Nous appelons $H$ l'agent, $HB$ son modèle de croyance, et $RB$ le modèle de croyance du robot. Nous créons également les prédicats suivants: $obs(p)$ signifi que l'instance de la propriété $p$ est observable, et probObs(p) l'observabilité de la propriété comme définie précédement. $valid(p,x)$ signifi que l'instance de la propriété $p$ ne contradit pas la perception courante de l'agent $x$. $value(p,m)$ est la valeur du prédicat $p$ dans le modèle de croyance $m$, et $vis(p,x)$ signifi que l'agent $x$ est capable de voir (lié à la propriété \textit{canSee} évoqué en section \ref{sec:perceptuelle}) l'entité sujet de la propriété $p$. $conf(p,x)$ représente la confiance que le robot a dans le fait que $x$ ait effectivement mis à jour la valeur de la propriété $p$. L'évaluation de la validité d'un prédicat étant hautement variable, il n'a été implémenté pour l'instant que pour les propriétés de position. En effet, pour les propriétés de position, le fait de pouvoir observer l'emplacement précédent suffit à savoir que la propriété n'est plus valide.
+Nous avons donc l'ensemble des règles de mise à jour suivant, pour chaque propriété  $p\in HB \cup RB$: 
+
+
+
+% We call $H$ the agent, $HB$ his belief model, and $RB$ the robot's belief model. We also create the following predicates: $obs(p)$ means that the instance of property $p$ is observable, $valid(p,x)$ means that the instance of property $p$ doesn't contradict the current perception data of agent $x$, $value(p,m)$ is the value of predicate $p$ in belief model $m$, and $vis(p,x)$ means that agent $x$ has visibility on the linked entities of property $p$. The rules for the $valid$ predicate will be different in each property. For example the property \textit{MUG isOn TABLE} won't be valid for agent Max if he can see that there is no mug on the table. For each property $p\in HB \cup RB$:
+\begin{itemize}
+\item if $p \in RB, \quad p\not\in HB,\quad obs(p),\quad vis(p,H) \rightarrow value(p,HB)=value(p,RB)$.
+\item if $p \not \in RB,\quad p\in HB,\quad obs(p),\quad vis(p,H) \rightarrow remove\quad $p$ \quad from \quad HB$.
+\item if $p\in RB,\quad p\in HB$ then:
+	\begin{itemize}
+      \item if $value(p,HB)\neq value(p,RB),\\ \quad obs(p),\quad vis(p,H) \rightarrow  value(p,HB)=value(p,RB)$ \\
+      $conf(p,H)=vis(p,H)*probObs(p)$.
+      \item if $value(p,HB)\neq value(p,RB),\\ \quad !obs(p),\quad !valid(p,H) \rightarrow  value(p,HB)=\textit{unknown}$.
+	\end{itemize}
+\end{itemize}
+
+L'idée de cet ensemble de règle est de mettre à jour le modèle d'état mental d'un agent seulement si le sujet de la propriété est observable par l'agent concerné, ou si il n'est pas observable mais que les données de perception contredisent la valeur actuelle de la propriété (par exemple si un mug a été déplacé de la table de la cuisine à une étagère en l'absence de l'agent, même si l'agent ne peut voir où est le mug, il peut voir qu'il n'est plus sur la table).
+
+
+\subsection{Reflexion sur d'eventuelles améliorations}
+La méthode d'implémentation basée sur les règles définies ci-dessous permets un traitement "automatique" et générique des divers propriétés.
+Cependant, cette implémentation est très simplifiée car comme indiqué précédement, 
+l'observation de l'invalidité d'une propriété ou l'aquisition du nouvel état d'une propriété peut être très variable d'une propriété à l'autre.
+
+L'une des façons d'améliorer simplement les règles déjà existante serait de considérer l'observabilité d'une propriété non seulement en la basant sur la visibilité du sujet mais aussi de la cible pour certaines propriétés. Ainsi selon la propriété, la mise à jour de l'état pourrait être liée à la possibilité de voir le sujet ou la possibilité de voir la cible ou la possibilité de voir les deux à la fois.
+
+Une autre façon d'améliorer la gestion des croyance serait de créer un ensemble de règle définissant les différents moyens de mise à jour d'une propriété.
+Ainsi, pour le problème de la propriété de contenance de la boîte opaque, il faudrait vérifier que: la boîte est visible par l'agent, que son contenu est visible et que la boîte est ouverte.
+Un autre exemple, pour savoir qu'un agent \textit{H1} est capable de savoir qu'un agent \textit{R} peut voir un objet \textit{O} il lui faut non seulement pouvoir voir la position de \textit{R} mais aussi connaître (ou voir) la position de l'objet \textit{O}.
+Cette méthode, bien qu'enviseageable nécéssiterait de définir des règles pour chaque propriétés, ou tu du moins chaque type de propriétés, et donc nécéssite de définir un domaine réduit avec des règles données au robot par un expert.
+Un moyen d'éviter cela serait de développer des meçanismes d'apprentissage afin que le robot apprenne de lui-même ces règles.
+
+
+%TODO finir: expliquer comment ça marche, ajouter des formules?
+%observabilité subject / target?
+
 %we assumed in previous chapter that perception object update property.
 %However, for some properties visual, some different...
-We assume here that if the human is able to perceive an object property, he is then aware of the object property state. As an example for position property, if there is no obstacle between his eyes and the object and the object is in the human field of view, 
-he is then aware of its position.
+% We assume here that if the human is able to perceive an object property, he is then aware of the object property state. As an example for position property, if there is no obstacle between his eyes and the object and the object is in the human field of view, 
+% he is then aware of its position.
 
 %explain how we do -> observability
 %explain that it is a first approximation, hypothesis are based on lot of things.
@@ -460,13 +514,13 @@ he is then aware of its position.
 %Sally and Anne + experience améliorée, cf Roman 2014
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Nous présentons ici l'une des expériences menée au LAAS permettant de mettre en valeur la capicité du système à maintenir et mettre à jour l'état mental des humains présents.
+Nous présentons ici l'une des expériences menée au LAAS permettant de mettre en valeur la capacité du système à maintenir et mettre à jour l'état mental des humains présents grâce aux mécanismes de suivi et de mise à jour d'état mental présenté précédement.
 
 \subsection{Configuration Expérimentale}
 Tout d'abord, nous présentons brièvement les capteurs et modules que nous utilisons pour les expérimentations.
 
 
-Ces expérimentations ayant été réalisées en 2014, l'infrastructure logicielle utilisée pour l'estimation de la situation est SPARK, qui est une version antérieure à TOASTER mais qui a un fonctionnement similaire pour le suivi de l'état mental des humains concernant les propriétés de position des objets.
+Ces expérimentations ayant été réalisées en 2014, l'infrastructure logicielle utilisée pour l'estimation de la situation est SPARK\cite{Milliez2014}, qui est une version antérieure à TOASTER mais qui a un fonctionnement similaire pour le suivi de l'état mental des humains concernant les propriétés de position des objets.
 
 %TODO: redo
 \begin{figure}[ht!]
@@ -474,29 +528,20 @@ Ces expérimentations ayant été réalisées en 2014, l'infrastructure logiciel
   %% \includegraphics[width=0.7\textwidth]{./figs/supervisor-architecture-new.pdf} \\
 % \includegraphics[width=0.5\textwidth]{./image/sparkinput.png} \\
  \includegraphics[width=0.99\linewidth]{./img/spark_input.png} 
-  \caption {Schema of SPARK input implementation}
-  \label{input_fg}
+  \caption {Schema représentant les entrées de SPARK.}
+  \label{fig:inputSpark}
 \end{figure}
 
-Pour assurer le suivi des humains, nous utilisons une Asus xtion. Comme le fait de bouger la tête une partie importante de la communication pour permettre au robot de montrer son attention, et pour éviter la perte du suivi, nous avons fixé l'Asus xtion sur une base stable derrière le robot.
-Un module, appelé niut, est responsable de la gestion du suivi des humains, en utilisant l'API OpenNI. Ce module détecte également la teinte moyenne du haut des humains afin de les identifier. Pour obtenir la valeur moyenne de la teinte de chaque humain, on extrait la position du torse, puis nous la projetons dans les coordonnées de l'image RGB. Si les données sont disponibles, le module utilise également les coordonnées des épaules et des hanches pour définir le rectangle dans lequel la teinte sera calculée, sinon le module créé un rectangle au tour de la position du torse, en adaptant l'échelle en fonction de l'éloignement de l'humain.
-En donnant au module les valeurs des teintes de chaque humains, il est possible de reconnaître l'humain et d'envoyer ses données de postures au module d'estimation de la situation avec un id unique. Cela permets de filtrer les faux positifs dans la détection d'humains et évite que des humains non enregistrés perturbent le déroulement des expériences.
+Pour assurer le suivi des humains, nous utilisons une Asus xtion. Comme le fait de bouger la tête est une partie importante de la communication pour permettre au robot de montrer son attention, et pour éviter la perte du suivi, nous avons fixé l'Asus xtion sur une base stable derrière le robot.
+Un module, appelé \textit{niut}, est responsable de la gestion du suivi des humains, en utilisant l'API OpenNI. Ce module détecte également la teinte moyenne du haut des humains afin de les identifier. Pour obtenir la valeur moyenne de la teinte de chaque humain, on extrait la position du torse, puis nous la projetons dans les coordonnées de l'image RGB. Si les données sont disponibles, le module utilise également les coordonnées des épaules et des hanches pour définir le rectangle dans lequel la teinte sera calculée, sinon le module créé un rectangle au tour de la position du torse, en adaptant l'échelle en fonction de l'éloignement de l'humain.
+En donnant au module les valeurs des teintes de chaque humains, il est possible de reconnaître l'humain et d'envoyer ses données de postures au module d'estimation de la situation avec un id unique. Cela permets également de filtrer les faux positifs dans la détection d'humains et évite que des humains non enregistrés perturbent le déroulement des expériences.
 Pour que les hommes soient à la bonne position dans le modèle du monde, une projection est effectuée à partir de la position et l'orientation de l'Asus xtion.
-
-
-
 
 La posture et la position du robot sont dirèctement obtenues grâce à ses capteurs internes en utilisant l'intergiciel ROS.
 
-Enfin, pour obtenir la position des objets, nous utilisons le module Viman. Ce module utilise la vision stéréo du robot pour reconnaître et localiser les objets. Pour ce faire, viman scan des RTags sur les objets.
-%TODO ref to rtags
+Enfin, pour obtenir la position des objets, nous utilisons le module \textit{Viman} qui est basé sur la bibliothèque de réalité augmentée ARToolKit\footnote{http://artoolkit.org/}. Ce module utilise la vision stéréo du robot pour reconnaître et localiser les objets. Pour ce faire, \textit{viman} scan des RTags placés sur les objets.
 Une fois que la position relative (à la caméra) de l'objet est connue, elle est envoyée au module d'estimation de la situation qui, en utilisant la position de la tête du robot pourra obtenir la position de l'objet dans le monde par projection.
-La figure \ref{input_fg} illustre cette implémentation.
-
-
-
-
-
+La figure \ref{fig:inputSpark} illustre cette implémentation.
 
 
 \subsection{Résultats}
@@ -511,11 +556,6 @@ Nous avons introduit ci-dessus comment nous procédons pour suivre les croyances
 
 Pour aider à la compréhension des scénarios, la figure \ref{SA} et la figure  \ref{divB} sont des images de l'expérimentation réelle avec des captures d'écran de la modélisation 3D du module de raisonnement spatial.
 
-Dans le premier scénario, afin de tester notre système et d'illustrer l'habileté du robot à détecter les \emph{croyances fausses/divergentes sur la position d'un objet} nous avons décider de le soumettre au test de Sally et Anne. Dans notre expérience, deux utilisateurs Greg (en vert) et Bob (en bleu) font face au robot
-La scène est composé d'un libre blanc et de deux boîtes se trouvant sur une table \ref{initSA}).
-Greg mets le livre blanc sous la boîte rose (\ref{startSA}). Puis Greg quite la scène. Pendant que Greg est parti, Bob prends le livre blanc et le mets sous la petite boîte. (\ref{middleSA} et \ref{endSA}).
-Puis, quand Greg revient, nous demandons au robot où Greg pense que le livre se trouve.
-
 
 \begin{figure*}[ht!]
   \begin{center}
@@ -529,17 +569,23 @@ Les petites sphères de couleur dans l'environnement perçu sont utilisées comm
   \label{SA}
 \end{figure*}
 
+Dans le premier scénario, afin de tester notre système et d'illustrer l'habileté du robot à détecter les croyances fausses/divergentes sur la position d'un objet nous avons décider de le soumettre au test de Sally et Anne déjà présenté par la figure \ref{fig:sallyAndAnne}. Dans notre expérience, deux utilisateurs Greg (en vert) et Bob (en bleu) font face au robot
+La scène est composée d'un livre blanc et de deux boîtes se trouvant sur une table \ref{initSA}).
+Greg mets le livre blanc sous la boîte rose (\ref{startSA}). Puis Greg quite la scène. Pendant que Greg est parti, Bob prends le livre blanc et le mets sous la petite boîte. (\ref{middleSA} et \ref{endSA}).
+Puis, quand Greg revient, nous demandons au robot où Greg pense que le livre se trouve.
 
 
-Nous allons présenter ci-dessous quelques faits symboliques interessants pour Greg et le robot correspondant à la situation décrite en \ref{endSA}.
-%TODO update facts
+
+
+
+Nous allons présenter ci-dessous quelques faits symboliques interessants pour Greg et le robot correspondant à la situation décrite en \ref{endSA}. Les croyances de Bob restent identiques à celles du robot et ne seront donc pas affiché par simplification.
 \begin{scriptsize}
 \begin{verbatim}
           ROBOT                         GREG
 GREG canSee PINK_BOX  TRUE      GREG canSee PINK_BOX  TRUE
 GREG canSee SMALL_BOX TRUE      GREG canSee SMALL_BOX TRUE
 GREG canSee BOOK      FALSE     GREG canSee BOOK      FALSE
-BOOK isIn   SMALL_BOX           BOOK isIn   PINK_BOX
+BOOK isIn   SMALL_BOX TRUE      BOOK isIn   PINK_BOX  TRUE
 
 \end{verbatim}
 \end{scriptsize}
@@ -549,7 +595,7 @@ Comme le robot sait que le livre n'est pas visible par Greg, il n'a pas mis à j
 \subsubsection{Gestion de Croyance Divergente}
 
 
-Pour aller plus loin et illustrer les trois différentes situations présentées en \ref{sec:beliefm}, nous avons tourné un autre scénario. Dans cette deuxième expérimentation, deux utilisateurs, Greg et Bob, font face au robot. Ils ont un livre blanc et une boîte blanche qui servira pour faire de l'occlusion visuelle (\ref{initDB}).
+Pour aller plus loin et illustrer les trois différentes situations présentées en section \ref{sec:divB}, nous avons tourné un autre scénario illustré par la figure \ref{divB}. Dans cette deuxième expérimentation, deux utilisateurs, Greg et Bob, font face au robot. Ils ont un livre blanc et une boîte blanche qui servira pour faire de l'occlusion visuelle (\ref{initDB}).
 Une fois que Bob pars (\ref{startDB}) Greg prends le livre blanc et le mets derrière la boîte blanche pour qu'il ne soit pas visible du point de vue humain (\ref{startDB}).
 Puis Greg pars et Bob revient. Le robot est capable de comprendre que, comme le livre blanc est caché, Bob ne sait pas où il se trouve. Toutefois, Bob peut voir que le livre n'est plus là où il pensait qu'il serait. Cette information manquante est représenté par une sphère transparente à l'emplacement où Bob pensait trouver l'objet (\ref{lackBobDB}).
 
@@ -558,7 +604,7 @@ Puis Greg pars et Bob revient. Le robot est capable de comprendre que, comme le 
   \begin{center}
     \subfigure[Greg (en vert) et Bob (en bleu) font face au robot. Ils connaissent la position de chaque objet.]{\includegraphics[width=0.49\textwidth]{./DivBFull/1ms.png}\label{initDB}}
     \subfigure[Bob pars, Greg mets le livre blanc derrière la boîte blanche.]{\includegraphics[width=0.49\textwidth]{./DivBFull/2ms.png}\label{startDB}}
-    \subfigure[Greg pars et Bob revient. Bob ignore la position du livre blanc. Le robot est au courant de ce manque d'information (une sphère bleu transparente représente la dernière croyance de Bob concernant la position du livre blanc).]{\includegraphics[width=0.49\textwidth]{./DivBFull/3ms.png}\label{lackBobDB}}
+    \subfigure[Greg pars et Bob revient. Bob ignore la position du livre blanc. Le robot est au courant de ce manque d'information (une sphère bleue transparente représente la dernière croyance de Bob concernant la position du livre blanc).]{\includegraphics[width=0.49\textwidth]{./DivBFull/3ms.png}\label{lackBobDB}}
     \subfigure[Bob regarde derrière la boîte blanche (et donc mets à jour ses croyances) et prends le livre blanc. ]{\includegraphics[width=0.49\textwidth]{./DivBFull/4ms.png}\label{updateBobDB}}
     \subfigure[Bob pars avec le livre blanc, puis Greg revient. Greg pense toujours que le livre blanc est derrière la boîte blanche. Le robot est au courant de cette croyance divergente (Une sphère opaque verte représente la croyance actuelle de Greg concernant la position du livre blanc).]{\includegraphics[width=0.49\textwidth]{./DivBFull/6ms.png}\label{GregDB}}
     \subfigure[Greg regarde derrière la boîte blanche et est alors informé que sa croyance est erronée mais ne connaît pas la nouvelle position de l'objet (la sphère devient transparente).]{\includegraphics[width=0.49\textwidth]{./DivBFull/7ms.png}\label{lackGregDB}}
@@ -579,13 +625,56 @@ BOOK   isNextTo WHITE_BOX TRUE          BOOK   location           unknown
 \end{verbatim}
 \end{scriptsize}
 
-A l'étape suivante, Bob regarde derrière la boîte blanche et mets à jour ses croyances (\ref{updateBobDB}).
-Puis il prends le livre blanc et s'en va. Lorsque Greg revient, comme l'objet était caché auparavant et est toujours pas visible, le robot est capable de comprendre que Greg n'a pas mis à jour ses croyance et a donc une croyance erronée sur la position du livre blanc. Cette croyance erronée est représentée par une sphère opaque à l'emplacement où Greg pense que le livre se trouve (\ref{GregDB}).
+A l'étape suivante, Bob regarde derrière la boîte blanche et mets à jour ses croyances (\ref{updateBobDB}). Les croyances de Bob et du robot sont alors identiques.
+Puis il prends le livre blanc et s'en va. Lorsque Greg revient, comme l'objet était caché auparavant et est toujours pas visible, le robot est capable de comprendre que Greg n'a pas mis à jour ses croyances et a donc une croyance erronée sur la position du livre blanc. Cette croyance erronée est représentée par une sphère opaque à l'emplacement où Greg pense que le livre se trouve (\ref{GregDB}).
+
+Ci-dessous sont représentés quelques faits symboliques concernant les croyances de Greg et du robot tel que le robot les modèlise à ce moment là.
+
+\begin{scriptsize}
+\begin{verbatim}
+          ROBOT                                        GREG
+ROBOT  canSee    WHITE_BOX  TRUE          ROBOT  canSee   WHITE_BOX   TRUE    
+GREG   canSee    WHITE_BOX  TRUE          GREG   canSee   WHITE_BOX   TRUE
+GREG   canSee    BOOK       FALSE         GREG   canSee   BOOK        FALSE
+BOB    hasInHand BOOK       TRUE          BOOK   isNextTo WHITE_BOX
+\end{verbatim}
+\end{scriptsize}
+
 Puis Greg regarde derrière la boîte blanche. Dès qu'il voit que le livre n'y est pas, il n'a plus de croyance divergente mais il ignore toujours où se trouve le livre. Comme le robot a suivi cette action d'observation, il a mis à jour le modèle d'état mental de Greg. La sphère représentant la croyance de Greg sur la position du livre est alors devenue transparente (\ref{lackGregDB}).
 
-Sans notre algorithme, à chaque étape le robot penserait à chaque étape que les humains ont la même croyance que lui concernant la position des objets (à savoir que l'humain connait la nouvelle position de l'objet).
+Ci-dessous sont représentés quelques faits symboliques concernant les croyances de Greg et du robot tel que le robot les modèlise à ce moment là.
 
-%REDIT avec chapter4
+\begin{scriptsize}
+\begin{verbatim}
+          ROBOT                                        GREG
+ROBOT  canSee    WHITE_BOX  TRUE          ROBOT  canSee   WHITE_BOX   TRUE    
+GREG   canSee    WHITE_BOX  TRUE          GREG   canSee   WHITE_BOX   TRUE
+GREG   canSee    BOOK       FALSE         GREG   canSee   BOOK        FALSE
+BOB    hasInHand BOOK       TRUE          BOOK   location             unknown
+\end{verbatim}
+\end{scriptsize}
+
+
+Sans notre algorithme, à chaque étape le robot penserait que les humains ont la même croyance que lui concernant la position des objets (à savoir que l'humain connait la nouvelle position de l'objet).
+
+
+\section{Conclusion}
+%TODO
+Nous avons montré comment en ajoutant quelques calculs géométrique à notre système d'évaluation de la situation il nous est possible de mettre en place un suivi de la situation spatiale de l'homme et de ses affordances en terme de visibilité et d'accessibilité des éléments.
+
+Basé sur cette visibilité, nous avons montré comment il est possible de modéliser et de maintenir un état de croyance pour chaque agent. Ceci est réalisé en utilisant des règles basées sur l'observabilité des propriétés et sur la possibilité pour l'agent concerné de voir l'entité liée à la propriété.
+Nous avons également conduit une étude permettant de valider et mettre en pratique la capacité de prise de perspective conceptuelle du robot, notamment en faisant passer une réplique du test de Sally et Anne.
+
+Ces capacités de prise de perspective et de raisonnement sur l'état des agents en terme de situation spatiale, de capacité perceptive et d'état de croyance est essentiel pour une bonne compréhension de l'homme.
+Dans le chapitre suivant, nous montrerons comment la prise de perspective de niveau aide à l'identification de référent pour le dialogue situé homme robot et comment la prise de perspective de niveau deux peut être intégrée à un système de dialogue situé pour en améliorer l'éfficacité et le taux de succès.
+
+Dans le chapitre \ref{chapter4}, la capacité de prise de perspective conceptuelle
+est utilisée pour interpréter convenablement les actions d'un homme afin d'en déduire son intention et de donner un comportement proactif au robot.
+
+
+
+
+%REDIT avec chapter3?
 % \subsubsection{Dialog disambiguation}
 
 

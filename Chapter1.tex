@@ -125,7 +125,9 @@ De même, les équipements de capture de mouvements, tel que celles utilisées d
 
 
 \section{Calculs géométriques}
+\label{sec:calculs}
 \subsection{Modèle tridimensionnel et calculs de faits}
+\label{sec:facts}
 
 Une fois que le système robotique peut accéder aux données lui permettant d'obtenir la configuration de l'environnement et des divers éléments qui le composent, il est nécéssaire, pour en extraire les informations pertinentes, de croiser les données. Pour ce faire, il faut dans un premier temps regrouper les données de position dans un repère commun afin que le robot puisse avoir une représentation globale de la scène. La figure \ref{fig:real} illustre cette unification avec une représentation en trois dimensions des divers éléments de l'environnement tel qu'ils sont perçus par le robot.
 
@@ -296,12 +298,14 @@ Le schéma \ref{fig:hypo} présente l'architecture prévisionnelle permettant ce
 
 %TODO: Temporal database here?
 \section{Base de données temporelle}
+\label{sec:db}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Nous avons présenté précédement comment divers composants contribuent à maintenir un état du monde géométrique (sub symbolique). Nous avons également présenté comment d'autres composants, à partir de l'état du monde géométrique et de raisonnements et calculs sur celui-ci, générent une liste de faits permettant une représentation symbolique de l'état du monde et une éstimation de la situation.
 
 Afin de regrouper ces données symboliques et permettre un accès standardisé et efficace, nous avons ajouté une base de données SQL à notre système.
 
 \subsection{Gestion des données}
+\label{sec:dbd}
 La base de données peut gérer deux types de données: les données statiques et dynamiques. En effet, il est possible de connaître à priori certaines informations sur l'environnement tel que la couleur, le nom de certains objets ou leur type ou leur propriétaire. 
 Nous avons donc dans notre base de donées une première table permettant d'avoir des informations sur les diverses entitées de l'environnement. Cette table peut être complétée en ligne si le système reçoit des informations complémentaires durant l'interaction (si le robot découvre de nouvelles propriétés statiques ou de nouveaux objets, que se soit par la perception ou le dialogue).
 
@@ -311,6 +315,7 @@ Cette table est composée de faits qui sont considérés comme vrais et mis à j
 %blabla etat du monde + données statiques
 
 \subsection{Gestion de la temporalité}
+\label{sec:dbt}
 L'une des valeurs ajoutées de cette base de données est l'aspect temporel.
 En effet, lors d'une interaction homme robot, de nombreux événements peuvent se succéder et pour pouvoir comprendre et interpréter les actions et les élocutions de l'homme, il est important de considérer l'historique de l'interaction.
 
