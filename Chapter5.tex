@@ -195,7 +195,7 @@ Ce formalisme de représentation de la tâche exige un expert du domaine pour in
 % To sum up, some tasks can be tagged as common knowledge while other tasks can be described by some of their parameters or parameter type.
 % This formalism of task representation requires a domain expert to indicate how to represent the task knowledge.
 
-\subsection{Niveau de Connaissance de Tâche}
+\subsection{Niveau de connaissance de tâche}
 
 %How human update their knowledge
 Dans ce contexte où le robot génère le plan partagé, nous supposons qu'il connaît toutes les tâches contenues dans le plan.
@@ -231,7 +231,7 @@ Ces niveaux de connaissance de tâche permettent l'adaptation de la génération
 
 \section{Plannificateur HTN Human-Adaptive}
 % Shared plan generation and knowledge level policy
-\label{planning}
+\label{sec:planning}
 
 %TODO: mb put this here? explain first why we use HTN and then explain HATP...
 %We chose to use HTN structures to represent shared plans because it's a hierarchical composition. Planners such as STRIPS \cite{strips71} build plans that are simply sequences of actions. On the other hand hierarchy offers a better understanding of the context in which an agent is asked to carry out an action. This context can be used by the monitoring system to better track the execution of the action but it is also very beneficial for dialogue. Indeed, by understanding the reasons behind an action, the dialogue system guide users in a more appropriate way, by explaining why he should perform an action and how it is linked to previous and successive part of the plan. 

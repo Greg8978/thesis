@@ -17,12 +17,12 @@
 
 \subsection{Introduction}
 %intro + related work
-L'une des compétences essentielles pour intéragir convenablement avec l'homme est de fournir des moyens d'assurer la compréhension mutuelle dans le contexte situé de l'activité jointe. Le robot et l'humain doivent avoir des références aux éléments de l'environnements qui soient communes (common ground), ce qui signifi qu'ils doivent pouvoir identifier, dans leur propre représentation du monde, les actions, les entités (humains, robots ou objets) et les propriétés énnoncées par leur interlocuteur.
+L'une des compétences essentielles pour interagir convenablement avec l'homme est de fournir des moyens d'assurer la compréhension mutuelle dans le contexte situé de l'activité jointe. Le robot et l'humain doivent avoir des références aux éléments de l'environnements qui soient communes (common ground), ce qui signifi qu'ils doivent pouvoir identifier, dans leur propre représentation du monde, les actions, les entités (humains, robots ou objets) et les propriétés énnoncées par leur interlocuteur.
 %TODO biblio on grounding / situated dialogue / reference generation
 
 Les systèmes robotiques reposent sur les capteurs pour reconnaître et localiser les entités afin de construire l'état du monde. Ces capteurs produisent des coordonnées pour positionner les entités par rapport à un repère donné. Par exemple, une caméra stéréo avec un logiciel de reconnaissance peut permettre de savoir qu'une tasse est à une position donnée  $x$, $y$, $z$ avec une orientation $\theta$, $\phi$, $\psi$.
 Les humains quand à eux, utilisent les relations spatiales entre les éléments pour décrire leur position. Pour indiquer la position de la tasse, l'humain dirait par exemple qu'il se trouve sur la table de la cuisine, sans donner les coordonnées précises.
-Pour comprendre les références de l'homme et générer des déclarations compréhensibles, le robot se doit donc de construire une représentation symbolique du monde, basée sur la fusion des données géométriques qu'il a collecté par ses capteurs, comme cela a été fait dans \cite{lemaignan2012grounding}.
+Pour comprendre les références de l'homme et générer des déclarations compréhensibles, le robot se doit donc de construire une représentation symbolique du monde, basée sur les données géométriques qu'il a collecté par ses capteurs, comme cela a été fait dans \cite{lemaignan2012grounding}.
 
 %We have developed a module based on spatial and temporal reasoning to generate "facts" about the current state of the world \cite{milliez2014framework}. A fact is a property which describes the current state of an entity (e.g. $MUG$ $isNextTo$ $BOTTLE$, $MUG$ $isFull$ $TRUE$). This framework generates facts related to the entities' position and facts about affordances to know, for instance, what is visible or reachable to each agent (human and robot). 
 %It also generates facts about agent postures to know if an agent is pointing toward an object or where an agent is looking. When the robot tries to understand the human, it should also use these data to improve the information grounding process.
@@ -32,17 +32,16 @@ En plus de l'état du monde (qui peut être considéré comme l'état de croyanc
 Pour établir ces références communes et comprendre les actes communicatifs humains à la lumières de sa situations, nous avons utilisé notre infrastructure logicielle d'évaluation de la situation, présentée dans les chapitres précédents, dans le cadre d'un projet visant à mettre en place un dialogue situé homme-robot
 
 
-\subsection{Le Projet MaRDi}
+\subsection{Le projet maRDi}
 %Projet MaRDi (thèse Manu)
-Ces travaux ont été réalisés dans le cadre du projet de l’Agence Nationale pour la Recherche,
-ANR, MaRDi\footnote{Man-Robot Dialogue - http ://mardi.metz.supelec.fr
-}, financé dans le cadre de l’appel à projet Contenu et Interactions. Les
-travaux réalisés dans ce cadre ont été faits en collaboration avec le Laboratoire d’Informatique Fondamentale de Lille (LIFL), l’École supérieure d’électricité (Supélec), le Laboratoire d’Analyse et d’Architecture des Systèmes (LAAS), le groupe Acapela et le Laboratoire Informatique d’Avigon (LIA).
+Ces travaux ont été réalisés dans le cadre du projet MaRDi\footnote{Man-Robot Dialogue - http ://mardi.metz.supelec.fr
+} de l’Agence Nationale pour la Recherche (ANR). Il a été financé par l’appel à projet Contenu et Interactions. Les
+travaux réalisés ont été faits en collaboration avec le Laboratoire d’Informatique Fondamentale de Lille (LIFL), l’École supérieure d’électricité (Supélec), le groupe Acapela, le Laboratoire Informatique d’Avigon (LIA) et le Laboratoire d’Analyse et d’Architecture des Systèmes (LAAS).
 Ce projet a pour axe d’étude l’apport d’une approche "située" du dialogue Homme-
 Machine. Le terme "situé" est ici relatif à l’incarnation physique d’un système de dialogue dans une plateforme robotique qui va permettre d’envisager l’intégration d’informations issues des perceptions physiques du robot dans le contexte de l’interaction pour espérer compléter ou lever des ambiguïtés introduites par le medium vocal. Ce projet s’inscrit également dans l’utilisation de méthodes d’apprentissage numérique, exploitant les données collectées au travers de la conduite de véritables interactions afin d’améliorer l’efficacité et le naturel du système dans le temps. L’originalité de l’approche est de ne pas considérer les technologies vocales comme disponibles et dissociées de la tâche d’interaction Homme-Robot, mais bel et bien comme moyen d’en améliorer l’expérience et les performances.
 Pour atteindre ce but, la Machine doit être capable de maintenir un contexte d’interaction suffisamment riche pour pouvoir être à même de prendre des décisions sur la
 suite à donner à celle-ci. Ce contexte intègrera les entrées fournies par l’humain mais
-aussi les informations issues de la perception de l’environnement et des proprioceptions du robot (mesures du système sur lui-même comme par exemple l’angle de rotation de ses armatures, le niveau charge de sa batterie, etc.). Sur ces aspects en particulier,
+aussi les informations issues des calculs géométriques et des raisonnements effectués à partir de la perception de l’environnement. Sur ces aspects en particulier,
 le projet s'appuye sur les recherches menées par le LAAS dans le domaine du raisonnement
 spatial et surtout de la prise de perspective, exposés aux chapitres précédents, pour tenter de résoudre des ambiguïtés.
 Pour prendre des décisions afin de poursuivre l’interaction, la machine devra s’appuyer sur un contexte de l’interaction (historique, état de l’environnement, etc.) et tenir
@@ -64,66 +63,154 @@ exemple adopter des attitudes physiques particulières, ou encore utiliser un ti
 voix particulier.
 
 
-\subsection{Scénario Associé}
+\subsection{Scénario associé}
 
 Afin de positionner le scénario dans un cadre naturel et fonctionnel, le choix a été
 fait de faire interagir un robot assistant avec un handicapé dans son appartement (aide
 à la personne). La personne pourra ainsi, en interagissant avec le robot, lui faire manipuler divers objets. Les objets en quéstion auront des propriétés associées en terme de couleur, de type d'objet (par exemple un DVD), de type de contenu (par exemple science-fiction) et de position et auront un identifiant unique. Pour se faire comprendre
 par le robot, l’utilisateur usera principalement de la parole, mais pourra également employer des gestes déictiques (comme le fait de pointer un objet particulier).
-Un dialogue multimodal sera ici employé pour pouvoir résoudre les possibles ambiguïtés liées à une précision insuffisante de la requête utilisateur, à la qualité des traitements (taux d’erreurs de transcription/compréhension de la parole).
+Un dialogue multimodal sera ici employé pour pouvoir résoudre les possibles ambiguïtés liées à une précision insuffisante de la requête utilisateur.
 Ce dialogue se poursuivra jusqu’à la fin de l’exécution effective de la tâche ou
 l’échec de l’interaction. Cette dernière situation peut par exemple être due à un désengagement explicite de l’utilisateur, ou encore à l’exécution d’une commande erronée
-de la part du robot. Un exemple d’un tel dialogue multimodal est donné dans le tableau \ref{tabl:dial}.
+de la part du robot. Un exemple d’un tel dialogue multimodal est donné dans le tableau \ref{table:dial}.
 Dans ce contexte d’étude nous pourrons également jouer sur la définition de divers
 scénarios (configuration de l’environnement, connaissances initiales du robot, position
 des agents, etc.) pour rendre l’interaction plus ou moins complexe. Ceci nous permet de
 pouvoir tester divers cas d’interactions, notamment dans des configurations "limites" comme celles employées lorsque nous étudierons les tâches de fausses croyances (voir \ref{}).
 
+
+
+\begin{table}
+\centering
+\small
+\begin{tabular}{|c|l|}
+  \hline
+  \multirow{2}{*}{Robot1} & Comment Puis-je vous aider? \\
+    & hello() [Greet] \\
+    \hline
+  \multirow{2}{*}{User1}  & Peux-tu mettre le livre sur ma table de chevet? \\
+  	& inform(cmd.action=move, cmd.location=bedroom\_bedsidetable) \\
+    \hline
+  \multirow{2}{*}{Robot2} & Désolé, mais savez vous où se trouve le livre dont vous me parlez? \\
+    & confreq(object.type=book,object.location) [TentRQ] \\
+    \hline
+  \multirow{2}{*}{User2} & C’est celui là. \\
+  	& inform(idobj= ?) + pointsAt BLUE\_BOOK = inform(idobj=BLUE\_BOOK) \\
+   \hline
+    \multirow{5}{*}{Robot3} & Ok, je vais mettre le livre bleu sur votre table de chevet. \\
+     & execute(cmd.action=move,cmd.location=bedroom\_bedsidetable, \\
+     & idobj=BLUE\_BOOK,object.location=livingroom\_table,object.type=book, \\
+     & object.color=blue) [Execute] \\
+     & move(BLUE\_BOOK,livingroom\_table,bedroom\_bedsidetable) \\
+    \hline
+\end{tabular}
+ \caption{Exemple de dialogue multimodal.}
+ \label{table:dial}
+% \vspace{-20pt}
+ \end{table}
+
+
+% Robot1 >
+% Usr1 >
+% Robot2 >
+% Usr2 >
+% Robot3 >
+% Comment puis-je vous aider ?
+% hello() [Greet]
+% Peux-tu mettre le livre sur ma table de chevet ?
+% inform(cmd.action=move, cmd.location=bedroom_bedsidetable)
+% Désolé, mais où se trouve le livre dont vous me parlez ?
+% confreq(object.type=book,object.location) [TentRQ]
+% C’est celui là
+% inform(idobj= ?) + pointsAt BLUE_BOOK = inform(idobj=BLUE_BOOK)
+% Ok, je vais mettre le livre bleu sur votre table de chevet
+% execute(cmd.action=move,cmd.location=bedroom_bedsidetable,
+% idobj=BLUE_BOOK,object.location=livingroom_table,object.type=book,
+% object.color=blue) [Execute]
+% move(BLUE_BOOK,livingroom_table,bedroom_bedsidetable)
+
+
+
+% \begin{table}
+% \centering
+% \small
+% \begin{tabular}{|c|c|l|}
+%   \hline
+%   \multirow{3}{*}{R1} & DA & hello() \\
+%     & NLG/TTS & Can I help you ?\\
+%     \hline
+%   \multirow{3}{*}{U1} & ASR & Can you put the book in my bedroom? \\
+%   	& SLU & inform(action=move,desc=in,room=bedroom)\\
+%     \hline
+%   \multirow{3}{*}{R2} & DA & confreq(type=book,position) \\
+%     & NLG/TTS & Sorry but where is the book you are talking about?\\
+%     \hline
+%   \multirow{3}{*}{U3} & ASR & I am talking about this one \\
+%   	& SLU & inform(idobj=?)\\
+%     & GRU & pointsAt BLUE\_BOOK 1395848705.31\\
+%    \hline
+%     \multirow{4}{*}{R3} & & execute(action=move,destination=bedroom\_bedsidetable,\\
+%      & DA & idobj=BLUE\_BOOK,position=livingroom\_table,type=book,\\
+%     & &color=blue) \\
+%     & NVBP/MC & move(BLUE\_BOOK,livingroom\_table,bedroom\_bedsidetable)\\
+%     & NLG/TTS & Ok, I will put the blue book on your bedside table\\
+%     \hline
+% \end{tabular}
+%  \caption{Example of a multimodal dialogue.}
+%  \label{table:hri-example}
+%  \vspace{-20pt}
+%  \end{table}
+
+
 Le robot utilisé est le PR2. L'appartement choisi pour conduire nos expériences est la réplique taille réelle
 d’un 3 pièces (salon, cuisine, chambre) présent dans les locaux du LAAS-CNRS et dont une modélisation fidèle a été faite sur simulateur 3D.
-Dans chaque pièce se trouvent des meubles, sur lesquels des objets peuvent être posés.
+Dans chaque pièce se trouvent des meubles, sur lesquels des objets peuvent être posés. Cet environnement est représenté à la figure \ref{fig:env}
+
+
+
+
 
 
 
 \begin{figure}[ht!]
  \centering
   \includegraphics[width=0.89\linewidth]{./img/LAASMORSE.png} 
-  \caption {}
-  \label{fig:morse}
+  \caption {Représentation tridimensionnelle de l'environnement utilisé.}
+  \label{fig:env}
 \end{figure}
 
 
-\section{Les Trois Phases de l'Intéraction}
+\section{Les trois phases de l'intéraction}
 
 
 
-L'architecture mise en place pour le dialogue situé contient divers modules qui interviennent à différentes étapes.
-Il est possible, dans ce scénario, de distinguer 3 phases. 
+L'architecture mise en place pour la réalisation de l'interaction contient divers modules qui interviennent à différentes étapes.
+Il est possible ici de distinguer 3 phases. 
 
 \begin{itemize}
-\item La première phase fait intervenir les éléments permettant le bon fonctionnement du dialogue afin de définir le but de l'utilisateur.
+\item La première phase fait intervenir les éléments permettant le bon fonctionnement du dialogue situé afin de définir le but de l'utilisateur.
 \item La deuxième phase consiste à transmettre le but au planificateur afin que celui-ci puisse, en utilisant les informations sur la configuration actuelle de l'environnement, trouver un plan qui permette d'atteindre le but. 
 \item La dernière fait intervenir la supervision qui pilote la planification de trajéctoire et de mouvement et contrôle le bon déroulement de l'execution de la tâche à accomplir.
 \end{itemize}
 
-Ces différentes phases font intervenir différents éléments de l'architecture.
-Nous allons détaillés les procésus impliqués dans chaque phase et les échanges de données.
+Ces différentes phases font intervenir divers éléments du système.
+Nous allons détailler les procésus impliqués dans chaque phase et les échanges de données.
 
-\subsection{Phase de Détermination du But Utilisateur}
+\subsection{Détermination du but utilisateur}
 Durant cette phase, l'humain et le robot dialoguent afin de déterminer le but de l'utilisateur. Pour expliquer les différents flux, nous nous appuyerons sur la figure \ref{fig:phase1}.
-
-
 
 
 \begin{figure}[ht!]
  \centering
   \includegraphics[width=0.99\linewidth]{./img/phase1color.jpg} 
-  \caption {}
+  \caption {Schéma des différents composants et flux intervenant dans la phase de détermination du but utilisateur.}
   \label{fig:phase1}
 \end{figure}
 
+Dans cette première phase, l'homme peut en permanance agir sur l'environnement (flux A). L'environnement étant en permanance mis à jour par notre système d'évaluation de la situation (flux B), la base de connaissance sera mise à jour en conséquence.
+Lors de cette phase d'estimation du but utilisateur, l'homme parle au robot (flux 1) en utilisant potentiellement des signes pour accompagner sa parole. Le système de dialogue du robot interprète les dires de l'homme en utilisant sa base de connaissance (flux 2) et génère une réponse appropriée à l'homme, par exemple en lui demandant une précision sur la tâche à accomplir (flux 3). L'opération est répétée (flux 1, 2, 3) juqu'à ce que le système de dialogue ait une représentation du fait avec tous les champs nécéssaires. Dans ce cas, à la place de répondre à l'homme (flux 3) le système de dialogue envoit le but de l'utilisateur au superviseur (flux 4). La phase de détermination de but est alors finie et l'interaction entre dans la phase d'élaboration de plan permettant de résoudre le but utilisateur. 
 
-\subsection{Phase d'Élaboration de Plan}
+\subsection{Élaboration de plan}
 Durant cette phase, le robot cherche un plan permettant de résoudre le but de l'utilisateur. Pour expliquer les différents flux, nous nous appuyerons sur la figure \ref{fig:phase2}.
 
 
@@ -132,14 +219,16 @@ Durant cette phase, le robot cherche un plan permettant de résoudre le but de l
 \begin{figure}[ht!]
  \centering
   \includegraphics[width=0.99\linewidth]{./img/phase2color.jpg} 
-  \caption {}
+  \caption {Schéma des différents composants et flux intervenant dans la phase d'élaboration de plan pour résoudre le but utilisateur.}
   \label{fig:phase2}
 \end{figure}
 
+À la fin de la phase de détermination du but utilistateur, le système de dialogue transmets ce but au superviseur (flux 4). Le superviseur par la suite transmets ce but au planificateur de tâche (flux 5). Le planificateur de tâche utilise la représentation symbolique de l'environnement, contenu dans la base de connaissance et provenant des calculs et raisonnements fait par le système d'évaluation de la situation, pour avoir connaissance de l'état du monde actuel et générer un plan permettant d'atteindre le but souhaité par l'utilisateur. Le planificateur de tâche renvoit un message au superviseur lui informant du succès ou de l'échec de la planification (flux 7). En cas d'échec, le superviseur informe le système de dialogue (flux 8) qui à son tour informe l'humain de l'impossibilité d'execution du plan (flux 9).
+L'interaction retourne alors à la phase précédente afin de tenter d'établir un but utilisateur qui soit réalisable. 
+Dans le cas où la planification est un succès (un plan a été trouvé), le plan est envoyé au superviseur (flux 7) et l'interaction peu passer à la phase d'execution du plan.
 
 
-
-\subsection{Phase d'Éxécution du Plan}
+\subsection{Exécution du plan}
 Durant cette phase, le robot cherche à exécuter les tâches du plan permettant d'accomplir le but de l'utilisateur. Pour expliquer les différents flux, nous nous appuyerons sur la figure \ref{fig:phase3}.
 
 
@@ -148,11 +237,18 @@ Durant cette phase, le robot cherche à exécuter les tâches du plan permettant
 \begin{figure}[ht!]
  \centering
   \includegraphics[width=0.99\linewidth]{./img/phase3color.jpg} 
-  \caption {}
+  \caption {Schéma des différents composants et flux intervenant dans la phase d'exécution de plan pour accomplir le but utilisateur.}
   \label{fig:phase3}
 \end{figure}
 
-%mais ne sont pas nécéssairement séquencées de façon ordonée. En effet, durant la phase d'identification du but utilisateur, il est possible qu'un but "intermédiaire" soit généré par le robot afin de faire avancer le dialogue et l'identification du but final de l'utilisateur. Par exemple, le robot peux décider d'aller verifier un fait en se déplaçant dans l'appartement, soulevé une boîte pour montrer à l'homme ce qui s'y trouve... Il est donc possible que le robot ait à planifier ou à agir pour mettre à jour son état de connaissance de l'environnement ou celui de l'homme.
+À la fin de la phase précédente, le planificateur de tâche transmets le plan à la supervision (flux 7). Le composant de supervision gère l'execution de la tâche grâce à la planification de mouvements (flux 10) qui envoye des commandes aux actuateurs du robot (flux 12). Le superviseur contrôle la bonne execution du plan à l'aide des éventuels retour d'erreur des différents composants et en surveillant l'évolution de l'état du monde (flux 14). Durant cette execution, l'homme peut à tout moment dialogué avec le système (flux C) afin de:
+\begin{itemize}
+\item Demander une information sur l'environnement. Au quel cas le système de dialogue utilise la base de connaissance (flux D) pour répondre au mieux à l'humain (flux G).
+\item S'enquérir de l'état d'avancement de la tâche ou de l'action courante du robot. Au quel cas le système de dialogue envoye une requète correspondante au superviseur (flux E) qui transmets cette information (flux F) et qui est transmise à l'homme par le système de dialogue (flux G).
+\item Demander un abandon de la tâche ou un changement de plan. Le système de dialogue transmets alors cette requète au superviseur (flux E). Puis en cas d'abandon, l'interaction retourne en phase de détermination de but utilisateur ou en cas de changement de plan, en phase d'élaboration d'un nouveau plan prenant en compte les demandes de l'utilisateur. Cette dernière fonctionnalité est présentée plus en détail en section \ref{sec:planning}.
+\end{itemize}
+
+%mais ne sont pas nécéssairement séquencées de façon ordonée. En effet, durant la phase d'identification du but utilisateur, il est possible qu'un but "intermédiaire" soit généré par le robot afin de faire avancer le dialogue et l'identification du but final de l'utilisateur. Par exemple, le robot peux décider d'aller verifier un fait en se déplaçant dans l'appartement, soulevé une boîte pour montrer à l'homme ce qu'il s'y trouve... Il est donc possible que le robot ait à planifier ou à agir pour mettre à jour son état de connaissance de l'environnement ou celui de l'homme.
 %De même, durant la phase de planification, il est possible de faire intervenir le dialogue pour négocier le plan, demander des conseils à l'homme ou l'informer de l'échec de la planification.
 %Enfin, durant l'execution, il est nécéssaire que le robot informe l'homme de l'évolution de la tâche. Le robot doit également pouvoir proposer une alternative au but de l'homme si le but donné par l'homme n'est pas atteignable.
 %Pour améliorer l'intéraction, l'homme devrait également pouvoir demander des informations au robot ou lui demander d'abandonner la tâche pendant l'execution.
@@ -160,32 +256,33 @@ Durant cette phase, le robot cherche à exécuter les tâches du plan permettant
 
 
 
-\section{Architecture du Système de Dialogue Situé}
+\section{Architecture du système de dialogue situé}
 
-Dans cette partie, nous allons aller plus loin dans l'explication de la première phase en détaillant les différents modules qui entrent en jeu lors de la détermination du but utilisateur. Nous allons notamment détailler comment le système de dialogue est enrichit en utilisant le contexte de l'intéraction et la base de fait maintenue par le système d'évaluation de la situation.
+Dans cette partie, nous allons aller plus loin dans l'explication du système de dialogue situé, intervenant principalement dans la première phase, en détaillant les différents modules qui entrent en jeu lors de la détermination du but utilisateur. Nous allons notamment détailler comment le système de dialogue est enrichit en utilisant le contexte de l'intéraction et la base de fait maintenue par le système d'évaluation de la situation.
 
-Nous présentons à la figure \ref{fig:archiphase1}, l'architecture mise en place pour la première phase d'intéraction. Nous nous baserons sur cette figure pour expliquer les différents flux, ainsi que les différents modules qui permettent le bon fonctionnement du dialogue situé.
+Nous présentons à la figure \ref{fig:archiphase1}, l'architecture détaillée mise en place pour la première phase d'intéraction. Nous nous baserons sur cette figure pour expliquer les différents flux, ainsi que les différents modules qui permettent le bon fonctionnement du dialogue situé.
 
 
 \begin{figure}[ht!]
  \centering
   \includegraphics[width=0.89\linewidth]{./img/archiphase1.jpg} 
-  \caption {}
+  \caption {Architecture détaillant les différents composant du système de dialogue situé.}
   \label{fig:archiphase1}
 \end{figure}
 
 Il est possible d'identifier plusieurs sous parties dans cette architecture.
-La première est en charge des entrées multimodales de l'utilisateur. Une deuxième partie est responsable de l'aquisition et du maintient de l'état du monde ainsi que de la génération de données symboliques. Le gestionnaire de dialogue, ou DM (Dialogue Manager) permets de décider, en fonction des entrées interprétées de l'utilisateur et du contexte de l'intéraction de la réponse donnée par le robot afin de parvenir à déterminer son but.
+La première est en charge des entrées multimodales de l'utilisateur. Une deuxième partie est responsable de l'aquisition et du maintient de l'état du monde ainsi que de la génération de données symboliques. Le gestionnaire de dialogue, ou DM (Dialogue Manager) permets de décider, en fonction des entrées interprétées de l'utilisateur et du contexte de l'intéraction de la réponse donnée par le robot afin de parvenir à déterminer le but.
 La dernière partie s'attache à restituer sous forme multimodale la sortie du système de dialogue décidée par le gestionnaire de dialogue.
 Certains modules relevant d'avantage du dialogue proprement parlé que de l'usage du système d'évaluation de la situation, une description brève en sera donnée. Pour plus de renseignements sur ces modules et une déscription plus exhaustive de la partie dialogue, nous invitons le lécteur à consulter les articles \cite{} ainsi que la thèse 
 
 
 %TODO ref au travail de Manu
 
-\subsection{Entrées Multimodales Utilisateur} 
+\subsection{Entrées multimodales utilisateur}
+\label{sec:entréesDial}
 Cette première partie permets d'aquérir et d'interpréter les entrées multimodales de l'homme en fonction du contexte de l'intéraction. En effet, l’utilisateur peut faire l’usage de la parole et/ou de
 gestes déictiques de façon non contrainte tout au long de l’interaction pour s’adresser
-au robot. Une fois la commande de l'utilisateur interprétée, elle est transmeise au module de géstion de dialogue. 
+au robot. Une fois la commande de l'utilisateur interprétée, elle est transmise au module de géstion de dialogue. 
 
 Pour aquérir et interpréter les commandes de l'utilisateur, quatre modules sont impliqués.
 
@@ -206,9 +303,7 @@ différentes hypothèses unimodales (étant donné qu’elles peuvent être erro
 La première étape de ce processus consiste donc à déterminer si les hypothèses en
 provenance des différentes modalités sont synchrones entre elles et peuvent être fusionnées
 ou doivent être considérées séparément. Du fait que la parole est considérée
-dans notre étude comme modalité principale de l’utilisateur, les tours d’interaction seront calés sur celui des entrées vocales. Ainsi, comme dans \cite{}
-%TODO citation
-(Holzapfel et al., 2004), seuls les gestes déictiques détectés dans un segment temporel de 20ms avant et après celui du tour de parole courant seront exploités par le mécanisme de fusion. De ce fait, si des hypothèses SLU apparaissent seules ou que les gestes détectés ne leur sont pas synchrones, elles seront directement considérées comme résultat de la fusion. La méthode de fusion retenue ici repose sur la définition d’un ensemble
+dans notre étude comme modalité principale de l’utilisateur, les tours d’interaction seront calés sur celui des entrées vocales. Ainsi, comme dans \cite{Holzapfel2004}, seuls les gestes déictiques détectés dans un segment temporel de 20ms avant et après celui du tour de parole courant seront exploités par le mécanisme de fusion. De ce fait, si des hypothèses SLU apparaissent seules ou que les gestes détectés ne leur sont pas synchrones, elles seront directement considérées comme résultat de la fusion. La méthode de fusion retenue ici repose sur la définition d’un ensemble
 de règles.
 Par exemple si l’utilisateur prononce la
 phrase « prends ça » tout en désignant un objet du doigt la fusion a pour rôle principal
@@ -310,110 +405,133 @@ des concepts de haut niveau identifiés à partir des hypothèses bas niveau.
 % que plus de données auront été collectées et annotées (ou qu’une solution à partir de
 % zéro aura été élaborée à l’instar de nos travaux en SLU).
 
-\subsection{Le Contexte Comme Aide à la Compréhension}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Le contexte comme aide à la compréhension}
 
 %contexte + prise de perspective perceptuelle + prise de perspective conceptuelle
 La modélisation du contexte de l’interaction joue un rôle déterminant dans une application
 HRI. Grâce a elle le robot peut modéliser dynamiquement l’environnement
 géométrique avec lequel il est en train d’interagir et ainsi en avoir une représentation
-symbolique adaptée au raisonnement logique. Cette modélisation est rendue possible
-grâce aux capacités perceptives et de raisonnement à même d’extraire des informations
-de haut niveau (reconnaissance d’objets, localisation, identification de relations
-spatiales, etc.).
+symbolique adaptée au raisonnement logique.
 Dans notre configuration le système dispose à la fois d’une base statique de connaissances
 contenant la liste de tous les objets connus du robot (même ceux non encore perçus
 durant l’interaction) et de leurs propriétés statiques (couleur, identifiant, etc.) mais
 aussi d’une base dynamique de connaissances dans laquelle sont stockées les informations
-contextuelles. Cette base se présente sous la forme d’un ensemble de faits symboliques
-représentant les propriétés dynamiques de l’environnement, que ce soit celles
-dites « géométriques » (positions relatives des différents objets/agents) ou celles déterminées
-par raisonnement sur les observations visuelles du robot (visibilité/accessibilité
-des divers objet pour chaque agent). A titre d’illustration le tableau 6.5 donne une liste,
-non exhaustive, de ces faits.
+contextuelles et la représentation symbolique de l'environnement, comme présenté au premier chapitre.
+%TODO Faire référence à une liste de faits en annexe?
+
+Ainsi, si l'homme fait référence à un objet en le décrivant par rapport à sa position relative à un autre objet, en utilisant les faits générés décrits en section \ref{sec:agencement} tel que \textit{isNextTo}, \textit{isIn} ou \textit{isOn}, il est possible sinon d'identifier l'objet, au moins réduire la liste des candidats potentiels. De même les déscriptions de positionnement relatives (gauche, droite) des objets permettent de discriminer les candidats possible parmis les entités présentes pouvant correspondre à une référence prononcée par l'homme.
+En utilisant une base de donnée SQL tel que décrite en section \ref{sec:db}, il est très simple de faire des jointures et donc d'identifier les objets correspondant aux critères définis dans la requête de l'utilisateur.
+Ainsi, si l'homme parle d'un objet vert situé sur la table du salon, en une seule requête à la base de données il est possible d'obtenir l'ensemble des objets correspondant à ces critères.
+De la même manière, le robot peut choisir de parler d'un objet en utilisant ces mêmes faits pour le décrire.
+Ceci permets au robot de comprendre et d'identifier les références faites par l'homme et d'utiliser des références naturelles et compréhensibles pour l'homme.
+
+Pour aller plus loin dans la compréhension, le robot doit aussi considérer l'homme comme une entité logique faisant des requêtes logiques. En partant de ce postulat, il est possible d'exploiter les données issues du raisonnement de prise de perspective perceptuelle décrits en section \ref{sec:perceptuelle}.
+En effet, si l'homme demande au robot d'apporter un objet et que le robot hésite entre deux objet possibles, l'objet A et l'objet B. L'une des différences entre ces deux objets est que l'objet A est à porté de l'homme. Dans ce cas deux situations sont possibles:
+\begin{itemize}
+\item soit l'objet A est visible de l'homme, auquel cas le robot doit être capable de comprendre que l'homme ne réclamerait pas un objet qui lui est déjà accessible.
+\item soit l'objet A n'est pas visible de l'homme, alors le robot aura besoin de demander une précision afin de pouvoir identifier l'objet.
+\end{itemize}
+
+De même, si l'homme demande la position d'un objet et que le robot identifi deux candidats possibles (A et B), et que l'objet A est visible de l'homme, le robot doit être capable de comprendre que l'objet recherché par l'homme est celui-qui n'est pas perceptible de lui.
+
+Ces données issues de la prise de perspective perceptuelle permettent donc un raisonnement de haut niveau basé sur des règles logiques sur les requêtes de l'homme et permettent au module de fusion d'identifier plus rapidement l'objet requis par l'homme et ainsi de réduire le nombre de tour et améliore ainsi l'efficacité du système de dialogue.
+
+De même, la capacité de prise de perspective conceptuelle provenant du système d'évaluation de la situation et décrite en section \ref{sec:conceptual} permets également d'améliorer la qualité du dialogue situé.
+En effet, les requêtes de l'homme doivent être interprétée dans son état mental car l'homme exprime sa requête en fonction de son état de croyance sur la situation de l'environnement.
+
+Nous décrivons dans la partie suivante, comment nous utilisons cette représentation de l'état de croyance pour améliorer le module de gestion du dialogue.
+
+% Now we will show how dialog could benefits from
+%   our system. 
+% At the end of the scenario of fig  ~\ref{divB}, Bob left with the white book. The robot was able to see this action by using the monitoring spheres. Now, let's assume that in
+% addition to this setup, a black book stands on the table but is hidden by the pink box on Bob's side. So the black book is not visible by
+% Bob and is visible by the robot.
+% Consequently, if Bob asks the robot "where is the book?", as the robot knows Bob took the white one, even if both books are currently not visible by Bob it understands that Bob speaks about the black book. The robot will answer: "It is on the table behind the pink box".
+% Such dialog ability is only possible if the robot
+% holds correct assumption concerning human's knowledge as done by our
+% system. Without the temporal reasonning on human actions, robot would have to ask "which book are you talking about?".
+
+% %comment dans le texte, essaie de bien grouper chacun des
+% %  exemples dans un paragraphe, si tu regardes le résultat pour le
+% %  moment, c'est pas évident de voir la séparation
+
+% Now, come back to the end of the scenario of fig
+%   ~\ref{divB} where Greg has a wrong belief about the white book's
+%   position (symbolized by an opaque green sphere). Seeing Greg trying
+%   to have a look behind the white box, the robot can infer that he's
+%   looking for the white book. Consequently, it can say proactively :
+%   "The object you are looking for was taken by Bob''. Such proactive
+%   dialog ability is possible with the help of our system because it
+%   allows to infer human's intention from human's (wrong or lack of)
+%   belief and to talk proactively to the human to correct it.
+% % comment fin du second exemple, mettre la phrase de
+% %  conclusion à part
 
 
-
-Pour mener à bien une tâche d’interaction située, le robot doit considérer les utilisateurs
-à la fois comme des entités physiques (par exemple sur lesquelles il ne faudra pas
-rouler), mais aussi et surtout comme des entités intelligentes, dotées d’une individualité
-et de capacités cognitives qui leur sont propres. Pour pouvoir agir efficacement, le
-robot doit donc être doté de capacités lui permettant de représenter fidèlement son environnement
-et de modéliser les perceptions/connaissances présumées des utilisateurs
-avec lesquels il interagit.
-L’une des particularités de notre module de gestion du contexte est qu’il permet
-de gérer plusieurs modèles symboliques en parallèle, à savoir un par agent (y compris
-le robot), chaque modèle étant indépendant et cohérent d’un point de vue logique.
-Cette décomposition permet notamment au robot de pouvoir raisonner sur plusieurs
-perspectives cognitives du même environnement. Ces perspectives peuvent notamment
-être incohérentes lorsqu’on les compares deux à deux. Le tableau 6.6 rapporte
-un exemple dans lequel deux objets sont visibles dans le modèle du robot alors que
-pour l’homme il n’y en a qu’un seul (l’autre n’étant pas dans son champ de vision).
-Ainsi, l’objet BLACK\_TAPE a simultanément la propriété isVisible à la valeur true et
-false selon le modèle considéré (situation d’incohérence).
+% This level of human understanding allows the robot to interact in a more natural way with humans.
 
 
-Dans la plateforme actuelle, le module SPARK (Milliez et al., 2014) employé pour le
-GRU a également à sa charge l’alimentation et le maintien des faits dynamiques (notamment
-ceux visuels) dans la base de connaissances grâce à ses capacités avancées en
-raisonnement spatial.
-
-
-\subsection{Gestionnaire de Dialogue}
-Finally, the green component is the DM, responsible for updating the internal belief state and to take the next robot decision. It is based on the POMDP-based Hidden Information State (HIS) framework \cite{Young10} which has been adapted to the multimodal case here. In this setup, the belief state is represented by a set of partitions. Each partition represents a possible user command. The decision takes place into a more reduced summary space  where RL algorithms are tractable. So, at each turn the system choose a summary action (e.g. inform, confirm, execute) and a heuristic-based method maps the summary action back to the master state (hand-crafted part).
-
-Concerning the DM policy, the sample-efficient KTD-SARSA RL algorithm~\cite{Daubigney12} was used in combination with the Bonus Greedy exploration scheme to enable the online learning of a dialogue policy from scratch. A reward function is defined to penalise the DM by $-1$ for each dialogue turn and reward it by $+20$ if the right command is performed at the end of the interaction, $0$ otherwise. More details about this setup are available in \cite{Ferreira13a,Ferreira13b}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Gestionnaire de dialogue}
+%TODO: réécrire cette section avec mes mots
+\subsubsection{Présentation générale}
+Le composant responsable de la gestion du dialogue, noté DM dans la figure \ref{fig:archiphase1} est basé sur le paradigme POMDP HIS (Hidden Information State) \cite{Young10} qui a été adapté ici pour l'interaction multimodale. Dans cette configuration, l'état de croyance du système de dialogue est représenté par un ensemble de partitions. Chaque partition représente une commande utilisateur possible. La prise de décision se fait sur un état résumé pour permettre l'apprentissage par renforcement. À chaque tour, le système choisit une action résumée (par exemple inform, confirm, execute).
+Pour ce qui est de la politique du gestionnaire de dialogue, l'algorithme KTD-SARSA RL ~\cite{Daubigney12} a été utilisé. Plus de détails sur cette configuration sont disponibles dans les articles \cite{Ferreira13a,Ferreira13b}.
 
 %TODO
-Tout comme pour le système de dialogue TownInfo, le DM employé dans notre étude
-repose sur le paradigme POMDP HIS (voir section 3.4.4). Mais contrairement au premier
-système étudié dans le chapitre 4, la tâche MaRDi ne peut pas être directement
-assimilable à un problème de recherche d’information standard, il a fallu donc légèrement
-adapté le paradigme à notre contexte applicatif.
-Le but utilisateur consiste ici en une commande de manipulation d’objet que ce dernier
-souhaite faire exécuter au robot parmi celles réalisables compte tenu des contraintes
-données par l’utilisateur et du contexte physique de l’interaction. L’ontologie de la
-tâche est décrite dans le tableau 6.7 (plus de détails sont disponibles dans l’annexe C.1).
-Du fait de la nature dynamique des informations contextuelles considérées (base
-de connaissances dynamiques), la base de données métier n’est plus seulement limitée
-à des informations statiques comme c’était le cas pour TownInfo où les données mé-
-tier correspondent à une liste d’établissements qui n’a pas vocation à changer durant
-l’interaction. De fait, la mise à jour de l’état de croyance du système de dialogue s’effectuera
-à la fois en prenant en compte les actes du dialogue robot et utilisateur, mais
-également en y intégrant l’information issue de la base des connaissances dynamiques.
-% task -> execute(cmd){1.0} ;
-% cmd -> manipaction(action, object){1.0} ;
-% action -> give(){0.5} ;
-% action -> move(location){0.5} ;
-% object -> domestic(idobj, type, color, location){1.0} ;
-% type -> book(title, genre, author){0.3} ;
-% type -> mug(){0.3} ;
-% type -> tape(title, genre, director){0.3} ;
-% type -> box(){0.1} ;
-% idobj = ("BLUE_BOOK" | "RED_BOOK" | ...)
-% color = ( blue | red | ...)
-% location = ( livingroom_coffeetable | livingroom_bedsidetable | ...)
-% book.title = ( "the lord of the rings 1" | ...)
-% tape.title = ("very bad trip" | ...)
-% author = ("J.R.R Tolkien" | ...)
-% director = ("Todd Phillips" | ...)
-% genre = ("scifi" | ...)
-% TABLE 6.7 – Ontologie de la tâche MaRDi.
-Pour mener à bien la tâche MaRDi et faciliter la génération de comportement multimodaux
-il a fallu définir deux nouvelles actions résumées venant compléter le jeu
-initialement proposé dans (Young et al., 2010). Nous avons donc complété l’ensemble
-d’actions décrit dans la section 3.4.4 (voir tableau 3.5) par les actions Explore et Execute.
-La première est employée pour procéder à la découverte de l’environnement afin d’acquérir
-de nouvelles connaissances factuelles. Par exemple, si le robot ne s’est jamais
+% Tout comme pour le système de dialogue TownInfo, le DM employé dans notre étude
+% repose sur le paradigme POMDP HIS (voir section 3.4.4). Mais contrairement au premier
+% système étudié dans le chapitre 4, la tâche MaRDi ne peut pas être directement
+% assimilable à un problème de recherche d’information standard, il a fallu donc légèrement
+% adapté le paradigme à notre contexte applicatif.
+% Le but utilisateur consiste ici en une commande de manipulation d’objet que ce dernier
+% souhaite faire exécuter au robot parmi celles réalisables compte tenu des contraintes
+% données par l’utilisateur et du contexte physique de l’interaction. L’ontologie de la
+% tâche est décrite dans le tableau 6.7 (plus de détails sont disponibles dans l’annexe C.1).
+% Du fait de la nature dynamique des informations contextuelles considérées (base
+% de connaissances dynamiques), la base de données métier n’est plus seulement limitée
+% à des informations statiques comme c’était le cas pour TownInfo où les données mé-
+% tier correspondent à une liste d’établissements qui n’a pas vocation à changer durant
+% l’interaction. De fait, la mise à jour de l’état de croyance du système de dialogue s’effectuera
+% à la fois en prenant en compte les actes du dialogue robot et utilisateur, mais
+% également en y intégrant l’information issue de la base des connaissances dynamiques.
+% % task -> execute(cmd){1.0} ;
+% % cmd -> manipaction(action, object){1.0} ;
+% % action -> give(){0.5} ;
+% % action -> move(location){0.5} ;
+% % object -> domestic(idobj, type, color, location){1.0} ;
+% % type -> book(title, genre, author){0.3} ;
+% % type -> mug(){0.3} ;
+% % type -> tape(title, genre, director){0.3} ;
+% % type -> box(){0.1} ;
+% % idobj = ("BLUE_BOOK" | "RED_BOOK" | ...)
+% % color = ( blue | red | ...)
+% % location = ( livingroom_coffeetable | livingroom_bedsidetable | ...)
+% % book.title = ( "the lord of the rings 1" | ...)
+% % tape.title = ("very bad trip" | ...)
+% % author = ("J.R.R Tolkien" | ...)
+% % director = ("Todd Phillips" | ...)
+% % genre = ("scifi" | ...)
+% % TABLE 6.7 – Ontologie de la tâche MaRDi.
+% Pour mener à bien la tâche MaRDi et faciliter la génération de comportement multimodaux
+% il a fallu définir deux nouvelles actions résumées venant compléter le jeu
+% initialement proposé dans (Young et al., 2010). Nous avons donc complété l’ensemble
+% d’actions décrit dans la section 3.4.4 (voir tableau 3.5) par les actions Explore et Execute.
+% La première est employée pour procéder à la découverte de l’environnement afin d’acquérir
+% de nouvelles connaissances factuelles. Par exemple, si le robot ne s’est jamais
 
 
 
 
-rendu dans la cuisine, une telle action peut être prise pour s’y déplacer et compléter ou
-mettre à jour ses connaissances sur les objets présents. La seconde action est quant à elle
-employée pour lancer la procédure d’exécution (si réalisable) de la commande « candidate
-» la plus probable du point de vue du robot. Elle suppose donc un effet de bord
-(réalisation de la commande avec toutes ses implications), ce qui typiquement n’existe
-pas dans des tâches purement recherche d’informations telles que TownInfo.
+% rendu dans la cuisine, une telle action peut être prise pour s’y déplacer et compléter ou
+% mettre à jour ses connaissances sur les objets présents. La seconde action est quant à elle
+% employée pour lancer la procédure d’exécution (si réalisable) de la commande « candidate
+% » la plus probable du point de vue du robot. Elle suppose donc un effet de bord
+% (réalisation de la commande avec toutes ses implications), ce qui typiquement n’existe
+% pas dans des tâches purement recherche d’informations telles que TownInfo.
 Une des limites du paradigme HIS pour le problème qui nous concerne est qu’il
 n’offre dans sa version initiale que des mécanismes capables de gérer l’incertitude due
 aux bruits présents dans le canal de communication (reconnaissance puis compréhension
@@ -427,48 +545,126 @@ jusqu’à ce que sa demande corresponde à la réalité observée, et ce même 
 des situations où il aurait été possible d’identifier une telle situation en amont de par
 sa modélisation.
 
-\subsection{Prise en Compte de l'État Mental}
-As mentioned earlier, an important aspect of the approach is to base our user belief state management on the POMDP framework~\cite{Kaelbling98}. It is a generalisation of the fully-observable Markov Decision Process (MDP), that was first employed to determine an optimal mapping between situations (dialogue states) and actions for the dialogue management problem in~\cite{Levin97}. We try hereafter to recall some of the principles of this approach pertaining to the modifications that will be introduced. More comprehensive descriptions should be sought in the cited papers.
-This framework maintains a probability distribution over dialogue states, called belief states, assuming the true one is unobservable. By doing so, it explicitly handles parts of the inherent uncertainty on the information conveyed inside the Dialogue Manager (DM) (e.g. error prone speech recognition and understanding processes).
-Thus, POMDP can be cast as a continuous space MDP. The latter is a tuple $<B,A,T,R, \gamma>$ 
-, where $B$ is the  belief state space (continuous), $A$ is the discrete action space, $T$ is a set of Markovian transition probabilities, $R$ is the immediate
-reward function, $R: B \times A \times B \rightarrow \Re $ and
-$\gamma \in [0,1]$ the discount factor (discounting long term
-rewards).
-The environment evolves at each time step $t$ to a belief state $b_t$ and
-the agent picks an action $a_t$ according to a policy mapping belief states to actions, $\pi: B \rightarrow A$. Then the belief state changes to $b_{t+1}$ according to the Markovian transition
-probability $b_{t+1} \sim T(.|b_t, a_t) $ and, following this, the agent received a reward $r_t =
-R(b_t, a_t, b_{t+1})$ from the environment.
-The overall problem of this continuous MDP is to derive an optimal policy maximising the reward expectation. Typically the averaged discounted sum over a potentially
-infinite horizon is used, $ \sum^{\infty}_{t=0} {\gamma^t r_t} $. Thus, for a given policy and start belief state
-$b$, this quantity is called the value function: $V^{\pi}(b) =
-E[\sum_{t\ge0}\gamma^t r_t| b_0 = b, \pi] \in \Re^B$. $V^{\ast}$ corresponds to the value function of any optimal policy
-$\pi^{\ast}$.
-The Q-function may be defined as an alternative to the value function. It adds a degree of freedom on the first
-selected action, $Q^{\pi}(b,a) = E[\sum_{t\ge0}\gamma^t r_t|b_0 = b, a_0 = a, \pi] \in \Re^{B \times A}$.
-As well as $V^{\ast}$, $Q^{\ast}$ corresponds to the
-action-value function of any optimal policy $\pi^{\ast}$. If it
-is known, an optimal policy can be directly computed by being
-greedy according to $Q^{\ast}$ ,
-$\pi^{\ast}(b) = \arg\max_a Q^{\ast}(b, a) \forall b \in B$.
 
-However, real-world POMDP problems are often intractable due to their dimensionality (large belief state and action spaces). Among other techniques, the HIS model~\cite{Young10} circumvents this scaling problem for dialogue management by the use of two main principles. First, it factors the dialogue state into three components: the user goal, the dialogue history and the last user act (see Figure~\ref{fig:overview-mardhis}). The possible user goals are then grouped together into \textit{partitions} on the assumption that all goals from the same partition are equally probable. These partitions are built using the dependencies defined in a domain-specific ontology and the information extracted all along the dialogue from both the user and the system communicative acts. In the standard HIS model, each partition is linked to matching database entities based on its static and dynamic properties that corresponds to the current state of the world (e.g. colour of an object vs spatial relations like \textit{isOn}).
-The combination of a partition, the associated dialogue history, which corresponds here to a finite state machine that keeps track of the grounding status for each convoyed piece of information (e.g. informed or grounded by the user), and a possible last user action forms a dialogue state hypothesis. A probability distribution $b(hyp)$ over the most likely hypotheses is maintained during the dialogue and this distribution constitutes the POMDP's belief state.
-Second, HIS maps both the belief space (hypotheses) and the action space into a much reduced summary space where RL algorithms are tractable.
-The summary state space is the compound of two continuous and three discrete values. Continuous values are the probabilities of the two-first hypotheses $b(hyp1)$ and $b(hyp2)$ while the discrete ones, extracted from the top hypothesis, are the type of the last user act (noted \textit{last\ uact}), a partition status (noted \textit{p-status}) database matching status related to the corresponding goal and a history status (noted \textit{h-status}).
-Likewise system dialogue acts are simplified in a dozen of summary actions like \textit{offer}, \textit{execute}, \textit{explicit-confirm} and \textit{request}. Once the summary actions are ordered by their $Q(b,a)$ scores in descending order by the policy, an handcrafted process checks if the best scored action is compatible with the current set of hypotheses (e.g. for the \textit{confirm} summary act this compatibility test consists in checking if there is something to confirm in the top hypothesis). If they are compatible, an heuristic-based method maps this action back to the master space as the next system response. If not, the process is pursued using the next best scored summary action until a possible action is found.
 
-%> MaRDHIS model
-\begin{figure}[t!]
-   \vspace{-10pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%TODO: read from here
+\subsubsection{Prise en compte de l'état mental}
+Pour répondre à la problématique soulevée ci-dessus nous proposons d'intégrer l’analyse sur les
+croyances factuelles du robot et de l’utilisateur directement dans le mécanisme de prise
+de décision du système HIS, afin d'améliorer la qualité et l’efficacité du dialogue. Ainsi, nous proposons d’augmenter l’état résumé du dialogue avec un état sur la croyance divergente, nommé le
+d-status. Ce dernier est utilisé pour notifier de la présence d’une situation de fausse
+croyance (divergence).
+Dans notre cadre expérimental actuel, ces croyances sont considérées comme parties
+intégrantes de la ressource de connaissances dynamiques employée et sont donc maintenues de façon indépendante aux mécanismes de gestion de l’état interne du système
+de dialogue. Nous proposons également dans cette extension d’ajouter une nouvelle
+action dédiée à la résolution des situations de fausses croyances, \textit{InformDivergentBelief}.
+
+
+Nous prenons comme exemple, un scénario ou deux livres ont étés interchangés sans que l'homme en soit informé.
+Cette situation est résumée par la figure \ref{fig:dbexemple}.
+
+\begin{figure}[ht!]
+ \centering
+  \includegraphics[width=0.89\linewidth]{./img/dbexemple.jpg} 
+  \caption {Exemple où l'homme a une croyance divergente concernant l'emplacement de deux livres ayant étés interchangés.}
+  \label{fig:dbexemple}
+\end{figure}
+
+
+Nous illustrons la prise en compte de la croyance divergente dans cette exemple avec la figure \ref{fig:overview-mardhis}. Les modifications apportées au modèle initial sont illustrées par les éléments en
+orange. 
+Soit la situation suivante :
+l’utilisateur vient de prononcer la phrase « donne moi le livre qui est sur ma table de
+chevet ». Comme le montre la figure \ref{fig:overview-mardhis}, logiquement la partition de plus grande probabilité devient celle qui modélise le but utilisateur qui consiste à vouloir lui « apporter
+un livre situé sur la table de chevet ». Du point de vue du robot (ROBOT FACTS sur
+la figure) ce livre est identifié de façon unique comme étant l’objet RED\_BOOK. Cependant,
+du point de vue de l’utilisateur (USER FACTS sur la figure), il est également identifié
+de façon unique comme étant l’objet BROWN\_BOOK. Cette situation est considérée
+comme divergente et le d-status est réglé sur unique parce qu’il n’y a qu’un seul objet possible qui correspond à cette description dans le modèle de l’utilisateur et que
+ce dernier est différent de celui également identifié dans la base de faits dynamiques
+du robot. Dans nos travaux, le d-status ne peut prendre que les deux valeurs unique et
+other, nous considérons cependant cet élément comme étant catégoriel et non binaire
+car nous comptons étendre à terme le nombre des valeurs ainsi considérées (identification de différentes situations comme par exemple le fait que plusieurs objets candidats
+présentent une position divergente).
+En ce qui concerne la nouvelle action résumée \textit{InformDivergentBelief} introduite pour
+résoudre la situation de divergence, les actes de dialogue qui lui sont associés dans
+l’espace maître sont déterminés par l’intermédiaire d’heuristiques expertes. Dans cette
+première version, lorsqu’un cas de divergence est détecté dans la meilleure hypothèse
+d’état de dialogue, idéalement l’action prise par le système doit permettre d’informer
+l’utilisateur de manière explicite de la présence et de la nature de cette divergence.
+Pour ce faire, un acte de dialogue est employé pour informer l’utilisateur sur l’existence d’une divergence quant à la valeur de la position de l’objet "sujet"
+de la commande. Grâce à l’émission de cet acte de dialogue l’utilisateur va pouvoir
+mettre à jour ses croyances avant de poursuivre son objectif initial. Ainsi, lorsque le
+système informera l’utilisateur oralement de la véritable position de l’objet en question, le modèle de croyance utilisateur sera mis à jour en fonction. Ce processus est également illustré dans la figure \ref{fig:overview-mardhis} lorsque l’action \textit{InformDivergentBelief} est sélectionnée
+en tant que prochaine action du système (action maître). L’action finalement exécutée
+dans l’espace maître sera : \textit{deny(object.location=bedside\_table, object.location=kitchen\_table,
+object.type=book, object.color=brown)}, qui sera transformée par le NLG dans l’énoncé système suivant « le livre marron n’est plus sur la table de chevet mais sur la table de la cuisine ».
+% Pour ce qui est de la politique d’interaction, nous envisageons là encore de réaliser
+% un apprentissage RL en ligne de la politique. Cependant contrairement aux expériences
+% réalisées dans le chapitre 4, nous considérons ici le recours à des interactions faisant
+% intervenir de vrais utilisateurs (que ce soit pour l’apprentissage et les tests). Nous décrivons plus précisément les conditions expérimentales dans la section suivante.
+
+\clearpage
+
+\begin{sidewaysfigure}[t!]
+%   \vspace{-10pt}
  \centering
  \begin{tabular}{c}
-  \includegraphics[width=0.98\textwidth]{img/MaRDHIS.pdf}
+  \includegraphics[width=1.0\textwidth]{img/MaRDHIS.pdf}
  \end{tabular}
  \caption{Overview of the HIS extension to take into account divergent belief.}
  \label{fig:overview-mardhis}
-   \vspace{-10pt}
-\end{figure}
+ %  \vspace{-10pt}
+\end{sidewaysfigure}
+
+
+\clearpage
+
+
+% \subsection{Prise en Compte de l'État Mental}
+% As mentioned earlier, an important aspect of the approach is to base our user belief state management on the POMDP framework~\cite{Kaelbling98}. It is a generalisation of the fully-observable Markov Decision Process (MDP), that was first employed to determine an optimal mapping between situations (dialogue states) and actions for the dialogue management problem in~\cite{Levin97}. We try hereafter to recall some of the principles of this approach pertaining to the modifications that will be introduced. More comprehensive descriptions should be sought in the cited papers.
+% This framework maintains a probability distribution over dialogue states, called belief states, assuming the true one is unobservable. By doing so, it explicitly handles parts of the inherent uncertainty on the information conveyed inside the Dialogue Manager (DM) (e.g. error prone speech recognition and understanding processes).
+% Thus, POMDP can be cast as a continuous space MDP. The latter is a tuple $<B,A,T,R, \gamma>$ 
+% , where $B$ is the  belief state space (continuous), $A$ is the discrete action space, $T$ is a set of Markovian transition probabilities, $R$ is the immediate
+% reward function, $R: B \times A \times B \rightarrow \Re $ and
+% $\gamma \in [0,1]$ the discount factor (discounting long term
+% rewards).
+% The environment evolves at each time step $t$ to a belief state $b_t$ and
+% the agent picks an action $a_t$ according to a policy mapping belief states to actions, $\pi: B \rightarrow A$. Then the belief state changes to $b_{t+1}$ according to the Markovian transition
+% probability $b_{t+1} \sim T(.|b_t, a_t) $ and, following this, the agent received a reward $r_t =
+% R(b_t, a_t, b_{t+1})$ from the environment.
+% The overall problem of this continuous MDP is to derive an optimal policy maximising the reward expectation. Typically the averaged discounted sum over a potentially
+% infinite horizon is used, $ \sum^{\infty}_{t=0} {\gamma^t r_t} $. Thus, for a given policy and start belief state
+% $b$, this quantity is called the value function: $V^{\pi}(b) =
+% E[\sum_{t\ge0}\gamma^t r_t| b_0 = b, \pi] \in \Re^B$. $V^{\ast}$ corresponds to the value function of any optimal policy
+% $\pi^{\ast}$.
+% The Q-function may be defined as an alternative to the value function. It adds a degree of freedom on the first
+% selected action, $Q^{\pi}(b,a) = E[\sum_{t\ge0}\gamma^t r_t|b_0 = b, a_0 = a, \pi] \in \Re^{B \times A}$.
+% As well as $V^{\ast}$, $Q^{\ast}$ corresponds to the
+% action-value function of any optimal policy $\pi^{\ast}$. If it
+% is known, an optimal policy can be directly computed by being
+% greedy according to $Q^{\ast}$ ,
+% $\pi^{\ast}(b) = \arg\max_a Q^{\ast}(b, a) \forall b \in B$.
+
+% However, real-world POMDP problems are often intractable due to their dimensionality (large belief state and action spaces). Among other techniques, the HIS model~\cite{Young10} circumvents this scaling problem for dialogue management by the use of two main principles. First, it factors the dialogue state into three components: the user goal, the dialogue history and the last user act (see Figure~\ref{fig:overview-mardhis}). The possible user goals are then grouped together into \textit{partitions} on the assumption that all goals from the same partition are equally probable. These partitions are built using the dependencies defined in a domain-specific ontology and the information extracted all along the dialogue from both the user and the system communicative acts. In the standard HIS model, each partition is linked to matching database entities based on its static and dynamic properties that corresponds to the current state of the world (e.g. colour of an object vs spatial relations like \textit{isOn}).
+% The combination of a partition, the associated dialogue history, which corresponds here to a finite state machine that keeps track of the grounding status for each convoyed piece of information (e.g. informed or grounded by the user), and a possible last user action forms a dialogue state hypothesis. A probability distribution $b(hyp)$ over the most likely hypotheses is maintained during the dialogue and this distribution constitutes the POMDP's belief state.
+% Second, HIS maps both the belief space (hypotheses) and the action space into a much reduced summary space where RL algorithms are tractable.
+% The summary state space is the compound of two continuous and three discrete values. Continuous values are the probabilities of the two-first hypotheses $b(hyp1)$ and $b(hyp2)$ while the discrete ones, extracted from the top hypothesis, are the type of the last user act (noted \textit{last\ uact}), a partition status (noted \textit{p-status}) database matching status related to the corresponding goal and a history status (noted \textit{h-status}).
+% Likewise system dialogue acts are simplified in a dozen of summary actions like \textit{offer}, \textit{execute}, \textit{explicit-confirm} and \textit{request}. Once the summary actions are ordered by their $Q(b,a)$ scores in descending order by the policy, an handcrafted process checks if the best scored action is compatible with the current set of hypotheses (e.g. for the \textit{confirm} summary act this compatibility test consists in checking if there is something to confirm in the top hypothesis). If they are compatible, an heuristic-based method maps this action back to the master space as the next system response. If not, the process is pursued using the next best scored summary action until a possible action is found.
+
+%> MaRDHIS model
+% \begin{figure}[t!]
+%    \vspace{-10pt}
+%  \centering
+%  \begin{tabular}{c}
+%   \includegraphics[width=0.98\textwidth]{img/MaRDHIS.pdf}
+%  \end{tabular}
+%  \caption{Overview of the HIS extension to take into account divergent belief.}
+%  \label{fig:overview-mardhis}
+%    \vspace{-10pt}
+% \end{figure}
 
 % Reviewer 3 => First, I am wondering whether a case when a user has a false belief can be (and needs to be) separately treated with a case with noises in the communicative channel.
 % MANU> perso je trouve que le paragrapthe ci-dessous y reponds
@@ -479,47 +675,45 @@ Likewise system dialogue acts are simplified in a dozen of summary actions like 
 % Old
 % If the standard HIS framework can properly handle misunderstandings due to noise in the communicative channel, it offers no appropriate mechanism for such a case where the user has a false belief about the state of the world which should impact negatively its communicative acts. Indeed, according to her mental belief the user may still want to pursue her goal with an erroneous statement until she is notified, or discovers by herself, that it does not correspond to the true current state of the world.
 % New
-The standard HIS framework can properly handle misunderstandings due to noise in the communicative channel.
-However, misunderstandings can also be introduced in cases where the user has false beliefs, impacting negatively her communicative acts. HIS has no dedicated mechanism to deal with such a situation and so it should react as in front of a %classical uncertainty by keeping requiring the user some confirmations of hypotheses until the request can match the reality, although it could have be resolved since the first turn. 
-classical uncertainty by asking the user to confirm  hypotheses until the request can match the reality, although it could have be resolved since the first turn. 
-Therefore having an appropriate mechanism should improve the quality and efficiency of the dialogue, preventing user to pursue her goal with an erroneous statement.
+% The standard HIS framework can properly handle misunderstandings due to noise in the communicative channel.
+% However, misunderstandings can also be introduced in cases where the user has false beliefs, impacting negatively her communicative acts. HIS has no dedicated mechanism to deal with such a situation and so it should react as in front of a %classical uncertainty by keeping requiring the user some confirmations of hypotheses until the request can match the reality, although it could have be resolved since the first turn. 
+% classical uncertainty by asking the user to confirm  hypotheses until the request can match the reality, although it could have be resolved since the first turn. 
+% Therefore having an appropriate mechanism should improve the quality and efficiency of the dialogue, preventing user to pursue her goal with an erroneous statement.
 
-So, as illustrated in Figure~\ref{fig:overview-mardhis} and highlighted with the orange items, we propose to extend the summary belief state with an additional status, the
-\textit{divergent belief} status (noted \textit{d-status}), and an additional summary action, \textit{inform divergent belief}.
-% GREG> I think it's hard here to understand what we mean by user facts and how it is different from partition.
-% so I added "(from user's belief model)"
-The \textit{d-status} is employed to trigger the presence of false belief situations by matching the top partition with user facts compiled by the system (see Sec.~\ref{sec:knowledge}) and as such trying to highlight some divergences between the user and the robot points of view. 
-%>>>BEGIN MODIF
-%Reviewer 3 => Are the user facts in Figure 2 maintained as an internal state of the system?  If yes, how is it updated or detected?
-%NEW>
-%****
-Both the user and the robot facts (from the belief models, not to be mistaken with the belief state related to the dialogue representation) are considered as part of the dynamic knowledge resource and are maintained independently of the internal state of the system with the techniques described in Sec.~\ref{sec:knowledge}.
-%>>>END MODIF
-Here we can observe in Figure~\ref{fig:overview-mardhis} that the top partition is about a book located on the bedside table. In the robot model of the world (i.e. robot facts) this book is identified as a unique entity, RED\_BOOK, and \textit{p-status} is set to \textit{unique} accordingly. However, in the user model it is identified as BROWN\_BOOK. This situation can be considered as divergent and \textit{p-status} is set to \textit{unique} too because there is one possible object that corresponds to that description in the user model. 
-%>>>BEGIN MODIF
-%WHY>
-%***
-%Reviewer 3 => The d-status is also unclear although it should be clearly defined. What values it has other than "unique"?  
-%NEW>
-%***
-In this preliminary study \textit{d-status} can only be \textit{unique} or \textit{non-unique}. Further studies may consider more complex cases.
-%>>>END MODIF
-%
-The new summary action is employed for appropriate resolution and removal of the divergence.
-The (real) communicative acts associated to this (generic) action relies on expert design. In this first version, if this action is compatible with the current hypotheses and thus picked up by the system, it explicitly informs the user of the presence and the nature of the divergence. To do so, the system uses a \textit{deny} dialogue act to inform the user about the existence of a divergent point of view and let the user agree on the updated information. 
-% GREG> Maybe explain here that we don't manage the situation when robot is wrong
-% review: It would be good to discuss other issues related to false beliefs
-Consequently, the user may pursue its original goal with the correct property instead of the obsolete one. This process is also illustrated in Figure~\ref{fig:overview-mardhis} when the \textit{inform divergent belief} action is mapped back to the master space.
+% So, as illustrated in Figure~\ref{fig:overview-mardhis} and highlighted with the orange items, we propose to extend the summary belief state with an additional status, the
+% \textit{divergent belief} status (noted \textit{d-status}), and an additional summary action, \textit{inform divergent belief}.
+% % GREG> I think it's hard here to understand what we mean by user facts and how it is different from partition.
+% % so I added "(from user's belief model)"
+% The \textit{d-status} is employed to trigger the presence of false belief situations by matching the top partition with user facts compiled by the system (see Sec.~\ref{sec:knowledge}) and as such trying to highlight some divergences between the user and the robot points of view. 
+% %>>>BEGIN MODIF
+% %Reviewer 3 => Are the user facts in Figure 2 maintained as an internal state of the system?  If yes, how is it updated or detected?
+% %NEW>
+% %****
+% Both the user and the robot facts (from the belief models, not to be mistaken with the belief state related to the dialogue representation) are considered as part of the dynamic knowledge resource and are maintained independently of the internal state of the system with the techniques described in Sec.~\ref{sec:knowledge}.
+% %>>>END MODIF
+% Here we can observe in Figure~\ref{fig:overview-mardhis} that the top partition is about a book located on the bedside table. In the robot model of the world (i.e. robot facts) this book is identified as a unique entity, RED\_BOOK, and \textit{p-status} is set to \textit{unique} accordingly. However, in the user model it is identified as BROWN\_BOOK. This situation can be considered as divergent and \textit{p-status} is set to \textit{unique} too because there is one possible object that corresponds to that description in the user model. 
+% %>>>BEGIN MODIF
+% %WHY>
+% %***
+% %Reviewer 3 => The d-status is also unclear although it should be clearly defined. What values it has other than "unique"?  
+% %NEW>
+% %***
+% In this preliminary study \textit{d-status} can only be \textit{unique} or \textit{non-unique}. Further studies may consider more complex cases.
+% %>>>END MODIF
+% %
+% The new summary action is employed for appropriate resolution and removal of the divergence.
+% The (real) communicative acts associated to this (generic) action relies on expert design. In this first version, if this action is compatible with the current hypotheses and thus picked up by the system, it explicitly informs the user of the presence and the nature of the divergence. To do so, the system uses a \textit{deny} dialogue act to inform the user about the existence of a divergent point of view and let the user agree on the updated information. 
+% % GREG> Maybe explain here that we don't manage the situation when robot is wrong
+% % review: It would be good to discuss other issues related to false beliefs
+% Consequently, the user may pursue its original goal with the correct property instead of the obsolete one. This process is also illustrated in Figure~\ref{fig:overview-mardhis} when the \textit{inform divergent belief} action is mapped back to the master space.
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%q
 
 
 \subsection{Restitution Multimodale}
 Quatre modules sont actuellement responsables
 des sorties du système.
-Comme nous avons pu le voir dans la section \ref{},
-%TODO ref
-le module de fission a en charge
+Le module de fission a en charge
 le processus de traduction des décisions abstraites (actes de dialogue haut niveau) du système vers des actions verbales et non-verbales (déplacement, prise de position).
 Pour l’instant, ce module est basé sur la définition d’un ensemble de règles prenant
 en compte la nature de la décision du système et le contexte courant (base de faits des
@@ -579,7 +773,7 @@ La première solution présente l'avantage de l'automatisation et ne demande auc
 
 Dans la seconde solution, un homme téléopère un avatar virtuel. La simulation est donc plus complexe à établir car elle nécéssite de monopoliser un humain. Cependant, l'avatar du simulateur aura un comportement beaucoup plus réaliste. Pour ce faire, l'environement doit avoir un rendu visuel réaliste et le contrôle de l'avatar doit être suffisamment intuitif.
 
-D'autres projets de dialogue situé homme robot reposent sur une étude dans un simulateur. Par exemple pour un scénario de Pick-Place-Carry (Prendre-Placer-Transporter) \cite{Lucignano13}, de robot barman \cite{stiefelhagen07} ou de navigation dans un environnemnt virtuel \cite{byron-fosler-lrec:06}. Cependant, peu de travaux considèrent l'environnement de simulation comme moyen pour l'aquisition du corpus de dialogue situé ou comme moyen de tester l'apprentissage de politique en ligne.
+D'autres projets de dialogue situé homme robot reposent sur une étude dans un simulateur. Par exemple pour un scénario de Pick-Place-Carry (Prendre-Placer-Transporter) \cite{Lucignano13}, de robot barman \cite{stiefelhagen07} ou de navigation dans un environnemnt virtuel \cite{byron06}. Cependant, peu de travaux considèrent l'environnement de simulation comme moyen pour l'aquisition du corpus de dialogue situé ou comme moyen de tester l'apprentissage de politique en ligne.
 %Indeed, most of the previous works in situated dialogue for HRI resorted to a preliminary Wizard-of-Oz (WoZ) experiment, where a human remotely operates the robot %, and then, used the collected data to train both a user simulator and an error model to pursue the dialogue policy learning without the use of any new real interactions
 %
 En effet, la plupart repose sur des expériences en magicien d'Oz \cite{prommer06,stiefelhagen07,rieser08}. 
@@ -589,7 +783,7 @@ En effet, la plupart repose sur des expériences en magicien d'Oz \cite{prommer0
 
 \subsection{Choix du Simulateur}
 
-In the robotic field, many simulators are available. We can name the Player/Stage/Gazebo suite~\cite{psg-1232}, the integrated simulation platform OpenHRP \cite{nakaoka|iros07}, the cross-platform software architecture OpenRAVE \cite{diankov_thesis} or even the commercial simulator V-REP \cite{Freese:2010:VRE:1947545.1947555}. However, only a few of them are very well suited to HRI. They generally limit human agent behaviours to relatively simple motions and interaction capacities which is one of the reasons why HRI simulations so far have been carried out in \emph{tele-operation} settings, where only the robot and the environment, but not the human agent, are actually simulated. Robotic simulators USARSim \cite{Lewis07usarsim:} and MORSE \cite{morse_simpar_2012,simparmorse2014} are both used in dozens of HRI studies due to their explicit support for controlling a human agent. However, the latter has several specific advantages that motivated our choice. 
+In the robotic field, many simulators are available. We can name the Player/Stage/Gazebo suite~\cite{psg-1232}, the integrated simulation platform OpenHRP \cite{nakaoka|iros07}, the cross-platform software architecture OpenRAVE \cite{diankov_thesis} or even the commercial simulator V-REP \cite{Freese2010}. However, only a few of them are very well suited to HRI. They generally limit human agent behaviours to relatively simple motions and interaction capacities which is one of the reasons why HRI simulations so far have been carried out in \emph{tele-operation} settings, where only the robot and the environment, but not the human agent, are actually simulated. Robotic simulators USARSim \cite{Lewis07usarsim} and MORSE \cite{morse_simpar_2012,simparmorse2014} are both used in dozens of HRI studies due to their explicit support for controlling a human agent. However, the latter has several specific advantages that motivated our choice. 
 
 % open-source / active communauty / middleware supports 
 MORSE is an open-source simulator, with a very active community, that was developed specifically for robotic simulation. It supports a wide range of middleware (e.g. ROS, YARP, pocolibs) as well as reliable implementations of realistic sensors and actuators which ease the integration on real robotic platforms afterwards.
@@ -644,7 +838,7 @@ In the second case, the avatar is programmatically controlled by using standard 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Simulation de l'Interaction}
+\subsection{Simulation de l'interaction}
 In our scenario, a disabled human is in her apartment and has a robot to assist her to perform everyday life chores.
 The goal is to make the robot understand, by reasoning on human speech, gestures and the environment, human's requests concerning objects. Objects are limited here to graspable items such as books, DVDs and mugs, that have diverse colors and a unique identifier.
 
@@ -695,7 +889,7 @@ The list of abstract actions is as followed:
 
 
 
-\subsection{Expérimentation et Résultats}
+\subsection{Expérimentation et résultats}
 In this "proof of concept" study we chose to deal with a limited expert panel, composed of 6 subjects (2 females and 4 males of around 25 years old), in order to focus on the capacity of the system to learn from scratch using a limited set of interactions. The advantage is that the collected data sufficiently explore the state and action spaces during the online learning to be exploited in offline learning (using batch samples).
 
 At the beginning of each dialogue, a specific goal (here a command) is randomly generated taking into account the simulated environment settings and the current interaction history in order to select a possible command. For example, "You want the robot to give you the white book on the kitchen table". No experimenter has any idea of the chosen configuration of the system with which he is interacting. So, we basically compare a hand-crafted expert dialogue policy (noted HDC) to a learned one (noted LEARNED). The latter was trained using a small set of expert users which first performed $60$ dialogues in an online learning setting.
@@ -736,10 +930,10 @@ The results obtained are $14.3$ for the HDC method and $17.6$ for the LEARNED on
 
 
 
-\subsection{Étude sur l'Utilisation de l'État Mental}
+\subsection{Étude sur l'utilisation de l'état mental}
 (p 193 thèse Manu)
 
-\section{Implémentation sur Plateforme Robotique}
+\section{Implémentation sur plateforme robotique}
 
 %Phase 2 et 3 (démo avec Sandra)
 
