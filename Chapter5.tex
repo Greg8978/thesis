@@ -348,7 +348,8 @@ Pour assurer le bon fonctionnement du système avec des plans de différente tai
 \centering
 \scriptsize
 \renewcommand{\arraystretch}{1.3}
-\begin{tabular}{c|c}
+\begin{tabular}{|c|c|}
+\hline
    agents(root) $+$ have\_to $+$ root  & "We have to cook an apple pie." \\
    \hline
    introduce\_presentation & "I will tell you the steps." \\
@@ -359,6 +360,7 @@ Pour assurer le bon fonctionnement du système avec des plans de différente tai
    \hline
    finally $+$ agents(child[2]) $+$  child[2] & "Finally, you will bake \\
    & the apple pie in the oven." \\
+   \hline
 \end{tabular}
  \vspace{-4pt}
 \caption{Presentation of a plan to cook an apple pie. Root is the root of the tree and child is a list with its children.}

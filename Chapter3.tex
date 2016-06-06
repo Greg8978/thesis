@@ -27,7 +27,7 @@ Pour comprendre les références de l'homme et générer des déclarations compr
 %We have developed a module based on spatial and temporal reasoning to generate "facts" about the current state of the world \cite{milliez2014framework}. A fact is a property which describes the current state of an entity (e.g. $MUG$ $isNextTo$ $BOTTLE$, $MUG$ $isFull$ $TRUE$). This framework generates facts related to the entities' position and facts about affordances to know, for instance, what is visible or reachable to each agent (human and robot). 
 %It also generates facts about agent postures to know if an agent is pointing toward an object or where an agent is looking. When the robot tries to understand the human, it should also use these data to improve the information grounding process.
 
-En plus de l'état du monde (qui peut être considéré comme l'état de croyance du robot), pour vraiment comprendre les actes dialoguiques de l'humain dans un contexte situé, il est nécéssaire au robot de comprendre la situation spatiale et mentale de l'homme. En effet, les références qu'il génère dans ses actes communicatifs avec le robot sont suceptible de grandement dépendre de cette situation spatiale ou mentale.
+En plus de l'état du monde (qui peut être considéré comme l'état de croyance du robot), pour vraiment comprendre les actes dialoguiques de l'humain dans un contexte situé, il est nécessaire au robot de comprendre la situation spatiale et mentale de l'homme. En effet, les références qu'il génère dans ses actes communicatifs avec le robot sont suceptible de grandement dépendre de cette situation spatiale ou mentale.
 
 Pour établir ces références communes et comprendre les actes communicatifs humains à la lumières de sa situations, nous avons utilisé notre infrastructure logicielle d'évaluation de la situation, présentée dans les chapitres précédents, dans le cadre d'un projet visant à mettre en place un dialogue situé homme-robot
 
@@ -37,13 +37,11 @@ Pour établir ces références communes et comprendre les actes communicatifs hu
 Ces travaux ont été réalisés dans le cadre du projet MaRDi\footnote{Man-Robot Dialogue - http ://mardi.metz.supelec.fr
 } de l’Agence Nationale pour la Recherche (ANR). Il a été financé par l’appel à projet Contenu et Interactions. Les
 travaux réalisés ont été faits en collaboration avec le Laboratoire d’Informatique Fondamentale de Lille (LIFL), l’École supérieure d’électricité (Supélec), le groupe Acapela, le Laboratoire Informatique d’Avigon (LIA) et le Laboratoire d’Analyse et d’Architecture des Systèmes (LAAS).
-Ce projet a pour axe d’étude l’apport d’une approche "située" du dialogue Homme-
-Machine. Le terme "situé" est ici relatif à l’incarnation physique d’un système de dialogue dans une plateforme robotique qui va permettre d’envisager l’intégration d’informations issues des perceptions physiques du robot dans le contexte de l’interaction pour espérer compléter ou lever des ambiguïtés introduites par le medium vocal. Ce projet s’inscrit également dans l’utilisation de méthodes d’apprentissage numérique, exploitant les données collectées au travers de la conduite de véritables interactions afin d’améliorer l’efficacité et le naturel du système dans le temps. L’originalité de l’approche est de ne pas considérer les technologies vocales comme disponibles et dissociées de la tâche d’interaction Homme-Robot, mais bel et bien comme moyen d’en améliorer l’expérience et les performances.
-Pour atteindre ce but, la Machine doit être capable de maintenir un contexte d’interaction suffisamment riche pour pouvoir être à même de prendre des décisions sur la
-suite à donner à celle-ci. Ce contexte intègrera les entrées fournies par l’humain mais
-aussi les informations issues des calculs géométriques et des raisonnements effectués à partir de la perception de l’environnement. Sur ces aspects en particulier,
-le projet s'appuye sur les recherches menées par le LAAS dans le domaine du raisonnement
-spatial et surtout de la prise de perspective, exposés aux chapitres précédents, pour tenter de résoudre des ambiguïtés.
+Ce projet vise à étudier l’apport d’une approche "située" du dialogue Homme-
+Robot. Le terme "situé" est ici relatif à l’incarnation physique d’un système de dialogue dans une plateforme robotique qui permet l’intégration d’informations issues de la perception du robot dans le contexte de l’interaction pour compléter ou lever des ambiguïtés introduites par le medium vocal. Ce projet s’inscrit également dans l’utilisation de méthodes d’apprentissage numérique, exploitant les données collectées au travers de la conduite de véritables interactions afin d’améliorer l’efficacité et le naturel du système dans le temps. L’originalité de l’approche est de ne pas considérer les technologies vocales comme disponibles et dissociées de la tâche d’interaction Homme-Robot, mais bel et bien comme moyen d’en améliorer l’expérience et les performances.
+Pour atteindre ce but, le robot doit être capable de maintenir un contexte d’interaction suffisamment riche pour pouvoir être à même de prendre des décisions sur la suite à donner à celle-ci. Ce contexte intègrera les entrées fournies par l’humain mais aussi les informations issues des calculs géométriques et des raisonnements effectués à partir de la perception de l’environnement. Sur ces aspects en particulier,
+le projet s'appuye sur les recherches présentées aux chapitres précédents, pour le  raisonnement
+spatial et la prise de perspective, pour tenter de résoudre des ambiguïtés.
 Pour prendre des décisions afin de poursuivre l’interaction, la machine devra s’appuyer sur un contexte de l’interaction (historique, état de l’environnement, etc.) et tenir
 compte de son aspect incertain. En effet, dans le cadre situé, le contexte de l’interaction ne peut être considéré comme une donnée sûre car de possibles erreurs ont pu être
 introduites par la chaîne de traitement automatique des entrées vocales et visuelles.
@@ -66,7 +64,7 @@ voix particulier.
 \subsection{Scénario associé}
 
 Afin de positionner le scénario dans un cadre naturel et fonctionnel, le choix a été
-fait de faire interagir un robot assistant avec un handicapé dans son appartement (aide
+fait de faire interagir un robot assistant avec une personne handicapé dans son appartement (aide
 à la personne). La personne pourra ainsi, en interagissant avec le robot, lui faire manipuler divers objets. Les objets en quéstion auront des propriétés associées en terme de couleur, de type d'objet (par exemple un DVD), de type de contenu (par exemple science-fiction) et de position et auront un identifiant unique. Pour se faire comprendre
 par le robot, l’utilisateur usera principalement de la parole, mais pourra également employer des gestes déictiques (comme le fait de pointer un objet particulier).
 Un dialogue multimodal sera ici employé pour pouvoir résoudre les possibles ambiguïtés liées à une précision insuffisante de la requête utilisateur.
@@ -76,7 +74,7 @@ de la part du robot. Un exemple d’un tel dialogue multimodal est donné dans l
 Dans ce contexte d’étude nous pourrons également jouer sur la définition de divers
 scénarios (configuration de l’environnement, connaissances initiales du robot, position
 des agents, etc.) pour rendre l’interaction plus ou moins complexe. Ceci nous permet de
-pouvoir tester divers cas d’interactions, notamment dans des configurations "limites" comme celles employées lorsque nous étudierons les tâches de fausses croyances (voir \ref{}).
+pouvoir tester divers cas d’interactions, notamment dans des configurations "limites" comme celles employées lorsque nous étudierons les tâches de fausse croyance (voir \ref{sec:mentalStateDial}).
 
 
 
@@ -164,7 +162,7 @@ pouvoir tester divers cas d’interactions, notamment dans des configurations "l
 
 Le robot utilisé est le PR2. L'appartement choisi pour conduire nos expériences est la réplique taille réelle
 d’un 3 pièces (salon, cuisine, chambre) présent dans les locaux du LAAS-CNRS et dont une modélisation fidèle a été faite sur simulateur 3D.
-Dans chaque pièce se trouvent des meubles, sur lesquels des objets peuvent être posés. Cet environnement est représenté à la figure \ref{fig:env}
+Dans chaque pièce se trouvent des meubles, sur lesquels des objets peuvent être posés. Une version tridimensionnelle de cet environnement est représenté à la figure \ref{fig:env}.
 
 
 
@@ -174,29 +172,31 @@ Dans chaque pièce se trouvent des meubles, sur lesquels des objets peuvent êtr
 
 \begin{figure}[ht!]
  \centering
-  \includegraphics[width=0.89\linewidth]{./img/LAASMORSE.png} 
+  \includegraphics[width=0.89\linewidth]{./img/mardiSetup.jpg} 
   \caption {Représentation tridimensionnelle de l'environnement utilisé.}
   \label{fig:env}
 \end{figure}
 
 
-\section{Les trois phases de l'intéraction}
+\section{Les trois phases de l'interaction}
+\label{sec:troisPhases}
 
 
 
 L'architecture mise en place pour la réalisation de l'interaction contient divers modules qui interviennent à différentes étapes.
-Il est possible ici de distinguer 3 phases. 
+Pour plus de clareté, nous distinguons trois phases de l'interaction permettant d'aller de la détermination du but utilisateur à son accomplissement. 
 
 \begin{itemize}
 \item La première phase fait intervenir les éléments permettant le bon fonctionnement du dialogue situé afin de définir le but de l'utilisateur.
 \item La deuxième phase consiste à transmettre le but au planificateur afin que celui-ci puisse, en utilisant les informations sur la configuration actuelle de l'environnement, trouver un plan qui permette d'atteindre le but. 
-\item La dernière fait intervenir la supervision qui pilote la planification de trajéctoire et de mouvement et contrôle le bon déroulement de l'execution de la tâche à accomplir.
+\item La dernière phase fait intervenir la supervision qui pilote la planification de trajéctoires et de mouvements et contrôle le bon déroulement de l'execution de la tâche à accomplir.
 \end{itemize}
 
 Ces différentes phases font intervenir divers éléments du système.
 Nous allons détailler les procésus impliqués dans chaque phase et les échanges de données.
 
 \subsection{Détermination du but utilisateur}
+\label{sec:phase1}
 Durant cette phase, l'humain et le robot dialoguent afin de déterminer le but de l'utilisateur. Pour expliquer les différents flux, nous nous appuyerons sur la figure \ref{fig:phase1}.
 
 
@@ -207,14 +207,12 @@ Durant cette phase, l'humain et le robot dialoguent afin de déterminer le but d
   \label{fig:phase1}
 \end{figure}
 
-Dans cette première phase, l'homme peut en permanance agir sur l'environnement (flux A). L'environnement étant en permanance mis à jour par notre système d'évaluation de la situation (flux B), la base de connaissance sera mise à jour en conséquence.
-Lors de cette phase d'estimation du but utilisateur, l'homme parle au robot (flux 1) en utilisant potentiellement des signes pour accompagner sa parole. Le système de dialogue du robot interprète les dires de l'homme en utilisant sa base de connaissance (flux 2) et génère une réponse appropriée à l'homme, par exemple en lui demandant une précision sur la tâche à accomplir (flux 3). L'opération est répétée (flux 1, 2, 3) juqu'à ce que le système de dialogue ait une représentation du fait avec tous les champs nécéssaires. Dans ce cas, à la place de répondre à l'homme (flux 3) le système de dialogue envoit le but de l'utilisateur au superviseur (flux 4). La phase de détermination de but est alors finie et l'interaction entre dans la phase d'élaboration de plan permettant de résoudre le but utilisateur. 
+Dans cette première phase, l'homme peut en permanence agir sur l'environnement (flux A). L'environnement étant en permanence mis à jour par notre système d'évaluation de la situation (B), la base de connaissance sera mise à jour en conséquence.
+Lors de cette phase d'estimation du but utilisateur, l'homme parle au robot (1) en utilisant potentiellement des signes pour accompagner sa parole. Le système de dialogue du robot interprète l'act communicatif de l'homme en utilisant sa base de connaissances (2) et génère une réponse appropriée à l'homme, par exemple en lui demandant une précision sur la tâche à accomplir (3). L'opération est répétée (flux 1, 2, 3) juqu'à ce que le système de dialogue ait une représentation du fait avec tous les champs nécessaires. Dans ce cas, à la place de répondre à l'homme (3) le système de dialogue envoit le but de l'utilisateur au superviseur (4). La phase de détermination de but est alors finie et l'interaction entre dans la phase d'élaboration de plan permettant de résoudre le but utilisateur. 
 
 \subsection{Élaboration de plan}
-Durant cette phase, le robot cherche un plan permettant de résoudre le but de l'utilisateur. Pour expliquer les différents flux, nous nous appuyerons sur la figure \ref{fig:phase2}.
-
-
-
+\label{sec:phase2}
+Durant cette phase, le robot cherche à générer un plan permettant de résoudre le but de l'utilisateur. Pour expliquer les différents flux, nous nous appuyerons sur la figure \ref{fig:phase2}.
 
 \begin{figure}[ht!]
  \centering
@@ -223,12 +221,13 @@ Durant cette phase, le robot cherche un plan permettant de résoudre le but de l
   \label{fig:phase2}
 \end{figure}
 
-À la fin de la phase de détermination du but utilistateur, le système de dialogue transmets ce but au superviseur (flux 4). Le superviseur par la suite transmets ce but au planificateur de tâche (flux 5). Le planificateur de tâche utilise la représentation symbolique de l'environnement, contenu dans la base de connaissance et provenant des calculs et raisonnements fait par le système d'évaluation de la situation, pour avoir connaissance de l'état du monde actuel et générer un plan permettant d'atteindre le but souhaité par l'utilisateur. Le planificateur de tâche renvoit un message au superviseur lui informant du succès ou de l'échec de la planification (flux 7). En cas d'échec, le superviseur informe le système de dialogue (flux 8) qui à son tour informe l'humain de l'impossibilité d'execution du plan (flux 9).
+À la fin de la phase de détermination du but utilistateur, le système de dialogue transmets ce but au superviseur (flux 4). Le superviseur par la suite transmets ce but au planificateur de tâche (5). Le planificateur de tâche utilise la représentation symbolique de l'environnement, contenu dans la base de connaissance et provenant des calculs et raisonnements fait par le système d'évaluation de la situation, pour avoir connaissance de l'état du monde actuel et générer un plan permettant d'atteindre le but souhaité par l'utilisateur. Le planificateur de tâche renvoit un message au superviseur lui informant du succès ou de l'échec de la planification (7). En cas d'échec, le superviseur informe le système de dialogue (8) qui à son tour informe l'humain de l'impossibilité d'execution du plan (9).
 L'interaction retourne alors à la phase précédente afin de tenter d'établir un but utilisateur qui soit réalisable. 
-Dans le cas où la planification est un succès (un plan a été trouvé), le plan est envoyé au superviseur (flux 7) et l'interaction peu passer à la phase d'execution du plan.
+Dans le cas où la planification est un succès (un plan a été trouvé), le plan est envoyé au superviseur (7) et l'interaction peu passer à la phase d'exécution du plan.
 
 
 \subsection{Exécution du plan}
+\label{sec:phase3}
 Durant cette phase, le robot cherche à exécuter les tâches du plan permettant d'accomplir le but de l'utilisateur. Pour expliquer les différents flux, nous nous appuyerons sur la figure \ref{fig:phase3}.
 
 
@@ -241,11 +240,11 @@ Durant cette phase, le robot cherche à exécuter les tâches du plan permettant
   \label{fig:phase3}
 \end{figure}
 
-À la fin de la phase précédente, le planificateur de tâche transmets le plan à la supervision (flux 7). Le composant de supervision gère l'execution de la tâche grâce à la planification de mouvements (flux 10) qui envoye des commandes aux actuateurs du robot (flux 12). Le superviseur contrôle la bonne execution du plan à l'aide des éventuels retour d'erreur des différents composants et en surveillant l'évolution de l'état du monde (flux 14). Durant cette execution, l'homme peut à tout moment dialogué avec le système (flux C) afin de:
+À la fin de la phase précédente, le planificateur de tâche transmets le plan à la supervision (flux 7). Le composant de supervision gère l'execution de la tâche grâce à la planification de mouvements (10) qui envoye des commandes aux actuateurs du robot (12). Le superviseur contrôle la bonne execution du plan à l'aide des éventuels retour d'erreur des différents composants et en surveillant l'évolution de l'état du monde (14). Durant cette execution, l'homme peut à tout moment dialogué avec le système (C) afin de:
 \begin{itemize}
-\item Demander une information sur l'environnement. Au quel cas le système de dialogue utilise la base de connaissance (flux D) pour répondre au mieux à l'humain (flux G).
-\item S'enquérir de l'état d'avancement de la tâche ou de l'action courante du robot. Au quel cas le système de dialogue envoye une requète correspondante au superviseur (flux E) qui transmets cette information (flux F) et qui est transmise à l'homme par le système de dialogue (flux G).
-\item Demander un abandon de la tâche ou un changement de plan. Le système de dialogue transmets alors cette requète au superviseur (flux E). Puis en cas d'abandon, l'interaction retourne en phase de détermination de but utilisateur ou en cas de changement de plan, en phase d'élaboration d'un nouveau plan prenant en compte les demandes de l'utilisateur. Cette dernière fonctionnalité est présentée plus en détail en section \ref{sec:planning}.
+\item Demander une information sur l'environnement. Au quel cas le système de dialogue utilise la base de connaissance (D) pour répondre au mieux à l'humain (G).
+\item S'enquérir de l'état d'avancement de la tâche ou de l'action courante du robot. Au quel cas le système de dialogue envoye une requète correspondante au superviseur (E) qui transmet cette information (F) et qui est transmise à l'homme par le système de dialogue (G).
+\item Demander un abandon de la tâche ou un changement de plan. Le système de dialogue transmet alors cette requète au superviseur (flux E). Puis en cas d'abandon, l'interaction retourne en phase de détermination de but utilisateur ou en cas de changement de plan, en phase d'élaboration d'un nouveau plan prenant en compte les demandes de l'utilisateur. Cette dernière fonctionnalité est présentée plus en détail en section \ref{sec:planning}.
 \end{itemize}
 
 %mais ne sont pas nécéssairement séquencées de façon ordonée. En effet, durant la phase d'identification du but utilisateur, il est possible qu'un but "intermédiaire" soit généré par le robot afin de faire avancer le dialogue et l'identification du but final de l'utilisateur. Par exemple, le robot peux décider d'aller verifier un fait en se déplaçant dans l'appartement, soulevé une boîte pour montrer à l'homme ce qu'il s'y trouve... Il est donc possible que le robot ait à planifier ou à agir pour mettre à jour son état de connaissance de l'environnement ou celui de l'homme.
@@ -258,9 +257,9 @@ Durant cette phase, le robot cherche à exécuter les tâches du plan permettant
 
 \section{Architecture du système de dialogue situé}
 
-Dans cette partie, nous allons aller plus loin dans l'explication du système de dialogue situé, intervenant principalement dans la première phase, en détaillant les différents modules qui entrent en jeu lors de la détermination du but utilisateur. Nous allons notamment détailler comment le système de dialogue est enrichit en utilisant le contexte de l'intéraction et la base de fait maintenue par le système d'évaluation de la situation.
+Dans cette partie, nous allons aller plus loin dans l'explication du système de dialogue situé, intervenant principalement dans la première phase, en détaillant les différents modules qui entrent en jeu lors de la détermination du but utilisateur. Nous allons notamment détailler comment le système de dialogue est enrichit en utilisant le contexte de l'interaction et la base de fait maintenue par le système d'évaluation de la situation.
 
-Nous présentons à la figure \ref{fig:archiphase1}, l'architecture détaillée mise en place pour la première phase d'intéraction. Nous nous baserons sur cette figure pour expliquer les différents flux, ainsi que les différents modules qui permettent le bon fonctionnement du dialogue situé.
+Nous présentons à la figure \ref{fig:archiphase1}, l'architecture détaillée mise en place pour la première phase d'interaction. Nous nous baserons sur cette figure pour expliquer les différents flux, ainsi que les différents modules qui permettent le bon fonctionnement du dialogue situé.
 
 
 \begin{figure}[ht!]
@@ -271,51 +270,79 @@ Nous présentons à la figure \ref{fig:archiphase1}, l'architecture détaillée 
 \end{figure}
 
 Il est possible d'identifier plusieurs sous parties dans cette architecture.
-La première est en charge des entrées multimodales de l'utilisateur. Une deuxième partie est responsable de l'aquisition et du maintient de l'état du monde ainsi que de la génération de données symboliques. Le gestionnaire de dialogue, ou DM (Dialogue Manager) permets de décider, en fonction des entrées interprétées de l'utilisateur et du contexte de l'intéraction de la réponse donnée par le robot afin de parvenir à déterminer le but.
+La première est en charge des entrées multimodales de l'utilisateur. Une deuxième partie est responsable de l'aquisition et du maintient de l'état du monde ainsi que de la génération de données symboliques. Le gestionnaire de dialogue, ou DM (Dialogue Manager) permet de décider, en fonction des entrées interprétées de l'utilisateur et du contexte de l'interaction de la réponse donnée par le robot afin de parvenir à déterminer le but.
 La dernière partie s'attache à restituer sous forme multimodale la sortie du système de dialogue décidée par le gestionnaire de dialogue.
-Certains modules relevant d'avantage du dialogue proprement parlé que de l'usage du système d'évaluation de la situation, une description brève en sera donnée. Pour plus de renseignements sur ces modules et une déscription plus exhaustive de la partie dialogue, nous invitons le lécteur à consulter les articles \cite{} ainsi que la thèse 
-
-
-%TODO ref au travail de Manu
+Certains modules relevant d'avantage du dialogue proprement parlé que de l'usage du système d'évaluation de la situation, une description brève en sera donnée. Pour plus de renseignements sur ces modules et une déscription plus exhaustive de la partie dialogue, nous invitons le lécteur à consulter les articles \cite{Ferreira13a,Ferreira13b} ainsi que la thèse \cite{ferreira2015phd}.
 
 \subsection{Entrées multimodales utilisateur}
 \label{sec:entréesDial}
-Cette première partie permets d'aquérir et d'interpréter les entrées multimodales de l'homme en fonction du contexte de l'intéraction. En effet, l’utilisateur peut faire l’usage de la parole et/ou de
-gestes déictiques de façon non contrainte tout au long de l’interaction pour s’adresser
-au robot. Une fois la commande de l'utilisateur interprétée, elle est transmise au module de géstion de dialogue. 
+Cette première partie permet d'aquérir et d'interpréter les entrées multimodales de l'homme en fonction du contexte de l'interaction. L’utilisateur peut faire l’usage de la parole et/ou de gestes déictiques de façon non contrainte tout au long de l’interaction pour s’adresser au robot. Une fois la commande de l'utilisateur interprétée, elle est transmise au module de géstion de dialogue. 
 
 Pour aquérir et interpréter les commandes de l'utilisateur, quatre modules sont impliqués.
 
 \begin{itemize}
-\item Le module ASR: la reconnaissance de la parole est effectuée grâce au module ASR (Automatic Speech Recognition). Il utilise le flux audio (numéro 1 sur le schéma) provenant du microphone pour traduire ce flux en mots. Ce module est basé sur la Google Web Speech API 3.
-\item Le module SLU: l'ASR fournit les mots possiblement prononcés par l'homme au SLU (2). Ces mots sont interprétés par le SLU (Spoken Language Understanding) pour permettre de relier les mots aux concepts mis en jeux.
-\item Le module GRU: ce module est chargé de la reconnaissance et la compréhension des gestes déictiques émis par l’utilisateur lors de son tour d’interaction (Gesture Recognition and Understanding). Les gestes de pointage sont détectés et interprétés dynamiquement par notre raisonneur spatial (TOASTER) décrit au premier chapitre de cette thèse. Ce dernier exploite à la fois les coordonnées spatiales des objets (5) et les jointures de l’utilisateur (4) telles que déterminées grâce aux informations issues des capteurs visuels du robot pour savoir si oui ou non un objet est désigné du
-doigt par l’utilisateur. Lorsque c’est le cas, un \textit{fait} de la forme \textit{AGENT\_ID pointsAt
+\item Le module \textit{ASR}: la reconnaissance de la parole est effectuée grâce au module \textit{ASR} (Automatic Speech Recognition). Il utilise le flux audio (flux 1 sur le schéma) provenant du microphone pour traduire ce flux en mots. Ce module est basé sur la Google Web Speech API 3.
+\item Le module \textit{SLU}: l'\textit{ASR} fournit les mots possiblement prononcés par l'homme au \textit{SLU} (2). Ces mots sont interprétés par le \textit{SLU} (Spoken Language Understanding) pour permettre de relier les mots aux concepts mis en jeux.
+\item Le module \textit{GRU}: ce module est chargé de la reconnaissance et la compréhension des gestes déictiques émis par l’utilisateur lors de son tour d’interaction (Gesture Recognition and Understanding). Les gestes de pointage sont détectés et interprétés dynamiquement par notre raisonneur spatial (\textit{TOASTER}) décrit au chapitre \ref{chapter1} de cette thèse. Ce dernier exploite à la fois les coordonnées spatiales des objets (5) et les jointures de l’utilisateur (4) telles que déterminées grâce aux informations issues des capteurs visuels du robot pour savoir si un objet est pointé par l’utilisateur. Lorsque c’est le cas, un \textit{fait} de la forme \textit{AGENT\_ID pointsAt
 OBJECT\_ID} est alors généré et transmis au GRU (7). De plus, ce \textit{fait}, comme tous les faits générés par notre infrastructure de raisonnement géométrique, contient un indicateur temporel. Cela permet de simplifier le mécanisme de
 fusion avec les entrées vocales.
 %Dans la version actuelle de la plateforme des heuristiques expertes sont employées pour la capture de ces gestes dans SPARK. Cependant, une fois que plus de données auront été collectées, des techniques plus élaborées pourront être envisagées pour les remplacer, comme par exemple celle proposée dans (Rossi et al., 2013) qui fait intervenir un classifieur HMM avec en entrée des données issues d’une caméra RGB-D (coordonnées 3D et angles des jointures du corps de l’utilisateur, état ouvert/fermé de chacune de ses mains, etc.).
 \item Le module de fusion: l’objectif du mécanisme de fusion est de combiner les actes de dialogue extraits du
-signal de parole utilisateur (3) aux évènements déictiques capturés grâce au module GRU (8).
-Pour ce faire, il faut tenir compte à la fois du contexte de l’interaction (positions des
-objets dans l’environnement physique, etc.), du niveau de confiance que l’on porte aux
-différentes hypothèses unimodales (étant donné qu’elles peuvent être erronées) mais
-également à leur marqueur temporel.
+signal de parole utilisateur (3) aux évènements déictiques capturés grâce au module \textit{GRU} (8).
+Pour ce faire, il faut tenir compte à la fois du contexte de l’interaction (positions des objets dans l’environnement physique, etc.), du niveau de confiance que l’on porte aux différentes hypothèses unimodales (étant donné qu’elles peuvent être erronées) mais également à leur marqueur temporel.
 La première étape de ce processus consiste donc à déterminer si les hypothèses en
-provenance des différentes modalités sont synchrones entre elles et peuvent être fusionnées
-ou doivent être considérées séparément. Du fait que la parole est considérée
-dans notre étude comme modalité principale de l’utilisateur, les tours d’interaction seront calés sur celui des entrées vocales. Ainsi, comme dans \cite{Holzapfel2004}, seuls les gestes déictiques détectés dans un segment temporel de 20ms avant et après celui du tour de parole courant seront exploités par le mécanisme de fusion. De ce fait, si des hypothèses SLU apparaissent seules ou que les gestes détectés ne leur sont pas synchrones, elles seront directement considérées comme résultat de la fusion. La méthode de fusion retenue ici repose sur la définition d’un ensemble
+provenance des différentes modalités sont synchrones entre elles et peuvent être fusionnées ou doivent être considérées séparément. Du fait que la parole est considérée dans notre étude comme modalité principale de l’utilisateur, les tours d’interaction seront calés sur celui des entrées vocales. Ainsi, comme dans \cite{Holzapfel2004}, seuls les gestes déictiques détectés dans un segment temporel de 20ms avant et après celui du tour de parole courant seront exploités par le mécanisme de fusion. De ce fait, si des entrées \textit{SLU} apparaissent seules ou que les gestes détectés ne leur sont pas synchrones, elles seront directement considérées comme résultat de la fusion. La méthode de fusion retenue ici repose sur la définition d’un ensemble
 de règles.
 Par exemple si l’utilisateur prononce la
-phrase « prends ça » tout en désignant un objet du doigt la fusion a pour rôle principal
-d’identifier un candidat valable. Pour ce faire le mécanisme de fusion s’appuie notamment
-sur la détection de concepts bas niveau qui témoignent d’un besoin de résolution
-de référents dans l’énoncé utilisateur (le mot « ça » dans l’exemple précédent).
+phrase « prends ça » tout en désignant un objet du doigt la fusion a pour rôle principal d’identifier un candidat valable. Pour ce faire le mécanisme de fusion s’appuie notamment sur la détection de concepts bas niveau qui témoignent d’un besoin de résolution de référents dans l’énoncé utilisateur (le mot « ça » dans l’exemple précédent).
 
 La dernière étape du processus consiste à convertir les hypothèses ainsi produites
 dans leur représentation sémantique haut niveau pour pouvoir les transmettre au gestionnaire de dialogue (11).
 Des heuristiques définies manuellement sont employées pour déterminer les valeurs
 des concepts de haut niveau identifiés à partir des hypothèses bas niveau.
 \end{itemize}
+
+Pour illustrer les mécanismes de compréhension des entrées utilisateur, un exemple de phrase utilisateur et de son interprétation par le système est donné au tableau \ref{table:fusion}.
+
+% Phrase utilisateur
+% Sémantique
+% bas niveau
+% Regroupement
+% Sémantique
+% haut niveau
+% Passe moi le livre bleu qui est sur la table du salon
+% inform(action=give, type=book, color=blue,
+% spatial.indicator=on, type=table, room=livingroom)
+% inform(cmd.action=give, object.type=book, object.color=blue
+% object.location=[spatial.indicator=on, type=table,
+% room=livingroom])
+% inform(cmd.action=give, object.type=book, object.color=blue,
+% object.position=livingroom\_table)
+% TABLE 6.4 – Exemple d’extraction sémantique complète de la tâche MaRDi.
+
+\begin{table}
+ %\vspace{-10pt}
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|c|}
+\hline
+  \textbf{Phrase utilisateur} & Passe moi le livre bleu qui est sur la table du salon. \\
+  \hline
+  \textbf{Sémantique} & inform(action=give, type=book, color=blue, \\
+  \textbf{bas niveau} & spatial.indicator=on, type=table, room=livingroom) \\
+  \hline
+ \textbf{Regroupement} & inform(cmd.action=give, object.type=book, \\
+      & object.color=blue, object.location=[spatial.indicator=on, \\
+      & type=table, room=livingroom]) \\
+  \hline
+  \textbf{Sémantique} & inform(cmd.action=give, object.type=book, \\
+  \textbf{haut niveau} & object.color=blue, object.position=livingroom\_table) \\
+  \hline
+\end{tabular}
+\caption{Exemple de phrase utilisateur et de l'interprétation qui en est faite par le système.}
+%    \vspace{-10pt}
+ \label{table:fusion}
+ \end{table}
 
 
 % \subsection{Entrées Multimodales de l'Utilisateur}
@@ -411,38 +438,28 @@ des concepts de haut niveau identifiés à partir des hypothèses bas niveau.
 \subsection{Le contexte comme aide à la compréhension}
 
 %contexte + prise de perspective perceptuelle + prise de perspective conceptuelle
-La modélisation du contexte de l’interaction joue un rôle déterminant dans une application
-HRI. Grâce a elle le robot peut modéliser dynamiquement l’environnement
-géométrique avec lequel il est en train d’interagir et ainsi en avoir une représentation
-symbolique adaptée au raisonnement logique.
-Dans notre configuration le système dispose à la fois d’une base statique de connaissances
-contenant la liste de tous les objets connus du robot (même ceux non encore perçus
-durant l’interaction) et de leurs propriétés statiques (couleur, identifiant, etc.) mais
-aussi d’une base dynamique de connaissances dans laquelle sont stockées les informations
-contextuelles et la représentation symbolique de l'environnement, comme présenté au premier chapitre.
+Comme déjà présenté au chapitre \ref{chapter1}, la modélisation du contexte de l’interaction joue un rôle déterminant dans une application HRI. Grâce a elle le robot peut modéliser dynamiquement l’environnement
+géométrique avec lequel il est en train d’interagir et ainsi en avoir une représentation symbolique adaptée au raisonnement logique.
+Dans notre configuration le système dispose à la fois d’une base statique de connaissances contenant la liste de tous les objets connus du robot (même ceux non encore perçus durant l’interaction) et de leurs propriétés statiques (couleur, identifiant, etc.) mais aussi d’une base dynamique de connaissances dans laquelle sont stockées les informations contextuelles et la représentation symbolique de l'environnement.
 %TODO Faire référence à une liste de faits en annexe?
 
-Ainsi, si l'homme fait référence à un objet en le décrivant par rapport à sa position relative à un autre objet, en utilisant les faits générés décrits en section \ref{sec:agencement} tel que \textit{isNextTo}, \textit{isIn} ou \textit{isOn}, il est possible sinon d'identifier l'objet, au moins réduire la liste des candidats potentiels. De même les déscriptions de positionnement relatives (gauche, droite) des objets permettent de discriminer les candidats possible parmis les entités présentes pouvant correspondre à une référence prononcée par l'homme.
-En utilisant une base de donnée SQL tel que décrite en section \ref{sec:db}, il est très simple de faire des jointures et donc d'identifier les objets correspondant aux critères définis dans la requête de l'utilisateur.
-Ainsi, si l'homme parle d'un objet vert situé sur la table du salon, en une seule requête à la base de données il est possible d'obtenir l'ensemble des objets correspondant à ces critères.
+Ainsi, si l'homme fait référence à un objet en le décrivant par rapport à sa position relative à un autre objet, en utilisant les faits générés décrits en section \ref{sec:agencement} tel que \textit{isNextTo}, \textit{isIn} ou \textit{isOn}, il est possible sinon d'identifier l'objet, au moins de réduire la liste des candidats potentiels. De même les déscriptions de positionnement relatives (gauche, droite) des objets permettent de discriminer les candidats possible parmis les entités présentes pouvant correspondre à une référence prononcée par l'homme.
+En utilisant une base de donnée SQL tel que décrite en section \ref{sec:db}, il est possible de faire des jointures et donc d'identifier les objets correspondant aux critères définis dans la requête de l'utilisateur.
+Ainsi, si l'homme parle d'un objet vert situé sur la table du salon, en une seule requête à la base de données combinant ces deux propriétés, il est possible d'obtenir l'ensemble des objets correspondant à ces critères.
 De la même manière, le robot peut choisir de parler d'un objet en utilisant ces mêmes faits pour le décrire.
-Ceci permets au robot de comprendre et d'identifier les références faites par l'homme et d'utiliser des références naturelles et compréhensibles pour l'homme.
+Ceci permet au robot de comprendre et d'identifier les références faites par l'homme et d'utiliser des références naturelles et compréhensibles pour l'homme.
 
 Pour aller plus loin dans la compréhension, le robot doit aussi considérer l'homme comme une entité logique faisant des requêtes logiques. En partant de ce postulat, il est possible d'exploiter les données issues du raisonnement de prise de perspective perceptuelle décrits en section \ref{sec:perceptuelle}.
-En effet, si l'homme demande au robot d'apporter un objet et que le robot hésite entre deux objet possibles, l'objet A et l'objet B. L'une des différences entre ces deux objets est que l'objet A est à porté de l'homme. Dans ce cas deux situations sont possibles:
-\begin{itemize}
-\item soit l'objet A est visible de l'homme, auquel cas le robot doit être capable de comprendre que l'homme ne réclamerait pas un objet qui lui est déjà accessible.
-\item soit l'objet A n'est pas visible de l'homme, alors le robot aura besoin de demander une précision afin de pouvoir identifier l'objet.
-\end{itemize}
+Prenons l'exemple où l'homme demande au robot d'apporter un objet et que le robot hésite entre deux objets possibles, l'objet A et l'objet B. L'une des différences entre ces deux objets est que l'objet A est devant l'homme. Dans ce cas le robot doit être capable de comprendre que l'homme ne réclamerait pas un objet qui lui est déjà accessible et donc apporter directement l'objet B.
 
-De même, si l'homme demande la position d'un objet et que le robot identifi deux candidats possibles (A et B), et que l'objet A est visible de l'homme, le robot doit être capable de comprendre que l'objet recherché par l'homme est celui-qui n'est pas perceptible de lui.
+De même, si l'homme demande la position d'un objet et que le robot identifi deux candidats possibles (A et B), et que l'objet A est visible de l'homme, le robot doit être capable de comprendre que l'objet recherché par l'homme est celui qui n'est pas perceptible de lui, c'est à dire l'objet B.
 
-Ces données issues de la prise de perspective perceptuelle permettent donc un raisonnement de haut niveau basé sur des règles logiques sur les requêtes de l'homme et permettent au module de fusion d'identifier plus rapidement l'objet requis par l'homme et ainsi de réduire le nombre de tour et améliore ainsi l'efficacité du système de dialogue.
+Ces données issues de la prise de perspective perceptuelle permettent donc un raisonnement de haut niveau basé sur des règles logiques liées aux requêtes de l'homme et permettent au module de fusion d'identifier plus rapidement l'objet requis par l'homme. Cette capacité réduie donc le nombre de tousr et améliore ainsi l'efficacité du système de dialogue.
 
-De même, la capacité de prise de perspective conceptuelle provenant du système d'évaluation de la situation et décrite en section \ref{sec:conceptual} permets également d'améliorer la qualité du dialogue situé.
+De même, la capacité de prise de perspective conceptuelle provenant du système d'évaluation de la situation et décrite en section \ref{sec:conceptual} est une capacité importante pour améliorer la qualité du dialogue situé.
 En effet, les requêtes de l'homme doivent être interprétée dans son état mental car l'homme exprime sa requête en fonction de son état de croyance sur la situation de l'environnement.
 
-Nous décrivons dans la partie suivante, comment nous utilisons cette représentation de l'état de croyance pour améliorer le module de gestion du dialogue.
+Nous décrivons dans la partie suivante, en section \ref{sec:mentalStateDial}, comment nous utilisons cette représentation de l'état de croyance pour améliorer le module de gestion du dialogue.
 
 % Now we will show how dialog could benefits from
 %   our system. 
@@ -551,6 +568,7 @@ sa modélisation.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %TODO: read from here
 \subsubsection{Prise en compte de l'état mental}
+\label{sec:mentalStateDial}
 Pour répondre à la problématique soulevée ci-dessus nous proposons d'intégrer l’analyse sur les
 croyances factuelles du robot et de l’utilisateur directement dans le mécanisme de prise
 de décision du système HIS, afin d'améliorer la qualité et l’efficacité du dialogue. Ainsi, nous proposons d’augmenter l’état résumé du dialogue avec un état sur la croyance divergente, nommé le
@@ -711,6 +729,8 @@ object.type=book, object.color=brown)}, qui sera transformée par le NLG dans l�
 
 
 \subsection{Restitution Multimodale}
+%TODO: rewrite
+% Mb do as inputs with a list of modules and some details...
 Quatre modules sont actuellement responsables
 des sorties du système.
 Le module de fission a en charge
@@ -761,17 +781,19 @@ sont traduites en séquence d’actions élémentaires selon des patrons prédé
 
 
 
-\section{Implémentation Dans un Simulateur Robotique}
+\section{Implémentation dans un simulateur robotique}
 
 \subsection{Motivation}
-Les systèmes de simulation sont très utilisés en robotique. Ils permettent aux roboticiens d'évaluer et valider leur travaux au niveau d'abstraction souhaité. De cette manière, les projets reposant sur des calculs de haut niveau (interaction, dialogue, supervision) peuvent utiliser un simulateur pour abstraire les niveaux inférieurs (navigation, traitement d'image, manipulation) et eviter que les problèmes qui leur sont liés interferent durant l'intéraction.
+Les systèmes de simulation sont très utilisés en robotique. Ils permettent aux roboticiens d'évaluer et valider leur travaux au niveau d'abstraction souhaité. De cette manière, les projets reposant sur des calculs de haut niveau (interaction, dialogue, supervision) peuvent utiliser un simulateur pour abstraire les niveaux inférieurs (navigation, traitement d'image, manipulation) et eviter que les problèmes qui leur sont liés interferent durant l'interaction.
 
-Pour le projet MaRDi, le simulateur est également utile pour partager un même environnement et une même configuration expérimentale entre les différents partenaires. Il est cependant nécéssaire que le simulateur soit adapté à l'intéraction homme-robot. 
+Pour le projet MaRDi, le simulateur est également utile pour partager un même environnement et une même configuration expérimentale entre les différents partenaires. Deplus, le système de dialogue reposant sur un gestionaire de dialogue ayant une politique apprise par renforcement, l'usage de la simulation permet d'effectuer cet apprentissage avec des moyens très réduits \cite{simpar_2014}.
+
+Il est cependant nécessaire que le simulateur soit adapté à l'interaction homme-robot. 
 En terme de simulation, deux solutions sont possible pour ajouter l'homme à la boucle: 1) en modelisant et implémentant leur comportements et actions, et 2) en utilisant la téléopération pour controler les avatars humains.
 
 La première solution présente l'avantage de l'automatisation et ne demande aucune manipulation manuelle. Cette solution est donc moins couteuse en temps et plus facile à mettre en place. Cependant, selon les caractéristiques humaines requises, il est potentiellement extrèmement complexe d'avoir un modèle de comportement humain réaliste. Les humains sont des entités complexes avec des réactions et comportements quasi impossible de synthétiser de manière satisfaisante. Cette solution est en général retenue pour les études qui n'impliquent pas les comportements humains les plus complexes, comme la navigation ou la manipulation.
 
-Dans la seconde solution, un homme téléopère un avatar virtuel. La simulation est donc plus complexe à établir car elle nécéssite de monopoliser un humain. Cependant, l'avatar du simulateur aura un comportement beaucoup plus réaliste. Pour ce faire, l'environement doit avoir un rendu visuel réaliste et le contrôle de l'avatar doit être suffisamment intuitif.
+Dans la seconde solution, un homme téléopère un avatar virtuel. La simulation est donc plus complexe à établir car elle nécessite de monopoliser un humain. Cependant, l'avatar du simulateur aura un comportement beaucoup plus réaliste. Pour ce faire, l'environement doit avoir un rendu visuel réaliste et le contrôle de l'avatar doit être suffisamment intuitif.
 
 D'autres projets de dialogue situé homme robot reposent sur une étude dans un simulateur. Par exemple pour un scénario de Pick-Place-Carry (Prendre-Placer-Transporter) \cite{Lucignano13}, de robot barman \cite{stiefelhagen07} ou de navigation dans un environnemnt virtuel \cite{byron06}. Cependant, peu de travaux considèrent l'environnement de simulation comme moyen pour l'aquisition du corpus de dialogue situé ou comme moyen de tester l'apprentissage de politique en ligne.
 %Indeed, most of the previous works in situated dialogue for HRI resorted to a preliminary Wizard-of-Oz (WoZ) experiment, where a human remotely operates the robot %, and then, used the collected data to train both a user simulator and an error model to pursue the dialogue policy learning without the use of any new real interactions
@@ -781,37 +803,52 @@ En effet, la plupart repose sur des expériences en magicien d'Oz \cite{prommer0
 
 
 
-\subsection{Choix du Simulateur}
+\subsection{Choix du simulateur}
+Dans le domaine de la robotique, de nombreux simulateurs sont disponibles. Nous pouvons citer la suite Player/Stage/Gazebo ~\cite{psg-1232}, la plateforme de simulation intégrée OpenHRP \cite{Nakaoka|iros07}, l'architecture logicielle multiplateforme OpenRAVE \cite{diankov_thesis} ou même le simulateur  commercial V-REP \cite{Freese2010}. Cependant, seuls quelques-uns d'entre eux sont adaptés à l'interaction homme-robot. Ils limitent généralement les comportements des agents humains à des mouvements et des capacités d'interaction relativement simple, ce qui constitue  l'une des raisons pour laquelle les simulations de HRI ont été menées jusqu'à présent dans des configuration de \emph{télé-opération}, où seul le robot et l'environnement (et pas l'agent humain) sont en fait simulé. Les simulateurs robotiques USARSim \cite{Lewis07usarsim} et MORSE \cite{morse_simpar_2012, simparmorse2014} sont tous deux utilisés dans des dizaines d'études HRI en raison de leur capacité à contrôler un agent humain. Cependant, MORSE présente plusieurs avantages spécifiques qui ont motivé notre choix.
 
-In the robotic field, many simulators are available. We can name the Player/Stage/Gazebo suite~\cite{psg-1232}, the integrated simulation platform OpenHRP \cite{nakaoka|iros07}, the cross-platform software architecture OpenRAVE \cite{diankov_thesis} or even the commercial simulator V-REP \cite{Freese2010}. However, only a few of them are very well suited to HRI. They generally limit human agent behaviours to relatively simple motions and interaction capacities which is one of the reasons why HRI simulations so far have been carried out in \emph{tele-operation} settings, where only the robot and the environment, but not the human agent, are actually simulated. Robotic simulators USARSim \cite{Lewis07usarsim} and MORSE \cite{morse_simpar_2012,simparmorse2014} are both used in dozens of HRI studies due to their explicit support for controlling a human agent. However, the latter has several specific advantages that motivated our choice. 
-
-% open-source / active communauty / middleware supports 
-MORSE is an open-source simulator, with a very active community, that was developed specifically for robotic simulation. It supports a wide range of middleware (e.g. ROS, YARP, pocolibs) as well as reliable implementations of realistic sensors and actuators which ease the integration on real robotic platforms afterwards.
-% Sensors / actuators with different level of abstraction
-%OLD>
-%The fact that virtual robots can interact with the virtual environment, not only through realistic sensors and actuators, but also by using higher level of abstraction makes it an adaptable tool for diverse research topics.
-%In this way, HRI simulation scenario can avoid to run low level sensors along with their related computation stack but can directly process high level data from unrealistic sensor. 
-%NEW> 
-Moreover, MORSE offers an adaptable simulation setup by allowing virtual robots to interact with the virtual environment through both realistic sensors/actuators and higher level ones. Thereby, roboticists can control the related computation cost of low level data processing by exploiting high level outputs from unrealistic components. 
+% Open-source / COMMUNAUTEE / supports actifs middleware
+MORSE est un simulateur open-source, avec une communauté très active, qui a été développé spécifiquement pour la simulation robotique. Il prend en charge une large gamme de middleware (par exemple ROS, YARP, pocolibs) ainsi que des implémentations fiables et réalistes des capteurs et des actionneurs qui facilitent l'intégration sur de véritables plateformes robotiques.
+% Capteurs / actionneurs avec le niveau d'abstraction
+En outre, MORSE offre une configuration de simulation adaptable en permettant à des robots virtuels d'interagir avec l'environnement virtuel en utilisant soit des capteurs/actionneurs réalistes ou des capteurs/actionneurs ayant un niveau d'abstraction supérieur. De ce fait, les roboticiens peuvent contrôler le coût de calcul de traitement des données de bas niveau en exploitant les sorties de haut niveau à partir de composants "irréalistes".
 %
-For example, MORSE provides both a vision camera and a
-semantic camera sensor. While the first camera provides a rough image (i.e. raw pixels) as output, the second one
-gives directly the names of the perceived objects and their positions in the scene. 
-%OLD> The latter sensor avoids users to perform object recognition and localization process when working on higher level issues
-%and still process same data while using a smaller computing environment.
-%NEW>
-The latter sensor avoids practitioners to perform object recognition and localization processes when focusing on higher level issues.
+Par exemple, Morse fournit à la fois une caméra de vision et
+un capteur de "caméra sémantique". Alors que la première caméra fournit une image grossière (i.e. pixels bruts) en tant que sortie, la seconde
+donne directement les noms des objets perçus et leurs positions dans la scène.
+Ce dernier capteur évite les utilisateurs à effectuer la reconnaissance et les processus de localisation d'objet lors de la focalisation sur les problématiques de niveau supérieur.
 
-% Realistic rendering
-Furthermore, MORSE relies on the Blender Game Engine,
-a real-time 3D runtime integrated to the open-source Blender
-modelling toolkit, for both advanced 3D (OpenGL shader) and
-physics simulation (based on the BULLET physics engine).
-This setup allows realistic rendering of complex environment and provides an immersive graphical user interface, which is a required feature %for immersive control of a human avatar.
-for HRI modelling. 
+% Rendu réaliste
+De plus, MORSE repose sur "Blender Game Engine",
+un moteur d'exécution 3D en temps réel intégré au toolkit de modélisation open-source Blender, à la fois pour la 3D avancé (OpenGL Shader) et
+pour la simulation de la physique (basée sur le moteur physique BULLET).
+Cette configuration permet un rendu réaliste d'environnement complexe et fournit une interface utilisateur graphique immersive, qui est une caractéristique nécessaire %pour le contrôle immersif d'un avatar humain.
+pour la modélisation HRI.
 
-% Human avatar controls
-In MORSE, the human avatar can be controlled by a human operator or directly through external scripts as any other robot.  
+% des commandes avatar humaines
+Dans MORSE, l'avatar humain peut être contrôlé par un opérateur humain ou directement par le biais de scripts externes comme tout autre robot.
+
+
+% In the robotic field, many simulators are available. We can name the Player/Stage/Gazebo suite~\cite{psg-1232}, the integrated simulation platform OpenHRP \cite{nakaoka|iros07}, the cross-platform software architecture OpenRAVE \cite{diankov_thesis} or even the commercial simulator V-REP \cite{Freese2010}. However, only a few of them are very well suited to HRI. They generally limit human agent behaviours to relatively simple motions and interaction capacities which is one of the reasons why HRI simulations so far have been carried out in \emph{tele-operation} settings, where only the robot and the environment, but not the human agent, are actually simulated. Robotic simulators USARSim \cite{Lewis07usarsim} and MORSE \cite{morse_simpar_2012,simparmorse2014} are both used in dozens of HRI studies due to their explicit support for controlling a human agent. However, the latter has several specific advantages that motivated our choice. 
+
+% % open-source / active communauty / middleware supports 
+% MORSE is an open-source simulator, with a very active community, that was developed specifically for robotic simulation. It supports a wide range of middleware (e.g. ROS, YARP, pocolibs) as well as reliable implementations of realistic sensors and actuators which ease the integration on real robotic platforms afterwards.
+% % Sensors / actuators with different level of abstraction
+% Moreover, MORSE offers an adaptable simulation setup by allowing virtual robots to interact with the virtual environment through both realistic sensors/actuators and higher level ones. Thereby, roboticists can control the related computation cost of low level data processing by exploiting high level outputs from unrealistic components. 
+% %
+% For example, MORSE provides both a vision camera and a
+% semantic camera sensor. While the first camera provides a rough image (i.e. raw pixels) as output, the second one
+% gives directly the names of the perceived objects and their positions in the scene. 
+% The latter sensor avoids practitioners to perform object recognition and localization processes when focusing on higher level issues.
+
+% % Realistic rendering
+% Furthermore, MORSE relies on the Blender Game Engine,
+% a real-time 3D runtime integrated to the open-source Blender
+% modelling toolkit, for both advanced 3D (OpenGL shader) and
+% physics simulation (based on the BULLET physics engine).
+% This setup allows realistic rendering of complex environment and provides an immersive graphical user interface, which is a required feature %for immersive control of a human avatar.
+% for HRI modelling. 
+
+% % Human avatar controls
+% In MORSE, the human avatar can be controlled by a human operator or directly through external scripts as any other robot.  
 
 \begin{figure}[ht!]
  \centering
@@ -823,47 +860,39 @@ In MORSE, the human avatar can be controlled by a human operator or directly thr
  \label{fig:human_morse}
    \vspace{-3pt}
  \end{figure}
-%In the first case, the operator controls the virtual human in an immersive way (i.e. first-person-shooter style). 
-%Displacement, gaze and interactions with the environment such as object manipulation can be controlled by the operator. 
-%These features are highly appreciated for enabling realistic behaviours of the simulated human.
-In the first case, the operator controls the virtual human in an immersive way (see Figure~\ref{fig:human_morse}) in terms of displacement, gaze, and interactions on the environment, such as object manipulation (e.g. grasp/released an object).
-To go even further in realistic human incorporation in the simulator, 
-a motion capture actuator allows to control the human avatar directly 
-by using an external device. So, a Kinect sensor collects human gestures and sends the posture data to %the actuator that will 
-move the human avatar accordingly.
-%For the operator to manipulate an object, a Nintendo wiimote can also be used to control this action.
-Furthermore, a Nintendo wiimote can jointly be used to manage its action (e.g. grasp/released an object).
 
-In the second case, the avatar is programmatically controlled by using standard MORSE actuators. As an example, it is possible to use a waypoint actuator on the human to define a path he has to follow.
+Dans le premier cas, l'opérateur contrôle l'humain virtuel de manière immersive (voir la figure \ref{fig:human_morse}) en termes de déplacement, de regard, et des interactions sur l'environnement, tel que la manipulation d'objets (par exemple, saisir ou déposer un objet).
+
+Dans le second cas, l'avatar est contrôlé par programme en utilisant des actionneurs MORSE standard. A titre d'exemple, il est possible d'utiliser un actionneur "waypoint" (point de cheminement) sur l'humain pour définir un trajet qu'il doit suivre.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Simulation de l'interaction}
-In our scenario, a disabled human is in her apartment and has a robot to assist her to perform everyday life chores.
-The goal is to make the robot understand, by reasoning on human speech, gestures and the environment, human's requests concerning objects. Objects are limited here to graspable items such as books, DVDs and mugs, that have diverse colors and a unique identifier.
 
-The PR2 robot is used in the simulator as it is our real platform at LAAS-CNRS. PR2 is already present in MORSE models, making it directly usable. We add a symbolic camera (MORSE semantic camera) sensor to the standard model so that it can perform object recognition and also a teleport actuator to move it to a designated position (while saving the time of the true displacement). We also add a human avatar with first person representation to have realistic inputs of speech and behaviour of human users. We use a virtual model of the physical environment in which the real robot will be tested (see Figure~\ref{fig:env}).
+%Explain why it is interesting for us to simulate + mainly phase 1
+La simulation de l'interaction nous permet dans notre cas d'obtenir rapidement un moyen d'entraîner le système de dialogue et de tester la validité de notre architecture pour la phase de détermination de but décrite en \ref{phase1}.
+Les phases d'élaboration de but et d'execution seront donc simplifiées au maximum.
+
+Dans notre scénario, une personne handicappée est dans son appartement de trois pièces et possède un robot pour l'assister dans les tâches quotidiennes.
+Le but ici est de faire en sorte que le système robotique puisse comprendre, en raisonnant sur les paroles de l'homme, les gestes et l'environnement, la requète de l'homme concernant les objets. Les objets sont limités ici aux objets qui peuvent être saisis comme des livres, des DVDs et des tasses, qui ont divers couleurs, type, position et un identifiant unique.
+
+Nous utilisons le robot Pr2 dans le simulateur car c'est la plateforme que nous utilisons au LAAS-CNRS. Le Pr2 est déjà présent dans les modèles de MORSE, le rendant dirèctement utilisable. Nous avons ajouté une caméra symbolique (MORSE semantic camera) au modèle standard afin qu'il puisse réaliser la reconnaissance d'objet. Nous avons également ajouté un actuateur "teleport" pour bouger le robot à une position donnée en évitant ainsi d'avoir à gérer la navigation et en gagnant le temps du déplacement. Nous utilisons un modèle virtuel de l'environnement physique dans lequel le robot réel sera testé. Enfin, nous ajoutons un avatar humain. La configuration expérimentale est schématisée à la figure \ref{fig:simusetup}. L'humain utilise le clavier (1) pour contrôler son avatar et a un retour visuel sur l'écran (2). Un casque audio avec micro intégré est utilisé pour dialoguer avec le système (3 et 4). Les flux 5 et 6 seront détaillés en section \ref{section:actions}. 
 % TODO take a screenshot of env with objects
 
 \begin{figure}[ht!]
  \centering
- \begin{tabular}{cc}
-  \includegraphics[width=0.6\textwidth]{img/LAASMORSE.png}
- \end{tabular}
- \caption{Scenario environment in MORSE}
- \label{fig:env}
- \end{figure}
+  \includegraphics[width=0.89\linewidth]{./img/simusetup.jpg} 
+  \caption {Configuration experimentale pour la simulation dans morse avec un agent humain controlant l'avatar du simulateur.}
+  \label{fig:simusetup}
+\end{figure}
+
  
-At the start of the simulation, a script randomly positions objects in predefined areas
-(such as over kitchen table, living-room table, bedroom shelf etc.), called \textit{manipulation areas}. This allows us to use different environment configurations without changing the initialization files (MORSE builder script).
-
-% -> Detail how we build our scene according to our scenario
-% -> Detail Morse tools we use in our scenario and how they work and fit our needs: Semantic camera, teleport, grasp
-
+Au début de la simulation, un script positionne des objets au hasard dans des zones prédéfinies (comme la table de la cuisine, celle du salon, l'étagère de la chambre...). Ces zones sont appelées des zones de manipulation. Cela nous permet d'utiliser différentes configuration d'environnement sans changé le fichier d'initialisation (MORSE builder script).
 
 %-----------------------------------------------%
-\subsection{Actions library}
+\subsection{Simulation de l'execution}
 \label{section:actions}
+%TODO
 %-> Why we need these actions?
 %   -> Simulation more interactive and realistic
 %    -> Objective fulfillment evaluation according to robot action (users satisfaction)
@@ -890,52 +919,176 @@ The list of abstract actions is as followed:
 
 
 \subsection{Expérimentation et résultats}
-In this "proof of concept" study we chose to deal with a limited expert panel, composed of 6 subjects (2 females and 4 males of around 25 years old), in order to focus on the capacity of the system to learn from scratch using a limited set of interactions. The advantage is that the collected data sufficiently explore the state and action spaces during the online learning to be exploited in offline learning (using batch samples).
+% In this "proof of concept" study we chose to deal with a limited expert panel, composed of 6 subjects (2 females and 4 males of around 25 years old), in order to focus on the capacity of the system to learn from scratch using a limited set of interactions. The advantage is that the collected data sufficiently explore the state and action spaces during the online learning to be exploited in offline learning (using batch samples).
 
-At the beginning of each dialogue, a specific goal (here a command) is randomly generated taking into account the simulated environment settings and the current interaction history in order to select a possible command. For example, "You want the robot to give you the white book on the kitchen table". No experimenter has any idea of the chosen configuration of the system with which he is interacting. So, we basically compare a hand-crafted expert dialogue policy (noted HDC) to a learned one (noted LEARNED). The latter was trained using a small set of expert users which first performed $60$ dialogues in an online learning setting.
+% At the beginning of each dialogue, a specific goal (here a command) is randomly generated taking into account the simulated environment settings and the current interaction history in order to select a possible command. For example, "You want the robot to give you the white book on the kitchen table". No experimenter has any idea of the chosen configuration of the system with which he is interacting. So, we basically compare a hand-crafted expert dialogue policy (noted HDC) to a learned one (noted LEARNED). The latter was trained using a small set of expert users which first performed $60$ dialogues in an online learning setting.
 
-In the complete multimodal architecture, each interaction takes from $7$ to $10$ minutes to complete (objects detection, robot movements, etc.).  So, without loss of generality, a practical workaround to speed-up the testing process consisted in using a fixed representation of the scene (a screenshot from the human point of view) and a web-based multimodal GUI instead of the full simulation setup.  Overall, $84$ dialogues for both the two proposed systems were recorded with $6$ distinct subjects. At the end of each interaction users evaluated the system in terms of task completion. The learned policy were configured to act greedily according to the value function. Results are those gathered in test condition where exploration is not allowed. All the dialogues were  recorded both in terms of audio and various kinds of meta-information (e.g. ASR N-Best list, dialogue manager detected gestures and related timestamps, etc.) but also high level annotations (e.g. environment settings, pursued goal, task success). As an illustration, a short interaction, translated from French, is given in Table~\ref{table:hri-example}.
+% In the complete multimodal architecture, each interaction takes from $7$ to $10$ minutes to complete (objects detection, robot movements, etc.).  So, without loss of generality, a practical workaround to speed-up the testing process consisted in using a fixed representation of the scene (a screenshot from the human point of view) and a web-based multimodal GUI instead of the full simulation setup.  Overall, $84$ dialogues for both the two proposed systems were recorded with $6$ distinct subjects. At the end of each interaction users evaluated the system in terms of task completion. The learned policy were configured to act greedily according to the value function. Results are those gathered in test condition where exploration is not allowed. All the dialogues were  recorded both in terms of audio and various kinds of meta-information (e.g. ASR N-Best list, dialogue manager detected gestures and related timestamps, etc.) but also high level annotations (e.g. environment settings, pursued goal, task success). As an illustration, a short interaction, translated from French, is given in Table~\ref{table:hri-example}.
+
+% \begin{table}
+% \centering
+% \small
+% \begin{tabular}{|c|c|l|}
+%   \hline
+%   \multirow{3}{*}{R1} & DA & hello() \\
+%     & NLG/TTS & Can I help you ?\\
+%     \hline
+%   \multirow{3}{*}{U1} & ASR & Can you put the book in my bedroom? \\
+%   	& SLU & inform(action=move,desc=in,room=bedroom)\\
+%     \hline
+%   \multirow{3}{*}{R2} & DA & confreq(type=book,position) \\
+%     & NLG/TTS & Sorry but where is the book you are talking about?\\
+%     \hline
+%   \multirow{3}{*}{U3} & ASR & I am talking about this one \\
+%   	& SLU & inform(idobj=?)\\
+%     & GRU & pointsAt BLUE\_BOOK 1395848705.31\\
+%    \hline
+%     \multirow{4}{*}{R3} & & execute(action=move,destination=bedroom\_bedsidetable,\\
+%      & DA & idobj=BLUE\_BOOK,position=livingroom\_table,type=book,\\
+%     & &color=blue) \\
+%     & NVBP/MC & move(BLUE\_BOOK,livingroom\_table,bedroom\_bedsidetable)\\
+%     & NLG/TTS & Ok, I will put the blue book on your bedside table\\
+%     \hline
+% \end{tabular}
+%  \caption{Example of a multimodal dialogue.}
+%  \label{table:hri-example}
+%  \vspace{-20pt}
+%  \end{table}
+ 
+% The results obtained are $14.3$ for the HDC method and $17.6$ for the LEARNED one. These results are given in terms of mean discounted cumulative rewards~\cite{Sutton98}. According to the reward function definition, this metric expresses in a single real value the two variables of improvement, namely the success rate (accuracy) and the number of turns until dialogue end (time efficiency). So, here the HDC policy manages the dialogue with $86\%$ of success rate in an average of $4.8$ turns against respectively $93\%$ and $2.9$ turns for the LEARNED one.  The difference observed between the two methods can be mainly explained by a more accurate and less frequent usage of request of confirmation as well as an expected more fined-grained uncertainty management for the LEARNED method. Thus, these results clearly both demonstrates the ability of the overall architecture (simulation software + multimodal dialogue system) to learn an efficient dialogue policy using few dialogue examples and shows the interest of considering RL methods rather than a hand-crafted fixed and suboptimal policy. Indeed, only $60$ training dialogues are enough to outperform the HDC by more than $3$ points.
+
+
+
+Une première étude a été menée pour montrer la capacité du système à apprendre la politique du gestionnaire de dialogue. Cette partie étant gérée par notre partenaire le LIA, nous invitons le lecteur à se référer dirèctement à l'article présentant les résultats de cette première expérimentation \cite{simpar_2014}.
+
+La seconde expérimentation menée sur le simulateur robotique morse concerne l'évaluation de l'amélioration du système de gestion de dialogue situé multimodal lors de la prise en compte des croyances erronées, comme présenté en section \ref{sec:mentalStateDial}.
+Nous nous focalisons donc sur des scénario où une divergence de croyance est présente entre le modèle d'état d'esprit de l'homme et celui du robot. 
+Dans une configuration réaliste, ces scénarios nécessitent des interactions d'une certaine durée pour faire apparaître une croyance divergente. Pour contourner ce procesus coûteux en temps dans notre configuration d'évaluation, nous proposons directement un but erroné à l'utilisateur au début de l'interaction. 
+Par conséquent, une fause croyance sur la localisation d'un objet non visible de l'homme est automatiquement ajoutée. Même si cette situation est générée de façon artificielle, le meme comportement peut être obtenu en utilisant notre système d'évaluation spatiale, comme présenté en section \ref{sec:ResChap2}.
+
+Par conséquent, cette configuration a été utilisé pour évaluer la capacité de notre système à gérer à la fois les tâches de manipulation classique (CLASSIC) et de fausse croyance (FB pour False Belief).
+Pour ce faire, nous comparons un système ayant connaissance des croyances de l'homme (BA pour Belief Aware) avec un système n'ayant pas de gestion de croyance (BU pour Belief Unaware). Ces deux systèmes ont des politiques apprises par l'interaction avec deux utilisateurs experts ayant réalisé $60$ dialogues.
+
+Dans la configuration d'évaluation, $10$ dialogues ont été enregistrés pour \textit{BA} et \textit{BU}, ces dialogues provenant de 6 sujets distincts (deux femmes et quatre hommes d'environ 25 ans), soit au total 120 dialogues. $30$\% de ces dialogues impliquaient des tâches de type \textit{FB}. Les sujets n'avaient pas connaissance de la configuration du système, qui ont été présenté dans un ordre aléatoire. À la fin de l'interaction, les utilisateurs évaluent le système en terme de réussite de la tâche avec un questionnaire en ligne.
+
+%(p 193 thèse Manu)
+
+%> EXPERIMENTAL SETUP
+
+% The DM implements the extended HIS framework described in Sec.~\ref{sec:dialogue}. For the reinforcement learning setup, the sample-efficient KTD-SARSA RL algorithm~\cite{Daubigney12} in combination with the Bonus Greedy exploration scheme enables online learning of dialogue strategy from scratch, as in~\cite{Ferreira13b}. A reward function is defined to penalise the DM by $-1$ for each dialogue turn and give it a $+20$ if the right command is performed at the end of the interaction, $0$ otherwise. To convey the DM action back to the user, a rule-based fission module is employed that splits the high level DM decision into verbal and non-verbal actions. The robot speech outputs are generated by chaining a template-based Natural Language Generation (NLG) module, which converts the sequence of concepts into text, to a Text-To-Speech (TTS) component based on the commercial Acapela TTS system\footnote{http://www.acapela-group.com/index.html}. A Non-verbal Behaviour Planning and Motor Control (NVBP/MC) module produces robot postures and gestures by translating the non-verbal actions into a sequence of abstract actions such as \textit{grasp}, \textit{moveTo}, \textit{release} which are then executed in the simulated environment.
+
 
 \begin{table}
+ \vspace{-10pt}
 \centering
-\small
-\begin{tabular}{|c|c|l|}
-  \hline
-  \multirow{3}{*}{R1} & DA & hello() \\
-    & NLG/TTS & Can I help you ?\\
+\scriptsize
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{c|*{3}{c|cc||}*{3}{c|cc|}}
+\multicolumn{1}{c}{} & \multicolumn{3}{c}{BU} & \multicolumn{3}{c}{BA} \\
+TASK  & $Avg.R$ & $Length$ & $SuccR$  
+      & $Avg.R$ & $Length$ & $SuccR$  \\ 
+\hline
+ 	CLASSIC & 17.62 & 2.95 & 0.93 
+            & 17.69 & 2.88 &  0.93 \\
+   	FB	& 12.72 & 5.94 &  0.83 
+        & 13.89 & 4.78&  0.83	 \\
     \hline
-  \multirow{3}{*}{U1} & ASR & Can you put the book in my bedroom? \\
-  	& SLU & inform(action=move,desc=in,room=bedroom)\\
-    \hline
-  \multirow{3}{*}{R2} & DA & confreq(type=book,position) \\
-    & NLG/TTS & Sorry but where is the book you are talking about?\\
-    \hline
-  \multirow{3}{*}{U3} & ASR & I am talking about this one \\
-  	& SLU & inform(idobj=?)\\
-    & GRU & pointsAt BLUE\_BOOK 1395848705.31\\
-   \hline
-    \multirow{4}{*}{R3} & & execute(action=move,destination=bedroom\_bedsidetable,\\
-     & DA & idobj=BLUE\_BOOK,position=livingroom\_table,type=book,\\
-    & &color=blue) \\
-    & NVBP/MC & move(BLUE\_BOOK,livingroom\_table,bedroom\_bedsidetable)\\
-    & NLG/TTS & Ok, I will put the blue book on your bedside table\\
-    \hline
+    ALL & 16.15 & 3.85&  0.9 
+        & 16.55 & 3.45& 0.9 \\
 \end{tabular}
- \caption{Example of a multimodal dialogue.}
- \label{table:hri-example}
- \vspace{-20pt}
+\caption{Performance du système sur des tâches classiques (CLASSIC), de fausse croyance (FB) et globales (ALL) en terme de moyenne sur les récompenses cumulées
+ (Avg.R), de longueur moyenne des dialogues en nombre de tours (Length) et de taux de succès moyen (SuccR).}
+ \label{table:hri-perfs}    
+ \vspace{-10pt}
+\end{table}
+
+Le tableau \ref{table:hri-perfs} est remplit avec les performances obtenues par les deux configurations discutées ci-dessus en considérant les tâches CLASSIC et FB. Ces résultats sont d'abord donnés en terme de moyenne sur les récompenses cumulées (Avg.R). D'après la définition de la fonction de récompense, cette métrique exprime dans une seule valeur les deux variables d'amélioration, le taux de succès (précision) et le nombre de tours avant la fin du dialogue (efficacité temporelle). Ces deux métriques sont également représentées. Les résultats dans le tableau \ref{table:hri-perfs} sont une moyenne des $60$ dialogues réalisés pour chaque système.
+
+
+
+Sur les tâches CLASSIC la performance entre BU et BA doit être considéré comme similaire. Ainsi, le mécanisme de résolution de croyance divergente ne semble pas influer sur la gestion du dialogue dans les situations sans croyance divergente.  La politique testée est apprise, par conséquent le processus d'attribution d'action est optimisée avec un degré supplémentaire de complexité (plus grand espace état / action que dans BU), donc une perte aurait pu être observée.
+
+Les performances entre BU et BA sur les tâches FB apparaissent en faveur de BA (taux plus élevé de réussite et un petit gain d'efficacité au niveau du temps  du processus de gestion du dialogue: gain moyen d'un tour).
+%
+%TODO translate?
+
+% However the quantitative comparison between the system configurations is not ensured to be relevant due to the relatively high confidence interval on considered metrics (e.g. success rate confidence interval for row FB is around $0.2$ for all system configurations).
+% Two main reasons account for this status quo. First, a limited amount of observations involving the different system configurations (due to experimental cost). Second, the expected marginal gain in terms of the considered metrics. Indeed, the current system is learnt on some overall task completion and efficiency criterion. However solving divergent belief situations in a pick and place scenario can not be considered a critical factor influencing these criterion greatly but just a way to cope with an additional (not dominant) degree of uncertainty and to improve user experience and naturalness of the interaction with the embodied agent. 
+
+\begin{table}
+%\vspace{-10pt}
+\centering
+\scriptsize
+  \begin{tabular}{llll}
+  \hline
+  $R_1$: & Puis-je vous aider? & $U_1$: & Apporte moi le livre qui est sur ma table de nuit.\\
+\end{tabular}
+  \vfill
+  \subfigure[][]{
+  \begin{tabular}{p{0.5cm} p{4.0cm}}
+  $R_2$: & \textbf{Le livre marron n'est plus sur la table de nuit, il a été déplacé vers la cuisine.}\\
+  $U_2$: & D'accord, apporte le moi0\\
+  $R_3$: & Je vous apporte le livre marron qui est sur la table de la cuisine. \\
+  \hline
+\end{tabular}
+  }%
+  \qquad
+  \subfigure[][]{
+   \begin{tabular}{p{0.5cm} p{4.0cm}}
+  $R_2$: & Voulez-vous le rouge?\\
+  $U_2$: & Non, le marron. \\
+  $R_3$: & Il n'y a pas de livre marron dans votre chambre mais il y en a un dans la cuisine.\\
+  $U_3$: & Tu es sûr? Et bien, apporte moi celui-ci. \\
+  $R_4$: & Je vous apporte le livre marron qui est sur la table de la cuisine. \\
+  \hline
+\end{tabular}
+  }
+  \caption{Exemple de dialogue avec (a) et sans (b) le raisonnement sur les croyances divergentes dans le cas où l'humain n'est pas informé que les livres rouge et marron ont été interchangés.
+  }
+%    \vspace{-10pt}
+ \label{table:qualitative-samples}
  \end{table}
- 
-The results obtained are $14.3$ for the HDC method and $17.6$ for the LEARNED one. These results are given in terms of mean discounted cumulative rewards~\cite{Sutton98}. According to the reward function definition, this metric expresses in a single real value the two variables of improvement, namely the success rate (accuracy) and the number of turns until dialogue end (time efficiency). So, here the HDC policy manages the dialogue with $86\%$ of success rate in an average of $4.8$ turns against respectively $93\%$ and $2.9$ turns for the LEARNED one.  The difference observed between the two methods can be mainly explained by a more accurate and less frequent usage of request of confirmation as well as an expected more fined-grained uncertainty management for the LEARNED method. Thus, these results clearly both demonstrates the ability of the overall architecture (simulation software + multimodal dialogue system) to learn an efficient dialogue policy using few dialogue examples and shows the interest of considering RL methods rather than a hand-crafted fixed and suboptimal policy. Indeed, only $60$ training dialogues are enough to outperform the HDC by more than $3$ points.
+
+Pour avoir une meilleur estimation des différences entre les deux stratégies des systèmes de dialogue BU et BA, nous avons également effectué une étude qualitative. Dans cette étude, nous étudions précisément les différences comportementales provenant de l'introduction du méchanisme de prise en compte des tâches FB dans un système ayant une politique apprise. 
+
+%
+Dans le tableau \ref{table:qualitative-samples} deux extraits de dialogues provenant des données d'évaluation illustrent les différences entre la gestion de dialogue BU et BA. sur la même tâche FB (ici le livre rouge a été interchangé avec le marron). Si la divergenece de croyance n'est pas prise en compte comme en (a), le gestionaire de dialogue peut être forcé de gérer un niveau supplémentaire d'incompréhension comme en (b) de $R_2$ à $U_3$. 
+Nous pouvons également observer en (b) que le système BU a été capable de réussir la tâche FB (ce qui explique que grâce à la politique apprise, le système BU a un taux de succès relativement élevé pour les tâches FB). En effet, si l'objet est clairement identifié par l'utilisateur, par exemple en utilisant la couleur ou le type, le système peut relâcher la contrainte de la position erronée et est donc capable de faire une offre d'execution de la commande corrigée avec la positon valide de l'objet.
+Nous observons également que la politique apprise prenant en compte l'état de croyance fait émerger des mécanismes alternatifs à l'utilisation de l'action \textit{informDivergentBelief}. Par exemple le système peut executer dirèctement la tâche corrigée de l'utilisateur, ce qui évite les malentendus, lorsque les informations collectées semblent suffisantes pour identifier l'objet.
 
 
-
-\subsection{Étude sur l'utilisation de l'état mental}
-(p 193 thèse Manu)
 
 \section{Implémentation sur plateforme robotique}
 
 %Phase 2 et 3 (démo avec Sandra)
+
+Pour compléter cette première implémentation et ces tests sur simulateurs dans lesquels les phases deux et trois décrites en \ref{sec:troisPhases} ont été simulées afin de mener à bien l'apprentissage de la politique du système de gestion de dialogue \cite{simpar_2014} et tester la prise en compte des croyances divergentes \cite{Ferreira2015}, nous avons implémentés et testé les éléments nécessaires pour la réalisation des phases deux et trois.
+
+
+\subsection{Élaboration du domaine de planification}
+
+
+
+
+\subsection{Supervision}
+
+
+
+
+\subsection{Expérimentation et résultats}
+
+
+
+
+
+
+
+\section{Conclusion}
+\label{sec:conclusion}
+%\vspace{-5pt}
+In this paper, we described how a user belief realtime tracking framework can be used along with a multimodal POMDP-based dialogue management. The evaluation of the proposed method with real users confirms that this additional information helps to achieve more efficient and natural task planning (and does not harm handling of normal situations). 
+%In the present work, for practical reasons, the interactions took place in a simulated 3D environment. However, the spatial reasoning framework responsible for the agent belief management is already operational for on-board interaction. 
+Our next step will be to integrate the multimodal dialogue system on the robot and carry out evaluations in real setting to uphold our claims in an fully realistic configuration.
 
 % \subsection{Représentation Symbolique de l'État du Monde}
 % Robot -> x y z
