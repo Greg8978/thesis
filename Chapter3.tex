@@ -493,10 +493,9 @@ Nous décrivons dans la partie suivante, en section \ref{sec:mentalStateDial}, c
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Gestionnaire de dialogue}
-%TODO: réécrire cette section avec mes mots
 \subsubsection{Présentation générale}
-Le composant responsable de la gestion du dialogue, noté DM dans la figure \ref{fig:archiphase1} est basé sur le paradigme POMDP HIS (Hidden Information State) \cite{Young10} qui a été adapté ici pour l'interaction multimodale. Dans cette configuration, l'état de croyance du système de dialogue est représenté par un ensemble de partitions. Chaque partition représente une commande utilisateur possible. La prise de décision se fait sur un état résumé pour permettre l'apprentissage par renforcement. À chaque tour, le système choisit une action résumée (par exemple inform, confirm, execute).
-Pour ce qui est de la politique du gestionnaire de dialogue, l'algorithme KTD-SARSA RL ~\cite{Daubigney12} a été utilisé. Plus de détails sur cette configuration sont disponibles dans les articles \cite{Ferreira13a,Ferreira13b}.
+Le composant responsable de la gestion du dialogue, noté DM pour Dialogue Manager dans la figure \ref{fig:archiphase1}, est basé sur le paradigme POMDP (Processus de Décision Markovien Partiellement Observable) HIS (Hidden Information State) \cite{Young10} qui a été adapté ici pour l'interaction multimodale. Dans cette configuration, l'état de croyance du système de dialogue est représenté par un ensemble de partitions. Chaque partition représente une commande utilisateur possible. La prise de décision se fait sur un état résumé pour permettre l'apprentissage par renforcement. À chaque tour, le système choisit une action résumée (par exemple inform, confirm, execute).
+Pour ce qui est de la politique du gestionnaire de dialogue, l'algorithme KTD-SARSA RL \cite{Daubigney12} a été utilisé. Plus de détails sur cette configuration sont disponibles dans les articles \cite{Ferreira13a,Ferreira13b}.
 
 %TODO
 % Tout comme pour le système de dialogue TownInfo, le DM employé dans notre étude
@@ -550,35 +549,25 @@ Pour ce qui est de la politique du gestionnaire de dialogue, l'algorithme KTD-SA
 % (réalisation de la commande avec toutes ses implications), ce qui typiquement n’existe
 % pas dans des tâches purement recherche d’informations telles que TownInfo.
 Une des limites du paradigme HIS pour le problème qui nous concerne est qu’il
-n’offre dans sa version initiale que des mécanismes capables de gérer l’incertitude due
-aux bruits présents dans le canal de communication (reconnaissance puis compréhension
-de la parole). Or, nous pensons qu’une autre source possible de l’incertitude peut
-provenir de situations de fausses croyances où la croyance en des faits erronées (par
-exemple une position antérieure d’un objet) viendrait bruiter les actes de communicatifs
-de l’utilisateur. En effet, si l’état mental de l’utilisateur n’est pas modélisé ni pris
-en compte, seul des mécanismes de résolution classiques de l’incertitude peuvent être
-appliqués par la politique, par exemple demander à l’utilisateur de confirmer des hypothèses
+n’offre dans sa version initiale que des mécanismes capables de gérer l’incertitude due aux bruits présents dans le canal de communication (reconnaissance puis compréhension
+de la parole). 
+Or, nous pensons qu’une autre source possible d'incertitude peut
+provenir de situations de fausses croyances où la croyance en des faits erronées (par exemple une position antérieure d’un objet) viendrait bruiter les actes  communicatifs
+de l’utilisateur et provoquer une difficulté supplémentaire de compréhension pour le système de dialogue. En effet, si l’état mental de l’utilisateur n’est pas modélisé ni pris en compte, seul des mécanismes de résolution classiques de l’incertitude peuvent être appliqués par la politique du gestionnaire de dialogue, par exemple demander à l’utilisateur de confirmer des hypothèses
 jusqu’à ce que sa demande corresponde à la réalité observée, et ce même dans
-des situations où il aurait été possible d’identifier une telle situation en amont de par
-sa modélisation.
+des situations où il aurait été possible d'interpréter correctement la commande de l'utilisateur en utilisant la modélisation de son état de croyance.
 
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%TODO: read from here
 \subsubsection{Prise en compte de l'état mental}
 \label{sec:mentalStateDial}
 Pour répondre à la problématique soulevée ci-dessus nous proposons d'intégrer l’analyse sur les
 croyances factuelles du robot et de l’utilisateur directement dans le mécanisme de prise
 de décision du système HIS, afin d'améliorer la qualité et l’efficacité du dialogue. Ainsi, nous proposons d’augmenter l’état résumé du dialogue avec un état sur la croyance divergente, nommé le
-d-status. Ce dernier est utilisé pour notifier de la présence d’une situation de fausse
-croyance (divergence).
-Dans notre cadre expérimental actuel, ces croyances sont considérées comme parties
-intégrantes de la ressource de connaissances dynamiques employée et sont donc maintenues de façon indépendante aux mécanismes de gestion de l’état interne du système
-de dialogue. Nous proposons également dans cette extension d’ajouter une nouvelle
-action dédiée à la résolution des situations de fausses croyances, \textit{InformDivergentBelief}.
-
+d-status. Ce dernier est utilisé pour notifier de la présence d’une situation de fausse croyance.
+Dans notre cadre expérimental actuel, ces croyances sont gérées par le module d'évaluation de la situation, comme expliqué au chapitre \ref{chapter2}. Elles sont donc maintenues de façon indépendante aux mécanismes de gestion de l’état interne du système de dialogue. Nous proposons également dans cette extension d’ajouter une nouvelle action dédiée à la résolution des situations de fausses croyances, \textit{InformDivergentBelief}.
 
 Nous prenons comme exemple, un scénario ou deux livres ont étés interchangés sans que l'homme en soit informé.
 Cette situation est résumée par la figure \ref{fig:dbexemple}.
@@ -591,8 +580,9 @@ Cette situation est résumée par la figure \ref{fig:dbexemple}.
 \end{figure}
 
 
-Nous illustrons la prise en compte de la croyance divergente dans cette exemple avec la figure \ref{fig:overview-mardhis}. Les modifications apportées au modèle initial sont illustrées par les éléments en
-orange. 
+Nous illustrons la prise en compte de la croyance divergente dans cet exemple avec la figure \ref{fig:overview-mardhis}. Les modifications apportées au modèle initial sont illustrées par les éléments en
+orange.
+
 Soit la situation suivante :
 l’utilisateur vient de prononcer la phrase « donne moi le livre qui est sur ma table de
 chevet ». Comme le montre la figure \ref{fig:overview-mardhis}, logiquement la partition de plus grande probabilité devient celle qui modélise le but utilisateur qui consiste à vouloir lui « apporter
@@ -600,25 +590,20 @@ un livre situé sur la table de chevet ». Du point de vue du robot (ROBOT FACTS
 la figure) ce livre est identifié de façon unique comme étant l’objet RED\_BOOK. Cependant,
 du point de vue de l’utilisateur (USER FACTS sur la figure), il est également identifié
 de façon unique comme étant l’objet BROWN\_BOOK. Cette situation est considérée
-comme divergente et le d-status est réglé sur unique parce qu’il n’y a qu’un seul objet possible qui correspond à cette description dans le modèle de l’utilisateur et que
-ce dernier est différent de celui également identifié dans la base de faits dynamiques
-du robot. Dans nos travaux, le d-status ne peut prendre que les deux valeurs unique et
+comme divergente et le d-status est réglé sur unique parce qu’il n’y a qu’un seul objet possible qui correspond à cette description dans le modèle de l’utilisateur et que ce dernier est différent de celui également identifié dans la base de faits  du robot. Dans nos travaux, le d-status ne peut prendre que les deux valeurs unique et
 other, nous considérons cependant cet élément comme étant catégoriel et non binaire
 car nous comptons étendre à terme le nombre des valeurs ainsi considérées (identification de différentes situations comme par exemple le fait que plusieurs objets candidats
 présentent une position divergente).
 En ce qui concerne la nouvelle action résumée \textit{InformDivergentBelief} introduite pour
-résoudre la situation de divergence, les actes de dialogue qui lui sont associés dans
-l’espace maître sont déterminés par l’intermédiaire d’heuristiques expertes. Dans cette
-première version, lorsqu’un cas de divergence est détecté dans la meilleure hypothèse
-d’état de dialogue, idéalement l’action prise par le système doit permettre d’informer
-l’utilisateur de manière explicite de la présence et de la nature de cette divergence.
+résoudre la situation de divergence, les actes de dialogue qui lui sont associés dans sont déterminés par l’intermédiaire d’heuristiques expertes. Dans cette
+première version, lorsqu’un cas de divergence est détecté, idéalement l’action prise par le système doit permettre d’informer l’utilisateur de manière explicite de la présence et de la nature de cette divergence.
 Pour ce faire, un acte de dialogue est employé pour informer l’utilisateur sur l’existence d’une divergence quant à la valeur de la position de l’objet "sujet"
 de la commande. Grâce à l’émission de cet acte de dialogue l’utilisateur va pouvoir
 mettre à jour ses croyances avant de poursuivre son objectif initial. Ainsi, lorsque le
 système informera l’utilisateur oralement de la véritable position de l’objet en question, le modèle de croyance utilisateur sera mis à jour en fonction. Ce processus est également illustré dans la figure \ref{fig:overview-mardhis} lorsque l’action \textit{InformDivergentBelief} est sélectionnée
 en tant que prochaine action du système (action maître). L’action finalement exécutée
 dans l’espace maître sera : \textit{deny(object.location=bedside\_table, object.location=kitchen\_table,
-object.type=book, object.color=brown)}, qui sera transformée par le NLG dans l’énoncé système suivant « le livre marron n’est plus sur la table de chevet mais sur la table de la cuisine ».
+object.type=book, object.color=brown)}, qui sera transformée par le module de Génération de Language Naturel \textit{NLG} dans l’énoncé système suivant "le livre marron n’est plus sur la table de chevet mais sur la table de la cuisine".
 % Pour ce qui est de la politique d’interaction, nous envisageons là encore de réaliser
 % un apprentissage RL en ligne de la politique. Cependant contrairement aux expériences
 % réalisées dans le chapitre 4, nous considérons ici le recours à des interactions faisant
@@ -632,7 +617,7 @@ object.type=book, object.color=brown)}, qui sera transformée par le NLG dans l�
  \begin{tabular}{c}
   \includegraphics[width=1.0\textwidth]{img/MaRDHIS.pdf}
  \end{tabular}
- \caption{Overview of the HIS extension to take into account divergent belief.}
+ \caption{Aperçu de l'extension apportée au système HIS pour prendre en compte les croyances divergentes.}
  \label{fig:overview-mardhis}
  %  \vspace{-10pt}
 \end{sidewaysfigure}
@@ -856,7 +841,7 @@ Dans MORSE, l'avatar humain peut être contrôlé par un opérateur humain ou di
   \includegraphics[width=0.475\textwidth]{img/Screenshot_from_2014-04-29_14_02_14.png} &
   \includegraphics[width=0.475\textwidth]{img/Screenshot_from_2014-04-29_14_21_24.png}
  \end{tabular}
- \caption{Human avatar grabbing an object controlled by an operator (left image) and human in 3rd person perspective (right image).}
+ \caption{Avatar humain attrapant un objet, contrôlépar un opérateur (image de gauche) et l'avatar humain en vue à la troisième personne (image de droite).}
  \label{fig:human_morse}
    \vspace{-3pt}
  \end{figure}
@@ -896,24 +881,23 @@ Au début de la simulation, un script positionne des objets au hasard dans des z
 %-> Why we need these actions?
 %   -> Simulation more interactive and realistic
 %    -> Objective fulfillment evaluation according to robot action (users satisfaction)
-To get a more interactive and realistic simulation and also for the user to
-evaluate the fulfilment of her request (e.g. does the robot bring the appropriate object),
-we have developed a library of high-level and abstract actions that the robot will be able to perform.
+Pour permettre aux utilisateurs d'évaluer l'accomplissement de sa requête (par exemple, est-ce que le robot rapporte le bon objet), nous avons développé une librairie abstraite d'actions haut niveau réalisable par le robot. Ces actions haut niveaux seront combinées pour accomplir l'objectif énoncé par l'utilisateur. Leur haut niveau d'abstraction permet ici de pouvoir accomplir le but utilisateur sans avoir recours au plannificateur ou à la supervision et donc de contourner les phases deux et trois décritent en section \ref{sec:phase2} et \ref{sec:phase3}.
 
-The list of abstract actions is as followed:
+La liste des actions abstraites est la suivante:
+
 \begin{itemize}
 
 % Move robot to manipulation area
-\item To explore the environment and bring an object to the human, the robot needs to be able to move to manipulation areas. To do so, we use the teleport actuator of MORSE. This actuator moves instantaneously the robot to a given place. We define a script function to move the robot to each manipulation area that has been defined. In this way the robot can go to each position to pick objects or explore an area to get some contextual information.
+\item \textit{Move}: pour explorer l'environnement ou rapporter un objet, le robot a besoin de se déplacer vers les zones de manipulation. Pour ce faire, nous utilisons l'actuateur \textit{teleport} de MORSE. Cet actuateur permet de déplacer instananément le robot à l'endroit désiré. Nous avons défini une fonction de script pour bouger le robot vers chaque zones de manipulation définies. De cette façon, le robot peut se rendre à chaque position pour prendre un objet ou explorer une zone pour obtenir des informations contextuelles.
 
 % Explore an area
-\item The robot is able to scan a manipulation area. To make this action possible a symbolic camera is added to the robot on its head. We then move the head sequentially to scan the environment.
+\item \textit{Explore}: le robot est capable de scanner une zone de manipulation. Pour rendre cette action possible, une caméra symbolique a été ajouté à la tête du robot. La tête se déplace séquenciellement pour scanner l'environnement.
 
 % Grab object
-\item The robot has to grab an object. To perform this action the grasp service of the PR2 is used. We specify the name of the object it has to grab and if the object is close to robot's hand it will be attached to it. In a similar way, we added a function to drop an object that takes as parameter the manipulation area where it should be dropped to. The robot will drop the object on top of the corresponding furniture.
+\item \textit{Grab}: le robot peut prendre un objet. Pour réaliser cette action, le service \textit{grasp} lié au Pr2 de MORSE est utilisé. Nous précisions le nom de l'objet qu'il doit attrapper et si l'objet est proche de la pince du robot, il sera placé au niveau de celle-ci et lié à son déplacement. De la même façon, nous avons ajouté une fonction \textit{Drop} qui prends comme paramètre la zone dans laquelle l'objet doit être déposé. Le robot relâchera alors l'objet sur le meuble correspondant.
 
 % Give object
-\item The last action is giving the object to the human. It consists in moving the robot to the human position and deploying the arm of the robot toward the human to give her the object. We simply use the robot armature actuator to control the robot's arm.
+\item \textit{Give}: la dernière action est de donner l'objet à l'humain. Pour ce faire, le robot se déplace vers la position de l'homme puis déploye son bras vers l'homme afin de lui remettre l'objet. Nous utilisons simplement l'armature du robot pour contrôler son bras.
 \end{itemize}
 
 
