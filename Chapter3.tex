@@ -264,7 +264,7 @@ Nous présentons à la figure \ref{fig:archiphase1}, l'architecture détaillée 
 
 \begin{figure}[ht!]
  \centering
-  \includegraphics[width=0.89\linewidth]{./img/archiphase1.jpg} 
+  \includegraphics[width=0.99\linewidth]{./img/archiphase1.jpg} 
   \caption {Architecture détaillant les différents composant du système de dialogue situé.}
   \label{fig:archiphase1}
 \end{figure}
@@ -577,7 +577,7 @@ Cette situation est résumée par la figure \ref{fig:dbexemple}.
 
 \begin{figure}[ht!]
  \centering
-  \includegraphics[width=0.89\linewidth]{./img/dbexemple.jpg} 
+  \includegraphics[width=0.89\linewidth]{./img/dbexemple.jpg}
   \caption {Exemple où l'homme a une croyance divergente concernant l'emplacement de deux livres ayant étés interchangés.}
   \label{fig:dbexemple}
 \end{figure}
@@ -878,7 +878,7 @@ Nous utilisons le robot Pr2 dans le simulateur car c'est la plateforme que nous 
 
 \begin{figure}[ht!]
  \centering
-  \includegraphics[width=0.89\linewidth]{./img/simusetup.jpg} 
+  \includegraphics[width=0.89\linewidth]{./img/simusetup.jpg}
   \caption {Configuration experimentale pour la simulation dans morse avec un agent humain controlant l'avatar du simulateur.}
   \label{fig:simusetup}
 \end{figure}
@@ -1177,8 +1177,8 @@ L'environnement contient donc trois pièces qui elles-même contiennent des zone
 \begin{figure}[ht!]
  \centering
  \begin{tabular}{cc}
-  \includegraphics[width=0.475\textwidth]{img/areas.jpg} &
-  \includegraphics[width=0.475\textwidth]{img/furnitures.jpg}
+  \includegraphics[width=0.49\textwidth]{img/areas.jpg} &
+  \includegraphics[width=0.49\textwidth]{img/furnitures.jpg}
  \end{tabular}
  \caption{Répartition des différentes pièces (image de gauche) et des différentes zones de manipulation correspondant aux meubles contenus dans ces pièces (image de droite).}
  \label{fig:areasMardi}
@@ -1319,6 +1319,8 @@ Le robot étant au courant de la croyance erronée de l'homme, la supervision va
 Le robot rapporte Bilbo à l'homme et lui tend l'objet.
 Le robot est donc parvenu à accomplir la tâche en corrigeant l'ennoncé grâce à l'identification de la croyance erronée. De plus, à la fin de l'exécution, comme le robot donne l'objet à l'homme, la croyance erronée a disparu sans que le robot ait eu à en informer l'homme.
 Cela donne au robot un aspect efficace et discret en évitant d'informer l'homme lorsque ceci n'est pas nécessaire.
+
+Dans le cas où le robot n'aurait pas trouvé Bilbo sur la table de nuit, il aurait alors mis à jours sa croyance et aurait été voir à l'endroit où l'homme pense que Bilbo se trouve au cas où celui-ci aurait été déplacé sans que le robot en soit informé.
 
 % % génération du plan...
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
