@@ -28,7 +28,7 @@ Pour pouvoir agir dans un environnement humain, le robot doit donc pouvoir perce
 %TODO
 %définir... peut-être mettre dans la partie précédente?
 \subsection{Évaluation de la situation}
-La connaissance et la compréhension de la situation courante sont définies dans la littérature comme la connaissance de la situation (situation awarness). Le processus permettant d'aquérir et de maintenir la connaissance de la situation est appelé évaluation de la situation (situation assessment). Endsley explique dans \cite{endsley1995} que "la connaissance de la situation incorpore la compréhension d'un opérateur sur la situation globale, formant ainsi la base pour la prise de décision". La couche d'évaluation de la situation est donc fortement liée à la couche de prise de décision (aussi appelée supervision). Pour agir sur son environnement, le robot a besoin de décider quelle action entreprendre et quand agir. Pour prendre ce genre de décisions, la couche de supervision repose sur une couche inférieure pour fournir des informations à haut niveau d'abstraction sur l'environnement. Cela implique, pour la couche d'évaluation de la situation, de raisonner sur ce qui entoure le robot et d'extraire un ensemble de faits qui permet de modéliser une représentation symbolique de l'état du monde. Pour créer cette représentation symbolique, il est d'abord nécessaire au robot d'avoir une bonne estimation de l'état du monde et d'en avoir une représentation tridimensionnelle.
+La connaissance et la compréhension de la situation courante sont définies dans la littérature comme la connaissance de la situation (situation awarness). Le processus permettant d'acquérir et de maintenir la connaissance de la situation est appelé évaluation de la situation (situation assessment). Endsley explique dans \cite{endsley1995} que "la connaissance de la situation incorpore la compréhension d'un opérateur sur la situation globale, formant ainsi la base pour la prise de décision". La couche d'évaluation de la situation est donc fortement liée à la couche de prise de décision (aussi appelée supervision). Pour agir sur son environnement, le robot a besoin de décider quelle action entreprendre et quand agir. Pour prendre ce genre de décisions, la couche de supervision repose sur une couche inférieure pour fournir des informations à haut niveau d'abstraction sur l'environnement. Cela implique, pour la couche d'évaluation de la situation, de raisonner sur ce qui entoure le robot et d'extraire un ensemble de faits qui permet de modéliser une représentation symbolique de l'état du monde. Pour créer cette représentation symbolique, il est d'abord nécessaire au robot d'avoir une bonne estimation de l'état du monde et d'en avoir une représentation tridimensionnelle.
 
 
 
@@ -46,7 +46,7 @@ De nombreux systèmes robotiques ont recours à un composant d'évaluation de la
 \cite{Kluge01situationassessment} présente une évaluation de la situation empirique pour robot mobile dans une zone à forte influence, permettant de reconnaître les situations d'obstruction volontaire.
 
 Notre système permet non seulement d'effectuer l'agrégation des données de perception pour modéliser l'état du monde mais aussi le raisonnement géométrique. 
-Nos travaux peuvent être comparés au "Grounded Situation Model" (GSM) introduit par Mavridis et Roy \cite{Mavridis2005} dans le sens où ils fournissent tout deux une représentation amodale du monde utilisée comme un médiateur entre les capteurs et le modèle symbolique. \cite{Coradeschi2013} presente une étude sur ces systèmes de fondement des symboles (symbol grounding) en robotique. \cite{Daoutis2009} \cite{Lemaignan2011}
+Nos travaux peuvent être comparés au "Grounded Situation Model" (GSM) introduit par Mavridis et Roy \cite{Mavridis2005} dans le sens où ils fournissent tout deux une représentation amodale du monde utilisée comme un médiateur entre les capteurs et le modèle symbolique. \cite{Coradeschi2013} présente une étude sur ces systèmes de fondement des symboles (symbol grounding) en robotique. \cite{Daoutis2009} \cite{Lemaignan2011}
 présentent des exemples d'utilisation de ce genre de systèmes.
 
 Les applications pour le raisonnement spatial \cite{OKeefe1999} sont multiples. Par exemple, cela a été utilisé pour le traitement du langage naturel pour des applications tel que la reconnaissance de direction \cite{Kollar10,Matuszek10}
@@ -72,7 +72,7 @@ Un robot amené à interagir avec des humains est également amené à partager 
 \end{figure}
 
 \subsection{Objets}
-Les lieux de tragail et de vie sont également composés d'objets divers. Des récipients, des outils, des vêtements, des appareils éléctroniques... autant d'éléments qui peuvent prendre des formes et fonctionnalités variées.
+Les lieux de travail et de vie sont également composés d'objets divers. Des récipients, des outils, des vêtements, des appareils électroniques... autant d'éléments qui peuvent prendre des formes et fonctionnalités variées.
 Certains de ces objets peuvent également avoir diverses états. Par exemple, une bouteille peut être vide ou pleine, un vêtement peut être propre ou sale, un appareil électronique peut être éteint ou allumé.
 Ces objets sont pour la plupart manipulable au cours d'une interaction. Il est donc important que le robot puisse, afin d'agir correctement sur son environnement, reconnaître ces objets et dans la mesure du possible, connaître et suivre l'évolution de leur état.
 
@@ -141,7 +141,7 @@ Une fois que le système robotique peut accéder aux données lui permettant d'o
 
 L'unification des données capteur va permettre au système de maintenir un état du monde tridimensionnel comme dans la figure \ref{fig:real}. Pour améliorer le suivi de l'état du monde notamment au niveau des positions des divers éléments, il est parfois nécessaire d'établir un raisonnement basé sur des hypothèses, par exemple pour éviter de perdre la position d'un objet lorsqu'il n'est plus perçu. Ces raisonnements et hypothèses reposant sur des calculs géométriques et sur l'évaluation de la situation, ils seront présentés plus tard (en section \ref{sec:hypo}). 
 
-La construction et le maintien du modèle tridimensionnel par agrégation des données provenant des divers capteurs va permetre de générer des liens symboliques entre les différents éléments de l'environnement. Dans notre système, nous représentons l'état du monde symbolique par une liste de \textit{faits}. Un \textit{fait} est traduit par une structure de données contenant divers champs que nous allons énumérés.
+La construction et le maintien du modèle tridimensionnel par agrégation des données provenant des divers capteurs va permettre de générer des liens symboliques entre les différents éléments de l'environnement. Dans notre système, nous représentons l'état du monde symbolique par une liste de \textit{faits}. Un \textit{fait} est traduit par une structure de données contenant divers champs que nous allons énumérés.
 
 \begin{itemize}
 \item \textit{Subject}: le sujet sur lequel la propriété s'applique. Il peut s'agir d'un agent (humain ou robotique), d'un objet ou du membre d'un agent (e.g.: \textit{Red\_Mug}, \textit{Human1}, \textit{PR2\_ROBOT}, \textit{Human1\_Right\_Hand}).
@@ -152,7 +152,7 @@ La construction et le maintien du modèle tridimensionnel par agrégation des do
 Dans d'autres cas, pour représenter le manque de connaissances sur une propriété et la "conscience" de ce manque, la valeur du fait peut aussi être \textit{unknown}.
 \item \textit{Confidence}: ce chiffre entre 0 et 1 représente la fiabilité du fait. Cette valeur peut être liée à la fiabilité des capteurs ou résulter du calcul de la propriété.
 \item \textit{Time}: ce paramètre permet d'enregistrer le moment auquel la propriété a été calculée.
-\item \textit{FactObservability}: ce dernier paramètre représente la probabilité qu'un humain aquière la connaissance du fait s'il est capable de voir le sujet du fait. Plus de détails sur ce paramètres seront donnés dans le chapitre suivant.
+\item \textit{FactObservability}: ce dernier paramètre représente la probabilité qu'un humain acquière la connaissance du fait s'il est capable de voir le sujet du fait. Plus de détails sur ce paramètres seront donnés dans le chapitre suivant.
 \end{itemize}
 
 Par exemple, le vecteur 
@@ -185,7 +185,7 @@ Dans l'exemple illustré, les faits (simplifiés ici) \textit{bob isInArea inter
 \begin{figure}[ht!]
  \centering
   \includegraphics[width=0.69\linewidth]{./img/interactionarea.jpg} 
-  \caption {Zone liée au robot pr2 pour savoir si un humain est dans sa zone d'interaction. Ici bob se trouve dans la zone, le robot va donc calculer si celui-ci lui fait face}
+  \caption {Zone liée au robot Pr2 pour savoir si un humain est dans sa zone d'interaction. Ici bob se trouve dans la zone, le robot va donc calculer si celui-ci lui fait face}
   \label{fig:interaction}
 \end{figure}
 
@@ -194,7 +194,7 @@ Ces zones peuvent être créées, mises à jour et supprimées pendant l'interac
 
 \subsection{Agencement}
 \label{sec:agencement}
-Pour pouvoir passer d'une représentation numérique à une représentation symbolique de l'environnement qui entoure le robot, il est nécessaire d'avoir, dans l'infrastructure logicielle du robot, un composant qui calcule les relations spatiales entre les objets. Ce composant fait une représentation tridimensionnelle de l'environnement en utilisant les données de position et d'orientation des différents éléments et leur mise à jour en temps réél pour tenir compte de l'état du monde courant. À partir de cette représentation 3d de l'état du monde, il calcule des propriétés d'agencement spatiale pour décrire la situation des objets.
+Pour pouvoir passer d'une représentation numérique à une représentation symbolique de l'environnement qui entoure le robot, il est nécessaire d'avoir, dans l'infrastructure logicielle du robot, un composant qui calcule les relations spatiales entre les objets. Ce composant fait une représentation tridimensionnelle de l'environnement en utilisant les données de position et d'orientation des différents éléments et leur mise à jour en temps réel pour tenir compte de l'état du monde courant. À partir de cette représentation 3d de l'état du monde, il calcule des propriétés d'agencement spatiale pour décrire la situation des objets.
 
 Ce composant permet de calculer si un objet O1 se trouve au dessus d'un autre objet O2 (\textit{O1 isOn O2}), dans un objet O2 (\textit{O1 isIn O2}) ou à côté d'un objet O2 (\textit{O1 isNextTo O2}) comme illustré par la figure \ref{fig:spar}. Les détails de calculs et la méthode d'implémentation proviennent de travaux précédents et sont décrits dans \cite{sisbot2011situation}.
 
@@ -217,10 +217,10 @@ Le composant permettant de calculer ces faits enregistre en permanence les posit
 Comme le suivi d'un agent peut s'avérer pertinent seulement dans certaines situations, le calcul des faits concernant n'importe quel agent peut être activé ou désactivé par requête. Ceci permet d'éviter de calculer en permanence des faits concernant tout les agents en ciblant seulement les agents qui se trouvent dans une situation nécessitant un suivi particulier.
 Il est également possible de faire une requête pour activer le calcul de faits concernant un ou plusieurs des membres d'un agent. Lorsque le suivit d'un agent est activé, le composant calcul le déplacement de l'agent à partir des données présentes dans le buffer circulaire associé, afin de déterminer si l'agent est en train de se déplacer. En utilisant le buffer circulaire associé à l'agent et ceux associés aux autres entités, il est possible de calculer si l'agent se déplace en direction d'une entité en particulier (même si cette dernière est également en cours de déplacement) et l'évolution temporelle de la distance entre l'agent et un point d'intérêt. Ce calcul peut être aussi bien fait sur la position globale de l'agent ou sur l'un de ses membres (par exemple sur la main de l'homme).
 En plus du mouvement, nous calculons également les distances entre les agents surveillés (respectivement les membres surveillés) et les autres entités.
-De cette manière il est possible de savoir si un humain, ou l'un de ses membres, est proche d'un point d'intéret (comme le robot ou un objet avec lequel il veut interagir).
+De cette manière il est possible de savoir si un humain, ou l'un de ses membres, est proche d'un point d'intérêt (comme le robot ou un objet avec lequel il veut interagir).
 Par exemple, ce module peut générer les faits (simplifiés ici) <\textit{HUMAN1 isMoving TRUE}> pour indiquer que l'humain \textit{HUMAN1} est en mouvement ou <\textit{HUMAN1\_RIGHT\_HAND isMovingToward BLUE\_BOOK}> pour indiquer que la main droite de l'humain se dirige en direction du livre bleu.
 
-Le dernier type de fait concerne la posture de l'agent. En utilisant le buffer circulaire il est possible de savoir vers quoi l'humain pointait le doigt à un instant donné. Ceci peut être utile par exemple pour un module de fusion d'un système de dialogue. Ainsi, si un humain demande au robot "donne-moi ça", si la reconnaissance de parole est capable de fournir le temps pour lequel le mot "ça" a été prononcé, il est possible de faire une requête pour savoir quel objet était pointé par l'humain au moment où il a prononcé le mot "ça". Pour alléger la charge de calcul, ce fait est calculé seulement par requête (et non en permanence comme les autres). La requête renvoye une liste d'entités avec une probabilité pour chaque candidat potentiellement pointé.
+Le dernier type de fait concerne la posture de l'agent. En utilisant le buffer circulaire il est possible de savoir vers quoi l'humain pointait le doigt à un instant donné. Ceci peut être utile par exemple pour un module de fusion d'un système de dialogue. Ainsi, si un humain demande au robot "donne-moi ça", si la reconnaissance de parole est capable de fournir le temps pour lequel le mot "ça" a été prononcé, il est possible de faire une requête pour savoir quel objet était pointé par l'humain au moment où il a prononcé le mot "ça". Pour alléger la charge de calcul, ce fait est calculé seulement par requête (et non en permanence comme les autres). La requête renvoie une liste d'entités avec une probabilité pour chaque candidat potentiellement pointé.
 
 
 
@@ -233,13 +233,13 @@ Le dernier type de fait concerne la posture de l'agent. En utilisant le buffer c
 
 Dans leur quotidien, les humains sont occupés par divers activités (cuisine, nettoyage, bricolage...). Ces activités impliquent très souvent l'utilisation d'objets. Comme les robots sont fait pour assister les hommes dans leur tâches quotidiennes, il est crucial qu'ils puissent non seulement manipuler les objets, mais également suivre leur changement de position. Notre but ici n'est pas de discuter des différentes méthodes de suivi d'objet basé sur la perception mais d'expliquer comment le raisonnement sur les données de perception peut améliorer la détection et le suivi d'objet.
 
-Localiser et suivre un objet n'est pas une tâche simple. En effet, l'objet peut être de petite taille et par conséquent être fréquemment occlu ou hors du champ visuel.
+Localiser et suivre un objet n'est pas une tâche simple. En effet, l'objet peut être de petite taille et par conséquent être fréquemment occlus ou hors du champ visuel.
 Les humains sont capables de connaître la localisation d'un objet même sans perception directe. Ils font en permanence des hypothèses sur la position des objets qu'ils ne peuvent pas voir et effectuent des raisonnement basés sur ces hypothèses. Pour travailler efficacement avec des humains, le robot doit être capable lui aussi de faire ce genre de raisonnements.
 
 Pour ce faire, nous avons ajouté au composant qui maintient l'état du monde à jour la possibilité d'émettre des hypothèses de position lorsqu'un objet n'est pas visible.
 
 Comme hypothèse de base, lorsque le robot est dans l'incapacité de voir l'objet (l'objet est hors du champs de vision ou est occlut), le système suppose que l'objet est à la même place et a la même orientation que la dernière fois qu'il l'a perçu. Dans la figure \ref{fig:occluded} 
-le livre bleu n'est pas visible par le robot (car il est caché par la boîte rose). Cela signifie que le capteur de vision n'est plus capable de fournir la donnée de position de cet objet. Cependant, le système de maintient de l'état du monde le concerve tel quel dans le modèle de l'environnement car il sait que l'objet est occlut, et qu'il est donc normal qu'il ne soit pas détecté. Cette hypothèse de maintien de position est utilisée comme hypothèse par défaut. Cela signifie que s'il y a une autre hypothèse concernant la position d'un objet, nous choisirons cette dernière plutôt que celle par défaut.
+le livre bleu n'est pas visible par le robot (car il est caché par la boîte rose). Cela signifie que le capteur de vision n'est plus capable de fournir la donnée de position de cet objet. Cependant, le système de maintient de l'état du monde le conserve tel quel dans le modèle de l'environnement car il sait que l'objet est occlut, et qu'il est donc normal qu'il ne soit pas détecté. Cette hypothèse de maintien de position est utilisée comme hypothèse par défaut. Cela signifie que s'il y a une autre hypothèse concernant la position d'un objet, nous choisirons cette dernière plutôt que celle par défaut.
 
 \begin{figure}[ht!]
  \centering
@@ -270,7 +270,7 @@ Si un objet devrait pouvoir être perçu et ne l'est pas, alors l'hypothèse par
 Ces hypothèses concernant la position des objets liés à un raisonnement top-down (symbolique vers sub-symbolique) permettent au robot d'avoir un suivi plus efficace des objets, spécialement quand ils sont occlus ou non perçus.
 
 
-\subsection{Généralistion}
+\subsection{Généralisation}
 
 
 %TODO: généralisation du maintient du monde par la gestion des hypothèses (rempli / vide, chaud/froid...)
@@ -300,14 +300,14 @@ Le schéma \ref{fig:hypo} présente l'architecture prévisionnelle permettant ce
 \section{Base de données temporelle}
 \label{sec:db}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Nous avons présenté précédemment comment divers composants contribuent à maintenir un état du monde géométrique (sub symbolique). Nous avons également présenté comment d'autres composants, à partir de l'état du monde géométrique et de raisonnements et calculs sur celui-ci, générent une liste de faits permettant une représentation symbolique de l'état du monde et une estimation de la situation.
+Nous avons présenté précédemment comment divers composants contribuent à maintenir un état du monde géométrique (sub-symbolique). Nous avons également présenté comment d'autres composants, à partir de l'état du monde géométrique et de raisonnements et calculs sur celui-ci, générant une liste de faits permettant une représentation symbolique de l'état du monde et une estimation de la situation.
 
 Afin de regrouper ces données symboliques et permettre un accès standardisé et efficace, nous avons ajouté une base de données SQL à notre système.
 
 \subsection{Gestion des données}
 \label{sec:dbd}
 La base de données peut gérer deux types de données: les données statiques et dynamiques. En effet, il est possible de connaître à priori certaines informations sur l'environnement tel que la couleur, le nom de certains objets ou leur type ou leur propriétaire. 
-Nous avons donc dans notre base de données une première table permettant d'avoir des informations sur les diverses entitées de l'environnement. Cette table peut être complétée en ligne si le système reçoit des informations complémentaires durant l'interaction (si le robot découvre de nouvelles propriétés statiques ou de nouveaux objets, que se soit par la perception ou le dialogue).
+Nous avons donc dans notre base de données une première table permettant d'avoir des informations sur les diverses entités de l'environnement. Cette table peut être complétée en ligne si le système reçoit des informations complémentaires durant l'interaction (si le robot découvre de nouvelles propriétés statiques ou de nouveaux objets, que se soit par la perception ou le dialogue).
 
 Concernant les données symboliques et notamment les \textit{faits} générés par les divers composants d'évaluation de la situation, la base de données récupère en permanence la liste de faits générée et publiée par chacun des modules. Cela permet de vérifier les changements apparus dans l'environnement pour mettre à jour la table de représentation symbolique de l'état du monde tel qu'il est perçu par le robot (\textit{ROBOT\_WS\_TBL} pour Robot World State Table).
 Cette table est composée de faits qui sont considérés comme vrais et mis à jour en temps réel. Ces faits proviennent des divers modules d'évaluation de la situation et ont comme valeur temporelle la date où le fait a été détecté.
@@ -323,7 +323,7 @@ Nous avons donc ajouté une gestion de l'aspect temporel.
 Pour ce faire, lorsqu'un fait est considéré comme vrai à partir d'un temps t1 et donc présent dans la table de représentation symbolique de l'état du monde perçu par le robot, le temps t1 lui est attribué jusqu'à ce que ce fait soit considéré comme faux à un temps t2.
 
 Lorsque le fait est considéré comme faux en t2, ou lorsqu'il change de valeur, il est retiré de la table \textit{ROBOT\_WS\_TBL} pour être mis dans une table mémoire \textit{ROBOT\_MEM\_TBL}. Cette table contient également une liste de faits. À la différence de la table \textit{ROBOT\_WS\_TBL}, les faits de cette table peuvent être en double (deux faits identiques peuvent être présent dans la table si ils ont des temps différents) et représentent des faits passés. Pour ce qui est du temps associé, chaque fait a deux dates: la date t1 à laquelle le fait a commencé a être vrai (ou plutôt détecté comme étant vrai) et la date t2 à laquelle le fait a cessé d'être vrai (détecté comme étant faux).
-Pour avoir un accès direct aux transitions, nous avons également ajouté une table d'événements \textit{EVENT\_TBL}. Lorsqu'une transition de fait est detectée (un fait n'est plus vrai ou change de valeur), en plus de le retirer de la table de faits courant et de l'ajouter à la table mémoire, nous ajoutons la transition avec la date de t2. 
+Pour avoir un accès direct aux transitions, nous avons également ajouté une table d'événements \textit{EVENT\_TBL}. Lorsqu'une transition de fait est détectée (un fait n'est plus vrai ou change de valeur), en plus de le retirer de la table de faits courant et de l'ajouter à la table mémoire, nous ajoutons la transition avec la date de t2. 
 
 Pour illustrer, nous prenons l'exemple où un homme \textit{H} prends un objet \textit{O} sur une table \textit{T} à un moment t2. Trois opérations seront faites dans la base de données:
 
@@ -359,7 +359,7 @@ L'un des avantages de TOASTER repose sur sa généricité et son adaptabilité g
 
 \subsection{Collecte de données et généricité}
 \label{sec:PDG}
-Pour que l'infractructure logicielle soit utilisable avec n'importe quelle configuration de capteurs, un premier module permet de collecter toutes les données et de les mettre au format TOASTER. Tous les autres modules utiliseront ensuite l'état du monde au format exporté par ce module. Ce module chargé de collecter les données des divers capteurs est appelé \textit{PDG} pour Perceived Data Gathering.
+Pour que l'infrastructure logicielle soit utilisable avec n'importe quelle configuration de capteurs, un premier module permet de collecter toutes les données et de les mettre au format TOASTER. Tous les autres modules utiliseront ensuite l'état du monde au format exporté par ce module. Ce module chargé de collecter les données des divers capteurs est appelé \textit{PDG} pour Perceived Data Gathering.
 Il permet à l'heure actuelle de gérer quatre types d'entrées pour l'homme, deux pour les objets, deux modèles de robot. Il gère également deux types de messages d'entrée: le ROS\footnote{http://www.ros.org/} et le pocolibs\footnote{https://www.openrobots.org/wiki/pocolibs}.
 
 Un autre avantage de ce module est également sa simplicité d'extension. Ainsi, grâce au système d'héritage du C++ il est possible d'ajouter une entrée capteur pour détecter des objets, pour suivre l'homme ou un modèle de robot en seulement 50 à 200 lignes de code C++ (estimation basée sur les entrées déjà existantes).
@@ -403,7 +403,7 @@ Pour aider à la compréhension, nous proposons le schéma d'architecture \ref{f
 \begin{figure}[ht!]
  \centering
   \includegraphics[width=0.99\linewidth]{./img/toasterArch.jpg} 
-  \caption {Architecture de l'infractructure logicielle TOASTER avec les différents flux d'échanges de données}
+  \caption {Architecture de l'infrastructure logicielle TOASTER avec les différents flux d'échanges de données}
   \label{fig:toasterArch}
 \end{figure}
 
@@ -481,7 +481,7 @@ Un autre moyen de s'adapter est de transmettre la représentation symbolique  de
  \end{figure}
  
  
- Ces deux exemples d'utilisation de l'infrastructure logicielle dans deux projets différents illustrent la généricité, la simplicité de reconfiguration grâce à l'architecture modulaire, ainsi que la polyvalance de TOASTER. Dans ces deux projets d'interaction homme robot, les faits générés par TOASTER ont permis de fournir les informations nécessaires à la couche décisionnelle pour pouvoir s'adapter à l'homme et donner un comportement socialement acceptable au robot.
+ Ces deux exemples d'utilisation de l'infrastructure logicielle dans deux projets différents illustrent la généricité, la simplicité de reconfiguration grâce à l'architecture modulaire, ainsi que la polyvalence de TOASTER. Dans ces deux projets d'interaction homme robot, les faits générés par TOASTER ont permis de fournir les informations nécessaires à la couche décisionnelle pour pouvoir s'adapter à l'homme et donner un comportement socialement acceptable au robot.
 
 %\section{Gestion de l'Incertitude}
 %TODO?
