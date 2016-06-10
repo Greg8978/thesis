@@ -1125,7 +1125,7 @@ Ce domaine ainsi définit permet de mettre au point les plans nécessaire à la 
 \subsection{Supervision et exécution}
 %Parler des différentes règles mises en place
 
-Parmis les buts possibles provenant du dialogue, certains correspondent directement à une des méthodes haut niveau présenté en section \ref{sec:domainehatp}.
+Parmi les buts possibles provenant du dialogue, certains correspondent directement à une des méthodes haut niveau présenté en section \ref{sec:domainehatp}.
 Ainsi, si l'homme demande au robot de déplacer un objet \textit{O} vers une zone de manipulation \textit{ZM}, si le robot connaît l'emplacement de \textit{O}, il peut directement demander au planificateur de générer le plan pour résoudre la méthode \textit{Move(O, ZM)}. Il en va de même pour les autres méthodes de haut niveau. Cependant, dans le cas où le robot ignore l'emplacement de l'objet certains raisonnements sont nécessaire pour mener à bien la tâche.
 
 Ainsi, lorsque le robot ne connaît pas l'emplacement de l'objet, une façon simple de résoudre le problème est d'appeler d'abord la méthode \textit{Localise} afin de trouver l'emplacement de l'objet, puis effectuer le déplacement demander le cas échéant. Cependant, le déplacement du robot et les scannes successifs des différentes pièces et zones contenus dans ces pièces est coûteux en temps.
@@ -1202,7 +1202,7 @@ Au début du scénario, le robot n'a pas encore exploré son environnement et ig
 Nous démarrons l'expérimentation avec l'homme et le robot se trouvant au niveau de  la table du salon \textit{Livingroom\_table}. Pour induire une croyance divergente, on informe l'homme que le DVD Bilbo Le Hobit \textit{Bilbo} se trouve sur la table de la cuisine.
 
 Les croyances sur l'état du monde perçu par le robot est représenté ci-dessous.
-Tous les faits présents sont vrais. Ils ont été simplifiés pour plus de clareté et le type est indiqué seulement lorsqu'il s'agit d'une information obtenue par le dialogue (les autres ayant été obtenus par perception).
+Tous les faits présents sont vrais. Ils ont été simplifiés pour plus de clarté et le type est indiqué seulement lorsqu'il s'agit d'une information obtenue par le dialogue (les autres ayant été obtenus par perception).
 
 %TODO représenté chaque états avec toaster?
 
@@ -1316,7 +1316,7 @@ Il lui demande d'apporter Bilbo qui se trouve dans la cuisine.
 Le robot étant au courant de la croyance erronée de l'homme, la supervision va directement demander au planificateur de résoudre la tâche \textit{Bring(Bilbo, Human)}. Durant l'exécution, le robot utilise son état de croyance et se dirige donc vers la table de nuit pour prendre Bilbo.
 
 Le robot rapporte Bilbo à l'homme et lui tend l'objet.
-Le robot est donc parvenu à accomplir la tâche en corrigeant l'ennoncé grâce à l'identification de la croyance erronée. De plus, à la fin de l'exécution, comme le robot donne l'objet à l'homme, la croyance erronée a disparu sans que le robot ait eu à en informer l'homme.
+Le robot est donc parvenu à accomplir la tâche en corrigeant l'énoncé grâce à l'identification de la croyance erronée. De plus, à la fin de l'exécution, comme le robot donne l'objet à l'homme, la croyance erronée a disparu sans que le robot ait eu à en informer l'homme.
 Cela donne au robot un aspect efficace et discret en évitant d'informer l'homme lorsque ceci n'est pas nécessaire.
 
 Dans le cas où le robot n'aurait pas trouvé Bilbo sur la table de nuit, il aurait alors mis à jours sa croyance et aurait été voir à l'endroit où l'homme pense que Bilbo se trouve au cas où celui-ci aurait été déplacé sans que le robot en soit informé.

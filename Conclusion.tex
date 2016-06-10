@@ -11,7 +11,8 @@
 \addstarredchapter{Conclusion et Perspectives} %Sinon cela n'apparait pas dans la table des matières
 
 \section{Conclusion}
-Ce manuscrit de thèse rapporte à travers cinq chapitres comment il est possible d'acquérir et d'utiliser des données contextuelles de différents niveaux d'abstraction pour permettre d'améliorer l'interaction homme-robot dans différents domaines tel que la dialogue situé, l'assistance proactive, la génération de plan, l'exécution de tâches collaboratives...
+%TODO vise à prendre en compte le contexte et à interpréter les indices afin d'acquérir des informations sur la situation de l'homme au niveau physique et mental: situations de l'environnement qui l'entoure, représentation spatiale, croyances, intention, niveau d'expertise 
+Ce manuscrit de thèse rapporte à travers cinq chapitres comment il est possible d'acquérir des données contextuelles et de les utilisées comme base de raisonnement afin d'obtenir une estimation de la situation à différents niveaux d'abstraction. Ces données contextuelles combinées avec des processus de raisonnements fournissent les indices nécessaires pour estimé également la situation de l'homme tant au niveau de sa situation spatiale que sa situation mentale. Ces raisonnements sur le contexte et sur la situations de l'homme est essentiel pour donner des comportements approprié au robot durant l'interaction homme-robot sur différentes aspects de l'interaction tel que la dialogue situé, l'assistance proactive, la génération de plan, l'exécution de tâches collaboratives...
 
 Dans le chapitre \ref{chapter1} nous avons montrer comment il est possible de mettre en place une architecture modulaire basée l'agrégation de données capteurs et sur certains raisonnements pour acquérir et maintenir un état du monde tridimensionnel correspondant à la représentation du monde réel tel qu'il est perçu et inféré (grâce à une gestion d'hypothèses) par le robot. Basé sur cette représentation tridimensionnelle, nous montrons comment les différents modules de l'architecture permettent de générer des \textit{faits} constituant une représentation symbolique du monde. Ces faits sont centralisés par une base de donnée temporelle qui possède une table permettant de garder en mémoire les faits passés et les transitions survenues. Nous présentons également dans ce premier chapitre TOASTER, une infrastructure logicielle modulaire Open-Source implémentant les principes et modèles énoncés.
 Deux exemples d'expérimentations utilisant l'infrastructure logicielle TOASTER comme module d'estimation de la situation ont été présentés comme exemple d'utilisation possible.
@@ -29,9 +30,28 @@ Enfin, dans le chapitre \ref{chapter5}, nous avons présenté nos travaux pour a
 
 
 \section{Améliorations et travaux à venir}
-
 %TODO
 %liste des améliorations
+Les travaux présentés dans cette thèse peuvent être étendus sur plusieurs aspects.
+Tout d'abord, l'infrastructure logicielle présentée implémentant les concepts présentés dans les chapitres \ref{chapter1} et \ref{chapter2} a été créée de façon générique et modulaire et est Open-Source. Le but étant de la rendre utilisable par d'autres équipes de recherche. Pour rendre l'infrastructure facilement utilisable, une documentation est en cours de réalisation. Celle-ci contiendra des tutoriels pour permettre la prise en main rapide de TOASTER.
+L'infrastructure est toujours en cours de développement pour améliorer la généricité, étendre le nombre de capteurs géré, améliorer les calculs de faits...
+
+De même, la modélisation de la prise de perspective pourrait être améliorée en l'adaptant à l'utilisateur. Ainsi certains utilisateurs peuvent avoir une déficience au niveau de l'un des sens. Pour effectuer une prise de perspective perceptuelle convenable, le robot devrait pouvoir prendre en compte ce fait.
+De même, selon l'individu (par exemple si le robot interagit avec des enfants) le robot devrait adapter son comportement. Cela nécessite de pouvoir modéliser non seulement l'état mental des agents mais également d'adapter la mise à jour de cet état mental en fonction des capacités de cet agent à émettre des hypothèses sur l'environnement.
+
+Concernant les aspects temporels, un premier développement a permis de mettre en place la gestion des transitions et de la mémoire de chaque agent. À leur actuelle cette capacité n'a pas encore été pleinement exploitée et il serait intéressant de baser certains raisonnements pour améliorer le maintien d'état du monde ou pour pouvoir répondre au demande de l'homme s'interrogeant sur les événements ayant eu lieu pendant son absence (quel événement est intéressant de rapporter?) ou utiliser la mémoire pour l'apprentissage du comportement humain. De même, pour permettre une interaction de longue durée, il serait intéressant de mettre en place des mécanismes permettant au robot d'oublier certains faits considérés comme peu importants.
+
+Pour ce qui est de la gestion de plan en fonction de l'expertise humaine, une étude plus approfondie sur la gestion de la négociation, par exemple en utilisant l'état de connaissance de l'homme, le coût relatif d'une tâche selon l'agent ou l'insistance de celui-ci.
+cd Doc
+%docu but need more like tuto
+%afin que 
+ %Combiner
+ %aller plus loin dans l'infrastructure
+ %=> tutorial pour être plus utilisé
+ 
+ % élargir les thématiques abordées
+ % raisonnements sur la temporalité
+
 \ifdefined\included
 \else
 \bibliographystyle{acm}
