@@ -21,21 +21,21 @@ L'une des compétences essentielles pour interagir convenablement avec l'homme e
 %TODO biblio on grounding / situated dialogue / reference generation
 
 Les systèmes robotiques reposent sur les capteurs pour reconnaître et localiser les entités afin de construire l'état du monde. Ces capteurs produisent des coordonnées pour positionner les entités par rapport à un repère donné. Par exemple, une caméra stéréo avec un logiciel de reconnaissance peut permettre de savoir qu'une tasse est à une position donnée  $x$, $y$, $z$ avec une orientation $\theta$, $\phi$, $\psi$.
-Les humains quand à eux, utilisent les relations spatiales entre les éléments pour décrire leur position. Pour indiquer la position de la tasse, l'humain dirait par exemple qu'il se trouve sur la table de la cuisine, sans donner les coordonnées précises.
+Les humains quand à eux, utilisent les relations spatiales entre les éléments pour décrire leur position. Pour indiquer la position de la tasse, l'humain dirait par exemple qu'elle se trouve sur la table de la cuisine, sans donner les coordonnées précises.
 Pour comprendre les références de l'homme et générer des déclarations compréhensibles, le robot se doit donc de construire une représentation symbolique du monde, basée sur les données géométriques qu'il a collecté par ses capteurs, comme cela a été fait dans \cite{lemaignan2012grounding}.
 
 %We have developed a module based on spatial and temporal reasoning to generate "facts" about the current state of the world \cite{milliez2014framework}. A fact is a property which describes the current state of an entity (e.g. $MUG$ $isNextTo$ $BOTTLE$, $MUG$ $isFull$ $TRUE$). This framework generates facts related to the entities' position and facts about affordances to know, for instance, what is visible or reachable to each agent (human and robot). 
 %It also generates facts about agent postures to know if an agent is pointing toward an object or where an agent is looking. When the robot tries to understand the human, it should also use these data to improve the information grounding process.
 
-En plus de l'état du monde (qui peut être considéré comme l'état de croyance du robot), pour vraiment comprendre les actes dialogiques de l'humain dans un contexte situé, il est nécessaire au robot de comprendre la situation spatiale et mentale de l'homme. En effet, les références qu'il génère dans ses actes communicatifs avec le robot sont susceptible de grandement dépendre de cette situation spatiale ou mentale.
+En plus de l'état du monde (qui peut être considéré comme l'état de croyance du robot), pour vraiment comprendre les actes dialogiques de l'humain dans un contexte situé, il est nécessaire au robot de comprendre la situation spatiale et mentale de l'homme. En effet, les références qu'il génère dans ses actes communicatifs avec le robot sont susceptibles de grandement dépendre de cette situation spatiale ou mentale.
 
-Pour établir ces références communes et comprendre les actes communicatifs humains à la lumières de sa situations, nous avons utilisé notre infrastructure logicielle d'évaluation de la situation, présentée dans les chapitres précédents, dans le cadre d'un projet visant à mettre en place un dialogue situé homme-robot
+Pour établir ces références communes et comprendre les actes communicatifs humains à la lumière de sa situation, nous avons utilisé notre infrastructure logicielle d'évaluation de la situation, présentée dans les chapitres précédents, dans le cadre d'un projet visant à mettre en place un dialogue situé homme-robot
 
 
 \subsection{Le projet MaRDi}
 %Projet MaRDi (thèse Manu)
 Ces travaux ont été réalisés dans le cadre du projet MaRDi\footnote{Man-Robot Dialogue - http ://mardi.metz.supelec.fr
-} de l’Agence Nationale pour la Recherche (ANR). Il a été financé par l’appel à projet Contenu et Interactions. Les
+} de l’Agence Nationale pour la Recherche (ANR). Il a été financé par l’appel à projet Contenu et interactions. Les
 travaux réalisés ont été faits en collaboration avec le Laboratoire d’Informatique Fondamentale de Lille (LIFL), l’École supérieure d’électricité (Supélec), le groupe Acapela, le Laboratoire Informatique d’Avignon (LIA) et le Laboratoire d’Analyse et d’Architecture des Systèmes (LAAS).
 Ce projet vise à étudier l’apport d’une approche "située" du dialogue Homme-
 Robot. Le terme "situé" est ici relatif à l’incarnation physique d’un système de dialogue dans une plateforme robotique qui permet l’intégration d’informations issues de la perception du robot dans le contexte de l’interaction pour compléter ou lever des ambiguïtés introduites par le médium vocal. Ce projet s’inscrit également dans l’utilisation de méthodes d’apprentissage numérique, exploitant les données collectées au travers de la conduite de véritables interactions afin d’améliorer l’efficacité et le naturel du système dans le temps. L’originalité de l’approche est de ne pas considérer les technologies vocales comme disponibles et dissociées de la tâche d’interaction Homme-Robot, mais bel et bien comme moyen d’en améliorer l’expérience et les performances.
@@ -220,7 +220,7 @@ Durant cette phase, le robot cherche à générer un plan permettant de résoudr
   \label{fig:phase2}
 \end{figure}
 
-À la fin de la phase de détermination du but utilisateur, le système de dialogue transmets ce but au superviseur (flux 4). Le superviseur par la suite transmets ce but au planificateur de tâche (5). Le planificateur de tâche utilise la représentation symbolique de l'environnement, contenu dans la base de connaissance et provenant des calculs et raisonnements fait par le système d'évaluation de la situation, pour avoir connaissance de l'état du monde actuel et générer un plan permettant d'atteindre le but souhaité par l'utilisateur. Le planificateur de tâche renvoi un message au superviseur lui informant du succès ou de l'échec de la planification (7). En cas d'échec, le superviseur informe le système de dialogue (8) qui à son tour informe l'humain de l'impossibilité d'exécution du plan (9).
+À la fin de la phase de détermination du but utilisateur, le système de dialogue transmet ce but au superviseur (flux 4). Le superviseur par la suite fais une requête au planificateur de tâche pour résoudre le but (5). Le planificateur de tâche utilise la représentation symbolique de l'environnement, contenu dans la base de connaissance et provenant des calculs et raisonnements fait par le système d'évaluation de la situation, pour avoir connaissance de l'état du monde actuel et générer un plan permettant d'atteindre le but souhaité par l'utilisateur. Le planificateur de tâche renvoi un message au superviseur lui informant du succès ou de l'échec de la planification (7). En cas d'échec, le superviseur informe le système de dialogue (8) qui à son tour informe l'humain de l'impossibilité d'exécution du plan (9).
 L'interaction retourne alors à la phase précédente afin de tenter d'établir un but utilisateur qui soit réalisable. 
 Dans le cas où la planification est un succès (un plan a été trouvé), le plan est envoyé au superviseur (7) et l'interaction peu passer à la phase d'exécution du plan.
 
@@ -239,10 +239,10 @@ Durant cette phase, le robot cherche à exécuter les tâches du plan permettant
   \label{fig:phase3}
 \end{figure}
 
-À la fin de la phase précédente, le planificateur de tâche transmets le plan à la supervision (flux 7). Le composant de supervision gère l'exécution de la tâche grâce à la planification de mouvements (10) qui envoie des commandes aux actionneurs du robot (12). Le superviseur contrôle la bonne exécution du plan à l'aide des éventuels retour d'erreur des différents composants et en surveillant l'évolution de l'état du monde (14). Durant cette exécution, l'homme peut à tout moment dialogué avec le système (C) afin de:
+À la fin de la phase précédente, le planificateur de tâche transmet le plan à la supervision (flux 7). Le composant de supervision gère l'exécution de la tâche grâce à la planification de mouvements (10) qui envoie des commandes aux actionneurs du robot (12). Le superviseur contrôle la bonne exécution du plan à l'aide des éventuels retour d'erreur des différents composants et en surveillant l'évolution de l'état du monde (14). Durant cette exécution, l'homme peut à tout moment dialoguer avec le système (C) afin de:
 \begin{itemize}
-\item Demander une information sur l'environnement. Au quel cas le système de dialogue utilise la base de connaissance (D) pour répondre au mieux à l'humain (G).
-\item S'enquérir de l'état d'avancement de la tâche ou de l'action courante du robot. Au quel cas le système de dialogue envoie une requête correspondante au superviseur (E) qui transmet cette information (F) et qui est transmise à l'homme par le système de dialogue (G).
+\item Demander une information sur l'environnement. Dans ce cas le système de dialogue utilise la base de connaissance (D) pour répondre au mieux à l'humain (G).
+\item S'enquérir de l'état d'avancement de la tâche ou de l'action courante du robot. Dans ce cas le système de dialogue envoie une requête correspondante au superviseur (E) qui transmet cette information à l'homme (G) par le système de dialogue (F).
 \item Demander un abandon de la tâche ou un changement de plan. Le système de dialogue transmet alors cette requête au superviseur (flux E). Puis en cas d'abandon, l'interaction retourne en phase de détermination de but utilisateur ou en cas de changement de plan, en phase d'élaboration d'un nouveau plan prenant en compte les demandes de l'utilisateur. Cette dernière fonctionnalité est présentée plus en détail en section \ref{sec:planning}.
 \end{itemize}
 
@@ -256,7 +256,7 @@ Durant cette phase, le robot cherche à exécuter les tâches du plan permettant
 
 \section{Architecture du système de dialogue situé}
 
-Dans cette partie, nous allons aller plus loin dans l'explication du système de dialogue situé, intervenant principalement dans la première phase, en détaillant les différents modules qui entrent en jeu lors de la détermination du but utilisateur. Nous allons notamment détailler comment le système de dialogue est enrichit en utilisant le contexte de l'interaction et la base de fait maintenue par le système d'évaluation de la situation.
+Dans cette partie, nous allons aller plus loin dans l'explication du système de dialogue situé, intervenant principalement dans la première phase, en détaillant les différents modules qui entrent en jeu lors de la détermination du but utilisateur. Nous allons notamment détailler comment le système de dialogue est enrichi en utilisant le contexte de l'interaction et la base de faits maintenue par le système d'évaluation de la situation.
 
 Nous présentons à la figure \ref{fig:archiphase1}, l'architecture détaillée mise en place pour la première phase d'interaction. Nous nous baserons sur cette figure pour expliquer les différents flux, ainsi que les différents modules qui permettent le bon fonctionnement du dialogue situé.
 
@@ -264,18 +264,18 @@ Nous présentons à la figure \ref{fig:archiphase1}, l'architecture détaillée 
 \begin{figure}[ht!]
  \centering
   \includegraphics[width=0.99\linewidth]{./img/archiphase1.jpg} 
-  \caption {Architecture détaillant les différents composant du système de dialogue situé.}
+  \caption {Architecture détaillant les différents composants du système de dialogue situé.}
   \label{fig:archiphase1}
 \end{figure}
 
 Il est possible d'identifier plusieurs sous parties dans cette architecture.
-La première est en charge des entrées multimodales de l'utilisateur. Une deuxième partie est responsable de l'acquisition et du maintient de l'état du monde ainsi que de la génération de données symboliques. Le gestionnaire de dialogue, ou DM (Dialogue Manager) permet de décider, en fonction des entrées interprétées de l'utilisateur et du contexte de l'interaction de la réponse donnée par le robot afin de parvenir à déterminer le but.
+La première est en charge des entrées multimodales de l'utilisateur. Une deuxième partie est responsable de l'acquisition et du maintien de l'état du monde ainsi que de la génération de données symboliques. Le gestionnaire de dialogue, ou DM (Dialogue Manager) permet de décider, en fonction des entrées interprétées de l'utilisateur et du contexte de l'interaction de la réponse donnée par le robot afin de parvenir à déterminer le but.
 La dernière partie s'attache à restituer sous forme multimodale la sortie du système de dialogue décidée par le gestionnaire de dialogue.
 Certains modules relevant d'avantage du dialogue proprement parlé que de l'usage du système d'évaluation de la situation, une description brève en sera donnée. Pour plus de renseignements sur ces modules et une description plus exhaustive de la partie dialogue, nous invitons le lecteur à consulter les articles \cite{Ferreira13a,Ferreira13b} ainsi que la thèse \cite{ferreira2015phd}.
 
 \subsection{Entrées multimodales utilisateur}
 \label{sec:entréesDial}
-Cette première partie permet d'acquérir et d'interpréter les entrées multimodales de l'homme en fonction du contexte de l'interaction. L’utilisateur peut faire l’usage de la parole et/ou de gestes déictiques de façon non contrainte tout au long de l’interaction pour s’adresser au robot. Une fois la commande de l'utilisateur interprétée, elle est transmise au module de géstion de dialogue. 
+Cette première partie permet d'acquérir et d'interpréter les entrées multimodales de l'homme en fonction du contexte de l'interaction. L’utilisateur peut faire l’usage de la parole et/ou de gestes déictiques de façon non contrainte tout au long de l’interaction pour s’adresser au robot. Une fois la commande de l'utilisateur interprétée, elle est transmise au module de gestion de dialogue. 
 
 Pour acquérir et interpréter les commandes de l'utilisateur, quatre modules sont impliqués.
 
@@ -445,21 +445,21 @@ géométrique avec lequel il est en train d’interagir et ainsi en avoir une re
 Dans notre configuration le système dispose à la fois d’une base statique de connaissances contenant la liste de tous les objets connus du robot (même ceux non encore perçus durant l’interaction) et de leurs propriétés statiques (couleur, identifiant, etc.) mais aussi d’une base dynamique de connaissances dans laquelle sont stockées les informations contextuelles et la représentation symbolique de l'environnement.
 %TODO Faire référence à une liste de faits en annexe?
 
-Ainsi, si l'homme fait référence à un objet en le décrivant par rapport à sa position relative à un autre objet, en utilisant les faits générés décrits en section \ref{sec:agencement} tel que \textit{isNextTo}, \textit{isIn} ou \textit{isOn}, il est possible sinon d'identifier l'objet, au moins de réduire la liste des candidats potentiels. De même les descriptions de positionnement relatives (gauche, droite) des objets permettent de discriminer les candidats possible parmi les entités présentes pouvant correspondre à une référence prononcée par l'homme.
+Ainsi, si l'homme fait référence à un objet en le décrivant par rapport à sa position relative à un autre objet, en utilisant les faits générés décrits en section \ref{sec:agencement} tel que \textit{isNextTo}, \textit{isIn} ou \textit{isOn}, il est possible sinon d'identifier l'objet, au moins de réduire la liste des candidats potentiels. De même les descriptions de positionnement relatives (gauche, droite) des objets permettent de discriminer les candidats potentiels parmi les entités présentes pouvant correspondre à une référence prononcée par l'homme.
 En utilisant une base de donnée SQL tel que décrite en section \ref{sec:db}, il est possible de faire des jointures et donc d'identifier les objets correspondant aux critères définis dans la requête de l'utilisateur.
-Ainsi, si l'homme parle d'un objet vert situé sur la table du salon, en une seule requête à la base de données combinant ces deux propriétés, il est possible d'obtenir l'ensemble des objets correspondant à ces critères.
+Ainsi, si l'homme parle d'un objet vert situé sur la table du salon, en une seule requête à la base de données combinant ces deux propriétés, la base de données renvoie l'ensemble des objets correspondant à ces critères.
 De la même manière, le robot peut choisir de parler d'un objet en utilisant ces mêmes faits pour le décrire.
 Ceci permet au robot de comprendre et d'identifier les références faites par l'homme et d'utiliser des références naturelles et compréhensibles pour l'homme.
 
 Pour aller plus loin dans la compréhension, le robot doit aussi considérer l'homme comme une entité logique faisant des requêtes logiques. En partant de ce postulat, il est possible d'exploiter les données issues du raisonnement de prise de perspective perceptuelle décrits en section \ref{sec:perceptuelle}.
-Prenons l'exemple où l'homme demande au robot d'apporter un objet et que le robot hésite entre deux objets possibles, l'objet A et l'objet B. L'une des différences entre ces deux objets est que l'objet A est devant l'homme. Dans ce cas le robot doit être capable de comprendre que l'homme ne réclamerait pas un objet qui lui est déjà accessible et donc apporter directement l'objet B.
+Prenons l'exemple où l'homme demande au robot d'apporter un objet et que le robot hésite entre deux objets, l'objet A et l'objet B. L'une des différences entre ces deux objets est que l'objet A est devant l'homme. Dans ce cas le robot doit être capable de comprendre que l'homme ne réclamerait pas un objet qui lui est déjà accessible et donc apporter directement l'objet B.
 
-De même, si l'homme demande la position d'un objet et que le robot identifie deux candidats possibles (A et B), et que l'objet A est visible de l'homme, le robot doit être capable de comprendre que l'objet recherché par l'homme est celui qui n'est pas perceptible de lui, c'est à dire l'objet B.
+De même, si l'homme demande la position d'un objet et que le robot identifie deux candidats (A et B), et que l'objet A est visible de l'homme, le robot doit être capable de comprendre que l'objet recherché par l'homme est celui qui ne lui est pas perceptible, c'est à dire l'objet B.
 
 Ces données issues de la prise de perspective perceptuelle permettent donc un raisonnement de haut niveau basé sur des règles logiques liées aux requêtes de l'homme et permettent au module de fusion d'identifier plus rapidement l'objet requis par l'homme. Cette capacité réduit donc le nombre de tours et améliore ainsi l'efficacité du système de dialogue.
 
-De même, la capacité de prise de perspective conceptuelle provenant du système d'évaluation de la situation et décrite en section \ref{sec:conceptual} est une capacité importante pour améliorer la qualité du dialogue situé.
-En effet, les requêtes de l'homme doivent être interprétée dans son état mental car l'homme exprime sa requête en fonction de son état de croyance sur la situation de l'environnement.
+De même, la capacité de prise de perspective conceptuelle gérée par le système d'évaluation de la situation et décrite en section \ref{sec:beliefm} est une capacité importante pour améliorer la qualité du dialogue situé.
+En effet, les requêtes de l'homme doivent être interprétées dans son état mental car l'homme exprime sa requête en fonction de son état de croyance sur la situation de l'environnement.
 
 Nous décrivons dans la partie suivante, en section \ref{sec:mentalStateDial}, comment nous utilisons cette représentation de l'état de croyance pour améliorer le module de gestion du dialogue.
 
@@ -555,7 +555,7 @@ n’offre dans sa version initiale que des mécanismes capables de gérer l’in
 de la parole). 
 Or, nous pensons qu’une autre source possible d'incertitude peut
 provenir de situations de fausses croyances où la croyance en des faits erronées (par exemple une position antérieure d’un objet) viendrait bruiter les actes  communicatifs
-de l’utilisateur et provoquer une difficulté supplémentaire de compréhension pour le système de dialogue. En effet, si l’état mental de l’utilisateur n’est pas modélisé ni pris en compte, seul des mécanismes de résolution classiques de l’incertitude peuvent être appliqués par la politique du gestionnaire de dialogue, par exemple demander à l’utilisateur de confirmer des hypothèses
+de l’utilisateur et provoquer une difficulté supplémentaire de compréhension pour le système de dialogue. En effet, si l’état mental de l’utilisateur n’est pas modélisé ni pris en compte, seul des mécanismes de résolution classique de l’incertitude peuvent être appliqués par la politique du gestionnaire de dialogue, par exemple demander à l’utilisateur de confirmer des hypothèses
 jusqu’à ce que sa demande corresponde à la réalité observée, et ce même dans
 des situations où il aurait été possible d'interpréter correctement la commande de l'utilisateur en utilisant la modélisation de son état de croyance.
 
@@ -597,7 +597,7 @@ other, nous considérons cependant cet élément comme étant catégoriel et non
 car nous comptons étendre à terme le nombre des valeurs ainsi considérées (identification de différentes situations comme par exemple le fait que plusieurs objets candidats
 présentent une position divergente).
 En ce qui concerne la nouvelle action résumée \textit{InformDivergentBelief} introduite pour
-résoudre la situation de divergence, les actes de dialogue qui lui sont associés dans sont déterminés par l’intermédiaire d’heuristiques expertes. Dans cette
+résoudre la situation de divergence, les actes de dialogue qui lui sont associés sont déterminés par l’intermédiaire d’heuristiques expertes. Dans cette
 première version, lorsqu’un cas de divergence est détecté, idéalement l’action prise par le système doit permettre d’informer l’utilisateur de manière explicite de la présence et de la nature de cette divergence.
 Pour ce faire, un acte de dialogue est employé pour informer l’utilisateur sur l’existence d’une divergence quant à la valeur de la position de l’objet "sujet"
 de la commande. Grâce à l’émission de cet acte de dialogue l’utilisateur va pouvoir
@@ -718,7 +718,7 @@ object.type=book, object.color=brown)}, qui sera transformée par le module de G
 \subsection{Restitution multimodale}
 %TODO: rewrite
 % Mb do as inputs with a list of modules and some details...
-Le robot utilise quatre modules pour gérer la sortie du système afin de transmettre à l'homme la commande choisie par le géstionnaire de dialogue.
+Le robot utilise quatre modules pour gérer la sortie du système afin de transmettre à l'homme la commande choisie par le gestionnaire de dialogue.
 
 \begin{itemize}
 \item \textbf{Le module de fission}: il a en charge
@@ -727,7 +727,7 @@ Pour l’instant, ce module est basé sur la définition d’un ensemble de règ
 en compte la nature de la décision du système (flux 13) et le contexte courant (14).
 %TODO corriger le graphique. 
 La solution retenue considère également les flux de sorties comme
-parallèle (pas de synchronisation fine entre gestes et paroles).
+parallèles (pas de synchronisation fine entre gestes et paroles).
 
 \item \textbf{Le module \textit{NLG}}: ce module est responsable de la génération de langage naturel. Il s'appuie sur des patrons lexicaux pour générer un texte qui soit compréhensible de l'homme afin de le transmettre au \textit{TTS} (18).
 
@@ -749,7 +749,7 @@ l’action (par exemple si l’objet est hors de porté pour lui) alors il pourr
 synthèse vocale employant une voix triste.
 
 
-\item \textbf{Le module \textit{CGG}}: ce module est responsable de la génération des gestes communicatifs (Communicative Gestures Generation). Cela permet d'ajouter de l'expressivité aux réponses du robot en ajoutant une séquence de gestes expressifs pendant que le robot parle. Un ensemble de mouvement correspondant à un panel d'expression a été généré hors ligne. La fission choisi s'il est pertinent d'ajouter un geste expressif à la parole en fonction du contexte (visibilité du robot par l'homme, nécessité d'une gestuelle pour améliorer l'expressivité de la parole) et envoi le cas échéant l'expression à jouer (15). Le CGG se contente d'envoyer de façon séquentielle les différents mouvements correspondant à l'expressivité gestuelle souhaitée.
+\item \textbf{Le module \textit{CGG}}: ce module est responsable de la génération des gestes communicatifs (Communicative Gestures Generation). Cela permet d'ajouter de l'expressivité aux réponses du robot en ajoutant une séquence de gestes expressifs pendant que le robot parle. Un ensemble de mouvements correspondants à un panel d'expression a été généré hors ligne. La fission choisit s'il est pertinent d'ajouter un geste expressif à la parole en fonction du contexte (visibilité du robot par l'homme, nécessité d'une gestuelle pour améliorer l'expressivité de la parole) et envoi le cas échéant l'expression à jouer (15). Le CGG se contente d'envoyer de façon séquentielle les différents mouvements correspondant à l'expressivité gestuelle souhaitée.
 %TODO compléter ceci avec le BML de Javier?
 \end{itemize}
 
@@ -785,13 +785,13 @@ Les systèmes de simulation sont très utilisés en robotique. Ils permettent au
 Pour le projet MaRDi, le simulateur est également utile pour partager un même environnement et une même configuration expérimentale entre les différents partenaires. De plus, le système de dialogue reposant sur un gestionnaire de dialogue ayant une politique apprise par renforcement, l'usage de la simulation permet d'effectuer cet apprentissage avec des moyens très réduits \cite{simpar_2014}.
 
 Il est cependant nécessaire que le simulateur soit adapté à l'interaction homme-robot. 
-En terme de simulation, deux solutions sont possible pour ajouter l'homme à la boucle: 1) en modélisant et implémentant leur comportements et actions, et 2) en utilisant la téléopération pour contrôler les avatars humains.
+En terme de simulation, deux solutions sont possibles pour ajouter l'homme à la boucle: 1) en modélisant et implémentant leurs comportements et actions, et 2) en utilisant la téléopération pour contrôler les avatars humains.
 
-La première solution présente l'avantage de l'automatisation et ne demande aucune manipulation manuelle. Cette solution est donc moins coûteuse en temps et plus facile à mettre en place. Cependant, selon les caractéristiques humaines requises, il est potentiellement extrêmement complexe d'avoir un modèle de comportement humain réaliste. Les humains sont des entités complexes avec des réactions et comportements quasi impossible de synthétiser de manière satisfaisante. Cette solution est en général retenue pour les études qui n'impliquent pas les comportements humains les plus complexes, comme la navigation ou la manipulation.
+La première solution présente l'avantage de l'automatisation et ne demande aucune manipulation manuelle. Cette solution est donc moins coûteuse en temps et plus facile à mettre en place. Cependant, selon les caractéristiques humaines requises, il est potentiellement extrêmement complexe d'avoir un modèle de comportement humain réaliste. Les humains sont des entités complexes avec des réactions et comportements quasi impossible à synthétiser de manière satisfaisante. Cette solution est en général retenue pour les études qui n'impliquent pas les comportements humains les plus complexes, comme la navigation ou la manipulation.
 
 Dans la seconde solution, un homme télé-opère un avatar virtuel. La simulation est donc plus complexe à établir car elle nécessite de monopoliser un humain. Cependant, l'avatar du simulateur aura un comportement beaucoup plus réaliste. Pour ce faire, l'environnement doit avoir un rendu visuel réaliste et le contrôle de l'avatar doit être suffisamment intuitif.
 
-D'autres projets de dialogue situé homme robot reposent sur une étude dans un simulateur. Par exemple pour un scénario de Pick-Place-Carry (Prendre-Placer-Transporter) \cite{Lucignano13}, de robot barman \cite{stiefelhagen07} ou de navigation dans un environnent virtuel \cite{byron06}. Cependant, peu de travaux considèrent l'environnement de simulation comme moyen pour l'acquisition du corpus de dialogue situé ou comme moyen de tester l'apprentissage de politique en ligne.
+D'autres projets de dialogue situé homme-robot reposent sur une étude dans un simulateur. Par exemple pour un scénario de Pick-Place-Carry (Prendre-Placer-Transporter) \cite{Lucignano13}, de robot barman \cite{stiefelhagen07} ou de navigation dans un environnent virtuel \cite{byron06}. Cependant, peu de travaux considèrent l'environnement de simulation comme moyen pour l'acquisition du corpus de dialogue situé ou comme moyen de tester l'apprentissage de politique en ligne.
 %Indeed, most of the previous works in situated dialogue for HRI resorted to a preliminary Wizard-of-Oz (WoZ) experiment, where a human remotely operates the robot %, and then, used the collected data to train both a user simulator and an error model to pursue the dialogue policy learning without the use of any new real interactions
 %
 En effet, la plupart repose sur des expériences en magicien d'Oz \cite{prommer06,stiefelhagen07,rieser08}. 
@@ -800,7 +800,7 @@ En effet, la plupart repose sur des expériences en magicien d'Oz \cite{prommer0
 
 
 \subsection{Choix du simulateur}
-Dans le domaine de la robotique, de nombreux simulateurs sont disponibles. Nous pouvons citer la suite Player/Stage/Gazebo ~\cite{psg-1232}, la plateforme de simulation intégrée OpenHRP \cite{Nakaoka|iros07}, l'architecture logicielle multiplateforme OpenRAVE \cite{diankov_thesis} ou même le simulateur  commercial V-REP \cite{Freese2010}. Cependant, seuls quelques-uns d'entre eux sont adaptés à l'interaction homme-robot. Ils limitent généralement les comportements des agents humains à des mouvements et des capacités d'interaction relativement simple, ce qui constitue  l'une des raisons pour laquelle les simulations de HRI ont été menées jusqu'à présent dans des configuration de \emph{télé-opération}, où seul le robot et l'environnement (et pas l'agent humain) sont en fait simulé. Les simulateurs robotiques USARSim \cite{Lewis07usarsim} et MORSE \cite{morse_simpar_2012, simparmorse2014} sont tous deux utilisés dans des dizaines d'études HRI en raison de leur capacité à contrôler un agent humain. Cependant, MORSE présente plusieurs avantages spécifiques qui ont motivé notre choix.
+Dans le domaine de la robotique, de nombreux simulateurs sont disponibles. Nous pouvons citer la suite Player/Stage/Gazebo ~\cite{psg-1232}, la plateforme de simulation intégrée OpenHRP \cite{Nakaoka|iros07}, l'architecture logicielle multiplateforme OpenRAVE \cite{diankov_thesis} ou même le simulateur  commercial V-REP \cite{Freese2010}. Cependant, seuls quelques-uns d'entre eux sont adaptés à l'interaction homme-robot. Ils limitent généralement les comportements des agents humains à des mouvements et des capacités d'interaction relativement simple, ce qui constitue  l'une des raisons pour laquelle les simulations de HRI ont été menées jusqu'à présent dans des configuration de \emph{télé-opération}, où seul le robot et l'environnement (et pas l'agent humain) sont en fait simulés. Les simulateurs robotiques USARSim \cite{Lewis07usarsim} et MORSE \cite{morse_simpar_2012, simparmorse2014} sont tous deux utilisés dans des dizaines d'études HRI en raison de leur capacité à contrôler un agent humain. Cependant, MORSE présente plusieurs avantages spécifiques qui ont motivé notre choix.
 
 % Open-source / COMMUNAUTEE / supports actifs middleware
 MORSE est un simulateur open-source, avec une communauté très active, qui a été développé spécifiquement pour la simulation robotique. Il prend en charge une large gamme de middleware (par exemple ROS, YARP, pocolibs) ainsi que des implémentations fiables et réalistes des capteurs et des actionneurs qui facilitent l'intégration sur de véritables plateformes robotiques.
@@ -810,7 +810,7 @@ En outre, MORSE offre une configuration de simulation adaptable en permettant à
 Par exemple, Morse fournit à la fois une caméra de vision et
 un capteur de "caméra sémantique". Alors que la première caméra fournit une image grossière (i.e. pixels bruts) en tant que sortie, la seconde
 donne directement les noms des objets perçus et leurs positions dans la scène.
-Ce dernier capteur évite les utilisateurs à effectuer la reconnaissance et les processus de localisation d'objet lors de la focalisation sur les problématiques de niveau supérieur.
+Ce dernier capteur évite pour les utilisateurs à devoir effectuer la reconnaissance et les processus de localisation d'objets lors de la focalisation sur les problématiques de niveau supérieur.
 
 % Rendu réaliste
 De plus, MORSE repose sur "Blender Game Engine",
@@ -866,7 +866,7 @@ Dans le second cas, l'avatar est contrôlé par programme en utilisant des actio
 \subsection{Simulation de l'interaction}
 
 %Explain why it is interesting for us to simulate + mainly phase 1
-La simulation de l'interaction nous permet dans notre cas d'obtenir rapidement un moyen d'entraîner le système de dialogue et de tester la validité de notre architecture pour la phase de détermination de but décrite en \ref{phase1}.
+La simulation de l'interaction nous permet dans notre cas d'obtenir rapidement un moyen d'entraîner le système de dialogue et de tester la validité de notre architecture pour la phase de détermination de but décrite en \ref{sec:phase1}.
 Les phases d'élaboration de but et d'exécution seront donc simplifiées au maximum.
 
 Dans notre scénario, une personne handicapée est dans son appartement de trois pièces et possède un robot pour l'assister dans les tâches quotidiennes.
@@ -883,7 +883,7 @@ Nous utilisons le robot Pr2 dans le simulateur car c'est la plateforme que nous 
 \end{figure}
 
  
-Au début de la simulation, un script positionne des objets au hasard dans des zones prédéfinies (comme la table de la cuisine, celle du salon, l'étagère de la chambre...). Ces zones sont appelées des zones de manipulation. Cela nous permet d'utiliser différentes configuration d'environnement sans changé le fichier d'initialisation (MORSE builder script).
+Au début de la simulation, un script positionne des objets au hasard dans des zones prédéfinies (comme la table de la cuisine, celle du salon, l'étagère de la chambre...). Ces zones sont appelées des zones de manipulation. Cela nous permet d'utiliser différentes configurations d'environnement sans changer le fichier d'initialisation (MORSE builder script).
 
 %-----------------------------------------------%
 \subsection{Simulation de l'exécution}
@@ -892,26 +892,26 @@ Au début de la simulation, un script positionne des objets au hasard dans des z
 %-> Why we need these actions?
 %   -> Simulation more interactive and realistic
 %    -> Objective fulfillment evaluation according to robot action (users satisfaction)
-Pour permettre aux utilisateurs d'évaluer l'accomplissement de sa requête (par exemple, est-ce que le robot rapporte le bon objet), nous avons développé une librairie abstraite d'actions haut niveau réalisable par le robot. Ces actions haut niveaux seront combinées pour accomplir l'objectif énoncé par l'utilisateur. Leur haut niveau d'abstraction permet ici de pouvoir accomplir le but utilisateur sans avoir recours au planificateur ou à la supervision et donc de contourner les phases deux et trois décrient en section \ref{sec:phase2} et \ref{sec:phase3}.
+Pour permettre aux utilisateurs d'évaluer l'accomplissement de sa requête (par exemple, est-ce que le robot rapporte le bon objet), nous avons développé une librairie abstraite d'actions haut niveau réalisable par le robot. Ces actions haut niveaux seront combinées pour accomplir l'objectif énoncé par l'utilisateur. Leur haut niveau d'abstraction permet ici de pouvoir accomplir le but utilisateur sans avoir recours au planificateur ou à la supervision et donc de contourner les phases deux et trois décrites en section \ref{sec:phase2} et \ref{sec:phase3}.
 
 La liste des actions abstraites est la suivante:
 
 \begin{itemize}
 
 % Move robot to manipulation area
-\item \textit{Move}: pour explorer l'environnement ou rapporter un objet, le robot a besoin de se déplacer vers les zones de manipulation. Pour ce faire, nous utilisons l'actionneur \textit{teleport} de MORSE. Cet actionneur permet de déplacer instantanément le robot à l'endroit désiré. Nous avons défini une fonction de script pour bouger le robot vers chaque zones de manipulation définies. De cette façon, le robot peut se rendre à chaque position pour prendre un objet ou explorer une zone pour obtenir des informations contextuelles.
+\item \textit{Move}: pour explorer l'environnement ou rapporter un objet, le robot a besoin de se déplacer vers les zones de manipulation. Pour ce faire, nous utilisons l'actionneur \textit{teleport} de MORSE. Cet actionneur permet de déplacer instantanément le robot à l'endroit désiré. Nous avons défini une fonction de script pour bouger le robot vers chaque zone de manipulation définie. De cette façon, le robot peut se rendre à chaque position pour prendre un objet ou explorer une zone pour obtenir des informations contextuelles.
 
 % Explore an area
-\item \textit{Explore}: le robot est capable de scanner une zone de manipulation. Pour rendre cette action possible, une caméra symbolique a été ajouté à la tête du robot. La tête se déplace séquentiellement pour scanner l'environnement.
+\item \textit{Explore}: le robot est capable de scanner une zone de manipulation. Pour rendre cette action possible, une caméra symbolique a été ajoutée à la tête du robot. La tête se déplace séquentiellement pour scanner l'environnement.
 
 % Grab object
-\item \textit{Grab}: le robot peut prendre un objet. Pour réaliser cette action, le service \textit{grasp} lié au Pr2 de MORSE est utilisé. Nous précisions le nom de l'objet qu'il doit attraper et si l'objet est proche de la pince du robot, il sera placé au niveau de celle-ci et lié à son déplacement. De la même façon, nous avons ajouté une fonction \textit{Drop} qui prends comme paramètre la zone dans laquelle l'objet doit être déposé. Le robot relâchera alors l'objet sur le meuble correspondant.
+\item \textit{Grab}: le robot peut prendre un objet. Pour réaliser cette action, le service \textit{grasp} lié au Pr2 de MORSE est utilisé. Nous précisons le nom de l'objet qu'il doit attraper et si l'objet est proche de la pince du robot, il sera placé au niveau de celle-ci et lié à son déplacement. De la même façon, nous avons ajouté une fonction \textit{Drop} qui prend comme paramètre la zone dans laquelle l'objet doit être déposé. Le robot relâchera alors l'objet sur le meuble correspondant.
 
 % Give object
 \item \textit{Give}: la dernière action est de donner l'objet à l'humain. Pour ce faire, le robot se déplace vers la position de l'homme puis déploie son bras vers l'homme afin de lui remettre l'objet. Nous utilisons simplement l'armature du robot pour contrôler son bras.
 \end{itemize}
 
-Ces actions haut niveau permettent d'effectuer des expérimentation avec un système allant de la détermination de but jusqu'à l'exécution de ceux-ci, tout en nous focalisant sur la partie dialogue. Cela rends possible d'entraîner le système de dialogue et de faire des premières évaluation de façon bien plus rapide et moins coûteuse en terme de ressources requises.
+Ces actions haut niveau permettent d'effectuer des expérimentations avec un système allant de la détermination de but jusqu'à l'exécution de celui-ci, tout en nous focalisant sur la partie dialogue. Cela rend possible d'entraîner le système de dialogue et de faire des premières évaluations de façon bien plus rapide et moins coûteuse en terme de ressources requises.
 
 \subsection{Expérimentation et résultats}
 % In this "proof of concept" study we chose to deal with a limited expert panel, composed of 6 subjects (2 females and 4 males of around 25 years old), in order to focus on the capacity of the system to learn from scratch using a limited set of interactions. The advantage is that the collected data sufficiently explore the state and action spaces during the online learning to be exploited in offline learning (using batch samples).
@@ -961,10 +961,10 @@ Nous nous focalisons donc sur des scénarios où une divergence de croyance est 
 Dans une configuration réaliste, ces scénarios nécessitent des interactions d'une certaine durée pour faire apparaître une croyance divergente. Pour contourner ce processus coûteux en temps dans notre configuration d'évaluation, nous proposons directement un but erroné à l'utilisateur au début de l'interaction. 
 Par conséquent, une fausse croyance sur la localisation d'un objet non visible de l'homme est automatiquement ajoutée. Même si cette situation est générée de façon artificielle, le même comportement peut être obtenu en utilisant notre système d'évaluation spatiale, comme présenté en section \ref{sec:ResChap2}.
 
-Par conséquent, cette configuration a été utilisé pour évaluer la capacité de notre système à gérer à la fois les tâches de manipulation classique (CLASSIC) et de fausse croyance (FB pour False Belief).
-Pour ce faire, nous comparons un système ayant connaissance des croyances de l'homme (BA pour Belief Aware) avec un système n'ayant pas de gestion de croyance (BU pour Belief Unaware). Ces deux systèmes ont des politiques apprises par l'interaction avec deux utilisateurs experts ayant réalisé $60$ dialogues.
+Par conséquent, cette configuration a été utilisée pour évaluer la capacité de notre système à gérer à la fois les tâches de manipulation classique (CLASSIC) et de fausse croyance (FB pour False Belief).
+Pour ce faire, nous comparons un système ayant connaissance des croyances de l'homme (BA pour Belief Aware) avec un système n'ayant pas de gestion de croyance (BU pour Belief Unaware). Ces deux systèmes ont des politiques apprises par l'interaction avec deux utilisateurs experts ayant réalisés $60$ dialogues.
 
-Dans la configuration d'évaluation, $10$ dialogues ont été enregistrés pour \textit{BA} et \textit{BU}, ces dialogues provenant de 6 sujets distincts (deux femmes et quatre hommes d'environ 25 ans), soit au total 120 dialogues. $30$\% de ces dialogues impliquaient des tâches de type \textit{FB}. Les sujets n'avaient pas connaissance de la configuration du système, qui ont été présenté dans un ordre aléatoire. À la fin de l'interaction, les utilisateurs évaluent le système en terme de réussite de la tâche avec un questionnaire en ligne.
+Dans la configuration d'évaluation, $10$ dialogues ont été enregistrés pour \textit{BA} et \textit{BU}, ces dialogues provenant de 6 sujets distincts (deux femmes et quatre hommes d'environ 25 ans), soit au total 120 dialogues. $30$\% de ces dialogues impliquaient des tâches de type \textit{FB}. Les sujets n'avaient pas connaissance de la configuration du système, les tests ayant été présentés dans un ordre aléatoire. À la fin de l'interaction, les utilisateurs évaluent le système en terme de réussite de la tâche avec un questionnaire en ligne.
 
 %(p 193 thèse Manu)
 
@@ -1003,11 +1003,11 @@ TASK  & $Avg.R$ & $Length$ & $SuccR$
  \vspace{-10pt}
 \end{table}
 
-Le tableau \ref{table:hri-perfs} est remplit avec les performances obtenues par les deux configurations discutées ci-dessus en considérant les tâches CLASSIC et FB. Ces résultats sont d'abord donnés en terme de moyenne sur les récompenses cumulées (Avg.R). D'après la définition de la fonction de récompense, cette métrique exprime dans une seule valeur les deux variables d'amélioration, le taux de succès (précision) et le nombre de tours avant la fin du dialogue (efficacité temporelle). Ces deux métriques sont également représentées. Les résultats dans le tableau \ref{table:hri-perfs} sont une moyenne des $60$ dialogues réalisés pour chaque système.
+Le tableau \ref{table:hri-perfs} est rempli avec les performances obtenues par les deux configurations discutées ci-dessus en considérant les tâches CLASSIC et FB. Ces résultats sont d'abord donnés en terme de moyenne sur les récompenses cumulées (Avg.R). D'après la définition de la fonction de récompense, cette métrique exprime dans une seule valeur les deux variables d'amélioration, le taux de succès (précision) et le nombre de tours avant la fin du dialogue (efficacité temporelle). Ces deux métriques sont également représentées. Les résultats dans le tableau \ref{table:hri-perfs} sont une moyenne des $60$ dialogues réalisés pour chaque système.
 
 
 
-Sur les tâches CLASSIC la performance entre BU et BA doit être considéré comme similaire. Ainsi, le mécanisme de résolution de croyance divergente ne semble pas influer sur la gestion du dialogue dans les situations sans croyance divergente.  La politique testée est apprise, par conséquent le processus d'attribution d'action est optimisée avec un degré supplémentaire de complexité (plus grand espace état / action que dans BU), donc une perte aurait pu être observée.
+Sur les tâches CLASSIC la performance entre BU et BA doit être considérée comme similaire. Ainsi, le mécanisme de résolution de croyance divergente ne semble pas influer sur la gestion du dialogue dans les situations sans croyance divergente.  La politique testée est apprise, par conséquent le processus d'attribution d'action est optimisée avec un degré supplémentaire de complexité (plus grand espace état / action que dans BU), donc une perte aurait pu être observée.
 
 Les performances entre BU et BA sur les tâches FB apparaissent en faveur de BA (taux plus élevé de réussite et un petit gain d'efficacité au niveau du temps  du processus de gestion du dialogue: gain moyen d'un tour).
 %
@@ -1063,7 +1063,7 @@ Nous observons également que la politique apprise prenant en compte l'état de 
 
 %Phase 2 et 3 (démo avec Sandra)
 
-Pour compléter cette première implémentation et ces tests sur simulateurs dans lesquels les phases deux et trois décrites en \ref{sec:troisPhases} ont été simulées afin de mener à bien l'apprentissage de la politique du système de gestion de dialogue \cite{simpar_2014} et tester la prise en compte des croyances divergentes \cite{Ferreira2015}, nous avons implémentés et testé les éléments nécessaires pour la réalisation des phases deux et trois sur un Pr2.
+Pour compléter cette première implémentation et ces tests sur simulateurs dans lesquels les phases deux et trois décrites en \ref{sec:troisPhases} ont été simulées afin de mener à bien l'apprentissage de la politique du système de gestion de dialogue \cite{simpar_2014} et tester la prise en compte des croyances divergentes \cite{Ferreira2015}, nous avons implémenté et testé les éléments nécessaires pour la réalisation des phases deux et trois sur un Pr2.
 
 L'environnement est constitué de trois pièces (\textit{Bedroom}, \textit{Livingroom} et \textit{Kitchen}) correspondant à des zones, dans lesquels ce trouvent des zones de manipulations définies au niveau des différents meubles présents dans l'environnement.
 %TODO ajouté photo ou lien vers homepage/MaRDi?
@@ -1090,7 +1090,7 @@ Lorsque une zone a été scanné, le fait \textit{scanned} passe alors à \texti
 \item \textit{Handover(A1, O, A2}: cette action implique que l'agent \textit{A1} ait l'objet \textit{O} et que \textit{A1} et \textit{A2} se trouvent dans la même zone de manipulation. \textit{A1} donne alors l'objet à \textit{A2}.
 \end{itemize}
  
- Cet ensemble d'actions atomique est complété par des méthodes (tâches composées par ces actions atomiques) afin de définir le domaine de planification.
+ Cet ensemble d'actions atomiques est complété par des méthodes (tâches composées par ces actions atomiques) afin de définir le domaine de planification.
  Les premières méthodes permettent d'ajouter le mouvement aux actions de manipulation.
  
  \begin{itemize}
@@ -1119,38 +1119,38 @@ Lorsque tous les meubles ont été scannés, le fait \textit{scanned} passe à \
 \item \textit{Localise(O)}: cette méthode vise à trouver un objet \textit{O}. Contrairement à la méthode \textit{LocaliseInRoom}, le robot n'a pas d'indication sur la pièce où peut se trouver l'objet. Il va donc effectuer la méthode \textit{LocaliseInRoom} pour chaque pièces dont le fait \textit{scanned} est faux puis la fonction \textit{Localise} est rappelée de façon récursive.
 \end{itemize}
 
-Ce domaine ainsi définit permet de mettre au point les plans nécessaire à la résolution des buts susceptible d'être demandés par l'utilisateur dans le cadre de notre scénario d'interaction homme-robot.
+Ce domaine ainsi définit permet de mettre au point les plans nécessaires à la résolution des buts susceptibles d'être demandés par l'utilisateur dans le cadre de notre scénario d'interaction homme-robot.
 
 
 \subsection{Supervision et exécution}
 %Parler des différentes règles mises en place
 
 Parmi les buts possibles provenant du dialogue, certains correspondent directement à une des méthodes haut niveau présenté en section \ref{sec:domainehatp}.
-Ainsi, si l'homme demande au robot de déplacer un objet \textit{O} vers une zone de manipulation \textit{ZM}, si le robot connaît l'emplacement de \textit{O}, il peut directement demander au planificateur de générer le plan pour résoudre la méthode \textit{Move(O, ZM)}. Il en va de même pour les autres méthodes de haut niveau. Cependant, dans le cas où le robot ignore l'emplacement de l'objet certains raisonnements sont nécessaire pour mener à bien la tâche.
+Ainsi, si l'homme demande au robot de déplacer un objet \textit{O} vers une zone de manipulation \textit{ZM}, si le robot connaît l'emplacement de \textit{O}, il peut directement demander au planificateur de générer le plan pour résoudre la méthode \textit{Move(O, ZM)}. Il en va de même pour les autres méthodes de haut niveau. Cependant, dans le cas où le robot ignore l'emplacement de l'objet certains raisonnements sont nécessaires pour mener à bien la tâche.
 
-Ainsi, lorsque le robot ne connaît pas l'emplacement de l'objet, une façon simple de résoudre le problème est d'appeler d'abord la méthode \textit{Localise} afin de trouver l'emplacement de l'objet, puis effectuer le déplacement demander le cas échéant. Cependant, le déplacement du robot et les scannes successifs des différentes pièces et zones contenus dans ces pièces est coûteux en temps.
+Ainsi, lorsque le robot ne connaît pas l'emplacement de l'objet, une façon simple de résoudre le problème est d'appeler d'abord la méthode \textit{Localise} afin de trouver l'emplacement de l'objet, puis effectuer le déplacement demandé le cas échéant. Cependant, le déplacement du robot et les scannes successifs des différentes pièces et zones contenues dans ces pièces est coûteux en temps.
 Pour réduire au maximum le coût de cette recherche, lorsqu'il doit effectuer un \textit{Localise} le robot va tout d'abord demander si l'humain connaît l'emplacement de l'objet.
 
 Trois cas sont alors possibles.
 \begin{itemize}
-\item \textbf{Zone de Manipulation}: l'humain peut indiquer une zone de manipulation au robot, au quel cas la supervision pourra directement faire une requête de planification permettant d'effectuer le déplacement de l'objet initialement demandé.
+\item \textbf{Zone de Manipulation}: l'humain peut indiquer une zone de manipulation au robot, dans ce cas la supervision pourra directement faire une requête de planification permettant d'effectuer le déplacement de l'objet initialement demandé.
 
-\item \textbf{Pièce}: l'humain peut également indiquer une pièce, au quel cas le superviseur devra faire une requête de planification \textit{LocaliseInRoom} correspondante. Le plan sera achevé dès que l'objet sera trouvé ou que toutes les zones de manipulations auront leur fait \textit{scanned} à \textit{true} pour le robot.
+\item \textbf{Pièce}: l'humain peut également indiquer une pièce, dans ce cas le superviseur devra faire une requête de planification \textit{LocaliseInRoom} correspondante. Le plan sera achevé dès que l'objet sera trouvé ou que toutes les zones de manipulations auront leur fait \textit{scanned} à \textit{true} pour le robot.
 
 \item \textbf{Emplacement inconnu}: dans le cas où l'homme ignore l'emplacement de l'objet, le superviseur doit alors faire une requête au planificateur avec la méthode \textit{Localise}. Avant d'exécuter ce plan, le robot demande l'autorisation à l'homme de pouvoir chercher dans tout l'appartement.
 \end{itemize}  
 
 
 Nous proposons une règle pour prendre en compte l'état de croyance de l'homme concernant la composition des différentes pièces et zones de manipulation pour améliorer la recherche d'objet.
-En effet, lorsque l'homme indique une pièce plutôt qu'une zone de manipulation ou lorsqu'il indique qu'il ignore l'emplacement de l'objet, on peut en déduire que l'objet ne se trouve pas dans les pièces ou dans les zones que l'homme a déjà exploré. Lors de l'exécution de la méthode \textit{Localise} le robot va donc explorer en premier lieu les pièces ayant le fait \textit{scanned} à \textit{false} pour l'humain et de même pour la méthode \textit{LocaliseInRoom} et les zones de manipulation ayant été explorées par l'homme.
+En effet, lorsque l'homme indique une pièce plutôt qu'une zone de manipulation ou lorsqu'il indique qu'il ignore l'emplacement de l'objet, on peut en déduire que l'objet ne se trouve pas dans les pièces ou dans les zones que l'homme a déjà explorées. Lors de l'exécution de la méthode \textit{Localise} le robot va donc explorer en premier lieu les pièces ayant le fait \textit{scanned} à \textit{false} pour l'humain et de même pour la méthode \textit{LocaliseInRoom} et les zones de manipulation ayant été explorées par l'homme.
 
 
-Nous proposons une autre règle pour prendre en compte cette fois-ci l'état de croyance divergente de l'homme et dur robot, directement au niveau de la supervision.
+Nous proposons une autre règle pour prendre en compte cette fois-ci l'état de croyance divergente de l'homme et du robot, directement au niveau de la supervision.
 Dans le cas où l'homme indique une position erronée de l'objet au robot deux situations peuvent apparaître. (1) Le robot ignore l'emplacement de l'objet mais a déjà scanné la position indiquée par l'homme. Dans ce cas le robot informe l'homme et demande confirmation avant de retourner scanner la zone ou la pièce correspondante (il est possible que le robot ait eu une défaillance au niveau de sa perception lors du scanne précédent). (2) Si le robot connaît la position de l'objet et si le superviseur est informé de l'état de croyance divergente de l'homme concernant cet objet, le robot exécutera directement la commande en allant chercher l'objet au bon emplacement. Nous considérons ici qu'il n'est pas nécessaire de contredire l'homme car celui-ci mettra à jour la position de l'objet une fois que le robot aura accompli la tâche demandée.
 
 
 Enfin, nous avons ajouté une dernière règle permettant de gérer les cas d'échec.
-Imaginons que le robot ait exploré toutes les zones mais qu'il n'ait pas trouvé l'objet demandé. Si le robot a connaissance de l'emplacement d'un objet similaire ayant le même type, c'est à dire qu'il a trouvé un autre livre ou un autre DVD étant classé dans la même catégorie (science-fiction, polar, pour enfant...) le robot pourra indiquer à l'homme qu'il n'a pas trouver l'objet demandé mais lui proposer malgrès tout l'objet similaire comme alternative à la commande initiale.
+Imaginons que le robot ait exploré toutes les zones mais qu'il n'ait pas trouvé l'objet demandé. Si le robot a connaissance de l'emplacement d'un objet similaire ayant le même type, c'est à dire qu'il a trouvé un autre livre ou un autre DVD étant classé dans la même catégorie (science-fiction, polar, pour enfant...) le robot pourra indiquer à l'homme qu'il n'a pas trouver l'objet demandé mais lui proposer malgrè tout l'objet similaire comme alternative à la commande initiale.
 
 
 
@@ -1160,7 +1160,7 @@ Imaginons que le robot ait exploré toutes les zones mais qu'il n'ait pas trouv�
 \subsubsection{Configuration expérimentale}
 %Parler des outils utilisés: mocap...
 %+ area et locations
-Nous avons utilisé la réplique d'appartement du LAAS pour effectuer nos expérimentations. Nous avons simplifier la perception, en utilisant de la capture de mouvement pour suivre les humains. Pour la détection d'objet nous utilisons un logiciel de reconnaissance de tags nommé viman (déjà présenté en section \ref{sec:chap2expconf}).
+Nous avons utilisé la réplique d'appartement du LAAS pour effectuer nos expérimentations. Nous avons simplifiée la perception, en utilisant de la capture de mouvement pour suivre les humains. Pour la détection d'objet nous utilisons un logiciel de reconnaissance de tags nommé viman (déjà présenté en section \ref{sec:chap2expconf}).
 
 
 Pour effectuer les différents mouvements, nous utilisons un planificateur de mouvement\cite{Sisbot2008} qui commande les actionneurs du robot.
@@ -1171,7 +1171,7 @@ Pour le maintien de l'état du monde perçu par le robot et l'évaluation de la 
 Dans cette configuration, nous utilisons les modules \textit{PDG} pour l'agrégation des données d'entrées, le module \textit{area\_manager} pour gérer les différentes zones et la base de données pour accéder aux faits contenus dans les différents modèles.
 
 Nous configurons l'environnement comme présenté à la figure \ref{fig:areasMardi}.
-L'environnement contient donc trois pièces qui elles-même contiennent des zones de manipulation.
+L'environnement contient donc trois pièces qui elles-mêmes contiennent des zones de manipulation.
 
 \begin{figure}[ht!]
  \centering
@@ -1179,7 +1179,7 @@ L'environnement contient donc trois pièces qui elles-même contiennent des zone
   \includegraphics[width=0.49\textwidth]{img/areas.jpg} &
   \includegraphics[width=0.49\textwidth]{img/furnitures.jpg}
  \end{tabular}
- \caption{Répartition des différentes pièces (image de gauche) et des différentes zones de manipulation correspondant aux meubles contenus dans ces pièces (image de droite).}
+ \caption{Répartition des différentes pièces (image de gauche) et des différentes zones de manipulation correspondants aux meubles contenus dans ces pièces (image de droite).}
  \label{fig:areasMardi}
 %   \vspace{-3pt}
  \end{figure}
@@ -1196,12 +1196,12 @@ Elle contient deux zones de manipulation, la table basse (\textit{Livingroom\_co
 \subsubsection{Expérimentation}
 
 
-Plusieurs expérimentations ont été réalisé en utilisant cette configuration du système et avec différentes répartitions d'objets et requêtes utilisateur. Nous reportons ici un scénario présentant plusieurs situations intéressantes.
+Plusieurs expérimentations ont été réalisées en utilisant cette configuration du système et avec différentes répartitions d'objets et requêtes utilisateur. Nous reportons ici un scénario présentant plusieurs situations intéressantes.
 
 Au début du scénario, le robot n'a pas encore exploré son environnement et ignore donc la position des objets.
 Nous démarrons l'expérimentation avec l'homme et le robot se trouvant au niveau de  la table du salon \textit{Livingroom\_table}. Pour induire une croyance divergente, on informe l'homme que le DVD Bilbo Le Hobit \textit{Bilbo} se trouve sur la table de la cuisine.
 
-Les croyances sur l'état du monde perçu par le robot est représenté ci-dessous.
+Les croyances sur l'état du monde perçu par le robot sont représentées ci-dessous.
 Tous les faits présents sont vrais. Ils ont été simplifiés pour plus de clarté et le type est indiqué seulement lorsqu'il s'agit d'une information obtenue par le dialogue (les autres ayant été obtenus par perception).
 
 %TODO représenté chaque états avec toaster?
@@ -1220,7 +1220,7 @@ Human scanned Livingroom_table            Human scanned  Livingroom_table
 
 L'homme demande alors au robot de lui apporter le DVD du Seigneur des Anneaux (\textit{LOTR}).
 Le robot n'ayant pas de connaissance de la position de cet objet, il demande à l'homme s'il la connaît.
-L'homme réponds alors qu'il se trouve dans la chambre.
+L'homme répond alors qu'il se trouve dans la chambre.
 
 Le robot ajoute alors le fait correspondant à son état de croyance et à celui de l'homme:
 
@@ -1233,9 +1233,9 @@ LOTR isInRoom Bedroom  (dialogue)
 \end{scriptsize}
 
 Suite à cela, la supervision va demander la génération d'un premier plan pour obtenir la localisation exacte de l'objet. Pour cela, le planificateur cherche à trouver comment effectuer la tâche \textit{LocaliseInRoom(Bedroom, LOTR)}.
-Pour exécuter cette première tâche, le robot se rends dans la cuisine, au niveau de la table de nuit. Il scanne l'emplacement et y trouve le DVD \textit{Bilbo}.
+Pour exécuter cette première tâche, le robot se rend dans la cuisine, au niveau de la table de nuit. Il scanne l'emplacement et y trouve le DVD \textit{Bilbo}.
 
-Les faits suivant sont alors ajouté à son état de croyance.
+Les faits suivant sont alors ajoutés à son état de croyance.
 
 \begin{scriptsize}
 \begin{verbatim}
@@ -1249,12 +1249,12 @@ ROBOT scanned Bedroom_bedsidetable
 \end{verbatim}
 \end{scriptsize}
 
-Le robot n'ayant pas trouvé l'objet recherché, le superviseur poursuis l'exécution du plan. Le robot se dirige donc vers l'étagère de la chambre et scanne l'emplacement.
+Le robot n'ayant pas trouvé l'objet recherché, le superviseur poursuit l'exécution du plan. Le robot se dirige donc vers l'étagère de la chambre et scanne l'emplacement.
 Il y découvre le DVD du Seigneur des Anneaux.
 Le plan de recherche est donc accompli, le robot informe l'homme qu'il a trouvé l'objet en utilisant le \textit{TTS}.
 Pendant l'accomplissement de ce plan, l'humain s'est rendu à la table basse du salon.
 
-Nous présentons les modèles d'état de croyance simplifié (les éléments redondants ont été omis):
+Nous présentons les modèles d'état de croyance simplifiés (les éléments redondants ont été omis):
 
 \begin{scriptsize}
 \begin{verbatim}
@@ -1274,18 +1274,18 @@ Pr2   scanned Bedroom
 La supervision demande alors au planificateur de générer un plan pour résoudre le but utilisateur, à savoir \textit{Bring(LOTR, Human)}.
 La supervision va gérer l'exécution pour la génération de mouvement pour attraper l'objet, la navigation vers l'emplacement de l'homme et la génération de mouvement pour transmettre l'objet à l'homme.
 
-Cette première étape permet de montrer comment le robot est capable d'acquérir une information manquante afin d'accomplir une tâche demandée par l'utilisateur. En effet, le robot a demandé à l'homme la position de l'objet, ce qui réduit l'espace de recherche. La réponse de l'homme n'étant pas suffisamment précise pour permettre une exécution directe du but utilisateur, la supervision a ordonner au planificateur la génération un premier plan de recherche d'objet afin d'obtenir l'emplacement précis de l'objet, tout en prenant en compte les indications de l'homme.
+Cette première étape permet de montrer comment le robot est capable d'acquérir une information manquante afin d'accomplir une tâche demandée par l'utilisateur. En effet, le robot a demandé à l'homme la position de l'objet, ce qui réduit l'espace de recherche. La réponse de l'homme n'étant pas suffisamment précise pour permettre une exécution directe du but utilisateur, la supervision a ordonné au planificateur la génération un premier plan de recherche d'objet afin d'obtenir l'emplacement précis de l'objet, tout en prenant en compte les indications de l'homme.
 
 Après l'accomplissement de ce premier but, l'homme fait une autre demande au robot. Il demande cette fois que le robot déplace le livre Cendrillon (\textit{Cinderella}) pour le mettre sur la table basse du salon.
-Tout comme l'étape précédente, le robot ne connaissant pas l'emplacement de cet objet, il demande à l'homme si il sait où trouver ce livre.
-L'homme réponds qu'il ignore sa position.
-Hors, le robot sait que l'homme connaît les éléments qui se trouvent dans le salon (\textit{Human scanned  Livingroom}), donc si l'homme ignore la position de cet objet c'est qu'il est probablement pas dans le salon. De plus, le robot a déjà exploré la chambre (\textit{Pr2 scanned Bedroom}). Le superviseur va donc éliminer ces deux zones de sa recherche et directement demander une génération de plan pour résoudre \textit{LocaliseInRoom(Kitchen Cinderella)}. Cette zone n'ayant pas été indiquée par l'homme le robot demande d'abord l'autorisation avant de se rendre à la cuisine. Ceci permet d'éviter que le robot soit perçu comme intrusif.
+Tout comme l'étape précédente, le robot ne connaissant pas l'emplacement de cet objet, il demande à l'homme s'il sait où trouver ce livre.
+L'homme répond qu'il ignore sa position.
+Hors, le robot sait que l'homme connaît les éléments qui se trouvent dans le salon (\textit{Human scanned  Livingroom}), donc si l'homme ignore la position de cet objet c'est qu'il n'est probablement pas dans le salon. De plus, le robot a déjà exploré la chambre (\textit{Pr2 scanned Bedroom}). Le superviseur va donc éliminer ces deux zones de sa recherche et directement demander une génération de plan pour résoudre \textit{LocaliseInRoom(Kitchen Cinderella)}. Cette zone n'ayant pas été indiquée par l'homme le robot demande d'abord l'autorisation avant de se rendre à la cuisine. Ceci permet d'éviter que le robot soit perçu comme intrusif.
 Le robot se rend donc à la table de la cuisine, scanne l'emplacement et trouve le livre \textit{Peter\_Pan} mais ne trouve pas \textit{Cinderella}.
-Le superviseur n'ayant pas trouvé l'objet et n'ayant plus d'emplacement à scanné, une relâche de contrainte sur l'emplacement est mise en place.
+Le superviseur n'ayant pas trouvé l'objet et n'ayant plus d'emplacement à scanner, une relâche de contrainte sur l'emplacement est mise en place.
 Le superviseur exécute alors le plan \textit{LocaliseInRoom(Livingroom Cinderella)}. On considère ici que, si le robot a cherché partout sans trouver l'objet, il doit alors vérifier qu'il ne se trouve pas aux emplacements observés par l'homme, bien que celui-ci ait affirmé ne pas connaître l'emplacement de l'objet.
 Le robot scanne alors les deux emplacements du salon sans succès.
 Le robot ayant exploré toutes les zones de l'appartement, il décide alors d'effectuer une relâche de contrainte sur l'objet et propose un objet similaire s'il a connaissance d'un objet similaire présent dans l'environnement.
-Ici \textit{Peter\_Pan} est considéré comme un objet similaire car il est de la même type (livre) et du même genre (compte pour enfant).
+Ici \textit{Peter\_Pan} est considéré comme un objet similaire car il est du même type (livre) et du même genre (compte pour enfant).
 L'humain accepte la proposition, le robot déplace donc \textit{Peter\_Pan} de la cuisine à la table basse du salon.
 
 Cette deuxième étape illustre la capacité du système à raisonner sur les emplacements possibles en utilisant la prise de perspective perceptuelle pour savoir ce que l'homme a pu observer ou non et pouvoir réduire le champ des possibles concernant l'emplacement de l'objet désiré. Cette expérimentation permet également de montrer comment le robot est capable de relâcher certaines contraintes en cas d'échec de localisation de l'objet désiré, permettant ainsi de proposer une alternative cohérente (proposition d'objet similaire) en cas d'incapacité d'accomplissement du but initial.
@@ -1319,7 +1319,7 @@ Le robot rapporte Bilbo à l'homme et lui tend l'objet.
 Le robot est donc parvenu à accomplir la tâche en corrigeant l'énoncé grâce à l'identification de la croyance erronée. De plus, à la fin de l'exécution, comme le robot donne l'objet à l'homme, la croyance erronée a disparu sans que le robot ait eu à en informer l'homme.
 Cela donne au robot un aspect efficace et discret en évitant d'informer l'homme lorsque ceci n'est pas nécessaire.
 
-Dans le cas où le robot n'aurait pas trouvé Bilbo sur la table de nuit, il aurait alors mis à jours sa croyance et aurait été voir à l'endroit où l'homme pense que Bilbo se trouve au cas où celui-ci aurait été déplacé sans que le robot en soit informé.
+Dans le cas où le robot n'aurait pas trouvé Bilbo sur la table de nuit, il aurait alors mis à jour sa croyance et aurait été voir à l'endroit où l'homme pense que Bilbo se trouve au cas où celui-ci aurait été déplacé sans que le robot en soit informé.
 
 % % génération du plan...
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1401,17 +1401,17 @@ Dans le cas où le robot n'aurait pas trouvé Bilbo sur la table de nuit, il aur
 \label{sec:chap3conclusion}
 Dans ce chapitre nous avons présenté le projet MaRDi qui vise à utiliser les informations contextuelles pour améliorer les performances du dialogue en tenant compte de l'aspect situé de celui-ci durant une interaction homme-robot.
 
-Pour se faire, les données contextuelles générées par notre infrastructure d'évaluation de la situation sont utilisées à différent niveaux de l'interaction et par différents modules impliqués dans l'architecture.
+Pour réaliser cela, les données contextuelles générées par notre infrastructure d'évaluation de la situation sont utilisées à différents niveaux de l'interaction et par différents modules impliqués dans l'architecture.
 
-Au niveau des données contextuelles de bas niveau (position, configuration), elles sont utilisées au niveau des données d'entrées. L'analyse de la gestuelle de l'homme permet une entrée multimodale du système afin de saisir la référence faite à un objet pointé. Ces données contextuelles de bas niveau sont également utilisées au niveau de la fission pour commander au \textit{TTS} de générer une voix adaptée à la situation (voix portée, voix normale) et pour décider d'ajouter ou non de la gestuelle à la parole (si le robot est proche et visible par l'homme).
+Les données contextuelles de bas niveau (position, configuration), sont utilisées comme données d'entrée. L'analyse de la gestuelle de l'homme permet une entrée multimodale du système afin de saisir la référence faite à un objet pointé. Ces données contextuelles de bas niveau sont également utilisées au niveau de la fission pour commander au \textit{TTS} de générer une voix adaptée à la situation (voix portée, voix normale) et pour décider d'ajouter ou non de la gestuelle à la parole (si le robot est proche et visible par l'homme).
 
 La représentation symbolique de l'environnement issue de raisonnements géométriques rend également possible l'identification des référents utilisés par l'homme dans sa communication verbale (par exemple, "Le livre qui est sur la table" peut être identifié en recherchant tous les livres étant le sujet du fait \textit{? isOn Table}).
 
-Nous avons également montré comment, en partant du principe que l'homme fait des demandes logiques, il est possible d'utiliser les informations disponibles en terme de prise de perspective perceptuelle pour réduire la liste des candidats possible pour identifier un objet désigné par l'homme.
+Nous avons également montré comment, en partant du principe que l'homme fait des demandes logiques, il est possible d'utiliser les informations disponibles en terme de prise de perspective perceptuelle pour réduire la liste des candidats pour identifier un objet désigné par l'homme.
 Ainsi, grâce à des règles simples (l'homme ne cherche pas un objet qui lui est visible et ne demande pas de ramener un objet qui lui est atteignable) le mécanisme de fusion est rendu plus efficace.
 
 De même, nous avons montré comment la prise de perspective conceptuelle et notamment l'identification de croyance divergente permet d'améliorer le gestionnaire de dialogue en ajoutant un état et une action possible afin de permettre au système de décider de la politique à adopter en prenant en compte cette croyance divergente lors de l'interprétation de la commande utilisateur.
-Cette amélioration a pu être testée en utilisant un simulateur robotique afin de faire interagir des utilisateurs avec le système et à confirmé une amélioration tant au niveau de l'efficacité que du taux de réussite concernant la résolution de tâches impliquant une croyance divergente de l'homme.
+Cette amélioration a pu être testée en utilisant un simulateur robotique afin de faire interagir des utilisateurs avec le système et a confirmé une amélioration tant au niveau de l'efficacité que du taux de réussite concernant la résolution de tâches impliquant une croyance divergente de l'homme.
 
 Enfin, nous avons implémenté un système de supervision basé sur des règles pour permettre au robot d'acquérir une information manquante (la position d'un objet) en utilisant un raisonnement sur sa propre connaissance et sur celle de l'humain.
 Nous avons également montré comment il est possible au robot de s'adapter en proposant une alternative cohérente dans le cas où la requête utilisateur ne pouvait être satisfaite.
@@ -1419,7 +1419,7 @@ Nous avons également montré comment il est possible au robot de s'adapter en p
 
 Nous avons donc montré à quel point l'interprétation des données contextuelles, du plus bas niveau (position, distance...) au plus haut niveau (prise de perspective) sont essentielles à tous les niveaux de l'architecture pour permettre un dialogue situé efficace et de qualité.
 
-Cependant, cette architecture et cette implémentation peut être améliorée en utilisant par exemple les aspects temporels présents dans la base de données (présentée en section \ref{sec:dbt}) et également la mémoire des agents (présentée en section \ref{sec:dbPt}). Cela permettrait par exemple de pouvoir répondre à des requête utilisateur du type "Qui a pris le livre qui était sur la table" en interprétant dans la mémoire d'état de croyance de l'interlocuteur afin d'identifier l'objet dont il parle et d'utiliser la table des événements  \textit{EVENT\_TBL} afin de trouver qui a pris l'objet.
+Cependant, cette architecture et cette implémentation peuvent être améliorées en utilisant par exemple les aspects temporels présents dans la base de données (présentée en section \ref{sec:dbt}) et également la mémoire des agents (présentée en section \ref{sec:dbPt}). Cela permettrait par exemple de pouvoir répondre à des requête utilisateur du type "Qui a pris le livre qui était sur la table" en interprétant dans la mémoire d'état de croyance de l'interlocuteur afin d'identifier l'objet dont il parle et d'utiliser la table des événements  \textit{EVENT\_TBL} afin de trouver qui a pris l'objet.
 
 L'interaction considérée prévoit que l'homme est globalement passif durant l'exécution de plan. Un des moyens d'aller plus loin dans cette étude serait de faire collaborer l'homme avec le robot comme pour l'étude qui sera présentée au chapitre \ref{chapter5}.
 
