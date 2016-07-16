@@ -6,7 +6,7 @@
 
 
 \begin{document}
-\setcounter{chapter}{4} %% Numéro du chapitre précédent ;)
+\setcounter{chapter}{5} %% Numéro du chapitre précédent ;)
 \dominitoc
 \faketableofcontents
 \fi
@@ -97,7 +97,7 @@ Les recherches sur les systèmes de tuteurs intelligents (ITS pour Intelligent T
 % STEVE
 %\cite{rickel1999animated}
 %%%In this paper we maintain and update user's knowledge level for each tasks and use this capacity along with hierarchical plans to enhance the system with explanation level adaptation based on the knowledge level of the collaborator.  
-Dans nos travaux, nous maintenons et actualisons le niveau de connaissance de l'utilisateur pour chaque tâche et couplons cette information avec l'utilisation de plans hiérarchiques pour gérer l'interaction. L'idée n'est pas d'enseigner un plan à l'utilisateur mais de mettre a profit son modèle de connaissance pour adapter la génération de plans à la politique de l'interaction (est-ce que l'efficacité est recherchée, ou le fait d'enseigner de nouvelles tâches?), et au cours de l'exécution, adapter le niveau d'explication de tâches et la surveillance de celles-ci au collaborateur.
+Dans nos travaux, nous maintenons et actualisons le niveau de connaissance de l'utilisateur pour chaque tâche et couplons cette information avec l'utilisation de plans hiérarchiques pour gérer l'interaction. L'idée n'est pas d'enseigner un plan à l'utilisateur mais de mettre à profit son modèle de connaissance pour adapter la génération de plans à la politique de l'interaction (est-ce que l'efficacité est recherchée, ou le fait d'enseigner de nouvelles tâches?), et au cours de l'exécution, adapter le niveau d'explication de tâches et la surveillance de celles-ci au collaborateur.
 % http://www.pitt.edu/~peterb/papers/studentmodels.pdf
 %
 
@@ -136,7 +136,7 @@ Dans \cite{clair2015robot} le dialogue est utilisé durant l'exécution du plan 
 %Vérifier problem ou process
 
 % Keep this?
-Des études en psychologie montrent que les humains forment une représentation jointe de la tâche, ce qui inclus les actions que chaque partenaire devrait accomplir \cite{sebanz2006joint}. La surveillance de l'exécution doit alors être liée à cette représentation partagée des tâches afin de mieux suivre le niveau d'engagement de chaque membre dans l'action jointe, et si il y a des erreurs qui ont besoin d'être prises en charge.
+Des études en psychologie montrent que les humains forment une représentation jointe de la tâche, ce qui inclue les actions que chaque partenaire devrait accomplir \cite{sebanz2006joint}. La surveillance de l'exécution doit alors être liée à cette représentation partagée des tâches afin de mieux suivre le niveau d'engagement de chaque membre dans l'action jointe, et si il y a des erreurs qui ont besoin d'être prises en charge.
 
 
 %TODO Michelangelo:
@@ -205,7 +205,7 @@ En ce qui concerne le collaborateur, nous définissons quatre niveaux de connais
 \begin{itemize}
 \item \textit{NEW}: cette valeur sera utilisée pour les tâches qui n'ont jamais été effectuées par l'utilisateur. Si l'utilisateur observe l'exécution de la tâche avec des explications ou s'il l'effectue lui-même, la valeur sera modifiée à \textit{BEGINNER}.
 Toutefois, si l'utilisateur observe l'exécution de la tâche, sans aucune explication, nous gardons le niveau \textit{NEW}. Le choix a été fait de considérer que dans cette situation l'utilisateur n'a pas reçu suffisamment d'informations pour relier l'observation à la tâche.
-\item \textit{BEGINNER}: cette valeur sera utilisée pour les utilisateurs qui ont déjà accomplit la tâche, mais qui ont potentiellement encore besoin d'explications afin de l'exécuter à nouveau. Si l'utilisateur exécute à nouveau la tâche avec succès, sans demander d'explications, la valeur de connaissance est mise à \textit{INTERMEDIATE} et dans tous les autres cas la valeur sera dégradée à \textit{NEW}.
+\item \textit{BEGINNER}: cette valeur sera utilisée pour les utilisateurs qui ont déjà accompli la tâche, mais qui ont potentiellement encore besoin d'explications afin de l'exécuter à nouveau. Si l'utilisateur exécute à nouveau la tâche avec succès, sans demander d'explications, la valeur de connaissance est mise à \textit{INTERMEDIATE} et dans tous les autres cas la valeur sera dégradée à \textit{NEW}.
 \item \textit{INTERMEDIATE}: cette valeur sera utilisée pour les utilisateurs qui sont en mesure d'accomplir la tâche sans directives. Si l'utilisateur exécute avec succès la tâche à nouveau, la valeur est mise à \textit{EXPERT}. En cas d'échec, elle est rétrogradée à \textit{BEGINNER}.
 \item \textit{EXPERT}: ce niveau de connaissance sera utilisé pour les utilisateurs qui sont en mesure d'accomplir la tâche sans directives et sont assez expérimentés pour l'expliquer à un tiers. Si l'utilisateur ne parvient pas à effectuer la tâche, sa valeur de connaissance associée est rétrogradée à \textit{INTERMEDIATE}.
 \end{itemize}
@@ -244,9 +244,9 @@ Ces niveaux de connaissance de tâche permettent l'adaptation de la génération
 
 %There are lots of different strategies for planning in diverse tasks. 
 %STRIPS \cite{strips71} is used to build plans that are sequences of actions.
-Une fois que le système est capable de suivre et modéliser les connaissances de l'homme sur divers tâches, il doit également pouvoir générer un plan collaboratif.
+Une fois que le système est capable de suivre et modéliser les connaissances de l'homme sur diverses tâches, il doit également pouvoir générer un plan collaboratif.
 
-Nous utilisons une approche hiérarchique de planification car cette méthode offre une meilleure compréhension du contexte dans lequel un agent est invité à effectuer une action. Ce contexte est bénéfique pour l'explication du plan. En effet, il met en œuvre un processus de raffinement contextuelle itératif. Par conséquent, le système peut guider les utilisateurs en leur disant pourquoi ils devraient effectuer une action et la façon dont elle est liée à des parties précédentes et suivantes du plan.
+Nous utilisons une approche hiérarchique de planification car cette méthode offre une meilleure compréhension du contexte dans lequel un agent est invité à effectuer une action. Ce contexte est bénéfique pour l'explication du plan. En effet, il met en œuvre un processus de raffinement contextuel itératif. Par conséquent, le système peut guider les utilisateurs en leur disant pourquoi ils devraient effectuer une action et la façon dont elle est liée à des parties précédentes et suivantes du plan.
 Nous utilisons un HTN, qui assure la représentation de domaine et une planification efficace.
 L'HTN est beaucoup plus efficace que la planification classique car l'expert du domaine peut guider le processus de recherche vers l'objectif en fournissant une représentation correcte.
 Une très célèbre application de HTN est SHOP \cite{Nau99}.
@@ -293,7 +293,7 @@ En utilisant cette règle, le robot est capable d'adapter sa génération du pla
 Pour calculer correctement le coût d'un plan, le planificateur considère également la connaissance d'une tâche comme améliorée après qu'elle ait été ajoutée au plan. Cela permet, lors de l'utilisation de la politique d'efficacité, de préférer les plans qui réutilisent de nombreuses fois la même tâche en l'affectant à un même utilisateur en réduisant le coût pour les prochaines occurrences. Par opposition, si différentes tâches sont utilisées ou si l'agent change en cours de route, le coût sera plus élevé. Ceci permet de prendre en compte la connaissance acquise au cours de l'exécution lors du calcul de coût.
 
 Le planificateur est intégré dans un système de dialogue qui permet de négocier des plans (voir la section \ref{sec:planNego}). Plus précisément, il permet de poser des questions sur les préférences des utilisateurs et leurs capacités à accomplir une tâche. Si l'utilisateur indique au système qu'il ne peut pas effectuer une tâche donnée, elle ne sera pas ajoutée au plan ou tout du moins ne lui sera pas attribuée (invalidation de la condition préalable de la tâche correspondante).
-En ce qui concerne les préférences des utilisateurs, l'étape de la négociation mettra à jour une base de données avec les préférences exprimées par l'utilisateur. Si l'utilisateur spécifie qu'il veut (ou non) effectuer certaines tâches, ces tâches, si elles sont ajoutées au plan et lui sont assignées, auront une récompense importante (respectivement pénalité) au niveau des coûts. Par conséquent, les plans qui contiennent de telles tâches seront considérés comme indésirables. Cependant, s'ils sont les seuls solutions possibles (en raison de l'incapacité, etc.), ils seront conservés et le planificateur donnera comme solution l'un de ces plans avec le moins de tâches indésirables et le maximum de tâches voulues attribuées à l'homme.
+En ce qui concerne les préférences des utilisateurs, l'étape de la négociation mettra à jour une base de données avec les préférences exprimées par l'utilisateur. Si l'utilisateur spécifie qu'il veut (ou non) effectuer certaines tâches, ces tâches, si elles sont ajoutées au plan et lui sont assignées, auront une récompense importante (respectivement pénalité) au niveau des coûts. Par conséquent, les plans qui contiennent de telles tâches seront considérés comme indésirables. Cependant, s'ils sont les seules solutions possibles (en raison de l'incapacité, etc.), ils seront conservés et le planificateur donnera comme solution l'un de ces plans avec le moins de tâches indésirables et le maximum de tâches voulues attribuées à l'homme.
 
 % To illustrate our planner and the new social rule let us consider the toy example where a human and a robot have to cook an apple pie. A part of the solution plan is shown in Figure \ref{fig:treePlan}. In this context we can consider that the human knows how to carry out all the actions (pick, place, cut, and so on) but they may not know the exact order of steps (higher level task). If we favor teaching, the plan should contain a way to achieve the recipe with a minimal knowledge level on each task and, as much as possible, human will be in charge of those steps. On the other hand, if we favor efficiency the plan should contain the smallest amount of unknown tasks to be performed by the user.
 % Using this rule, the robot is able to adapt its plan generation to the knowledge of the user concerning tasks contained in the shared plan.
@@ -317,7 +317,7 @@ En considérant cela, nous décidons d'utiliser la parole pour présenter le pla
 \subsection{Prétraitement du plan}
 L'arbre HTN généré représente une solution pour accomplir le but. Cependant, il se peut qu'en l'état il ne convienne pas à la présentation ou à l'explication du plan au collaborateur, car il peut contenir des étapes de raffinement qui rendraient l'explication confuse. Pour adapter le plan à l'explication nous utilisons deux règles.
 %
-(1) Nous retirons les tâches récursives. Si un nœud $n$ de l'arbre HTN contient la même méthode (en utilisant la fonction $compare$) que son parent $parent(n)$, il sera remplacer dans l'arbre par ses enfants $children(n)$. (2) Nous remplaçons également les nœuds avec un enfant unique par cet enfant.
+(1) Nous retirons les tâches récursives. Si un nœud $n$ de l'arbre HTN contient la même méthode (en utilisant la fonction $compare$) que son parent $parent(n)$, il sera remplacé dans l'arbre par ses enfants $children(n)$. (2) Nous remplaçons également les nœuds avec un enfant unique par cet enfant.
 \begin{enumerate}
 \item $\textbf{if}$ $(compare(n, parent(n)))$ \textbf{then} $n \leftarrow children(n)$
 \item $\textbf{if}$ $(children(n).size() = 1)$ \textbf{then} $n \leftarrow children(n)$
@@ -338,7 +338,7 @@ Ces traitements sont illustrés par la figure \ref{fig:pretraitement}.
 %Miki: Could simplyfi in which agents are in charge of the task, removing the parhentesis.
 
 Avant de pouvoir commencer l'exécution du plan, le robot présente le plan à l'homme et les allocations des tâches de haut niveau pour donner un aperçu global du plan. Une génération de langage naturel (NL pour Natural Language) est utilisée comme présenté dans le tableau \ref{table:pie-present}. 
-Pour assurer le bon fonctionnement du système avec des plans de différentes tailles (scalability), lors de la présentation du plan, le robot verbalise seulement les  $N$ premières tâches de haut niveau. Par simplicité nous avons choisi $N$=$3$. Ce chiffre a été choisi de façon empirique, en effectuant quelques tests lors du développement. Nous pensons qu'établir ce nombre de façon optimal nécessiterait de mener des investigations plus poussées, dépendant du domaine ou de l'utilisateur et de son aisance à accomplir les tâches. Le robot présente les $N$ premières étapes du plan, puis les exécute avec son partenaire. Une fois que cette exécution est achevée, le processus de présenter/négocier/exécuter se répète jusqu'à ce que le plan soit achevé ou abandonné.
+Pour assurer le bon fonctionnement du système avec des plans de différentes tailles (scalability), lors de la présentation du plan, le robot verbalise seulement les  $N$ premières tâches de haut niveau. Par simplicité nous avons choisi $N$=$3$. Ce chiffre a été choisi de façon empirique, en effectuant quelques tests lors du développement. Nous pensons qu'établir ce nombre de façon optimale nécessiterait de mener des investigations plus poussées, dépendant du domaine ou de l'utilisateur et de son aisance à accomplir les tâches. Le robot présente les $N$ premières étapes du plan, puis les exécute avec son partenaire. Une fois que cette exécution est achevée, le processus de présenter/négocier/exécuter se répète jusqu'à ce que le plan soit achevé ou abandonné.
 % Put in a double colomn table
 %\begin{tabular}{ll}
 %   agents(root) $+$ have\_to $+$ root  & "We have to cook an apple pie." \\
@@ -485,7 +485,7 @@ Nous utilisons une procédure d'exploration du plan en profondeur, ou "depth fir
 Lorsque le processus atteint un nœud, plusieurs situations peuvent se présenter.
 % Monitor function is responsible for: knowledge update(success = upgrade, fail = downgrade) and replan in case of failure. 
 
-\subsubsection{Le robot est le seul impliqué (lignes ~\ref{alg:onlyRobotStart}-~\ref{alg:onlyRobotEnd})} Si le robot est le seul agent en charge du nœud courant, si le collaborateur a un niveau de connaissance égal à \textit{NEW} pour la tâche actuelle et si la politique choisie pour l'interaction est l'apprentissage, le robot va exécuter les sous tâches en mode "démonstration", ce qui signifie qu'il va verbaliser chaque tâche-enfant avant de la réaliser. Une fois la tâche accomplie, le robot mets à jour la connaissance de l'homme sur le nœud courant en lui donnant la valeur \textit{BEGINNER}. La même procédure sera appliquée aux enfants, afin que le robot verbalise chaque tâche qui doit être apprise par le collaborateur (et uniquement celles-ci).
+\subsubsection{Le robot est le seul impliqué (lignes ~\ref{alg:onlyRobotStart}-~\ref{alg:onlyRobotEnd})} Si le robot est le seul agent en charge du nœud courant, si le collaborateur a un niveau de connaissance égal à \textit{NEW} pour la tâche actuelle et si la politique choisie pour l'interaction est l'apprentissage, le robot va exécuter les sous-tâches en mode "démonstration", ce qui signifie qu'il va verbaliser chaque tâche-enfant avant de la réaliser. Une fois la tâche accomplie, le robot mets à jour la connaissance de l'homme sur le nœud courant en lui donnant la valeur \textit{BEGINNER}. La même procédure sera appliquée aux enfants, afin que le robot verbalise chaque tâche qui doit être apprise par le collaborateur (et uniquement celles-ci).
 Si le robot est en charge du nœud, mais que le collaborateur humain a déjà les connaissances suffisantes sur le nœud, ou que la politique d'interaction est l'efficacité, le robot ne verbalisera que la tâche de plus haut niveau qu'il a à accomplir.
 
 Dans le cas où l'humain est impliqué dans le nœud courant, le comportement du robot va dépendre des connaissances de l'humain sur la tâche, car il se peut que le robot doive expliquer celle-ci ou adapter la surveillance des tâches à accomplir par l'homme.
@@ -533,7 +533,7 @@ Ce comportement de replanification permet de donner de la robustesse au système
 % Maybe discuss here about the scenario and all and then in user study say that we use the same scenario.
 \section{Implémentation}
 \subsection{Architecture}
-Nous avons implémenter les mécanismes proposés dans notre architecture\footnote{Open-Source modules: http://homepages.laas.fr/gmilliez/hri2016/}. La figure \ref{fig:architecture} illustre l'architecture et les interactions entre les modules principaux.
+Nous avons implémenté les mécanismes proposés dans notre architecture\footnote{Open-Source modules: http://homepages.laas.fr/gmilliez/hri2016/}. La figure \ref{fig:architecture} illustre l'architecture et les interactions entre les modules principaux.
 Le module de gestion de l'exécution du HTN (\textit{htn execution manager}) contient l'algorithme présenté en section \ref{sec:algo}.
 Il est contrôlé par le superviseur et envoie des requêtes au superviseur pour surveiller ou exécuter une tâche.
 
@@ -575,8 +575,8 @@ Pour tester notre système, nous avons choisi un scénario où un humain revient
  \end{figure}
 
 Comme dans ce scénario l'utilisateur est pressé, nous allons utiliser la politique d'efficacité.
-Nous avons créer un domaine représentant la connaissance nécessaire sur les tâches à utiliser par le planificateur de tâches (\textit{task planner}) et pour le gestionnaire d'exécution d'htn (\textit{htn execution manager}).
-Pour cuisiner la tourte aux pommes, cinq tâches principales sont nécessaires. Nous imaginons dans ce scénario, qu'à cause de limitation au niveau de l'accessibilité, le robot ne peut faire la pâte ou préparer les fruits. De ce fait, la répartition de tâche sera la suivante.
+Nous avons créé un domaine représentant la connaissance nécessaire sur les tâches à utiliser par le planificateur de tâches (\textit{task planner}) et pour le gestionnaire d'exécution d'htn (\textit{htn execution manager}).
+Pour cuisiner la tourte aux pommes, cinq tâches principales sont nécessaires. Nous imaginons dans ce scénario, qu'à cause de limitations au niveau de l'accessibilité, le robot ne peut faire la pâte ou préparer les fruits. De ce fait, la répartition de tâches sera la suivante.
 
 
 
@@ -594,7 +594,7 @@ Après la première étape, l'humain aura acquis la connaissance pour faire la p
 %MB give the task representation to explain class / instance
 %
 
-Après avoir cuisiner le premier dessert, à savoir la tourte aux pommes, le robot génère un plan pour cuisiner la tarte à la banane. Cette fois-ci, nous considérons que les deux agents peuvent accomplir toutes les tâches (tout est atteignable pour les deux parties). La tarte à la banane requière les même tâches avec différents paramètres. La mixture est différente, ainsi que les fruits mais la méthode de préparation de ceux-ci est la même (couper et répartir dans le moule). De plus, la tarte à la banane n'aura pas de pâte sur le dessus et aura un temps de cuisson différent. Le plan généré est présenté dans la figure \ref{fig:bananaPlan}. Nous pouvons observer que la politique favorise l'efficacité en donnant les tâches connues à l'utilisateur (\textit{PrepareDough} et \textit{PrepareFruits}). Pendant l'exécution, comme l'utilisateur a un niveau de connaissance à \textit{INTERMEDIATE} sur comment préparer la pâte, le robot ne va pas l'expliquer. Concernant la tâche de préparation de fruits (\textit{prepareFruits}), le robot va proposer de fournir des explications à l'humain car celui-ci ne l'a accomplie qu'une fois avec des explications.
+Après avoir cuisiné le premier dessert, à savoir la tourte aux pommes, le robot génère un plan pour cuisiner la tarte à la banane. Cette fois-ci, nous considérons que les deux agents peuvent accomplir toutes les tâches (tout est atteignable pour les deux parties). La tarte à la banane requière les même tâches avec différents paramètres. La mixture est différente, ainsi que les fruits mais la méthode de préparation de ceux-ci est la même (couper et répartir dans le moule). De plus, la tarte à la banane n'aura pas de pâte sur le dessus et aura un temps de cuisson différent. Le plan généré est présenté dans la figure \ref{fig:bananaPlan}. Nous pouvons observer que la politique favorise l'efficacité en donnant les tâches connues à l'utilisateur (\textit{PrepareDough} et \textit{PrepareFruits}). Pendant l'exécution, comme l'utilisateur a un niveau de connaissance à \textit{INTERMEDIATE} sur comment préparer la pâte, le robot ne va pas l'expliquer. Concernant la tâche de préparation de fruits (\textit{prepareFruits}), le robot va proposer de fournir des explications à l'humain car celui-ci ne l'a accomplie qu'une fois avec des explications.
 
 
 %TODO: try to add streams?
@@ -638,14 +638,14 @@ Après avoir cuisiner le premier dessert, à savoir la tourte aux pommes, le rob
 \label{study}
 
 \subsection{Étude utilisateur}
-Nous avons conduit une étude comparative afin d'avoir une première évaluation de la façon dont l'adaptabilité du système est perçue par les utilisateurs. Deux groupes d'utilisateurs ont été constitués, auxquels il a été demandé de suivre le scénario des deux desserts. Le premier groupe a interagi avec un robot simulé équipé d'un système basique (BS). BS a le même comportement que notre système, à ceci prêt qu'il n'a pas le mécanisme permettant de connaître le niveau de connaissance de l'homme. Le deuxième groupe interagi avec un second système, appelé système de connaissance (KS pour Knowledge System), exhibant un comportement similaire à celui fournit par notre système.
+Nous avons conduit une étude comparative afin d'avoir une première évaluation de la façon dont l'adaptabilité du système est perçue par les utilisateurs. Deux groupes d'utilisateurs ont été constitués, auxquels il a été demandé de suivre le scénario des deux desserts. Le premier groupe a interagir avec un robot simulé équipé d'un système basique (BS). BS a le même comportement que notre système, à ceci prêt qu'il n'a pas le mécanisme permettant de connaître le niveau de connaissance de l'homme. Le deuxième groupe interagi avec un second système, appelé système de connaissance (KS pour Knowledge System), exhibant un comportement similaire à celui fourni par notre système.
 Tous les participants ont par la suite évalué l'interaction sur plusieurs critères.
 %
 La répartition de tâche présentée dans la section \ref{sec:experiment} 
 est utilisée dans les deux systèmes pour accomplir l'exemple de la tourte aux pommes. Une fois qu'ils ont cuisiné le premier dessert, le robot génère un plan pour cuisiner la tarte aux pommes. Dans KS, le robot a le même comportement que notre système et favorise une répartition de tâches pour la tarte à la banane où l'humain doit accomplir les tâches qu'il a déjà accomplies lors de la préparation de la tourte aux pommes (préparant la pâte et les fruits).
 Dans BS, nous imaginons que le robot pourrait demander à l'humain de faire la mixture plutôt que la pâte.
 
-Deux groupes composés chacun de 19 participants, de 18 à 60 ans, ont été constitués. Chaque groupe a interagit avec un des systèmes. Cela a été réalisé grâce à une étude utilisateur en ligne\footnote{Étude utilisateur KS http://goo.gl/forms/qvbtu4vcFW, et BS http://goo.gl/forms/ZSvGcCi5le}, où nous avons présenté des images de l'état de la tâche et des enregistrements des paroles du robot en Français pour chaque étape de l'interaction (comme présenté dans la figure \ref{fig:user_study}).
+Deux groupes composés chacun de 19 participants, de 18 à 60 ans, ont été constitués. Chaque groupe a interagi avec un des systèmes. Cela a été réalisé grâce à une étude utilisateur en ligne\footnote{Étude utilisateur KS http://goo.gl/forms/qvbtu4vcFW, et BS http://goo.gl/forms/ZSvGcCi5le}, où nous avons présenté des images de l'état de la tâche et des enregistrements des paroles du robot en Français pour chaque étape de l'interaction (comme présenté dans la figure \ref{fig:user_study}).
 Pour certaines étapes, l'utilisateur pouvait choisir l'action à réaliser, rendant possible d'effectuer une action fausse conduisant à une replanification du robot. Par souci de simplicité, la replanification était limitée à une annulation de l'action erronée avant de reprendre le plan précédent. De plus, pour se concentrer sur l'adaptabilité de notre solution grâce à la prise en compte des connaissances de l'homme dans les différentes étapes du plan partagé, nous n'avons pas autorisé la négociation avec l'utilisateur et le robot a directement imposé son plan.
 À la fin de l'interaction simulée, nous avons posé les mêmes questions aux deux groupes, concernant l'adaptabilité du système et le partenaire robotique.
 Les utilisateurs ont donné des notes en suivant une échelle de Likert de un (pas d'accord) à 5 (d'accord) afin d'exprimer leur ressenti sur plusieurs affirmations (comme indiqué dans la figure \ref{fig:user_study}).
@@ -683,7 +683,7 @@ Nous pensons que d'autres paramètres ont été pris en compte par les utilisate
   \includegraphics[width=0.81\textwidth]{img/respvalue3.png}
  \end{tabular}
  %  \vspace{-8pt}
- \caption{Notes moyennes des utilisateurs sur plusieurs critères concernant la perception de l'adaptation du système par rapport à leur connaissance  (en haut) et concernant le partenaire robotique (en bas). Les résultats en bleu représente l'évaluation de notre système (KS) et en rouge un système basique (BS.}
+ \caption{Notes moyennes des utilisateurs sur plusieurs critères concernant la perception de l'adaptation du système par rapport à leur connaissance  (en haut) et concernant le partenaire robotique (en bas). Les résultats en bleu représentent l'évaluation de notre système (KS) et en rouge un système basique (BS.}
  \label{fig:results}
  % \vspace{-10pt}
  \end{figure}
@@ -717,7 +717,7 @@ Nous avons mener une étude comparative en ligne. Les résultats sont encouragea
 %
 À l'heure actuelle, cette approche nécessite que le robot connaisse toutes les méthodes à réaliser (incluant la décomposition de chaque tâche). Ajouter la possibilité d'enseigner une décomposition de tâches au robot comme dans  \cite{Mohseni2015} permettrait de surmonter cette restriction.
 Pour la partie de négociation, nous avons fourni un premier mécanisme, en donnant un coût différent à une tâche lorsque l'utilisateur exprime son souhait de la faire ou non. Cependant, cela pourrait être amélioré en utilisant des travaux précédents tel que \cite{chu2000conflict} qui expose une infrastructure de Proposition/Évaluation/Modification pour prendre en charge la négociation.
-Il serait par exemple intéressant de prendre en compte, une fois de plus, la connaissance de l'utilisateur pour accepter ou refuser une proposition de modification. Le robot pourrait ainsi informé l'utilisateur de la différence de coût pour effectuer une tâche entre l'homme et le robot (une tâche pourrait être plus ou moins simple ou dangereuse selon qu'elle est effectuée par un agent humain ou robotique).
+Il serait par exemple intéressant de prendre en compte, une fois de plus, la connaissance de l'utilisateur pour accepter ou refuser une proposition de modification. Le robot pourrait ainsi informer l'utilisateur de la différence de coût pour effectuer une tâche entre l'homme et le robot (une tâche pourrait être plus ou moins simple ou dangereuse selon qu'elle est effectuée par un agent humain ou robotique).
 En ce qui concerne la surveillance de tâches humaines, l'implémentation actuelle utilise une stratégie simple basée sur l'estimation du résultat d'une tâche après un certain temps. Nous souhaiterions améliorer cela en concevant des mécanismes plus élaborés pour estimer l'engagement de l'homme dans une tâche et mieux reconnaître lorsqu'une tâche surveillée a échoué. L'humain pourrait aussi informer le robot de la raison pour laquelle il n'effectue pas la tâche attendue.
 Enfin, pour améliorer l'interactivité, il serait pertinent d'autoriser l'humain à demander directement des explications sur les actions du robot comme dans  \cite{Lomas2012}.
 %Explaining robot actions \cite{Lomas2012}
