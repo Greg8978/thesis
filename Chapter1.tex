@@ -55,10 +55,10 @@ décision et d'entreprendre d'agir sur l'environnement.
 \end{itemize}
 Cette composition est résumée à la figure \ref{fig:ensley}.
 
-Le processus permettant d'acquérir et de maintenir la connaissance de la situation est appelé évaluation de la situation (situation assessment). Endsley explique dans \cite{endsley1995} que "la connaissance de la situation incorpore la compréhension d'un opérateur sur la situation globale, formant ainsi la base pour la prise de décision". Les processus d'évaluation de la situation sont donc fortement liés aux processus de prise de décision (qui constituent la supervision).
+Dans le cas de systèmes en évolution et d'environnements dynamiques, le processus permettant d'acquérir et de maintenir la connaissance de la situation est appelé évaluation de la situation (situation assessment). Endsley explique dans \cite{endsley1995} que "la connaissance de la situation incorpore la compréhension d'un opérateur sur la situation globale, formant ainsi la base pour la prise de décision". Les processus d'évaluation de la situation sont donc fortement liés aux processus de prise de décision (qui constituent la supervision).
 L'une des principales préoccupations pour l'Interaction Homme-Machine est de concevoir des interfaces utilisateurs qui permettent à un opérateur d'acquérir la connaissance de la situation de façon optimale afin qu'il puisse décider quelle décision prendre.
 
-De la même manière, en robotique, le robot a besoin de décider quelle action entreprendre et quand agir sur son environnement. Pour prendre ce genre de décisions, la supervision repose sur des processus de plus bas niveau pour fournir des informations à haut niveau d'abstraction sur l'environnement. Cela implique, pour l'évaluation de la situation, de raisonner sur ce qui entoure le robot à partir des données des capteurs afin de modéliser la configuration de l'environnement physique autour du robot et de produire un ensemble de propriétés concernant les divers éléments. Ceci permet de fournir une représentation symbolique de l'état du monde au superviseur afin de faciliter son raisonnement et sa prise de décision. Pour créer cette représentation symbolique, il est d'abord nécessaire au robot d'avoir une bonne estimation de l'état du monde et d'en avoir une représentation tridimensionnelle en regroupant efficacement les données issues des divers capteurs.
+De la même manière, en robotique, le robot a besoin de décider quelle action entreprendre et quand agir sur son environnement. Pour prendre ce genre de décisions, la supervision repose sur des processus de plus bas niveau pour obtenir des informations à haut niveau d'abstraction sur l'environnement. Cela implique, pour l'évaluation de la situation, de raisonner sur ce qui entoure le robot à partir des données des capteurs afin de modéliser la configuration de l'environnement physique autour du robot et de produire un ensemble de propriétés concernant les divers éléments. Ceci permet de fournir une représentation symbolique de l'état du monde au superviseur afin de faciliter son raisonnement et sa prise de décision. Pour créer cette représentation symbolique, il est d'abord nécessaire au robot d'avoir une bonne estimation de l'état du monde et d'en avoir une représentation tridimensionnelle en regroupant efficacement les données de perception issues des divers capteurs.
 
 % 3 different ways to perform SA: 
 %https://core.ac.uk/download/files/14/334486.pdf
@@ -96,27 +96,112 @@ $HIGH\_TEMPERATURE \land NO\_CLOUD \implies GOOD\_WEATHER$. \newline
 Dans cet exemple, les propriétés $HIGH\_TEMPERATURE$ et $NO\_CLOUD$ sont issues de capteurs. Si ces deux propriétés sont vrais, le fait $GOOD\_WEATHER$ sera produit et ajouté à la base de faits. Dans le cas d'un système basé sur des règles expertes, cette implication serait directement ajouté au système par l'expert du domaine (par exemple ici un expert en météorologie). 
 Les modules responsables de la production des faits basés sur ces règles sont appelés des raisonneurs.
 
-En identifiants les divers éléments et leur relations, les règles peuvent être utilisées pour déduire des informations de plus haut niveau correspondant à des faits décrivant des situations particulières. Ceci permet à la partie décisionnelle, c'est à dire l'opérateur pour une Interface Homme-Machine (IHM) ou le superviseur pour un système autonome tel qu'un robot, de basé sa décision sur des faits décrivant la situation de façon pertinente.
+En identifiant les divers éléments et leur relations, les règles peuvent être utilisées pour déduire des informations de plus haut niveau correspondant à des faits décrivant des situations particulières. Ceci permet à la partie décisionnelle, c'est à dire l'opérateur pour une Interface Homme-Machine (IHM) ou le superviseur pour un système autonome tel qu'un robot, de basé sa décision sur des faits décrivant la situation de façon pertinente.
 
-Ce type d'approche a été utilisé dans divers domaine, comme par exemple l'évaluation de la situation pour la surveillance côtière \cite{edlund2006rule}.
+Ce type d'approche a été utilisé dans divers domaines, comme par exemple l'évaluation de la situation pour la surveillance côtière \cite{edlund2006rule}, l'évaluation de procédure d'approche pour l'atterrissage d'avion \cite{baron1980procru,milgram1984multi}, le dépannage de voiture ou encore le diagnostique médical \cite{swartout1985rule,miller1982internist}.
+L'un des avantages principaux des systèmes basés sur des règles est qu'ils sont relativement simples et naturels dans leur implémentation.
+Cependant, l'un des inconvénients de tels systèmes est le manque de modélisation de l'incertitude.
+Même si certaines variantes de systèmes basés sur des règles incorporent des valeurs d'incertitudes dans les règles, cette approche implique certaines restrictions et une attention toute particulière lors du développement des règles comme présenté au chapitre 15 du livre \cite{russell2003artificial}.
 
-Defining an ontology for the different types of objects, their relations and the situations of
-interest and using a Rule-based Expert System to reason about these concepts is one
-approach for performing SA. By identifying the objects and the basic relations between them
-in the situation picture, the rules can be used to infer higher-order relations corresponding to
-situations of interest for the operator. Variations of this approach have been used by Saab
-Systems [5] and other research groups [4] for achieving SAW (read more about these
-approaches below).
-One of the main advantages of rule-based systems is that they are relatively straightforward
-to implement. There are many inference engines available for developing customized expert
-systems simply by defining the rules. The fact that domain knowledge is expressed as rules
-makes the knowledge transparent and easy to interpret.
-However, one major drawback of classical rule-based systems is the lack of uncertainty
-modelling. Even though variations of rule-based systems incorporating uncertainty values for
-rules and propositions have been developed and implemented, this approach implies serious
-restrictions and careful considerations when developing the rule base [16]. Therefore, this
-approach is generally not recommended. 
 
+
+
+\subsection{Évaluation de la situation basée sur des Réseaux Bayesiens}
+%https://www.nada.kth.se/utbildning/grukth/exjobb/rapportlistor/2007/rapporter07/laxhammar_rikard_07046.pdf
+%http://www.nap.edu/read/6173/chapter/9#186
+Using different variations of Bayesian Belief Networks (BBN) is a very common technique
+for probabilistic reasoning about events and relations in the context of situation awareness
+and situation assessment [7, 8, 9, 10 et al.].
+
+BBNs are based on Bayes rule which allows the computation of the posterior probability
+associated with a particular proposition, which could be an object or relation, given the prior
+probabilities and conditional probabilities associated to it.
+The BBN can be represented as a graph, where the nodes correspond to the propositions and
+the directed edges correspond to the causal relationships between the propositions. When
+setting up a BBN, priori probabilities and conditional probabilities have to be specified for
+each node in the network. Then, posterior probabilities for each node can be updated
+according to Bayes rule as new information is presented to the network. In particular, new
+information regarding the probability of objects and basic relations can be used by the BBN
+for fusion to assess the probability of higher-level relations or situations.
+Two important requirements are pointed out by Gonsalves and his colleagues when using
+BBNs for SA in dynamic real-time environments [8]:
+1. Rapid modelling of complex situations via BBNs
+2. Efficient BBN inference based on incoming evidence
+For rapid modelling, they suggest that each BBN is constructed at real-time from a library of
+smaller component-like BBNs to assess a specific situation. To address the issue of efficient
+inference, they propose a way in which a BBN can be broken up into sub-networks and
+distributed across multiple computers, allowing computations to be carried out in parallel. In
+addition to this, the distribution mechanism allows computation at various levels of
+abstraction and granularity suitable for hierarchical organizations.
+The powerful model for handling uncertainty and casual relationships combined with a
+relatively straightforward implementation make the Bayesian Belief Network a very
+attractive model. However, BBNs are essentially propositional: the set of variables is fixed
+and finite and each variable has a fixed domain of possible values [16]. Regular BBNs lack
+the concept of objects and relations and thus cannot take full advantage of the structure of
+the domain or reuse [11]. These facts limit the application of BBNs in complex domains. To
+handle these constrains, different extensions to BBNs called Relational Probabilistic Models
+(RPM) [11, 16] have been proposed. The first-order RPMs support much more complex
+models including generic objects and relations, being able to express facts about some or all
+objects.
+Another weakness of regular BBNs is that they lack a natural mechanism for temporal
+reasoning. Various forms of Dynamic Bayesian Networks have been proposed for handling
+this [16]. However, it is still possible to model temporal sequence constraints in a regular
+BBN by including multi-state nodes corresponding to a “memory” [7].
+Finally, because Bayesian methods are based on probability theory, adequate statistics are
+required for making good models. Without a sufficiently large amount of data (training
+examples) or other prior knowledge, approximating various probability distributions can be a
+difficult task. Furthermore, modelling the causal relationships may also prove a non trivial
+task in a complex domain.
+3.2.1 Hierarchical Event Recognition
+One approach for performing situation assessment is to identify events in the situation
+picture. According to Higgins [7], “an event can be defined as a change in the relationship
+between objects that occurs over a period of time”. In our case, this implies that one has to
+identify objects and their track motion and relationships to other objects in order to
+successfully recognize the events as object relationships that evolve over time.
+Generally speaking, complex events can be modelled as sequences of sub-events. These subevents
+on their part can be further decomposed in a recursive manner. At the bottom of this 
+recursive tree we find primitive events and primitive relationships between objects. These
+primitives constitute the base elements of the event hierarchy and need to be measured
+directly from the situation picture which may involve different context specific extraction
+algorithms. Typical primitives in the context of SA could be spatial relations between objects
+(in front of another object, to the right etc.), kinematical relations (approaching etc.), state of
+objects (inside-of a region etc) or simple events corresponding to changes in direction of
+motion.
+
+
+3.2.2 Implementing Hierarchical Event Recognition through Bayesian
+Networks
+
+Higgins [7] proposes an approach to event recognition using Bayesian Networks where the
+networks consist of input nodes and output nodes. The input nodes of the network
+correspond to the sub-events and primitives in the event hierarchy and the output nodes
+correspond to the higher-order events. All nodes have an associated measure of probability
+ascribed to them. Furthermore the causal dependency between sequences of sub-events and
+primitives and the corresponding complex event is represented by the directed arcs between
+nodes and the associated conditional probabilities. The idea is to provide probabilities for the
+input sub-events (evidence) and let the network calculate the probability for the complex
+events presented in the output nodes.
+To handle the sequential ordering constraint of the sub-events, i.e. when the time order of the
+sub-events is part of the definition of a complex event, additional multi-state nodes are also
+included in the networks. A sequence node is a multi-state node that represents the belief of
+the state of a particular sequence, i.e. the probability that the sequential constraint is fulfilled
+for a particular complex event. The state of a sequence node is first set to some initial state
+and later determined by 1) the input nodes corresponding to the sub-events of the sequence
+and 2) a “memory” node representing the previous state of the sequence node. These
+memory nodes provide a feature resembling a Dynamic Bayesian Network. However, one
+difference is that the state nodes are not updated at every time step, as time is not explicitly
+incorporated in the model. Rather, they are updated in response to updates of the input
+nodes.
+The probability for a complex event is thus determined by the corresponding (multi-state)
+sequence node and the rest of the input nodes (for which there is no ordering constraint) and
+their associated conditional probabilities. 
+
+
+\subsection{Évaluation de la situation basée sur des cas}
+%http://www.nap.edu/read/6173/chapter/9#185
+%https://www.nada.kth.se/utbildning/grukth/exjobb/rapportlistor/2007/rapporter07/laxhammar_rikard_07046.pdf
+%p21
+...
 
 
 De nombreux systèmes robotiques ont recours à un composant d'évaluation de la situation qui correspond aux besoins du robot dans une tâche applicative particulière. Dans \cite{beck2011}, le système d'évaluation de la situation est basé sur une chaîne de Markov dynamique pour modéliser les états de l'environnement et leur évolution. Les auteurs présentent une application pour un robot mobile navigant dans un passage étroit.
@@ -133,6 +218,12 @@ ou le fondement du langage (language grounding) \cite{Tellex10}. \cite{Skubic200
 % A variety of robotic systems have made a situation assessment component to fit the need of the robot in a particular task application. In \cite{beck2011}, the situation assessment system is based on Dynamic Markov chains to model the environment states and their evolution. It presents an application for a mobile robot to navigate in a narrow passage.
 % \cite{Chella2010} aims to build a "higher order" perception, giving the robot the ability to reason on its own inner world.
 % \cite{Kluge01situationassessment} presents an empirical assessment of situations for a mobile robot in a crowded public environment applied to recognize situations of deliberate obstruction. In our situation assessment software we focus on what is represented (human, objects ...) and we support heterogeneous type of sensors and data to provide a semantic interpretation of the environment with the aim to have a situation assessment capability that can be used in a various set of applications (see \ref{sec:applications}).
+
+
+
+
+
+%Notre approche: rule based améliorée: prise en compte de la temporalité, modulaire donc pas que du rule based, bottom-up et top-down
 
 
 \section{Données capteurs}
