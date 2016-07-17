@@ -213,38 +213,40 @@ Par la suite, pour palier au manque de sécurité lors de l'exécution d'action 
 une nouvelle forme d'architecture robotique, plus réactive et plus connectée aux données capteur a été mise en place. Il s'agit de l'architecture Subsumption ou "behavior-based" \cite{brooks1986robust}. Dans ce type d'architecture, les actionneurs sont reliés aux capteurs de façon beaucoup plus directe, ce qui permet d'obtenir un système plus réactif. Cependant, l'inconvénient d'une telle architecture robotique est que le système n'a pas de représentation globale de la situation et a donc un comportement principalement réactif. L'absence de représentation globale du monde qui entoure le robot ne permet pas de prendre des décisions à long terme ou d'optimiser la prise de décision. Dans une telle architecture l'évaluation de la situation est de type \textit{basé sur le cas} (case-based).
 
 La plupart des architecture robotiques récentes visent à intégrer à la fois la réactivité des architectures basées sur le comportement (Subsumption) et la capacité de délibération des architectures SPA.
-Afin d'atteindre cet objectif, l'architecture 3T (pour "3 tiers", trois niveaux) a été mise en place \cite{8.36}. En terme d'évaluation de la situation, ces trois niveaux sont comparables aux trois niveaux d'Ensley présentés en section \ref{sec:evaSit} comme nous allons le montrer ci-dessous.
+Afin d'atteindre cet objectif, l'architecture 3T (de l'Anglais "3 tiers", trois niveaux) a été mise en place \cite{bonasso1995experiences}. En terme d'évaluation de la situation, ces trois niveaux sont comparables aux trois niveaux d'Ensley présentés en section \ref{sec:evaSit} comme nous allons le montrer ci-dessous.
 
 Le niveau le plus bas appelé "Behavioral layer" est en charge des capteurs pour la perception et des actionneurs pour l'exécution.
-À ce niveau, les données capteurs sont traitées pour fournir des données pertinentes. Par exemple, pour le dialogue, les données du microphones sont transformées en mots, cependant ceci ne sont pas encore interprétés. L'interprétation sémantique de cette entrée sera faite dans le niveau supérieur.
+À ce niveau, les données capteurs sont traitées pour fournir des données pertinentes. Par exemple, pour le dialogue, les données bruts du microphone sont transformées en mots, cependant ceci ne sont pas encore interprétés. L'interprétation sémantique de cette entrée sera faite dans le niveau supérieur.
 Ce premier niveau prends également en charge les actionneurs qui reçoivent des commandes de la couche supérieure et qui les exécutent tout en utilisant les données capteurs de cette même couche.
 En terme d'estimation de la situation, cette couche est comparable au niveau "perception et représentation" pour la connaissance de la situation présentée par Ensley.
 %L'évaluation de la situation se fait à ce niveau, en fournissant une interprétation des données capteurs à au niveau supérieure. 
 
-Le second niveau, aussi appelé "Executive layer" est en charge de l'interprétation sémantique des données issues de la couche inférieure et du séquençage d'actions à accomplir pour atteindre la tâche donnée par le niveau supérieur. Ce niveau pilote donc les actionneurs de la couche inférieure en fonction de l'estimation de la situation et de séquences d'actions pour accomplir une tâche. En terme d'estimation de la situation, si on se réfère à nouveau aux trois niveaux d'Ensley, ce second niveau par l'interprétation sémantique des données réalisée correspond bien au second niveau d'Ensley (le niveau de connaissance et d'états mentaux).
+Le second niveau, aussi appelé "Executive layer" est en charge de l'interprétation sémantique des données issues de la couche inférieure et du séquençage d'actions à accomplir pour atteindre la tâche donnée par le niveau supérieur. Ce niveau pilote donc les sous composants d'exécution de la couche inférieure en fonction de l'estimation de la situation et de séquences d'actions pour accomplir une tâche. En terme d'estimation de la situation, si on se réfère à nouveau aux trois niveaux d'Ensley, ce second niveau par l'interprétation sémantique des données réalisée correspond bien au second niveau d'Ensley (le niveau de connaissance et d'états mentaux).
 
-Le dernier niveau appelé "Planning layer" est en charge de la vision à long terme du système pour accomplir un but. Elle utilise les données issues de la couche inférieure pour décider de la suite de tâche à entreprendre pour accomplir un but. De nouveau, en terme d'estimation de la situation, ce dernier niveau correspond au niveau "Reflection et projection" de Ensley. 
-
-
-
-
-%=> Notre archi cf p 191 
-comme présenté en...
+Le dernier niveau appelé "Planning layer" est en charge de la vision à long terme du système pour accomplir un but. Elle utilise les données issues de la couche inférieure pour décider de la suite de tâche à entreprendre pour accomplir un but. De nouveau, en terme d'estimation de la situation, ce dernier niveau correspond au niveau "Reflection et projection" d'Ensley.
 
 
 
 
+%=> Notre archi cf p 191
+Comme présenté en section \ref{sec:workEnv} et dans \cite{Alami1998}, notre architecture est également en trois niveaux. Le plus bas niveau, appelé niveau fonctionnel, est constitué d'un ensemble de modules qui contiennent des algorithmes de contrôle et de perception dynamiquement paramétrable.
+La couche exécutive quand à elle ne contient pas de séquence d'actions. Elle se contente de recevoir les commandes du niveau supérieur et de paramétrer les modules inférieurs en conséquence. Le dernier niveau est constitué d'un superviseur \cite{fioreiser2014} et d'un planificateur de tâches de type HTN \cite{Guitton2012}. Le superviseur pilote le planificateur de tâches en demandant de résoudre un but, puis pilote les autres modules pour exécuter chaque action du plan et surveiller l'évolution de celui-ci.
+Le superviseur peut ainsi, lorsqu'il détecte une incohérence (une action n'ayant pas eu l'effet prévu, l'échec d'une action ou encore l'impossibilité d'exécuter l'action) peut demander un nouveau plan au planificateur. 
 
-De nombreux systèmes robotiques ont recours à un composant d'évaluation de la situation qui correspond aux besoins du robot dans une tâche applicative particulière. Dans \cite{beck2011}, le système d'évaluation de la situation est basé sur une chaîne de Markov dynamique pour modéliser les états de l'environnement et leur évolution. Les auteurs présentent une application pour un robot mobile navigant dans un passage étroit.
+
+Concernant l'évaluation de la situation, de nombreux systèmes robotiques ont recours à un composant d'évaluation de la situation qui correspond aux besoins du robot dans une tâche applicative particulière. Dans \cite{beck2011}, le système d'évaluation de la situation est basé sur une chaîne de Markov dynamique pour modéliser les états de l'environnement et leur évolution. Les auteurs présentent une application pour un robot mobile navigant dans un passage étroit.
 \cite{Kluge01situationassessment} présente une évaluation de la situation empirique pour robot mobile dans une zone à forte influence, permettant de reconnaître les situations d'obstruction volontaire.
 
-Notre système permet non seulement d'effectuer l'agrégation des données de perception pour modéliser l'état du monde mais aussi le raisonnement géométrique. 
+Notre système permet non seulement d'effectuer l'agrégation des données de perception pour modéliser l'état du monde afin de pouvoir réagir à l'environnement et exécuter les actions en prenant en compte l'aspect dynamique de ce qui l'entoure mais aussi le raisonnement géométrique pour permettre le raisonnement symbolique au niveau des modules supérieur dans l'architecture, à savoir le superviseur et la planification.
 Nos travaux peuvent être comparés au "Grounded Situation Model" (GSM) introduit par Mavridis et Roy \cite{Mavridis2005} dans le sens où ils fournissent tout deux une représentation amodale du monde utilisée comme un médiateur entre les capteurs et le modèle symbolique. \cite{Coradeschi2013} présente une étude sur ces systèmes de fondement des symboles (symbol grounding) en robotique. \cite{Daoutis2009} \cite{Lemaignan2011}
 présentent des exemples d'utilisation de ce genre de systèmes.
 
 Les applications pour le raisonnement spatial \cite{OKeefe1999} sont multiples. Par exemple, cela a été utilisé pour le traitement du langage naturel pour des applications tel que la reconnaissance de direction \cite{Kollar10,Matuszek10}
 ou le fondement du langage (language grounding) \cite{Tellex10}. \cite{Skubic2004} présente un raisonneur spatial intégré dans un robot qui calcule la position symbolique des objets.
 
+
+Nos travaux portent principalement sur l'aspect "représentation" du premier niveau décrit par Ensley et sur les connaissances et les modèles mentaux constituant le second niveau décrit par Ensley. 
+Afin de donner un contexte à notre étude, nous aborderons, bien que brièvement, les différentes méthodes permettant de réaliser la perception à proprement parlée. En effet, nos travaux sur l'estimation de la situation pour l'interaction homme-robot se concentrent sur les processus suivants, à savoir l'agrégation et l'interprétation des données issues de la perception pour évaluer la situation.
 
 % A variety of robotic systems have made a situation assessment component to fit the need of the robot in a particular task application. In \cite{beck2011}, the situation assessment system is based on Dynamic Markov chains to model the environment states and their evolution. It presents an application for a mobile robot to navigate in a narrow passage.
 % \cite{Chella2010} aims to build a "higher order" perception, giving the robot the ability to reason on its own inner world.
@@ -258,7 +260,7 @@ ou le fondement du langage (language grounding) \cite{Tellex10}. \cite{Skubic200
 %see http://people.ict.usc.edu/~hill/hill-publications/agent2000zhang-final.pdf
 
 
-\section{Données capteurs}
+\section{Données capteurs et perception}
 % En dehors de nos travaux mais pour fournir un contexte à notre étude nous présentons quelques méthodes classiques en robotique
 \label{sec:collecte}
 \subsection{Éléments statiques}
