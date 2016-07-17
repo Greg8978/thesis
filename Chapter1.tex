@@ -238,15 +238,17 @@ Concernant l'évaluation de la situation, de nombreux systèmes robotiques ont r
 \cite{Kluge01situationassessment} présente une évaluation de la situation empirique pour robot mobile dans une zone à forte influence, permettant de reconnaître les situations d'obstruction volontaire.
 
 Notre système permet non seulement d'effectuer l'agrégation des données de perception pour modéliser l'état du monde afin de pouvoir réagir à l'environnement et exécuter les actions en prenant en compte l'aspect dynamique de ce qui l'entoure mais aussi le raisonnement géométrique pour permettre le raisonnement symbolique au niveau des modules supérieur dans l'architecture, à savoir le superviseur et la planification.
-Nos travaux peuvent être comparés au "Grounded Situation Model" (GSM) introduit par Mavridis et Roy \cite{Mavridis2005} dans le sens où ils fournissent tout deux une représentation amodale du monde utilisée comme un médiateur entre les capteurs et le modèle symbolique. \cite{Coradeschi2013} présente une étude sur ces systèmes de fondement des symboles (symbol grounding) en robotique. \cite{Daoutis2009} \cite{Lemaignan2011}
+Nos travaux peuvent être comparés au "Grounded Situation Model" (GSM) introduit par Mavridis et Roy \cite{Mavridis2005} dans le sens où ils fournissent tout deux une représentation amodale du monde utilisée comme un médiateur entre les capteurs et le modèle symbolique. \cite{Coradeschi2013} présente une étude sur ces systèmes de fondement des symboles (symbol grounding \cite{harnad1990symbol}) en robotique.
+Le fondement de symboles permet de relier la représentation symbolique de concept avec leur équivalents non symboliques dans le monde réel.
+\cite{Daoutis2009} \cite{Lemaignan2011}
 présentent des exemples d'utilisation de ce genre de systèmes.
-
 Les applications pour le raisonnement spatial \cite{OKeefe1999} sont multiples. Par exemple, cela a été utilisé pour le traitement du langage naturel pour des applications tel que la reconnaissance de direction \cite{Kollar10,Matuszek10}
 ou le fondement du langage (language grounding) \cite{Tellex10}. \cite{Skubic2004} présente un raisonneur spatial intégré dans un robot qui calcule la position symbolique des objets.
 
 
-Nos travaux portent principalement sur l'aspect "représentation" du premier niveau décrit par Ensley et sur les connaissances et les modèles mentaux constituant le second niveau décrit par Ensley. 
-Afin de donner un contexte à notre étude, nous aborderons, bien que brièvement, les différentes méthodes permettant de réaliser la perception à proprement parlée. En effet, nos travaux sur l'estimation de la situation pour l'interaction homme-robot se concentrent sur les processus suivants, à savoir l'agrégation et l'interprétation des données issues de la perception pour évaluer la situation.
+Nos travaux portent principalement sur l'aspect "représentation" du premier niveau décrit par Ensley et sur les connaissances et les modèles mentaux constituant le second niveau.
+Nous utilisons une approche modulaire basée globalement sur des règles (rule-based) mais comportant également certaines spécificités tel des raisonnements "top-down" permettant de palier à certains manques liés à la perception.
+Notre étude ne concerne pas la fusion des données capteurs (voir chapitre 25 du livre \cite{siciliano2008springer}) ni les différentes méthodes permettant de réaliser la perception à proprement parlée des divers éléments de l'environnement, cependant, afin de donner un contexte à notre étude, nous présenterons brièvement certaines de ces méthodes. En effet, nos travaux sur l'estimation de la situation pour l'interaction homme-robot se concentrent sur les processus de plus haut niveau, à savoir l'agrégation et l'interprétation contextuelle des données issues de la perception pour évaluer la situation.
 
 % A variety of robotic systems have made a situation assessment component to fit the need of the robot in a particular task application. In \cite{beck2011}, the situation assessment system is based on Dynamic Markov chains to model the environment states and their evolution. It presents an application for a mobile robot to navigate in a narrow passage.
 % \cite{Chella2010} aims to build a "higher order" perception, giving the robot the ability to reason on its own inner world.
@@ -275,6 +277,7 @@ Un robot amené à interagir avec des humains est également amené à partager 
 \end{figure}
 
 \subsection{Objets}
+% => TODO chap 23 p 543 handbook of robotics
 Les lieux de travail et de vie sont également composés d'objets divers. Des récipients, des outils, des vêtements, des appareils électroniques... autant d'éléments qui peuvent prendre des formes et fonctionnalités variées.
 Certains de ces objets peuvent également avoir diverses états. Par exemple, une bouteille peut être vide ou pleine, un vêtement peut être propre ou sale, un appareil électronique peut être éteint ou allumé.
 Ces objets sont pour la plupart manipulable au cours d'une interaction. Il est donc important que le robot puisse, afin d'agir correctement sur son environnement, reconnaître ces objets et dans la mesure du possible, connaître et suivre l'évolution de leur état.
@@ -432,6 +435,9 @@ Le dernier type de fait concerne la posture de l'agent. En utilisant le buffer c
 \label{sec:hypo}
 \subsection{Hypothèses de position}
 %Put this in objects?
+%9.2 p 213 of handbook
+% que faire lors de contradiction entre connaissance et perception?
+% solution = faux positifs faible ou inexistant => perception privilégiée
 
 
 Dans leur quotidien, les humains sont occupés par divers activités (cuisine, nettoyage, bricolage...). Ces activités impliquent très souvent l'utilisation d'objets. Comme les robots sont fait pour assister les hommes dans leur tâches quotidiennes, il est crucial qu'ils puissent non seulement manipuler les objets, mais également suivre leur changement de position. Notre but ici n'est pas de discuter des différentes méthodes de suivi d'objet basé sur la perception mais d'expliquer comment le raisonnement sur les données de perception peut améliorer la détection et le suivi d'objet.
