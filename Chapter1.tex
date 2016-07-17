@@ -28,7 +28,7 @@ Pour pouvoir agir dans un environnement humain, le robot doit donc pouvoir perce
 %TODO
 %définir... peut-être mettre dans la partie précédente?
 \subsection{Évaluation de la situation}
-
+\label{sec:evaSit}
 
 
 Le concept de "connaissance de la situation" (Situation Awareness) a été identifié d'après Gilson \cite{gilson1995} durant la première guerre mondiale par Oswald Boelke qui a réalisé "l'importance d'obtenir une connaissance de l'ennemi avant que l'ennemi n'obtienne une connaissance similaire, et conçu des procédés pour y parvenir". Le terme de Situation Awareness est couramment utilisé dans le domaine de l'Interaction Homme-Machine. Parmi les scientifiques ayant étudié ce principe, Mica Endsley en a énoncé une définition générale. Elle définit la connaissance de la situation comme étant "la perception d'éléments de l'environnement dans un volume de temps et d'espace, la compréhension de leur signification et la projection de leur état dans un future proche" \cite{endsley2000}.
@@ -106,7 +106,7 @@ Même si certaines variantes de systèmes basés sur des règles incorporent des
 
 
 
-\subsection{Évaluation de la situation basée sur des Réseaux Bayesiens}
+\subsubsection{Évaluation de la situation basée sur des Réseaux Bayésiens}
 %https://www.nada.kth.se/utbildning/grukth/exjobb/rapportlistor/2007/rapporter07/laxhammar_rikard_07046.pdf
 %http://www.nap.edu/read/6173/chapter/9#186
 Using different variations of Bayesian Belief Networks (BBN) is a very common technique
@@ -197,11 +197,42 @@ sequence node and the rest of the input nodes (for which there is no ordering co
 their associated conditional probabilities. 
 
 
-\subsection{Évaluation de la situation basée sur des cas}
+\subsubsection{Évaluation de la situation basée sur le cas}
 %http://www.nap.edu/read/6173/chapter/9#185
 %https://www.nada.kth.se/utbildning/grukth/exjobb/rapportlistor/2007/rapporter07/laxhammar_rikard_07046.pdf
 %p21
 ...
+
+\subsubsection{Évaluation de la situation en robotique}
+En robotique, l'aspect dynamique de l'environnement et le besoin d'agir et réagir en fonction de celui-ci rend l'évaluation de la situation indispensable. Ainsi Shakey \cite{nilsson1969mobile}, l'un des tout premiers robots, avait une architecture en trois partie: perception, planification, exécution. Cette approche est appelée le sense-plan-act (SPA) paradigme.
+La partie "perception" avait en charge de fournir une représentation du monde à la planification.
+L'équipe de Stanford ayant réalisé cette étude avait déjà identifier l'importance de mettre à jour le modèle d'environnement dynamique: "comme le monde évolue, soit par l'action du robot lui-même ou pour d'autres raisons, le modèle doit être mis à jour pour enregistrer ces changements. De même, les nouvelles informations apprises sur l'environnement doivent être ajoutées au modèle".
+L'une des caractéristiques de ce type d'architecture est que les données capteurs sont utilisées pour créer un modèle du monde, réalisant ainsi une évaluation de la situation \textit{basée sur des règles expertes} afin de permettre la planification pour atteindre un but donné. L'un des inconvénients de ce système est que les capteurs utilisés pour créer le modèle d'environnement servant de base pour la planification ne sont pas directement utilisé lors de l'exécution.
+
+Par la suite, pour palier au manque de sécurité lors de l'exécution d'action d'architectures robotiques basées sur le paradigme SPA, et pour éviter une planification coûteuse en temps et puissance de calcul,
+une nouvelle forme d'architecture robotique, plus réactive et plus connectée aux données capteur a été mise en place. Il s'agit de l'architecture Subsumption ou "behavior-based" \cite{brooks1986robust}. Dans ce type d'architecture, les actionneurs sont reliés aux capteurs de façon beaucoup plus directe, ce qui permet d'obtenir un système plus réactif. Cependant, l'inconvénient d'une telle architecture robotique est que le système n'a pas de représentation globale de la situation et a donc un comportement principalement réactif. L'absence de représentation globale du monde qui entoure le robot ne permet pas de prendre des décisions à long terme ou d'optimiser la prise de décision. Dans une telle architecture l'évaluation de la situation est de type \textit{basé sur le cas} (case-based).
+
+La plupart des architecture robotiques récentes visent à intégrer à la fois la réactivité des architectures basées sur le comportement (Subsumption) et la capacité de délibération des architectures SPA.
+Afin d'atteindre cet objectif, l'architecture 3T (pour "3 tiers", trois niveaux) a été mise en place \cite{8.36}. En terme d'évaluation de la situation, ces trois niveaux sont comparables aux trois niveaux d'Ensley présentés en section \ref{sec:evaSit} comme nous allons le montrer ci-dessous.
+
+Le niveau le plus bas appelé "Behavioral layer" est en charge des capteurs pour la perception et des actionneurs pour l'exécution.
+À ce niveau, les données capteurs sont traitées pour fournir des données pertinentes. Par exemple, pour le dialogue, les données du microphones sont transformées en mots, cependant ceci ne sont pas encore interprétés. L'interprétation sémantique de cette entrée sera faite dans le niveau supérieur.
+Ce premier niveau prends également en charge les actionneurs qui reçoivent des commandes de la couche supérieure et qui les exécutent tout en utilisant les données capteurs de cette même couche.
+En terme d'estimation de la situation, cette couche est comparable au niveau "perception et représentation" pour la connaissance de la situation présentée par Ensley.
+%L'évaluation de la situation se fait à ce niveau, en fournissant une interprétation des données capteurs à au niveau supérieure. 
+
+Le second niveau, aussi appelé "Executive layer" est en charge de l'interprétation sémantique des données issues de la couche inférieure et du séquençage d'actions à accomplir pour atteindre la tâche donnée par le niveau supérieur. Ce niveau pilote donc les actionneurs de la couche inférieure en fonction de l'estimation de la situation et de séquences d'actions pour accomplir une tâche. En terme d'estimation de la situation, si on se réfère à nouveau aux trois niveaux d'Ensley, ce second niveau par l'interprétation sémantique des données réalisée correspond bien au second niveau d'Ensley (le niveau de connaissance et d'états mentaux).
+
+Le dernier niveau appelé "Planning layer" est en charge de la vision à long terme du système pour accomplir un but. Elle utilise les données issues de la couche inférieure pour décider de la suite de tâche à entreprendre pour accomplir un but. De nouveau, en terme d'estimation de la situation, ce dernier niveau correspond au niveau "Reflection et projection" de Ensley. 
+
+
+
+
+%=> Notre archi cf p 191 
+comme présenté en...
+
+
+
 
 
 De nombreux systèmes robotiques ont recours à un composant d'évaluation de la situation qui correspond aux besoins du robot dans une tâche applicative particulière. Dans \cite{beck2011}, le système d'évaluation de la situation est basé sur une chaîne de Markov dynamique pour modéliser les états de l'environnement et leur évolution. Les auteurs présentent une application pour un robot mobile navigant dans un passage étroit.
@@ -224,9 +255,11 @@ ou le fondement du langage (language grounding) \cite{Tellex10}. \cite{Skubic200
 
 
 %Notre approche: rule based améliorée: prise en compte de la temporalité, modulaire donc pas que du rule based, bottom-up et top-down
+%see http://people.ict.usc.edu/~hill/hill-publications/agent2000zhang-final.pdf
 
 
 \section{Données capteurs}
+% En dehors de nos travaux mais pour fournir un contexte à notre étude nous présentons quelques méthodes classiques en robotique
 \label{sec:collecte}
 \subsection{Éléments statiques}
 Un robot amené à interagir avec des humains est également amené à partager leur environnement. Que se soit dans un foyer ou une entreprise, cet environnement est composé de murs, d'escaliers de meubles... autant d'éléments statiques pouvant être des obstacles pour se mouvoir et manipuler les objets dans l'environnement. Ces éléments étant considérés comme "statiques", leur configuration peut être stockée dans la mémoire du robot (par exemple sous forme de carte 2D pour la navigation, comme dans la figure \ref{fig:map}) et directement utilisée par la couche d'exécution lorsque l'action à accomplir nécessite une navigation ou une manipulation, sans avoir à passer par la couche décisionnelle.
