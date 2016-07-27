@@ -23,10 +23,6 @@ d'éléments statiques tel que les murs, d'éléments pouvant évoluer au cours 
 Pour pouvoir agir dans un environnement humain, le robot doit donc pouvoir percevoir tous ces éléments énumérés précédemment et en extraire une représentation symbolique afin de décrire au mieux la situation et permettre à la couche décisionnelle d'agir de façon appropriée.
 
 
-%TODO definir
-%\section{Évaluation de la Situation}
-%TODO
-%définir... peut-être mettre dans la partie précédente?
 \subsection{Évaluation de la situation}
 \label{sec:evaSit}
 
@@ -55,7 +51,7 @@ décision et d'entreprendre d'agir sur l'environnement.
 \end{itemize}
 Cette composition est résumée à la figure \ref{fig:ensley}.
 
-Dans le cas de systèmes en évolution et d'environnements dynamiques, le processus permettant d'acquérir et de maintenir la connaissance de la situation est appelé évaluation de la situation (situation assessment). Endsley explique dans \cite{endsley1995} que "la connaissance de la situation incorpore la compréhension d'un opérateur sur la situation globale, formant ainsi la base pour la prise de décision". Les processus d'évaluation de la situation sont donc fortement liés aux processus de prise de décision (qui constituent la supervision).
+Dans le cas de systèmes en évolution et d'environnements dynamiques, le processus permettant d'acquérir et de maintenir la connaissance de la situation est appelé évaluation de la situation (situation assessment). Endsley explique dans \cite{endsley1995} que "la connaissance de la situation incorpore la compréhension d'un opérateur sur la situation globale, formant ainsi la base pour la prise de décision". Les processus d'évaluation de la situation sont donc fortement liés aux processus de prise de décision (qui constituent la supervision dans un système robotique).
 L'une des principales préoccupations pour l'Interaction Homme-Machine est de concevoir des interfaces utilisateurs qui permettent à un opérateur d'acquérir la connaissance de la situation de façon optimale afin qu'il puisse décider quelle décision prendre.
 
 De la même manière, en robotique, le robot a besoin de décider quelle action entreprendre et quand agir sur son environnement. Pour prendre ce genre de décisions, la supervision repose sur des processus de plus bas niveau pour obtenir des informations à haut niveau d'abstraction sur l'environnement. Cela implique, pour l'évaluation de la situation, de raisonner sur ce qui entoure le robot à partir des données des capteurs afin de modéliser la configuration de l'environnement physique autour du robot et de produire un ensemble de propriétés concernant les divers éléments. Ceci permet de fournir une représentation symbolique de l'état du monde au superviseur afin de faciliter son raisonnement et sa prise de décision. Pour créer cette représentation symbolique, il est d'abord nécessaire au robot d'avoir une bonne estimation de l'état du monde et d'en avoir une représentation tridimensionnelle en regroupant efficacement les données de perception issues des divers capteurs.
@@ -89,11 +85,11 @@ De la même manière, en robotique, le robot a besoin de décider quelle action 
 Dans le domaine de l'Intelligence Artificielle, plusieurs méthodes ont été développées pour effectuer l'évaluation de la situation. Nous allons brièvement décrire ces différentes méthodes.
 
 \subsubsection{Évaluation de la situation basée sur des règles expertes}
-Un système d'évaluation de la situation basé sur des règles est un système de connaissance basé sur des règles et sur une base de faits. L'expertise liée au domaine est directement intégré au système par la définition des différentes règles spécifiques au domaine d'application. L'état du monde symbolique en découlant est représenté comme un ensemble de faits dans une base de faits.
+Un système d'évaluation de la situation basé sur des règles (rule-based en Anglais) est un système de connaissance qui repose sur des règles prés établies pour l'inférence et sur une base de faits. L'expertise liée au domaine est directement intégrée au système par la définition des différentes règles spécifiques au domaine d'application. L'état du monde symbolique en découlant est représenté comme un ensemble de faits dans une base de faits.
 Généralement, les règles utilisent des données d'environnements (pouvant provenir de calculs sur les données capteurs) ou des faits provenant d'autres règles, et en fonction de certaines conditions logiques, produisent un nouveau fait qui sera ajouté à la base de faits. 
 Par exemple, un système météorologique pourrait avoir la règle suivante: \newline
 $HIGH\_TEMPERATURE \land NO\_CLOUD \implies GOOD\_WEATHER$. \newline
-Dans cet exemple, les propriétés $HIGH\_TEMPERATURE$ et $NO\_CLOUD$ sont issues de capteurs. Si ces deux propriétés sont vrais, le fait $GOOD\_WEATHER$ sera produit et ajouté à la base de faits. Dans le cas d'un système basé sur des règles expertes, cette implication serait directement ajouté au système par l'expert du domaine (par exemple ici un expert en météorologie). 
+Dans cet exemple, les propriétés $HIGH\_TEMPERATURE$ et $NO\_CLOUD$ sont issues de capteurs. Si ces deux propriétés sont vrais, le fait $GOOD\_WEATHER$ sera produit et ajouté à la base de faits. Dans le cas d'un système basé sur des règles expertes, cette implication serait directement ajoutée au système par l'expert du domaine (par exemple ici un expert en météorologie). 
 Les modules responsables de la production des faits basés sur ces règles sont appelés des raisonneurs.
 
 En identifiant les divers éléments et leur relations, les règles peuvent être utilisées pour déduire des informations de plus haut niveau correspondant à des faits décrivant des situations particulières. Ceci permet à la partie décisionnelle, c'est à dire l'opérateur pour une Interface Homme-Machine (IHM) ou le superviseur pour un système autonome tel qu'un robot, de basé sa décision sur des faits décrivant la situation de façon pertinente.
@@ -104,113 +100,147 @@ Cependant, l'un des inconvénients de tels systèmes est le manque de modélisat
 Même si certaines variantes de systèmes basés sur des règles incorporent des valeurs d'incertitudes dans les règles, cette approche implique certaines restrictions et une attention toute particulière lors du développement des règles comme présenté au chapitre 15 du livre \cite{russell2003artificial}.
 
 
+\subsubsection{Évaluation de la situation basée sur le cas}
+%http://www.nap.edu/read/6173/chapter/9#185
+%https://www.nada.kth.se/utbildning/grukth/exjobb/rapportlistor/2007/rapporter07/laxhammar_rikard_07046.pdf
+%p21
+%...
+
+Le raisonnement basé sur le cas (Case-based reasoning en Anglais) est un paradigme dans lequel la connaissance est représentée comme un ensemble de cas individuels qui est utilisé pour raisonné sur de nouvelles situations. Tous les cas partagent une même structure et sont définis par un ensemble de caractéristiques. Lorsqu'un nouveau problème, défini comme le cas recherché, est présenté au système, il est comparé à tous les autres cas de la bibliothèque, et le cas le plus proche est utilisé pour résoudre le nouveau problème. La proximité est défini par une mesure basée sur un sous-ensemble des caractéristiques du cas appelé indice de caractéristiques. Il existe différents types de mesures de similarité: distance Euclidienne, distance d'Hamming, la métrique de la valeur de différence de Stanfill et Waltz (1986)...
+
+En général, le cas le plus proche retrouvé ne correspond pas parfaitement au cas recherché. C'est pourquoi, les systèmes basé sur le cas ont souvent recours à des règles pour adapter le cas retrouvé au cas recherché.
+L'un des intérêt d'utiliser le raisonnement basé sur le cas pour l'estimation de la situation et la prise de décision est que cette démarche est proche de celle utilisée par les hommes pour interagir sur leur environnement. Dans le domaine de la théorie de la mémoire humaine, ces cas de connaissances reliées à un épisode spécifique est appelé la mémoire épisodique \cite{tulving1972episodic}.
+
+L'approche basée sur le cas peut également être préférable lorsqu'il n'y a pas de modèles valides du domaine. En effet, dans certaines application l'espace d'états peu être trop vaste pour permettre la construction d'un domaine complet et pertinent. En l'absence de la modélisation du modèle, les solutions basées sur le cas offrent une alternative aux solutions basées sur le modèle.
+
+
+
+
+% disadvantages. Models are condensed summaries of a domain, omitting (i.e., averaging over) details below a certain level. They therefore contain less information (i.e., fewer parameters) and require less storage space and have less computational complexity than case-based approaches. If it is known beforehand that there will never be a need to access details below the model's level of abstraction, models are preferable because of their increased computational efficiency. However, if access to low-level information will be needed, a case-based reasoning approach is preferable.
+
+% We are unaware of any military human behavior representations that employ case-based reasoning models of situation awareness. However, we believe this approach offers considerable potential for the development of general situation awareness models and military situation awareness models in particular, given the military's heavy reliance on case-based training through numerous exercises, the well-known development of military expertise with actual combat experience, and the consistent use of "war stories" or cases by subject matter experts to illustrate general concepts. In addition, the ease with which case-based reasoning or case "learning" can be implemented makes the approach particularly attractive for modeling the effects of human learning. Whether effective case-based reasoning models of situation awareness will be developed for future human behavior representations is still an open research question, but clearly one worth pursuing.
 
 
 \subsubsection{Évaluation de la situation basée sur des Réseaux Bayésiens}
 %https://www.nada.kth.se/utbildning/grukth/exjobb/rapportlistor/2007/rapporter07/laxhammar_rikard_07046.pdf
 %http://www.nap.edu/read/6173/chapter/9#186
-Using different variations of Bayesian Belief Networks (BBN) is a very common technique
-for probabilistic reasoning about events and relations in the context of situation awareness
-and situation assessment [7, 8, 9, 10 et al.].
+%TODO check with livre ^
 
-BBNs are based on Bayes rule which allows the computation of the posterior probability
-associated with a particular proposition, which could be an object or relation, given the prior
-probabilities and conditional probabilities associated to it.
-The BBN can be represented as a graph, where the nodes correspond to the propositions and
-the directed edges correspond to the causal relationships between the propositions. When
-setting up a BBN, priori probabilities and conditional probabilities have to be specified for
-each node in the network. Then, posterior probabilities for each node can be updated
-according to Bayes rule as new information is presented to the network. In particular, new
-information regarding the probability of objects and basic relations can be used by the BBN
-for fusion to assess the probability of higher-level relations or situations.
-Two important requirements are pointed out by Gonsalves and his colleagues when using
-BBNs for SA in dynamic real-time environments [8]:
-1. Rapid modelling of complex situations via BBNs
-2. Efficient BBN inference based on incoming evidence
-For rapid modelling, they suggest that each BBN is constructed at real-time from a library of
-smaller component-like BBNs to assess a specific situation. To address the issue of efficient
-inference, they propose a way in which a BBN can be broken up into sub-networks and
-distributed across multiple computers, allowing computations to be carried out in parallel. In
-addition to this, the distribution mechanism allows computation at various levels of
-abstraction and granularity suitable for hierarchical organizations.
-The powerful model for handling uncertainty and casual relationships combined with a
-relatively straightforward implementation make the Bayesian Belief Network a very
-attractive model. However, BBNs are essentially propositional: the set of variables is fixed
-and finite and each variable has a fixed domain of possible values [16]. Regular BBNs lack
-the concept of objects and relations and thus cannot take full advantage of the structure of
-the domain or reuse [11]. These facts limit the application of BBNs in complex domains. To
-handle these constrains, different extensions to BBNs called Relational Probabilistic Models
-(RPM) [11, 16] have been proposed. The first-order RPMs support much more complex
-models including generic objects and relations, being able to express facts about some or all
-objects.
-Another weakness of regular BBNs is that they lack a natural mechanism for temporal
-reasoning. Various forms of Dynamic Bayesian Networks have been proposed for handling
-this [16]. However, it is still possible to model temporal sequence constraints in a regular
-BBN by including multi-state nodes corresponding to a “memory” [7].
-Finally, because Bayesian methods are based on probability theory, adequate statistics are
-required for making good models. Without a sufficiently large amount of data (training
-examples) or other prior knowledge, approximating various probability distributions can be a
-difficult task. Furthermore, modelling the causal relationships may also prove a non trivial
-task in a complex domain.
-3.2.1 Hierarchical Event Recognition
-One approach for performing situation assessment is to identify events in the situation
-picture. According to Higgins [7], “an event can be defined as a change in the relationship
-between objects that occurs over a period of time”. In our case, this implies that one has to
-identify objects and their track motion and relationships to other objects in order to
-successfully recognize the events as object relationships that evolve over time.
-Generally speaking, complex events can be modelled as sequences of sub-events. These subevents
-on their part can be further decomposed in a recursive manner. At the bottom of this 
-recursive tree we find primitive events and primitive relationships between objects. These
-primitives constitute the base elements of the event hierarchy and need to be measured
-directly from the situation picture which may involve different context specific extraction
-algorithms. Typical primitives in the context of SA could be spatial relations between objects
-(in front of another object, to the right etc.), kinematical relations (approaching etc.), state of
-objects (inside-of a region etc) or simple events corresponding to changes in direction of
-motion.
+Pour réaliser l'estimation de la situation de façon probabiliste, de nombreux systèmes ont recours à divers
+variantes des réseaux Bayésiens (BN pour Bayesian Networks) \cite{bladon2002situation,das2002situation,higgins2005automatic}.
+Les réseaux Bayésiens (aussi appelés réseaux de croyance (Belief Networks) ou réseaux de croyance Bayésien (BBN pour Bayesian Belief Networks) sont des structures probabilistes qui permettent un raisonnement cohérent à partir d'informations incertaines \cite{pearl1986fusion}.
+
+Les BNs sont basés sur des règles Bayésiennes qui permettent le calcul d'une probabilité postérieure associée à une proposition particulière
+en fonction des probabilités antérieurs et des probabilités conditionnelles qui y sont associées.
+Il est possible de représenter un BN sous la forme d'un graphe où les nœuds correspondent aux propositions et
+les arrêtes directionnelles représentent le lien causal entre les propositions.
+Lors de la mise en place d'un BN, les probabilités à priori et conditionnelles doivent être spécifiées pour
+chaque nœud. Les probabilités postérieures pour chaque nœud peuvent être mises à jour selon les règles Bayésiennes lorsque
+une nouvelle information est présenté au réseau.
+
+%Deux prérogatives importantes sont notifiées par Gonsalves et al. lors de l'utilisation de BBNs pour l'estimation de la situation dans un environnement
+%dynamic et en temps réel \cite{}:
+%Two important requirements are pointed out by Gonsalves and his colleagues when using
+%BBNs for SA in dynamic real-time environments [8]:
+%1. Rapid modelling of complex situations via BBNs
+%2. Efficient BBN inference based on incoming evidence
+%For rapid modelling, they suggest that each BBN is constructed at real-time from a library of
+%smaller component-like BBNs to assess a specific situation. To address the issue of efficient
+%inference, they propose a way in which a BBN can be broken up into sub-networks and
+%distributed across multiple computers, allowing computations to be carried out in parallel. In
+%addition to this, the distribution mechanism allows computation at various levels of
+%abstraction and granularity suitable for hierarchical organizations.
+
+La capacité de gérer l'incertitude et une implémentation relativement simple rendent les réseaux de croyance Bayésiens très attractifs.
+Cependant, l'ensemble des variables est fixe et fini, et chaque variable a un ensemble fixe de valeurs possibles \cite{russell2003artificial}.
+Les BNs classiques ne peuvent représenter des concepts abstraits tel que les relations entre éléments, ce qui limite l'application des BNs pour
+des domaines complexes. Pour gérer ces contraintes, des extensions ont été crées. Ces extensions s'appellent RPM pour modèles relationnels probabilistes (Relational Probabilistic Models) \cite{howard2005situation,russell2003artificial}.
+
+Un autre inconvénient lié à l'usage des BNs classiques est qu'ils n'ont pas de mécanismes propre pour le raisonnement temporel.
+De nombreuses propositions existent pour palier à ce manque \cite{russell2003artificial}. Il est également possible d'utiliser un BN classique en ajoutant des noeuds multi-états correspondant à une "mémoire" \cite{higgins2005automatic}.
+
+Enfin, dû à l'aspect probabiliste, des valeurs statistiques adéquates sont nécessaires pour obtenir des modèles probant.
+Ceci peut nécessité des connaissances à priori sur la répartition de probabilité ou un large panel de données pour entraîner le système, sans quoi une approximation des distributions doit être réalisée ce qui peut s'avérer compliqué. De plus, modéliser les relations causales peut également s'avérer complexe selon la complexité du domaine concerné.
 
 
-3.2.2 Implementing Hierarchical Event Recognition through Bayesian
-Networks
 
-Higgins [7] proposes an approach to event recognition using Bayesian Networks where the
-networks consist of input nodes and output nodes. The input nodes of the network
-correspond to the sub-events and primitives in the event hierarchy and the output nodes
-correspond to the higher-order events. All nodes have an associated measure of probability
-ascribed to them. Furthermore the causal dependency between sequences of sub-events and
-primitives and the corresponding complex event is represented by the directed arcs between
-nodes and the associated conditional probabilities. The idea is to provide probabilities for the
-input sub-events (evidence) and let the network calculate the probability for the complex
-events presented in the output nodes.
-To handle the sequential ordering constraint of the sub-events, i.e. when the time order of the
-sub-events is part of the definition of a complex event, additional multi-state nodes are also
-included in the networks. A sequence node is a multi-state node that represents the belief of
-the state of a particular sequence, i.e. the probability that the sequential constraint is fulfilled
-for a particular complex event. The state of a sequence node is first set to some initial state
-and later determined by 1) the input nodes corresponding to the sub-events of the sequence
-and 2) a “memory” node representing the previous state of the sequence node. These
-memory nodes provide a feature resembling a Dynamic Bayesian Network. However, one
-difference is that the state nodes are not updated at every time step, as time is not explicitly
-incorporated in the model. Rather, they are updated in response to updates of the input
-nodes.
-The probability for a complex event is thus determined by the corresponding (multi-state)
-sequence node and the rest of the input nodes (for which there is no ordering constraint) and
-their associated conditional probabilities. 
+%The powerful model for handling uncertainty and casual relationships combined with a
+%relatively straightforward implementation make the Bayesian Belief Network a very
+%attractive model. However, BBNs are essentially propositional: the set of variables is fixed
+%and finite and each variable has a fixed domain of possible values [16]. Regular BBNs lack
+%the concept of objects and relations and thus cannot take full advantage of the structure of
+%the domain or reuse [11]. These facts limit the application of BBNs in complex domains. To
+%handle these constrains, different extensions to BBNs called Relational Probabilistic Models
+%(RPM) [11, 16] have been proposed. The first-order RPMs support much more complex
+%models including generic objects and relations, being able to express facts about some or all
+%objects.
+%Another weakness of regular BBNs is that they lack a natural mechanism for temporal
+%reasoning. Various forms of Dynamic Bayesian Networks have been proposed for handling
+%this [16]. However, it is still possible to model temporal sequence constraints in a regular
+%BBN by including multi-state nodes corresponding to a “memory” [7].
+%Finally, because Bayesian methods are based on probability theory, adequate statistics are
+%required for making good models. Without a sufficiently large amount of data (training
+%examples) or other prior knowledge, approximating various probability distributions can be a
+%difficult task. Furthermore, modelling the causal relationships may also prove a non trivial
+%task in a complex domain.
+
+%3.2.1 Hierarchical Event Recognition
+%TODO use this in chap 4?
+% One approach for performing situation assessment is to identify events in the situation
+% picture. According to Higgins [7], “an event can be defined as a change in the relationship
+% between objects that occurs over a period of time”. In our case, this implies that one has to
+% identify objects and their track motion and relationships to other objects in order to
+% successfully recognize the events as object relationships that evolve over time.
+% Generally speaking, complex events can be modelled as sequences of sub-events. These subevents
+% on their part can be further decomposed in a recursive manner. At the bottom of this 
+% recursive tree we find primitive events and primitive relationships between objects. These
+% primitives constitute the base elements of the event hierarchy and need to be measured
+% directly from the situation picture which may involve different context specific extraction
+% algorithms. Typical primitives in the context of SA could be spatial relations between objects
+% (in front of another object, to the right etc.), kinematical relations (approaching etc.), state of
+% objects (inside-of a region etc) or simple events corresponding to changes in direction of
+% motion.
 
 
-\subsubsection{Évaluation de la situation basée sur le cas}
-%http://www.nap.edu/read/6173/chapter/9#185
-%https://www.nada.kth.se/utbildning/grukth/exjobb/rapportlistor/2007/rapporter07/laxhammar_rikard_07046.pdf
-%p21
-...
+%3.2.2 Implementing Hierarchical Event Recognition through Bayesian
+%Networks
+
+Higgins \cite{higgins2005automatic} propose une approche pour la reconnaissance d'événements en utilisant les réseaux Bayésiens.
+Nous reviendrons sur ce type d'utilisation de réseaux Bayésiens pour tenter de reconnaître les actions de l'homme et estimer son intention au chapitre \ref{chapter4}.
+
+%The input nodes of the network
+%correspond to the sub-events and primitives in the event hierarchy and the output nodes
+%correspond to the higher-order events. All nodes have an associated measure of probability
+%ascribed to them. Furthermore the causal dependency between sequences of sub-events and
+%primitives and the corresponding complex event is represented by the directed arcs between
+%nodes and the associated conditional probabilities. The idea is to provide probabilities for the
+%input sub-events (evidence) and let the network calculate the probability for the complex
+%events presented in the output nodes.
+%To handle the sequential ordering constraint of the sub-events, i.e. when the time order of the
+%sub-events is part of the definition of a complex event, additional multi-state nodes are also
+%included in the networks. A sequence node is a multi-state node that represents the belief of
+%the state of a particular sequence, i.e. the probability that the sequential constraint is fulfilled
+%for a particular complex event. The state of a sequence node is first set to some initial state
+%and later determined by 1) the input nodes corresponding to the sub-events of the sequence
+%and 2) a “memory” node representing the previous state of the sequence node. These
+%memory nodes provide a feature resembling a Dynamic Bayesian Network. However, one
+%difference is that the state nodes are not updated at every time step, as time is not explicitly
+%incorporated in the model. Rather, they are updated in response to updates of the input
+%nodes.
+%The probability for a complex event is thus determined by the corresponding (multi-state)
+%sequence node and the rest of the input nodes (for which there is no ordering constraint) and
+%their associated conditional probabilities. 
+
+
 
 \subsubsection{Évaluation de la situation en robotique}
-En robotique, l'aspect dynamique de l'environnement et le besoin d'agir et réagir en fonction de celui-ci rend l'évaluation de la situation indispensable. Ainsi Shakey \cite{nilsson1969mobile}, l'un des tout premiers robots, avait une architecture en trois partie: perception, planification, exécution. Cette approche est appelée le sense-plan-act (SPA) paradigme.
+En robotique, l'aspect dynamique de l'environnement et le besoin d'agir et réagir en fonction de celui-ci rend l'évaluation de la situation indispensable. L'estimation de la situation en robotique est fortement liée au choix de l'architecture robotique. Ainsi Shakey \cite{nilsson1969mobile}, l'un des tout premiers robots, avait une architecture en trois parties: perception, planification, exécution. Cette approche est appelée le sense-plan-act (SPA) paradigme.
 La partie "perception" avait en charge de fournir une représentation du monde à la planification.
 L'équipe de Stanford ayant réalisé cette étude avait déjà identifier l'importance de mettre à jour le modèle d'environnement dynamique: "comme le monde évolue, soit par l'action du robot lui-même ou pour d'autres raisons, le modèle doit être mis à jour pour enregistrer ces changements. De même, les nouvelles informations apprises sur l'environnement doivent être ajoutées au modèle".
 L'une des caractéristiques de ce type d'architecture est que les données capteurs sont utilisées pour créer un modèle du monde, réalisant ainsi une évaluation de la situation \textit{basée sur des règles expertes} afin de permettre la planification pour atteindre un but donné. L'un des inconvénients de ce système est que les capteurs utilisés pour créer le modèle d'environnement servant de base pour la planification ne sont pas directement utilisé lors de l'exécution.
 
 Par la suite, pour palier au manque de sécurité lors de l'exécution d'action d'architectures robotiques basées sur le paradigme SPA, et pour éviter une planification coûteuse en temps et puissance de calcul,
-une nouvelle forme d'architecture robotique, plus réactive et plus connectée aux données capteur a été mise en place. Il s'agit de l'architecture Subsumption ou "behavior-based" \cite{brooks1986robust}. Dans ce type d'architecture, les actionneurs sont reliés aux capteurs de façon beaucoup plus directe, ce qui permet d'obtenir un système plus réactif. Cependant, l'inconvénient d'une telle architecture robotique est que le système n'a pas de représentation globale de la situation et a donc un comportement principalement réactif. L'absence de représentation globale du monde qui entoure le robot ne permet pas de prendre des décisions à long terme ou d'optimiser la prise de décision. Dans une telle architecture l'évaluation de la situation est de type \textit{basé sur le cas} (case-based).
+une nouvelle forme d'architecture robotique, plus réactive et plus connectée aux données capteur a été mise en place. Il s'agit de l'architecture Subsumption ou "behavior-based" \cite{brooks1986robust}. Dans ce type d'architecture, les actionneurs sont reliés aux capteurs de façon beaucoup plus directe, ce qui permet d'obtenir un système plus réactif. Cependant, l'inconvénient d'une telle architecture robotique est que le système n'a pas de représentation globale de la situation et a donc un comportement principalement réactif. L'absence de représentation globale du monde qui entoure le robot ne permet pas de prendre des décisions à long terme ou d'optimiser la prise de décision. Dans une telle architecture l'évaluation de la situation est de type \textit{basée sur le cas} (case-based).
 
 La plupart des architecture robotiques récentes visent à intégrer à la fois la réactivité des architectures basées sur le comportement (Subsumption) et la capacité de délibération des architectures SPA.
 Afin d'atteindre cet objectif, l'architecture 3T (de l'Anglais "3 tiers", trois niveaux) a été mise en place \cite{bonasso1995experiences}. En terme d'évaluation de la situation, ces trois niveaux sont comparables aux trois niveaux d'Ensley présentés en section \ref{sec:evaSit} comme nous allons le montrer ci-dessous.
@@ -247,7 +277,8 @@ ou le fondement du langage (language grounding) \cite{Tellex10}. \cite{Skubic200
 
 
 Nos travaux portent principalement sur l'aspect "représentation" du premier niveau décrit par Ensley et sur les connaissances et les modèles mentaux constituant le second niveau.
-Nous utilisons une approche modulaire basée globalement sur des règles (rule-based) mais comportant également certaines spécificités tel des raisonnements "top-down" permettant de palier à certains manques liés à la perception.
+Nous utilisons une approche modulaire où chaque module partage une représentation tridimensionnelle du monde. Cette représentation est utilisée pour le calcul de divers faits et primitives concernant notamment les relations spatiales, la cinématique et l'état des divers éléments de l'environnement.
+Une valeur de "confiance" est associée à chaque fait, permettant ainsi le raisonnement probabiliste. Différents modules peuvent donc utiliser différentes techniques d'évaluation de la situation, probabiliste ou basé sur des règles expertes. Notre infrastructure pour l'évaluation de la situation comporte également certaines spécificités tel des raisonnements "top-down" permettant de palier à certains manques liés à la perception.
 Notre étude ne concerne pas la fusion des données capteurs (voir chapitre 25 du livre \cite{siciliano2008springer}) ni les différentes méthodes permettant de réaliser la perception à proprement parlée des divers éléments de l'environnement, cependant, afin de donner un contexte à notre étude, nous présenterons brièvement certaines de ces méthodes. En effet, nos travaux sur l'estimation de la situation pour l'interaction homme-robot se concentrent sur les processus de plus haut niveau, à savoir l'agrégation et l'interprétation contextuelle des données issues de la perception pour évaluer la situation.
 
 % A variety of robotic systems have made a situation assessment component to fit the need of the robot in a particular task application. In \cite{beck2011}, the situation assessment system is based on Dynamic Markov chains to model the environment states and their evolution. It presents an application for a mobile robot to navigate in a narrow passage.
@@ -262,56 +293,65 @@ Notre étude ne concerne pas la fusion des données capteurs (voir chapitre 25 d
 %see http://people.ict.usc.edu/~hill/hill-publications/agent2000zhang-final.pdf
 
 
-\section{Données capteurs et perception}
+\section{Perception et données capteurs}
 % En dehors de nos travaux mais pour fournir un contexte à notre étude nous présentons quelques méthodes classiques en robotique
 \label{sec:collecte}
 \subsection{Éléments statiques}
-Un robot amené à interagir avec des humains est également amené à partager leur environnement. Que se soit dans un foyer ou une entreprise, cet environnement est composé de murs, d'escaliers de meubles... autant d'éléments statiques pouvant être des obstacles pour se mouvoir et manipuler les objets dans l'environnement. Ces éléments étant considérés comme "statiques", leur configuration peut être stockée dans la mémoire du robot (par exemple sous forme de carte 2D pour la navigation, comme dans la figure \ref{fig:map}) et directement utilisée par la couche d'exécution lorsque l'action à accomplir nécessite une navigation ou une manipulation, sans avoir à passer par la couche décisionnelle.
+Un robot amené à interagir avec des humains est également amené à partager leur environnement. Que se soit dans un foyer ou une entreprise, cet environnement est composé de murs, d'escaliers de meubles... autant d'éléments statiques pouvant être des obstacles pour se mouvoir et manipuler les objets dans l'environnement. Ces éléments étant considérés comme "statiques", leur configuration peut être stockée dans la mémoire du robot (par exemple sous forme de carte 2D pour la navigation, comme dans la figure \ref{fig:map}) et directement utilisée au niveau de l'exécution lorsque l'action à accomplir nécessite une navigation ou une manipulation, sans avoir à passer par le niveau décisionnelle. Connaître l'empreinte au sol des différents éléments statiques n'est pas toujours suffisant. Ainsi pour effectuer une manipulation d'objet sur des meubles, le robot a besoin de connaître le modèle tridimensionnel du meuble afin d'éviter d'entrer en collision lors de la manipulation. Cette connaissance peut provenir soit d'une perception tridimensionnelle de l'environnement, soit d'une connaissance à priori du modèle tridimensionnel du meuble.
 
 %MB put a map here to illustrate? Talk about gmapping?
 \begin{figure}[ht!]
  \centering
   \includegraphics[width=0.59\linewidth]{./img/Map2d.png} 
-  \caption {Exemple de carte pour la navigation et la localisation du robot}
+  \caption {Exemple de carte pour la navigation 2-D et la localisation du robot.}
   \label{fig:map}
 \end{figure}
 
 \subsection{Objets}
 % => TODO chap 23 p 543 handbook of robotics
 Les lieux de travail et de vie sont également composés d'objets divers. Des récipients, des outils, des vêtements, des appareils électroniques... autant d'éléments qui peuvent prendre des formes et fonctionnalités variées.
-Certains de ces objets peuvent également avoir diverses états. Par exemple, une bouteille peut être vide ou pleine, un vêtement peut être propre ou sale, un appareil électronique peut être éteint ou allumé.
-Ces objets sont pour la plupart manipulable au cours d'une interaction. Il est donc important que le robot puisse, afin d'agir correctement sur son environnement, reconnaître ces objets et dans la mesure du possible, connaître et suivre l'évolution de leur état.
+Certains de ces objets peuvent également avoir des états. Par exemple, une bouteille peut être vide ou pleine, un vêtement peut être propre ou sale, un appareil électronique peut être éteint ou allumé.
+Ces objets sont pour la plupart manipulables au cours d'une interaction. Il est donc important que le robot puisse, afin d'agir correctement sur son environnement, reconnaître ces objets et dans la mesure du possible, connaître et suivre l'évolution de leur état.
 
-Pour reconnaître les objets, diverses méthodes existent. Ces méthodes sont basées sur des solutions capteurs tel la stéréo vision \cite{murphy2005}
-ou en utilisant un capteur RGBD tel la kinect \cite{tang2012}.
-%TODO? ajouter illustration reconnaissance d'objets + image kinect
+La vision permet d'obtenir des informations riches concernant les objets, en répondant aux questions "où?" et "quoi?". L'article \cite{Besl1985} propose une définition du problème de reconnaissance d'objets 3-D. Pour effectuer cette reconnaissance d'objets, diverses méthodes existent. Ces méthodes sont basées sur des solutions capteurs comme la stéréo vision \cite{murphy2005}
+ou en utilisant un capteur RGBD tel la Kinect \cite{tang2012}.
+%TODO? ajouter illustration reconnaissance d'objets + image Kinect
 Ainsi, le robot est capable de détecter, reconnaître et positionner l'objet par rapport au reste de l'environnement.
 
 
-\subsection{Proprioception et autres robots}
-Pour comprendre la situation, le robot doit également pouvoir comprendre la situation des agents, à commencer par lui-même. Le robot est généralement composé de plusieurs membres, lui permettant de manipuler des objets, de changer son champ de vision ou de se déplacer. Il lui est donc nécessaire de connaître la configuration de ses propres membres. Cette faculté est appelée proprioception. Sur les robots, des capteurs de position permettent de transmettre la configuration des articulations, et ainsi de connaître la posture globale du robot. En utilisant les éléments statiques et à l'aide de techniques de localisation,
-le robot peut également estimer sa position globale par rapport aux autres éléments de l'environnement.
+\subsection{Robots}
+Pour comprendre la situation, le robot doit également pouvoir comprendre la situation des agents, à commencer par lui-même. 
+Pour connaître sa situation, dans le cas où l'environnement est connu, le robot doit pouvoir se localiser dans l'environnement. Ceci est essentiel pour lui permettre de naviguer ou de se situer par rapport aux autres éléments.
+%TODO: SLAM tell more, cite paper...
+L'une des méthode ayant fait ses preuves pour localiser le robot est le SLAM (Simultaneous Localization And Mapping) qui permet à la fois d'établir une carte de l'environnement et de
+localiser le robot par rapport à cette carte.
+%En utilisant les éléments statiques et à l'aide de techniques de localisation,
+%le robot peut également estimer sa position globale par rapport aux autres éléments de l'environnement.
+
+
+Le robot est généralement composé de plusieurs membres, lui permettant de manipuler des objets, de changer son champ de vision ou de se déplacer. Il lui est donc nécessaire de connaître la configuration de ses propres membres. Cette faculté est appelée proprioception. Sur les robots, des capteurs de position permettent de transmettre la configuration des articulations, et ainsi de connaître la posture globale du robot. Le package ROS "tf"\footnote{http://wiki.ros.org/tf} peut par exemple être utilisé pour accéder aux coordonnées des articulations d'un robot, comme illustré par la figure\ref{fig:frames} où les repères des articulations d'un Pr2 sont affichées.
 
 \begin{figure}[ht!]
  \centering
   \includegraphics[width=0.59\linewidth]{./img/frames2.png} 
-  \caption {Représentation tridimensionnelle du robot pr2 avec des repères pour chacune de ses articulations}
+  \caption {Représentation des différents repères articulaires du robot Pr2 provenant de la documentation du package ROS tf.}
   \label{fig:frames}
 \end{figure}
 
-Dans le cas où l'interaction comporte plusieurs robots, il leur est possible de communiquer, à travers le réseau, leur configuration et ainsi permettre à chaque robot de pouvoir accéder directement à leurs propres données. Grâce à cela, il est possible à chaque système robotique de connaître la position et la configuration de chaque robot par rapport à l'environnement global.
+Dans le cas où l'interaction comporte plusieurs robots, différentes solutions sont possible pour connaître la configuration et la position des autres entités robotiques.
+L'une des méthodes consiste à utiliser la perception. Cette méthode étant coûteuse en calcul et pas toujours fiable, l'échange direct de données est généralement privilégié. En effet, si chaque robot connaît sa position et sa configuration par rapport à un repère commun, il leur est possible de communiquer ces informations à travers le réseau et ainsi permettre à chaque robot de pouvoir accéder directement aux données des autres. Grâce à cela, il est possible à chaque système robotique de connaître la position et la configuration de chaque robot par rapport à l'environnement global.
 
 
 \subsection{Humains}
 
-Lorsqu'un ou plusieurs humains sont présents dans l'environnement, il est essentiel pour le robot de pouvoir au moins les détecter, voir de les reconnaître.
-Tout comme le robot, l'homme possède plusieurs membres. Il est donc important de connaître la position de chaque homme mais aussi sa posture, et donc de percevoir la position de ses membres. Un capteur très utilisé pour détecter les humains est la kinect. Elle permet de connaître directement la position des différents membres de chaque humain. La figure \ref{fig:skeleton} présente la perception tridimensionnelle de la kinect et le suivi des membres de chaque humain ainsi que l'estimation de son squelette (de la position de ses membres) calculée à partir de cette perception.
+Lorsqu'un ou plusieurs humains sont présents dans l'environnement, il est essentiel pour le robot de pouvoir au moins les détecter, voire de les reconnaître.
+Tout comme le robot, l'homme possède plusieurs membres! Il est donc important de connaître la position de chaque homme mais aussi sa posture, et donc de percevoir la position de ses membres. Un capteur largement utilisé pour détecter les humains est la Kinect. Elle permet de connaître directement la position des différents membres de chaque humain. La figure \ref{fig:skeleton} présente la perception tridimensionnelle de la Kinect et le suivi des membres de chaque humain ainsi que l'estimation de son squelette (de la position de ses membres) calculée à partir de cette perception.
 
-%image kinect
+%image Kinect
 \begin{figure}[ht!]
  \centering
   \includegraphics[width=0.59\linewidth]{./img/skeleton3.jpg} 
-  \caption {Image provenant de la kinect et illustrant le suivi des humains et de leurs membres.}
+  \caption {Image provenant de la Kinect et illustrant le suivi des humains et de leurs membres réalisé par la librairie OpenNi.}
   \label{fig:skeleton}
 \end{figure}
 
@@ -327,80 +367,116 @@ De même, les équipements de capture de mouvements, tel que ceux utilisés dans
 \end{figure}
 
 
+% changer: état du monde géométrique et modélisation tridimensionnelle 
+  % => aglomération des données capteurs
+  % => definition de données standardisées
+% Représentation des connaissances sur l'environnement: facts = diverses formes de vérité:
+% état, attribut, relation spatiale...
+% Calcul des connaissances
+% Regroupement et Gestion temporelle des connaissances
+
+\section{Représentation du monde et regroupement des données}
+\label{sec:ws}
+La seconde partie de ce premier niveau d'estimation de la situation consiste à établir une "représentation" géométrique du monde qui entoure le robot. Une fois que le système robotique peut accéder aux données de perception issues des capteurs lui permettant d'obtenir la configuration des divers éléments qui composent l'environnement, il est nécessaire, pour en extraire les informations pertinentes, de regrouper, combiner et interpréter les données. Pour ce faire, il faut dans un premier temps regrouper les données de position dans un repère commun afin que le robot puisse avoir une représentation globale de la scène. En effet, selon le capteur utilisé la position des éléments peut se faire dans le repère du capteur, du robot ou directement dans un repère global. La figure
+% TODO: redo figure
+\ref{fig:real} illustre cette unification avec une représentation en trois dimensions des divers éléments de l'environnement tel qu'ils sont perçus par le robot.
 
 
 
-\section{Calculs géométriques}
-\label{sec:calculs}
-\subsection{Modèle tridimensionnel et calculs de faits}
-\label{sec:facts}
-
-Une fois que le système robotique peut accéder aux données lui permettant d'obtenir la configuration de l'environnement et des divers éléments qui le composent, il est nécessaire, pour en extraire les informations pertinentes, de croiser les données. Pour ce faire, il faut dans un premier temps regrouper les données de position dans un repère commun afin que le robot puisse avoir une représentation globale de la scène. La figure \ref{fig:real} illustre cette unification avec une représentation en trois dimensions des divers éléments de l'environnement tel qu'ils sont perçus par le robot.
-
+% TODO: expliquer mieux, référence à plus tard
 \begin{figure}[ht!]
  \centering
   \includegraphics[width=0.99\linewidth]{./img/real.jpg} 
-  \caption {Exemple d'environnement d'interaction homme robot (à gauche), et la représentation tridimensionnelle de cette même scène tel qu'elle est perçue par le robot (à droite)}
+  \caption {Exemple d'environnement d'interaction homme robot (à gauche), et la représentation tridimensionnelle de cette même scène tel qu'elle est perçue par le robot (à droite).}
   \label{fig:real}
 \end{figure}
 
 
 L'unification des données capteur va permettre au système de maintenir un état du monde tridimensionnel comme dans la figure \ref{fig:real}. Pour améliorer le suivi de l'état du monde notamment au niveau des positions des divers éléments, il est parfois nécessaire d'établir un raisonnement basé sur des hypothèses, par exemple pour éviter de perdre la position d'un objet lorsqu'il n'est plus perçu. Ces raisonnements et hypothèses reposant sur des calculs géométriques et sur l'évaluation de la situation, ils seront présentés plus tard (en section \ref{sec:hypo}). 
 
-La construction et le maintien du modèle tridimensionnel par agrégation des données provenant des divers capteurs va permettre de créer des liens symboliques entre les différents éléments de l'environnement. Dans notre système, nous représentons l'état du monde symbolique par une liste de \textit{faits}. Un \textit{fait} est traduit par une structure de données contenant divers champs que nous allons énumérés.
+La construction et le maintien du modèle tridimensionnel par agrégation des données provenant des divers capteurs va permettre de calculer des relations entre les différents éléments de l'environnement.
+D'un point de vue architectural, le module chargé de l'unification des données capteurs est donc le module au près du quel d'autres modules vont récupérer les données de position des éléments de l'environnement, notamment les modules d'estimation de la situation mais également d'autres tel la planification de mouvement. Il est donc important qu'il définisse les structures de données permettant de représenter l'état du monde géométrique et qu'il les rende accessibles ou les distribue aux autres modules qui en ont besoin pour raisonner sur l'environnement. Ces problématiques relèvent de l'implémentation et seront donc discutées en section \ref{sec:PDG}.
+
+
+\section{Connaissances sur l'environnement et calculs géométriques}
+\label{sec:calculs}
+\subsection{Représentation de la connaissance}
+\label{sec:facts}
+
+Pour accéder au niveau deux de connaissance de la situation décrit par Ensley, le robot doit pouvoir établir des connexions entre les divers éléments de l'environnement, connaître leur état, leur mouvements... Pour acquérir ces connaissances il est nécessaire au robot de raisonner sur la représentation du monde qu'il a construit et qu'il maintien à jour. Idéalement il doit également être capable de raisonner non seulement sur les relations spatiales et les états des éléments de l'environnement, mais également sur l'évolution de ces éléments (prise en compte de l'aspect temporel). Une fois que ces vérités relatives à l'environnement ont été calculées, le robot doit pouvoir les représenter pour les utiliser lors de la planification de tâche, de la prise de décision ou lors de dialogue avec l'homme.
+
+Nous définissons donc un formalisme pour représenter tout ces types de vérités concernant les divers éléments de l'environnement.
+Dans notre système, nous représentons l'état de connaissance du robot, aussi appelé état du monde symbolique, par une liste de \textit{faits}. Un \textit{fait} est la représentation d'une connaissance sur l'environnement traduit par une structure de données contenant divers champs. Le fait contient toujours au moins une propriété qui peut décrire l'état d'une entité, un attribut, une relation entre entité, une affordance ou tout autre vérité se rapportant à un élément de l'environnement.
+Afin de décrire plus en détail cette structure de données essentielles pour notre architecture, nous énumérons ci-dessous les divers champs possibles. 
 
 \begin{itemize}
 \item \textit{Subject}: le sujet sur lequel la propriété s'applique. Il peut s'agir d'un agent (humain ou robotique), d'un objet ou du membre d'un agent (e.g.: \textit{Red\_Mug}, \textit{Human1}, \textit{PR2\_ROBOT}, \textit{Human1\_Right\_Hand}).
-\item \textit{Property}: la propriété attachée au sujet du fait (\textit{Subject}) (e.g.: \textit{isOn}, \textit{isFull}, \textit{isMoving}, \textit{isPointing}, \textit{canSee}).
-\item \textit{Target}: il se peut que la propriété relie l'entité-sujet \textit{Subject} avec une entité-cible \textit{Target}. Par exemple, si une entité \textit{RED\_BOOK} se trouve sur une entité \textit{KITCHEN\_TABLE}, \textit{RED\_BOOK} sera alors le sujet du fait tandis que \textit{KITCHEN\_TABLE} sera la cible.
+\item \textit{Property}: la propriété attachée au sujet du fait (\textit{Subject}). Il peut s'agir d'une relation entre l'entité-sujet (\textit{Subject}) et l'entité-cible (\textit{Target}), d'un état ou un attribut du sujet ou plus généralement de toute vérité pouvant s'y rapporter.  Par exemple les propriétés suivantes sont utilisées dans TOASTER: \textit{isOn}, \textit{isFull}, \textit{isMoving}, \textit{isPointing}, \textit{canSee}, \textit{hasPosture}.
+\item \textit{Target}: il se peut que la propriété soit une relation qui lie l'entité-sujet \textit{Subject} avec une entité-cible \textit{Target}. Par exemple, si une entité \textit{RED\_BOOK} se trouve sur une entité \textit{KITCHEN\_TABLE}, \textit{RED\_BOOK} sera alors le sujet du fait tandis que \textit{KITCHEN\_TABLE} sera l'entité-cible.
 \item \textit{PropertyType}: ce paramètre définit la catégorie dans laquelle on peut classer la propriété. Il peut s'agir par exemple d'une propriété de position, d'état, de mouvement, de posture ou d'accessibilité. En utilisant ce paramètre, lorsqu'un module extérieur ajoute un fait dont la propriété est inconnue, il reste possible de savoir quel type de propriété est décrite par ce fait. Cela permet également d'appliquer certains traitements aux faits en fonction de leur type.
 \item \textit{Value}: selon la propriété, il est possible qu'une valeur y soit rattachée. Par exemple, la propriété décrivant l'état d'un container \textit{isFull} ou le déplacement d'une entité \textit{isMoving} peuvent prendre la valeur \textit{TRUE} ou \textit{FALSE}. Un autre exemple, si on représente la distance entre deux membres, comme la main (ou pince) du robot et la tête de l'homme, le paramètre \textit{Value} peut contenir la valeur \textit{DANGER}, \textit{CLOSE} ou \textit{FAR}. Dans certains cas, il est également possible de donner une valeur numérique à ce paramètre.
-Dans d'autres cas, pour représenter le manque de connaissances sur une propriété et la "conscience" de ce manque, la valeur du fait peut aussi être \textit{unknown}.
-\item \textit{Confidence}: ce chiffre entre 0 et 1 représente la fiabilité du fait. Cette valeur peut être liée à la fiabilité des capteurs ou résulter du calcul de la propriété.
-\item \textit{Time}: ce paramètre permet d'enregistrer le moment auquel la propriété a été calculée.
+Dans d'autres cas, pour représenter le manque de connaissances sur une propriété et le fait que ce manque est connu, la valeur du fait peut aussi être \textit{unknown}.
+\item \textit{Confidence}: ce nombre entre 0 et 1 représente la fiabilité du fait. Cette valeur peut être liée à la fiabilité des capteurs ou résulter du calcul de la propriété.
+\item \textit{Time}: ce paramètre permet d'enregistrer le moment auquel la propriété a été produite (calculée ou perçue).
 \item \textit{FactObservability}: ce dernier paramètre représente la probabilité qu'un humain acquière la connaissance du fait s'il est capable de voir le sujet du fait. Plus de détails sur ce paramètres seront donnés dans le chapitre suivant.
 \end{itemize}
 
 Par exemple, le vecteur 
 %TODO Make this as a table?
-$<$ $Subject = Bob\_Right\_Hand$, $Property = isMovingToward$, $Target = HP\_Book$, $PropertyType = motion$, $Confidence = 0.8$, $time = 145571646570$, $FactObservability = 0.7$ $>$ représente le fait qu'à un temps \textit{time}, le bras droit de l'agent Bob (\textit{Bob\_Right\_Hand}) se dirige vers le livre "Harry Potter" (\textit{HP\_Book}).
+$<$ $Subject = Dan$, $Property = isMovingToward$, $Target = TABLE_4$, $PropertyType = motion$, $Confidence = 0.8$, $time = 146962814568$, $FactObservability = 0.7$ $>$ représente le fait qu'à un temps \textit{time}, l'agent \textit{Dan} se dirige vers la table du salon (\textit{TABLE\_4}). La situation dans laquelle ce fait est produit est illustrée par l'image \ref{fig:fact}.
+Un autre exemple de fait correspondant à la même illustration représentant le fait que Dan est dans le salon (la zone \textit{Livingroom} en rose) prendra les champs suivants:
+$<$ $Subject = Dan$, $Property = isInRoom$, $Target = Livingroom$, $PropertyType = position$, $Confidence = 0.9$, $time = 146962814568$, $FactObservability = 0.9$ $>$
+
+
+\begin{figure}[ht!]
+ \centering
+  \includegraphics[width=0.99\linewidth]{./img/towardTbl.jpg} 
+  \caption {Image issue de la visualisation de l'environnement et des faits dans le module de visualisation Rviz. Le fait que Dan se déplace vers la table \textit{TABLE\_4} est représenté par une flèche rouge.}
+  \label{fig:fact}
+\end{figure}
+
 Les sections suivantes décrivent les raisonnements géométriques et temporels 
 permettant de produire ce genre de faits.
 
+\subsection{Calculs de faits}
 
-\subsection{Zones}
+%TODO
+%blabla
+
+\subsubsection{Utilisation de zones sémantiques}
 \label{sec:zones}
 
 Pour avoir une première estimation de la situation, il est possible dans un premier temps de regarder l'emplacement des divers éléments. Pour ce faire, nous utilisons des zones ayant une signification sémantique particulière pour avoir une première catégorisation de la situation en fonction de la répartition des éléments par rapport à ces zones.
 
-Nous définissons comme zone un emplacement délimité de l'environnement ayant une signification particulière. Ces zones peuvent être bidimensionnelles ou tridimensionnelles selon l'utilisation qui en est faite. Ces zones peuvent être statiques ou dynamiques et sont paramétrables. Les paramètres permettant de définir ces zones sont:
+Nous définissons comme zone un emplacement délimité de l'environnement ayant une signification particulière. Ces zones peuvent être bidimensionnelles ou tridimensionnelles selon l'utilisation qui en est faite. Ces zones peuvent être statiques, c'est à dire liées à une position fixe dans le repère global de l'interaction, ou dynamiques, c'est à dire que la position et l'orientation de la zone est liée à un élément dynamique de l'environnement et évolue donc avec la position et l'orientation de cet élément. Pour avoir une définition générique des zones et une utilisation s'adaptant aux différents cas d'usage possible, ces zones sont paramétrables. Les paramètres permettant de définir ces zones sont:
 \begin{itemize}
 \item le type de la zone: ce paramètre permet de catégoriser la zone. Ainsi une zone peut-être une pièce (comme une chambre, un salon...), une zone d'interaction avec un agent (par exemple en face de l'agent en question), une zone de danger...
 Ce paramètre permet donc de donner un contexte sémantique à la zone concernée en l'associant à une catégorie.
 \item le type d'éléments concernés par cette zone: une zone peut concerner que certains éléments de l'environnement. Ce paramètre permet de définir quel type d'éléments doivent être considérés. Il peut s'agir de toutes les entités (objets, et agents), ou simplement des agents ou d'un seul type d'entité (humain, robot ou objet). Les éléments ne faisant pas partie de la catégorie choisie seront ignorés des calculs effectués en lien avec cette zone.
-\item le type de calcul lié à cette zone: ce paramètre permet de définir quels calculs doivent être fait. Ces calculs seront appliqués aux éléments concernés et se trouvant à l'intérieur de la zone.
-\item le "propriétaire" de cette zone: une zone peut avoir un "propriétaire". Cela signifie que la zone sera "liée" à l'entité désignée comme propriétaire de la zone.  La position et l'orientation de la zone seront mis à jour avec la position et l'orientation de son propriétaire. Ainsi, il est possible de définir une zone d'interaction liée au robot par un trapèze positionné devant celui-ci. Si le robot bouge, la zone bougera avec lui pour toujours rester devant lui.
+\item le type de calcul lié à cette zone: ce paramètre permet de définir quels calculs doivent être fais. Ces calculs seront appliqués aux éléments concernés et se trouvant à l'intérieur de la zone.
+\item le "propriétaire" de cette zone: une zone peut avoir un "propriétaire". Si un propriétaire est défini, la zone est alors une zone dynamique dont la position et l'orientation évoluera avec la position et l'orientation de l'entité désignée comme propriétaire. Par exemple, il est possible de définir une zone d'interaction liée au robot par un trapèze positionné devant celui-ci. Si le robot bouge, la zone bougera avec lui pour toujours rester devant lui.
 \end{itemize}
 
-Pour reprendre l'exemple précédent, il est possible de définir une zone d'interaction devant le robot pour savoir si un humain se trouve dans cette zone et activer conditionnellement certains calculs, tel que l'orientation de l'humain pour savoir si celui-ci est dans une configuration permettant l'interaction.
+Pour reprendre l'exemple précédent et pour illustrer les différents paramètres, il est possible de définir une zone d'interaction devant le robot pour savoir si un humain se trouve dans cette zone et activer conditionnellement certains calculs, tel que l'orientation de l'humain pour savoir si celui-ci est dans une configuration permettant l'interaction.
 La zone aura alors le vecteur de paramètres <\textit{interaction, humans, orientation, robot}>
-Cette zone est illustrée par la figure \ref{fig:interaction} par une zone violette.
-Dans l'exemple illustré, les faits (simplifiés ici) \textit{bob isInArea interaction} et \textit{bob isFacing pr2} sont créés. Le robot (\textit{pr2}) peut donc en déduire qu'il lui est directement possible de parler à \textit{bob} mais pas à \textit{greg} (il devra par exemple commencer par l'appeler).
+Cette zone est illustrée par la figure \ref{fig:interaction} par une zone en jaune.
+Dans l'exemple illustré, les faits (simplifiés ici) \textit{bob isInArea interaction} et \textit{bob isFacing PR2\_ROBOT} sont créés. Le robot (\textit{PR2\_ROBOT}) peut donc en déduire qu'il lui est directement possible de parler à \textit{Alexia} mais pas à \textit{Dan} (il devra par exemple commencer par l'appeler).
 
 
 \begin{figure}[ht!]
  \centering
   \includegraphics[width=0.69\linewidth]{./img/interactionarea.jpg} 
-  \caption {Zone liée au robot Pr2 pour savoir si un humain est dans sa zone d'interaction. Ici bob se trouve dans la zone, le robot va donc calculer si celui-ci lui fait face}
+    \caption {Zone liée au robot Pr2 pour savoir si un humain est dans sa "zone d'interaction". Ici Alexia se trouve à l'intérieur de la zone et donc à un emplacement propice pour interagir avec le robot. Le robot va donc calculer si celle-ci lui fait face afin par exemple d'entamer un dialogue.}
   \label{fig:interaction}
 \end{figure}
 
 Ces zones peuvent être créées, mises à jour et supprimées pendant l'interaction (par exemple par le superviseur) et sont utiles pour avoir une première discrimination de la situation et des calculs conditionnels.
 
 
-\subsection{Agencement}
+\subsubsection{Agencement des objets}
 \label{sec:agencement}
-Pour pouvoir passer d'une représentation numérique à une représentation symbolique de l'environnement qui entoure le robot, il est nécessaire d'avoir, dans l'infrastructure logicielle du robot, un composant qui calcule les relations spatiales entre les objets. Ce composant fait une représentation tridimensionnelle de l'environnement en utilisant les données de position et d'orientation des différents éléments et leur mise à jour en temps réel pour tenir compte de l'état du monde courant. À partir de cette représentation 3d de l'état du monde, il calcule des propriétés d'agencement spatiale pour décrire la situation des objets.
+%TODO: développer un peu plus, lister les faits...
+Pour pouvoir passer d'une représentation numérique à une représentation symbolique de l'environnement qui entoure le robot, il est nécessaire d'avoir, dans l'infrastructure logicielle du robot, un composant qui calcule les relations spatiales entre les objets. Pour ce faire, ce composant utilise les modèles tridimensionnels des différents éléments stockés en mémoire pour effectuer une représentation tridimensionnelle de l'environnement. Les modèles des différents éléments sont positionnés en utilisant les données de position et d'orientation de ces éléments et leur mise à jour en temps réel pour tenir compte de l'état du monde courant (issu du processus décrit en \ref{sec:ws}. À partir de cette représentation 3d de l'état du monde, il calcule des propriétés d'agencement spatiale pour décrire la situation des objets.
 
 Ce composant permet de calculer si un objet O1 se trouve au dessus d'un autre objet O2 (\textit{O1 isOn O2}), dans un objet O2 (\textit{O1 isIn O2}) ou à côté d'un objet O2 (\textit{O1 isNextTo O2}) comme illustré par la figure \ref{fig:spar}. Les détails de calculs et la méthode d'implémentation proviennent de travaux précédents et sont décrits dans \cite{sisbot2011situation}.
 
@@ -413,20 +489,21 @@ Ce composant permet de calculer si un objet O1 se trouve au dessus d'un autre ob
 \end{figure}
 
 
-\subsection{Situation des agents}
+\subsubsection{Situation des agents}
 \label{sec:situationAgents}
 
 Quand le robot doit accomplir une tâche collaborative avec d'autres agents, et notamment avec des humains, il est primordial pour le système robotique d'identifier les activités humaines. Pour ce faire, nous utilisons un composant qui permet de surveiller chaque agent en utilisant des calculs de faits concernant les déplacements, la posture et la distance par rapport à certains points d'intérêt.
 
 Le composant permettant de calculer ces faits enregistre en permanence les positions des entités, et ce pour une courte période de temps (quelques secondes). Afin de pouvoir stocker ces données temporairement et de les renouveler, nous avons créé une structure de données appelée buffer ciculaire temporel (time stamped circular buffer). La différence avec les buffers circulaires traditionnels est que les données y sont labellisées en fonction d'un marqueur temporel et qu'il est possible d'y accéder en utilisant le temps qui leur a été attribué. Ceci permet d'accéder à la donné de position des entités à un temps donné (moyennant de ne pas dépasser la taille du buffer).
 
-Comme le suivi d'un agent peut s'avérer pertinent seulement dans certaines situations, le calcul des faits concernant n'importe quel agent peut être activé ou désactivé par requête. Ceci permet d'éviter de calculer en permanence des faits concernant tout les agents en ciblant seulement les agents qui se trouvent dans une situation nécessitant un suivi particulier.
-Il est également possible de faire une requête pour activer le calcul de faits concernant un ou plusieurs des membres d'un agent. Lorsque le suivit d'un agent est activé, le composant calcul le déplacement de l'agent à partir des données présentes dans le buffer circulaire associé, afin de déterminer si l'agent est en train de se déplacer. En utilisant le buffer circulaire associé à l'agent et ceux associés aux autres entités, il est possible de calculer si l'agent se déplace en direction d'une entité en particulier (même si cette dernière est également en cours de déplacement) et l'évolution temporelle de la distance entre l'agent et un point d'intérêt. Ce calcul peut être aussi bien fait sur la position globale de l'agent ou sur l'un de ses membres (par exemple sur la main de l'homme).
+Comme le suivi d'un agent peut s'avérer pertinent seulement dans certaines situations, le calcul des faits concernant n'importe quel agent peut être activé ou désactivé par n'importe quel autre module (en utilisant par exemple un système de requête). Ceci permet d'éviter de calculer en permanence des faits concernant tout les agents en ciblant seulement les agents qui se trouvent dans une situation nécessitant un suivi particulier.
+Il est également possible d'activer le calcul de faits concernant un ou plusieurs des membres d'un agent. Lorsque le suivit d'un agent est activé, le composant calcul le déplacement de l'agent à partir des données présentes dans le buffer circulaire associé, afin de déterminer si l'agent est en train de se déplacer. En utilisant le buffer circulaire associé à l'agent et ceux associés aux autres entités, il est possible de calculer si l'agent se déplace en direction d'une entité en particulier (même si cette dernière est également en cours de déplacement) et l'évolution temporelle de la distance entre l'agent et un point d'intérêt. Ce calcul peut être aussi bien fait sur la position globale de l'agent ou sur l'un de ses membres (par exemple sur la main de l'homme).
 En plus du mouvement, nous calculons également les distances entre les agents surveillés (respectivement les membres surveillés) et les autres entités.
 De cette manière il est possible de savoir si un humain, ou l'un de ses membres, est proche d'un point d'intérêt (comme le robot ou un objet avec lequel il veut interagir).
 Par exemple, ce module peut produire les faits (simplifiés ici) <\textit{HUMAN1 isMoving TRUE}> pour indiquer que l'humain \textit{HUMAN1} est en mouvement ou <\textit{HUMAN1\_RIGHT\_HAND isMovingToward BLUE\_BOOK}> pour indiquer que la main droite de l'humain se dirige en direction du livre bleu.
+%TODO: expliquer limitation car en ligne droite
 
-Le dernier type de fait concerne la posture de l'agent. En utilisant le buffer circulaire il est possible de savoir vers quoi l'humain pointait le doigt à un instant donné. Ceci peut être utile par exemple pour un module de fusion d'un système de dialogue. Ainsi, si un humain demande au robot "donne-moi ça", si la reconnaissance de parole est capable de fournir le temps pour lequel le mot "ça" a été prononcé, il est possible de faire une requête pour savoir quel objet était pointé par l'humain au moment où il a prononcé le mot "ça". Pour alléger la charge de calcul, ce fait est calculé seulement par requête (et non en permanence comme les autres). La requête renvoie une liste d'entités avec une probabilité pour chaque candidat potentiellement pointé.
+Le dernier type de fait concerne la posture de l'agent. En utilisant le buffer circulaire il est possible de savoir vers quoi l'humain pointait le doigt à un instant donné. Ceci peut être utile par exemple pour un module de fusion d'un système de dialogue. Ainsi, si un humain demande au robot "donne-moi ça", si la reconnaissance de parole est capable de fournir le temps pour lequel le mot "ça" a été prononcé, il est possible de demander au module quel(s) objet(s) étai(en)t pointé(s) par l'humain au moment où il a prononcé le mot "ça". Pour alléger la charge de calcul, ce fait est calculé seulement sur demande (et non en permanence comme les autres). Le module renvoie une liste d'entités avec une probabilité pour chaque candidat potentiellement pointé.
 
 
 
@@ -434,7 +511,7 @@ Le dernier type de fait concerne la posture de l'agent. En utilisant le buffer c
 \section{Hypothèses pour le maintien de l'état du monde}
 \label{sec:hypo}
 \subsection{Hypothèses de position}
-%Put this in objects?
+%Put this in maintien du monde 3D?
 %9.2 p 213 of handbook
 % que faire lors de contradiction entre connaissance et perception?
 % solution = faux positifs faible ou inexistant => perception privilégiée
@@ -569,7 +646,7 @@ L'un des avantages de TOASTER repose sur sa généricité et son adaptabilité g
 \subsection{Collecte de données et généricité}
 \label{sec:PDG}
 Pour que l'infrastructure logicielle soit utilisable avec n'importe quelle configuration de capteurs, un premier module permet de collecter toutes les données et de les mettre au format TOASTER. Tous les autres modules utiliseront ensuite l'état du monde au format exporté par ce module. Ce module chargé de collecter les données des divers capteurs est appelé \textit{PDG} pour Perceived Data Gathering.
-Il permet à l'heure actuelle de gérer quatre types d'entrées pour l'homme, deux pour les objets, deux modèles de robot. Il gère également deux types de messages d'entrée: le ROS\footnote{http://www.ros.org/} et le pocolibs\footnote{https://www.openrobots.org/wiki/pocolibs}.
+Il permet à l'heure actuelle de gérer quatre types d'entrées pour l'homme, deux pour les objets, deux modèles de robot. Il gère également, à l'heure actuelle, la lecture de deux types de messages: les topics ROS\footnote{http://www.ros.org/} et les posters pocolibs \footnote{https://www.openrobots.org/wiki/pocolibs}.
 
 Un autre avantage de ce module est également sa simplicité d'extension. Ainsi, grâce au système d'héritage du C++ il est possible d'ajouter une entrée capteur pour détecter des objets, pour suivre l'homme ou un modèle de robot en seulement 50 à 200 lignes de code C++ (estimation basée sur les entrées déjà existantes).
 Au démarrage du module ou à tout moment de l'interaction, il est possible de (re)configurer se module pour modifier les entrées à prendre en compte.
@@ -579,14 +656,14 @@ Par exemple, il est possible d'utiliser les capteurs d'un robot réel ainsi que 
 Le module \textit{PDG} permet donc une grande flexibilité dans la configuration des données d'entrées. En exportant l'état du monde dans un format unique et invariable, \textit{PDG} permet aux autres modules TOASTER de s'abstraire de cette diversité et de conserver les mêmes formes de raisonnement, indépendamment de la configuration des capteurs et des données d'entrées de TOASTER.
 
 \subsection{Outils de développement}
-Pour aider au développement de nouvelles fonctionnalités et à la configuration de scénarios, un module de visualisation a été ajouté à l'infrastructure TOASTER. Ce module utilise le rviz\footnote{http://wiki.ros.org/rviz} pour afficher les différents éléments en trois dimensions, ce qui permet de comprendre la situation en affichant l'état du monde. Chaque entité est associée à un modèle 3D qui est positionné dans un environnement virtuel à la position et à l'orientation données par le module PDG. Le module affiche également les noms de chaque entité au dessus de leur modèle 3D. 
+Pour aider au développement de nouvelles fonctionnalités et à la configuration de scénarios, un module de visualisation a été ajouté à l'infrastructure TOASTER. Ce module utilise le système de visualisation intégré à ROS, Rviz\footnote{http://wiki.ros.org/rviz} pour afficher les différents éléments en trois dimensions, ce qui permet de comprendre la situation en affichant l'état du monde. Chaque entité est associée à un modèle 3D qui est positionné dans un environnement virtuel à la position et à l'orientation données par le module PDG. Le module affiche également les noms de chaque entité au dessus de leur modèle 3D. 
 Le module permet également d'afficher les différentes zones présentes dans le module de gestion de zone (\textit{area\_manager}) avec leurs noms, comme présentée sur la figure \ref{fig:interaction}.
 Concernant les faits exportés par le module de suivi d'agents (\textit{agent\_monitoring}), afin d'éviter la surcharge de l'interface, le fait \textit{isMoving} rend l'affichage du nom de l'agent plus intense selon si le système considère qu'il bouge. La donnée numérique de sa vitesse associée à ce fait permet également de faire varier cette intensité. Pour le fait \textit{isMovingToward}, une flèche reliant l'agent à l'entité vers laquelle il se déplace est tracée. L'intensité de la couleur de cette flèche varie également en fonction de l'indice de confiance du fait associé. Ce retour visuel est illustré par un exemple à la figure \ref{fig:moving}
 
 \begin{figure}[ht!]
  \centering
   \includegraphics[width=1.0\linewidth]{./img/movingToward.jpg} 
-  \caption {Affichage dans rviz des faits liés au module \textit{agent\_monitoring}. La flèche rouge indique ce fait calculé en terme de différentiel de distance alors que la flèche verte indique ce même fait en terme de direction de trajectoire. Sur l'image A et B \textit{Greg} se déplace vers \textit{Bob} ainsi que vers un objet (\textit{LOTR\_TAPE}). Sur l'image A et de façon plus prononcée sur l'image B, les flèches allant vers \textit{LOTR\_TAPE} sont plus sombres, indiquant que la confidence pour ce candidat est moins grande que pour \textit{Bob}. En C Greg s'est arrêté. Les flèches de directions sémantiques ont disparues et le nom de Greg s'est assombri (pour devenir comme celui de Bob qui est immobile).}
+  \caption {Affichage dans Rviz des faits liés au module \textit{agent\_monitoring}. La flèche rouge indique ce fait calculé en terme de différentiel de distance alors que la flèche verte indique ce même fait en terme de direction de trajectoire. Sur l'image A et B \textit{Greg} se déplace vers \textit{Bob} ainsi que vers un objet (\textit{LOTR\_TAPE}). Sur l'image A et de façon plus prononcée sur l'image B, les flèches allant vers \textit{LOTR\_TAPE} sont plus sombres, indiquant que la confidence pour ce candidat est moins grande que pour \textit{Bob}. En C Greg s'est arrêté. Les flèches de directions sémantiques ont disparues et le nom de Greg s'est assombri (pour devenir comme celui de Bob qui est immobile).}
   \label{fig:moving}
 \end{figure}
 
@@ -594,7 +671,7 @@ Cette visualisation permet de comprendre l'état du monde tel qu'il est perçu p
 
 %It uses the position of the entities published by the data gathering component and the areas published by the area manager component as shown in Fig.~\ref{fig:simu} and Fig.~\ref{fig:spencer}. In a future work, we would like to improve this visualization by adding the rendering of other facts, such as the one generated by the agent monitoring component.
 
-Un autre composant déjà évoqué dans la partie \ref{sec:PDG}, permettant de rapidement paramétrer et tester des expérimentations est le module de test \textit{toaster\_simu}. Grâce à ce module, il est possible par une simple requête d'ajouter et positionner des entités dans l'environnement. Il est également possible de contrôler ces entités par une interface clavier. Le module exportera alors en temps réel les données liées à l'état du monde créé par l'utilisateur et ces données seront lues par le module PDG. Il est donc possible, à partir d'un simple script envoyant quelques requêtes, de configurer un environnement d'interaction avec des robots, des humains et des objets. Des scripts python pour configurer un environnement de simulations sont disponibles à titre d'exemple\footnote{https://github.com/Greg8978/toaster-scripts}.
+Un autre composant déjà évoqué dans la partie \ref{sec:PDG}, permettant de rapidement paramétrer et tester des expérimentations est le module de test \textit{toaster\_simu}. Grâce à ce module, il est possible par une simple requête d'ajouter et positionner des entités dans l'environnement. Il est également possible de contrôler ces entités par une interface clavier. Le module exportera alors en temps réel les données liées à l'état du monde créé par l'utilisateur et ces données seront lues par le module PDG. Il est donc possible, à partir d'un simple script envoyant quelques requêtes, de configurer un environnement d'interaction avec des robots, des humains et des objets. Des scripts Python pour configurer un environnement de simulations sont disponibles à titre d'exemple\footnote{https://github.com/Greg8978/toaster-scripts}.
 
 
 \subsection{Architecture globale}
@@ -634,7 +711,7 @@ L'idée est de créer trois zones de guidage autour du robot pour savoir si la c
 Les trois zones sont appelées \textit{slow}, \textit{following} et \textit{pushing} et sont configurées comme indiqué dans la figure \ref{fig:spencer}.
 L'idée est que, (1) si l'un des membres du groupe est dans la zone \textit{slow} (loin du robot) le robot \textit{ralentit}. (2) Si 1) est faux et la majorité du groupe est dans la zone \textit{pushing} (proche ou sur les côtés du robot) le robot \textit{accélère}. (3) Si 1) et 2) sont fausses, signifiant qu'à la fois aucun humain ne se trouve dans la zone \textit{slow} et que la majorité des humains se trouvent dans la zone \textit{following}, le robot \textit{continue} avec la même allure.
 
-Le deuxième type de zones est statique, lié à une position de l'environnement, et déclenche des calculs sur les humains s'y trouvant. Ces calculs concernent les distances, le mouvement et l'orientation par rapport à un point d'intérêt (comme par exemple un écran). En utilisant ces zones, le système peut détecter l'activité humaine (par exemple que l'humain regarde un écran d'information ou l'humain se dirige vers les toilettes). Cette estimation de la situation donne au robot la capacité de détecter quand un ou plusieurs des humains du groupe guidé, est investi dans une activité temporaire. Le robot peut ensuite distinguer entre les situations où il devrait abandonner le guidage de certains usagers de situations où il devrait attendre les humains, voir même les aider de façon pro-active (par exemple proposer des informations s'il détecte qu'un humain regarde un panneau d'informations).
+Le deuxième type de zones est statique, lié à une position de l'environnement, et déclenche des calculs sur les humains s'y trouvant. Ces calculs concernent les distances, le mouvement et l'orientation par rapport à un point d'intérêt (comme par exemple un écran). En utilisant ces zones, le système peut détecter l'activité humaine (par exemple que l'humain regarde un écran d'information ou l'humain se dirige vers les toilettes). Cette estimation de la situation donne au robot la capacité de détecter quand un ou plusieurs des humains du groupe guidé, est investi dans une activité temporaire. Le superviseur peut ensuite distinguer entre les situations où il devrait abandonner le guidage de certains usagers de situations où il devrait attendre les humains, voir même les aider de façon pro-active (par exemple proposer des informations s'il détecte qu'un humain regarde un panneau d'informations).
 
 %This situation assessment gives, to the robot, the capacity to detect that one or more of the human followers are involved in a temporary activity. The robot can then disambiguate between situation where it should give up on guiding and situation where it should wait for the humans, or even proactively help the humans involved in the activity.
 
