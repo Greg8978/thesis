@@ -276,6 +276,8 @@ présentent des exemples d'utilisation de ce genre de systèmes.
 Les applications pour le raisonnement spatial \cite{OKeefe1999} sont multiples. Par exemple, cela a été utilisé pour le traitement du langage naturel pour des applications tel que la reconnaissance de direction \cite{Kollar10,Matuszek10}
 ou le fondement du langage (language grounding) \cite{Tellex10}. \cite{Skubic2004} présente un raisonneur spatial intégré dans un robot qui calcule la position symbolique des objets.
 
+%TODO: talk about knowrob?
+
 %Put this in conclusion?
 Nos travaux peuvent également être comparés aux travaux de Heinz \cite{heintz2009dyknow}, dans le sens où contrairement à beaucoup d'applications robotique, nous ne cherchons pas à relier des capteurs à un raisonneur pour une application particulière (de façon "had-hoc") mais nous cherchons à créer une infrastructure logicielle permettant le raisonnement sur l'environnement du robot pour divers applications d'interaction homme-robot et pour combler l'écart entre les données capteurs et le raisonnement symbolique. Heinz définit le terme de "knowledge processing middleware"\cite{heintz2008knowledge}, ou intergiciel de traitement de données, comme étant "un infrastructure logicielle systématique et fondée sur des principes pour combler le fossé entre détection et de raisonnement dans un agent physique". Ainsi, nos travaux répondent à de nombreuses caractéristiques requises pour être considéré comme un intergiciel de traitement de données. En effet, Heinz déclare qu'une telle infrastructure doit fournir à la fois un aspect conceptuel et une implémentation permettant d'intégrer une large variété de fonctionnalité et de gestion de l'information. Ainsi, Heinz dans \cite{heintz2010bridging} décrit DyKnow. DyKnow est un intergiciel (ou middleware) de traitement de connaissances basé sur des flux. Le but de DyKnow est de combler l'écart entre "les données sur le monde collectées généralement au près des capteurs et les données supposées disponibles qui sont utilisées par les fonctionnalités délibératives".
 
@@ -516,7 +518,7 @@ En plus du mouvement, nous calculons également les distances entre les agents s
 De cette manière il est possible de savoir si un humain, ou l'un de ses membres, est proche d'un point d'intérêt (comme le robot ou un objet avec lequel il veut interagir).
 Par exemple, ce module peut produire les faits (simplifiés ici) <\textit{HUMAN1 isMoving TRUE}> pour indiquer que l'humain \textit{HUMAN1} est en mouvement ou <\textit{HUMAN1\_RIGHT\_HAND isMovingToward BLUE\_BOOK}> pour indiquer que la main droite de l'humain se dirige en direction du livre bleu.
 
-Le dernier type de fait concerne la posture de l'agent. En utilisant le buffer circulaire il est possible de savoir vers quoi l'humain pointait le doigt à un instant donné. Ceci peut être utile par exemple pour un module de fusion d'un système de dialogue. Ainsi, si un humain demande au robot "donne-moi ça", si la reconnaissance de parole est capable de fournir le temps pour lequel le mot "ça" a été prononcé, il est possible de demander au module quel(s) objet(s) étai(en)t pointé(s) par l'humain au moment où il a prononcé le mot "ça". Pour alléger la charge de calcul, ce fait est calculé seulement sur demande (et non en permanence comme les autres). Le module renvoie une liste d'entités avec une probabilité pour chaque candidat potentiellement pointé.
+Le dernier type de fait concerne la posture de l'agent. En utilisant le buffer circulaire il est possible de savoir vers quoi l'humain pointait le doigt à un instant donné. Ceci peut être utile par exemple pour un module de fusion d'un système de dialogue. Ainsi, si un humain demande au robot "donne-moi ça", si la reconnaissance de parole est capable de fournir le temps pour lequel le mot "ça" a été prononcé, il est possible de demander au module quel(s) objet(s) étai(en)t pointé(s) par l'humain au moment où il a prononcé le mot "ça". Pour alléger la charge de calcul, ce fait est calculé seulement sur demande (et non en permanence comme les autres). Le module utilise la position de la main de l'agent par rapport à son épaule pour calculer la direction de pointage. Tous les éléments se trouvant dans cette direction, à un angle d'erreur prêt, sont renvoyés dans une liste d'entités avec un indice de confidence basé sur l'angle de déviation par rapport à la direction pointée, pour chaque éléments de la liste.
 
 
 
@@ -562,13 +564,13 @@ Si un agent laisse tomber un objet dans un autre, même si il n'est pas possible
   \label{obj_manag_fg}
 \end{figure}
 
-Pour résumé, le robot utilise en premier lieu la perception, puis s'il n'est pas possible de percevoir l'objet il utilise des hypothèses de position.
+Pour résumer, le robot utilise en premier lieu la perception, puis s'il n'est pas possible de percevoir l'objet il utilise des hypothèses de position.
 Si aucun des deux n'est disponible, il utilise la dernière position de l'objet, comme indiqué par la figure \ref{obj_manag_fg}.
 Les hypothèses de position doivent être gérées en temps réel pour maintenir un modèle du monde cohérent.
 Dans le cas où un objet a une hypothèse de position et est perçu en même temps, la position perçue est comparée avec celle donnée par l'hypothèse de position. Si la  position indiquée est incompatible (distance trop importante) l'hypothèse est alors supprimée car elle est considérée comme impossible.
 Si un objet devrait pouvoir être perçu et ne l'est pas, alors l'hypothèse par défaut est annulée et la position de l'objet prend alors la valeur "unknown" pour indiquer que le robot ne sait pas où se trouve l'objet en question.
 
-Ces hypothèses concernant la position des objets liés à un raisonnement top-down (symbolique vers sub-symbolique) permettent au robot d'avoir un suivi plus efficace des objets, spécialement quand ils sont occultés ou non perçus.
+Ces hypothèses concernant la position des objets liés à un raisonnement top-down (symbolique vers sub-symbolique) permettent au robot d'avoir un suivi plus efficace des objets, spécialement quand ils sont occultés ou non perçus et ainsi avoir une représentation de l'état du monde plus fiable en palliant à certaines limitations de la perception.
 
 
 \subsection{Généralisation}
@@ -576,18 +578,21 @@ Ces hypothèses concernant la position des objets liés à un raisonnement top-d
 
 %TODO: généralisation du maintient du monde par la gestion des hypothèses (rempli / vide, chaud/froid...)
 % Différent car ne modifi pas l'état du monde sub symbolique
+%http://link.springer.com/article/10.1007%2Fs13218-015-0400-1
 
 Pour aller plus loin, nous travaillons actuellement à généraliser ces hypothèses. En effet, il est important de pouvoir suivre la position des objets, et donc d'établir des hypothèses pour pallier le manque de visibilité et avoir un suivi efficace de la position des objets, mais il est également important de connaître l'état des divers propriétés liées aux objets. Contrairement aux hypothèses de position, ces hypothèses n'influencent pas la représentation tridimensionnelle de la scène mais uniquement les données symboliques.
 
-Ce maintien des hypothèses concernant l'état symbolique du monde est réalisé grâce à un module de reconnaissance d'actions appelé AIR (Action and Intention Recognizer), dont le fonctionnement est présenté au chapitre \ref{chapter4}.
+Dans l'environnement, nous considérons que seul les agents peuvent agir pour modifier l'état du monde. Ainsi dans cette première approche, nous ne prenons pas en compte l'évolution temporelle de certaines propriétés (comme par exemple le fait qu'une boisson chaude refroidisse).
+Le maintien des hypothèses concernant les faits symboliques décrivant l'état du monde est donc effectué à partir du suivi des agents et de l'estimation de leurs actions. Nous utilisons pour cela un module de reconnaissance d'actions appelé AIR (Action and Intention Recognizer), dont le fonctionnement est présenté au chapitre \ref{chapter4}.
 Ce module transmet au module de gestion d'hypothèses (Hypotheses Manager) les actions détectées par le système.
-Basé sur un nombre de règles liées aux actions, le module de gestion d'hypothèses est capable de mettre à jour certaines propriétés liées à l'état symbolique du monde.
+De nombreux travaux traitent de la question de la mise à jour du monde à partir de la reconnaissance d'actions \cite{ginsberg1988reasoning,ginsberg1988reasoning2,rao1989minimal,jackson1990semantic,brewka1993things}.
+Ainsi, dans l'infrastructure de représentation de connaissances KnowRob, des \textit{règles de projection} sont utilisées pour connaître l'état du monde après qu'une action se soit réalisée \cite{tenorth2015representations}. Les actions peuvent changer la position des objets mais également le détruire ou créer un nouvel objet en combinant deux autres (par exemple en mélangeant deux ingrédients). Ici, nous traitons uniquement des actions pouvant modifier la position (comme présenté précédemment) ou l'état d'un objet, comme par exemple le fait de remplir ou vider un container, de nettoyer un objet ou encore de l'allumer ou l'éteindre. L'idée est d'associé à chaque action un effet (se traduisant par la modifications de certains faits symboliques) dont l'action est la cause. Cet effet est aussi appelé post-condition. Basé sur les posts-conditions de l'action reconnue, le module de gestion d'hypothèses est capable de mettre à jour certains faits liés à l'état symbolique du monde pour prendre en compte l'effet de l'action reconnue.
 
 Par exemple, si le module AIR détecte qu'un humain a versé le contenu \textit{C} d'un récipient \textit{B} (comme une bouteille) dans un autre récipient \textit{V} (comme un verre), le rôle du module de gestion des hypothèses sera d'envoyer une requête à la base de données pour mettre à jour l'état des propriétés liées à \textit{V} et \textit{B}. Ainsi, la propriété \textit{isEmpty} sera mise à faux pour \textit{V} et la propriété \textit{hasLiquid} sera ajoutée avec \textit{C} comme valeur (\textit{C} peut être par exemple de l'eau. Le module de gestion d'hypothèses sera également chargé de décrémenter la quantité de \textit{C} contenue dans \textit{B}.
 Pour résumer, ce module de gestion d'hypothèses permet d'appliquer les effets (ou postconditions) liés à une action lorsque celle-ci est détectée. Il sera également en charge d'assurer la cohérence globale de l'état du monde.
 
 
-Le schéma \ref{fig:hypo} présente l'architecture prévisionnelle permettant cette gestion d'hypothèses. Le module de gestion d'hypothèses peut envoyer des requêtes au module d'agrégation de données et de maintien du monde (Perceived Data Gathering) pour modifier la position d'un objet, ou à la base de données temporelle (présentée à la section suivante) pour modifier certains faits, et donc l'état du monde symbolique.
+Le schéma \ref{fig:hypo} présente l'architecture permettant cette gestion d'hypothèses. Le module de gestion d'hypothèses peut communiquer avec le module d'agrégation de données et de maintien du monde (Perceived Data Gathering) pour modifier la position d'un objet, ou avec la base de données temporelle (présentée à la section suivante) pour modifier certains faits, et donc l'état du monde symbolique.
 
 \begin{figure}[ht!]
  \centering
@@ -601,6 +606,10 @@ Le schéma \ref{fig:hypo} présente l'architecture prévisionnelle permettant ce
 \section{Base de données temporelle}
 \label{sec:db}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%http://journal.frontiersin.org/article/10.3389/frobt.2015.00019/full
+%Open ease
+
 Nous avons présenté précédemment comment divers composants contribuent à maintenir un état du monde géométrique (sub-symbolique). Nous avons également présenté comment d'autres composants, à partir de l'état du monde géométrique et de raisonnements et calculs sur celui-ci, produisent une liste de faits permettant une représentation symbolique de l'état du monde et une estimation de la situation.
 
 Afin de regrouper ces données symboliques et permettre un accès standardisé et efficace, nous avons ajouté une base de données SQL à notre système.
@@ -619,7 +628,13 @@ Cette table est composée de faits qui sont considérés comme vrais et mis à j
 \label{sec:dbt}
 %TODO: open ease http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7139458
 L'une des valeurs ajoutées de cette base de données est l'aspect temporel.
-En effet, lors d'une interaction homme robot, de nombreux événements peuvent se succéder et pour pouvoir comprendre et interpréter les actions et les élocutions de l'homme, il est important de considérer l'historique de l'interaction.
+Ceci permet de doter le système d'une mémoire des faits passés.
+Dans \cite{vernon2014artificial}, Vernon décrit la mémoire des systèmes cognitifs comme un moyen de "facilité la persistance des connaissances et forme un réservoir d'expérience".
+Ainsi, certains systèmes de gestion de connaissances intègrent des mécanisme de mémoire et de raisonnement sur la mémoire, tel KnowRob \cite{tenorth2015representations} ou encore Open-Ease \cite{beetz2015open}.
+Open-Ease est une base de connaissance en ligne fournissant des données sur les activités des humains et des robots. Open-Ease fournit également un langage pour effectuer des requête sur la base de donnée ainsi qu'un système d'inférence. Cela permet au robot de répondre aux questions sur leur propre actions en fournissant les raisons et en décrivant les différentes étapes.
+
+Dans notre implémentation, la mémoire est principalement réalisée en terme de sauvegarde d'état précédent des propriétés et des événements s'étant produits dans l'environnement.
+En effet, lors d'une interaction homme-robot, de nombreux événements peuvent se succéder et pour pouvoir comprendre et interpréter les actions et les élocutions de l'homme, il est important de considérer l'historique de l'interaction.
 
 Nous avons donc ajouté une gestion de l'aspect temporel.
 Pour ce faire, lorsqu'un fait est considéré comme vrai à partir d'un temps t1 et donc présent dans la table de représentation symbolique de l'état du monde perçu par le robot, le temps t1 lui est attribué jusqu'à ce que ce fait soit considéré comme faux à un temps t2.
@@ -728,8 +743,20 @@ L'idée est de créer trois zones de guidage autour du robot pour savoir si la c
 Les trois zones sont appelées \textit{slow}, \textit{following} et \textit{pushing} et sont configurées comme indiqué dans la figure \ref{fig:spencer}.
 L'idée est que, (1) si l'un des membres du groupe est dans la zone \textit{slow} (loin du robot) le robot \textit{ralentit}. (2) Si 1) est faux et la majorité du groupe est dans la zone \textit{pushing} (proche ou sur les côtés du robot) le robot \textit{accélère}. (3) Si 1) et 2) sont fausses, signifiant qu'à la fois aucun humain ne se trouve dans la zone \textit{slow} et que la majorité des humains se trouvent dans la zone \textit{following}, le robot \textit{continue} avec la même allure.
 
-Le deuxième type de zones est statique, lié à une position de l'environnement, et déclenche des calculs sur les humains s'y trouvant. Ces calculs concernent les distances, le mouvement et l'orientation par rapport à un point d'intérêt (comme par exemple un écran). En utilisant ces zones, le système peut détecter l'activité humaine (par exemple que l'humain regarde un écran d'information ou l'humain se dirige vers les toilettes). Cette estimation de la situation donne au robot la capacité de détecter quand un ou plusieurs des humains du groupe guidé, est investi dans une activité temporaire. Le superviseur peut ensuite distinguer entre les situations où il devrait abandonner le guidage de certains usagers de situations où il devrait attendre les humains, voir même les aider de façon pro-active (par exemple proposer des informations s'il détecte qu'un humain regarde un panneau d'informations). Une vidéo de présentation de ces travaux est disponible à l'adresse: \url{https://youtu.be/9lI1_Qecjmc}.
+Le deuxième type de zones est statique, lié à une position de l'environnement, et déclenche des calculs sur les humains s'y trouvant. Ces calculs concernent les distances, le mouvement et l'orientation par rapport à un point d'intérêt (comme par exemple un écran). En utilisant ces zones, le système peut détecter l'activité humaine (par exemple que l'humain regarde un écran d'information, comme dans l'illustration à la figure \ref{fig:screen}, ou l'humain se dirige vers les toilettes). Cette estimation de la situation donne au robot la capacité de détecter quand un ou plusieurs des humains du groupe guidé, est investi dans une activité temporaire. Le superviseur peut ensuite distinguer entre les situations où il devrait abandonner le guidage de certains usagers de situations où il devrait attendre les humains, voir même les aider de façon pro-active (par exemple proposer des informations s'il détecte qu'un humain regarde un panneau d'informations). Une vidéo de présentation de ces travaux est disponible à l'adresse: \url{https://youtu.be/9lI1_Qecjmc}.
 
+
+ \begin{figure*}[ht!]
+  \begin{center}
+    \subfigure[Le robot guide l'homme.]{\includegraphics[width=0.47\textwidth]{./img/spenc1.jpg}\label{init}}
+    \subfigure[L'homme s'arrête pour consulter un écran d'informations]{\includegraphics[width=0.52\textwidth]{./img/spenc2.jpg}\label{screen}}
+    \subfigure[Le robot donne des informations complémentaire de façon proactive.]{\includegraphics[width=0.5\textwidth]{./img/spencer3.jpg}\label{info}}
+ \end{center}
+  \caption{Le robot guide l'humain (image de gauche), l'homme s'arrête pour consulter un écran d'information (image de droite), le robot décide alors de donner des informations à l'homme de façon proactive (image du bas), avant de reprendre sa tâche de guider l'homme.}
+  \label{fig:screen}
+\end{figure*}
+
+ 
 %This situation assessment gives, to the robot, the capacity to detect that one or more of the human followers are involved in a temporary activity. The robot can then disambiguate between situation where it should give up on guiding and situation where it should wait for the humans, or even proactively help the humans involved in the activity.
 
 %TODO: rewrite to adapt to toaster
