@@ -428,7 +428,7 @@ Dans d'autres cas, pour représenter le manque de connaissances sur une proprié
 
 Par exemple, le vecteur 
 %TODO Make this as a table?
-$<$ $Subject = Dan$, $Property = isMovingToward$, $Target = TABLE_4$, $PropertyType = motion$, $Confidence = 0.8$, $time = 146962814568$, $FactObservability = 0.7$ $>$ représente le fait qu'à un temps \textit{time}, l'agent \textit{Dan} se dirige vers la table du salon (\textit{TABLE\_4}). La situation dans laquelle ce fait est produit est illustrée par l'image \ref{fig:fact}.
+$<$ $Subject = Dan$, $Property = isMovingToward$, $Target = TABLE\_4$, $PropertyType = motion$, $Confidence = 0.8$, $time = 146962814568$, $FactObservability = 0.7$ $>$ représente le fait qu'à un temps \textit{time}, l'agent \textit{Dan} se dirige vers la table du salon (\textit{TABLE\_4}). La situation dans laquelle ce fait est produit est illustrée par l'image \ref{fig:fact}.
 Un autre exemple de fait correspondant à la même illustration représentant le fait que Dan est dans le salon (la zone \textit{Livingroom} en rose) prendra les champs suivants:
 $<$ $Subject = Dan$, $Property = isInRoom$, $Target = Livingroom$, $PropertyType = position$, $Confidence = 0.9$, $time = 146962814568$, $FactObservability = 0.9$ $>$
 
@@ -465,9 +465,12 @@ Ce paramètre permet donc de donner un contexte sémantique à la zone concerné
 \end{itemize}
 
 Pour reprendre l'exemple précédent et pour illustrer les différents paramètres, il est possible de définir une zone d'interaction devant le robot pour savoir si un humain se trouve dans cette zone et activer conditionnellement certains calculs, tel que l'orientation de l'humain pour savoir si celui-ci est dans une configuration permettant l'interaction.
-Dans cet exemple le robot a pour identifiant \textit{PR2\_ROBOT}. La zone aura alors le vecteur de paramètres <\textit{interaction, humans, orientation, PR2\_ROBOT}>
+Dans cet exemple le robot a pour identifiant \textit{PR2\_ROBOT}. La zone aura alors le vecteur de paramètres:
+\begin{center}
+<\textit{interaction, humans, orientation, PR2\_ROBOT}>
+\end{center}
 Cette zone est illustrée par la figure \ref{fig:interaction} par une zone en jaune.
-Dans l'exemple illustré, les faits (simplifiés ici) \textit{bob isInArea interaction} et \textit{bob isFacing PR2\_ROBOT} sont créés. Le robot (\textit{PR2\_ROBOT}) peut donc en déduire qu'il lui est directement possible de parler à \textit{Alexia} mais pas à \textit{Dan} (il devra par exemple commencer par l'appeler).
+Dans l'exemple illustré, les faits (simplifiés ici) \textit{Alexia isInArea interaction} et \textit{Alexia isFacing PR2\_ROBOT} sont créés. Le robot (\textit{PR2\_ROBOT}) peut donc en déduire qu'il lui est directement possible de parler à \textit{Alexia} mais pas à \textit{Dan} (il devra par exemple commencer par l'appeler).
 
 Les faits produis par ce module peuvent avoir la propriété \textit{isInRoom} si la zone a comme type particulier \textit{Room}, pour tous les autres types de zone le fait produit aura la propriété \textit{isInArea}.
 
