@@ -37,7 +37,7 @@ Pour établir ces références communes et comprendre les actes communicatifs hu
 Ces travaux ont été réalisés dans le cadre du projet MaRDi\footnote{Man-Robot Dialogue - http ://mardi.metz.supelec.fr
 } de l’Agence Nationale pour la Recherche (ANR). Il a été financé par l’appel à projet Contenu et interactions. Les
 travaux réalisés ont été faits en collaboration avec le Laboratoire d’Informatique Fondamentale de Lille (LIFL), l’École supérieure d’électricité (Supélec), le groupe Acapela, le Laboratoire Informatique d’Avignon (LIA) et le Laboratoire d’Analyse et d’Architecture des Systèmes (LAAS).
-Ce projet vise à étudier l’apport d’une approche "située" du dialogue homme-robot. Le terme "situé" est ici relatif à l’incarnation physique d’un système de dialogue dans une plateforme robotique qui permet l’intégration d’informations issues de la perception du robot dans le contexte de l’interaction pour compléter ou lever des ambiguïtés introduites par le médium vocal. Ce projet s’inscrit également dans l’utilisation de méthodes d’apprentissage numérique, exploitant les données collectées au travers de la conduite de véritables interactions afin d’améliorer l’efficacité et le naturel du système dans le temps. L’originalité de l’approche est de ne pas considérer les technologies vocales comme disponibles et dissociées de la tâche d’interaction homme-robot, mais bel et bien comme moyen d’en améliorer l’expérience et les performances.
+Ce projet vise à étudier l’apport d’une approche "située" du dialogue homme-robot. Le terme "située" est ici relatif à l’incarnation physique d’un système de dialogue dans une plateforme robotique qui permet l’intégration d’informations issues de la perception du robot dans le contexte de l’interaction pour compléter ou lever des ambiguïtés introduites par le médium vocal. Ce projet s’inscrit également dans l’utilisation de méthodes d’apprentissage numérique, exploitant les données collectées au travers de la conduite de véritables interactions afin d’améliorer l’efficacité et le naturel du système dans le temps. L’originalité de l’approche est de ne pas considérer les technologies vocales comme disponibles et dissociées de la tâche d’interaction homme-robot, mais bel et bien comme moyen d’en améliorer l’expérience et les performances.
 
 En effet, le système de dialogue utilisé dans le cadre de ce projet est basé sur le système de résolution de la tâche \textit{TownInfo} qui vise à fournir aux utilisateurs un service vocal donnant accès à des
 informations touristiques concernant une ville virtuelle et portant essentiellement sur la
@@ -46,7 +46,7 @@ restaurants, bars et infrastructures). Il s'agit donc d'un système de dialogue 
 Nous utilisons une implémentation
 du système de dialogue basée sur celle proposée par l’université de Cambridge et qui repose
 sur le formalisme POMDP-HIS \cite{Young10}.
-L'une des caractéristiques de ces systèmes est qu'ils peuvent également effectuer une relâche de contrainte pour proposer une solution proche des critères de l'utilisateur si aucunes solution n'a été trouvée.
+L'une des caractéristiques de ces systèmes est qu'ils peuvent également effectuer une relâche de contrainte pour proposer une solution proche des critères de l'utilisateur si aucune solution n'a été trouvée.
 
 La tâche MaRDi ne peut cependant pas être directement
 assimilable à un problème de recherche d’information standard.
@@ -237,7 +237,7 @@ Durant cette phase, le robot cherche à générer un plan permettant de résoudr
   \label{fig:phase2}
 \end{figure}
 
-À la fin de la première phase, lorsque un but est produit, le système de dialogue transmet le but au superviseur (flux 4). Le superviseur par la suite fait une requête au planificateur de tâche pour résoudre le but (5). Le planificateur de tâche utilise la représentation symbolique de l'environnement, contenu dans la base de connaissance et provenant des calculs et raisonnements faits par le système d'évaluation de la situation, pour avoir connaissance de l'état du monde actuel et générer un plan permettant d'atteindre le but souhaité par l'utilisateur. Le planificateur de tâche renvoie un message au superviseur lui informant du succès ou de l'échec de la planification (7). En cas d'échec, le superviseur informe le système de dialogue (8) qui à son tour informe l'humain de l'impossibilité d'exécution du plan (9).
+À la fin de la première phase, lorsque un but est produit, le système de dialogue transmet le but au superviseur (flux 4). Le superviseur par la suite fait une requête au planificateur de tâches pour résoudre le but (5). Le planificateur de tâche utilise la représentation symbolique de l'environnement, contenu dans la base de connaissance et provenant des calculs et raisonnements faits par le système d'évaluation de la situation, pour avoir connaissance de l'état du monde actuel et générer un plan permettant d'atteindre le but souhaité par l'utilisateur. Le planificateur de tâche renvoie un message au superviseur lui informant du succès ou de l'échec de la planification (7). En cas d'échec, le superviseur informe le système de dialogue (8) qui à son tour informe l'humain de l'impossibilité d'exécution du plan (9).
 L'interaction retourne alors à la phase précédente afin de tenter d'établir un but utilisateur qui soit réalisable. 
 Dans le cas où la planification est un succès (un plan a été trouvé), le plan est envoyé au superviseur (7) et l'interaction peut passer à la phase d'exécution du plan.
 
@@ -256,7 +256,7 @@ Durant cette phase, le robot cherche à exécuter les tâches du plan permettant
   \label{fig:phase3}
 \end{figure}
 
-À la fin de la phase précédente, le planificateur de tâche transmet le plan à la supervision (flux 7). Le composant de supervision gère l'exécution de la tâche grâce à la planification de mouvements (10) qui envoie des commandes aux actionneurs du robot (12). Le superviseur contrôle la bonne exécution du plan à l'aide des éventuels retours d'erreur des différents composants et en surveillant l'évolution de l'état du monde (14). Durant cette exécution, l'homme peut à tout moment dialoguer avec le système (C) afin de:
+À la fin de la phase précédente, le planificateur de tâche transmet le plan à la supervision (flux 7). Le composant de supervision gère l'exécution de la tâche grâce à la planification de mouvements (10) qui envoie des commandes aux actionneurs du robot (12). Le superviseur contrôle la bonne exécution du plan à l'aide des éventuels retours d'erreurs des différents composants et en surveillant l'évolution de l'état du monde (14). Durant cette exécution, l'homme peut à tout moment dialoguer avec le système (C) afin de:
 \begin{itemize}
 \item Demander une information sur l'environnement. Dans ce cas le système de dialogue utilise la base de connaissance (D) pour répondre au mieux à l'humain (G).
 \item S'enquérir de l'état d'avancement de la tâche ou de l'action courante du robot. Dans ce cas le système de dialogue envoie une requête correspondante au superviseur (E) qui transmet cette information à l'homme (G) par le système de dialogue (F).

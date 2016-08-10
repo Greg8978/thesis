@@ -13,6 +13,9 @@
 \label{chapter4}
 \minitoc
 
+\section{Contribution}
+Cette étude a été réalisée en collaboration avec Michelangelo Fiore, doctorant au LAAS-CNRS qui s'est chargé de la modélisation de la reconnaissance d'intention basée sur notre système de modélisation et de gestion des croyances divergentes.
+
 \section{Contexte}
 %ROMAN 2016
 Créer des systèmes capables d'interagir avec l'humain de façon efficace et qui paraissent naturels et intuitifs à l'homme est une des problématiques essentielles de la robotique d'assistance. Dans leurs activités quotidiennes, les humains collaborent régulièrement sans avoir besoin de requête explicite ou de communication verbale. Une compétence importante pour accomplir cela est la capacité de déduire les croyances et les intentions des autres à partir d'observations et d'indices contextuels. Afin d'être efficace, socialement cohérent et d'aider au mieux l'homme, la connaissance des croyances et la reconnaissance d'intention sont des fonctionnalités importantes à fournir aux robots qui coopèrent ou assistent les humains.
@@ -26,9 +29,9 @@ Pour être un assistant efficace, le robot devrait également être capable de c
 Un des aspects clés dans le scénario présenté est la capacité du robot à savoir qu'Alice ignore que ses lunettes ne sont plus où elle les a laissées. Sans cette connaissance, le robot aurait probablement estimé qu'Alice cherchait à prendre un objet présent sur la table. 
 Il semble que, pour interagir avec les humains, les robots ont besoin d'avoir un ensemble de capacités qui leur permettent de comprendre et modéliser les croyances des utilisateurs, afin d'interpréter leurs actions et d'ainsi permettre la reconnaissance de plan. Une approche pour résoudre ce problème est d'étudier les mécanismes utilisés par les humains lorsqu'ils interagissent entre eux, et essayer de les adapter dans des scénarios de robotique afin de rendre le processus d'interaction homme-robot le plus naturel et intuitif possible pour les humains.
 
-Le premier point qu'il nous faut introduire est le concept d'intention. Il y a beaucoup de définitions différentes de l'intention dans la littérature psychologique  \cite{bruner1981} et philosophique \cite{bratman1984}. Ici, nous définissons une intention comme étant le souhait et la volonté d'atteindre un objectif. L'intention émerge de causes contextuelles (motivations) et reste présente jusqu'à ce que l'objectif soit atteint ou abandonné, poussant l'agent à entreprendre des actions menant à cet objectif.
+Le premier point qu'il nous faut introduire est le concept d'intention. Il y a beaucoup de définitions différentes de l'intention dans la littérature de psychologie  \cite{bruner1981} et de philosophie \cite{bratman1984}. Ici, nous définissons une intention comme étant le souhait et la volonté d'atteindre un objectif. L'intention émerge de causes contextuelles (motivations) et reste présente jusqu'à ce que l'objectif soit atteint ou abandonné, poussant l'agent à entreprendre des actions menant à cet objectif.
 
-Comprendre correctement les intentions d'autrui requiert de raisonner sur leurs croyances et leurs pensées afin d'interpréter correctement leurs actions. Cette compétence est la théorie de l'esprit et la capacité de prise de perspective associée, présentée au chapitre \ref{chapter2}.
+Comprendre correctement les intentions d'autrui requiert de raisonner sur leurs croyances afin d'interpréter correctement leurs actions. Cette compétence est la théorie de l'esprit et la capacité de prise de perspective associée, présentée au chapitre \ref{chapter2}.
 
 % %b in robotics
 % Previous works in robotics have shown that enhancing the robot's perspective taking abilities improves its reasoning capabilities, leading to more appropriate and efficient task planning and interaction strategies \cite{breazeal2006,Trafton2005}.
@@ -38,7 +41,8 @@ Comprendre correctement les intentions d'autrui requiert de raisonner sur leurs 
 % An important study linked to conceptual perspective taking is the 'divergent belief task'.  Formulated in~\cite{wimmer1983}, this kind of task requires the ability to recognize that others can have beliefs about the world that differ from the observable reality.
 Ainsi, Breazeal dans \cite{BreazealGB09}, propose d'utiliser cette prise de perspective pour la reconnaissance de but. Cette capacité de prise de perspective est une prérogative pour la reconnaissance d'intention, car, comme expliqué par \cite{byom2013theory}, "en tant qu'humains nous croyons généralement que les autres agissent de façon cohérente avec leurs croyances et leurs objectifs". Il est donc nécessaire que l'interprétation des actions de l'homme soit basée sur leur état de croyance pour déduire correctement leur intention. Ainsi dans \cite{Call1998} les sujets sont capables d'interpréter les actions d'autres humains pour distinguer une action "intentionnelle" d'une action "accidentelle".
 
-La reconnaissance des activités humaines est un sujet important dans la recherche en sciences informatiques, et elle peut être étudiée à différents niveaux. L'anticipation des actions humaines et des mouvements permet au robot d'adapter son comportement et d'aider l'humain de façon proactive, comme étudié dans \cite{koppula2013anticipating}. Une idée intéressante est d'utiliser les modèles internes du robot lui-même pour reconnaître les actions et prédire l'intention de l'utilisateur, comme montré par le système \textit{HAMMER} dans \cite{demiris2007prediction}. 
+La reconnaissance des activités humaines est un sujet important dans la recherche en sciences informatiques, et elle peut être étudiée à différents niveaux. L'anticipation des actions humaines et des mouvements permet au robot d'adapter son comportement et d'aider l'humain de façon proactive, comme étudié dans \cite{koppula2013anticipating}. Dans cette étude la reconnaissance d'actions est basée sur le contexte et sur l'affordance des divers objets présents dans la scène.
+Une idée intéressante est d'utiliser les modèles internes du robot lui-même pour reconnaître les actions et prédire l'intention de l'utilisateur, comme montré par le système \textit{HAMMER} dans \cite{demiris2007prediction}. 
 
 Les séquences d'actions peuvent être liées à des plans. Ceci constitue une thématique de recherche appelée la reconnaissance de plan. Plusieurs approches ont été étudiées dans ce domaine, en utilisant par exemple la planification classique \cite{ramirez2009plan}, probabiliste \cite{bui2003general} ou des techniques logiques \cite{singla2011abductive}. Une infrastructure logicielle intéressante pour la reconnaissance d'intention est la théorie de l'esprit Bayésienne \cite{baker2014modeling}, utilisée pour représenter les processus de déduction d'un observateur regardant le comportement d'un autre agent, basée sur des POMDPs et des réseaux Bayésiens dynamiques (DBN for Dynamic Bayesian Networks).
 
@@ -60,8 +64,9 @@ Les robots assistants ont besoin non seulement de prédire les intentions humain
 
 Bien qu'il existe plusieurs travaux intéressants liés au problème de la reconnaissance de l'intention, nous croyons que, pour le moment, peu de systèmes intègrent ces mécanismes dans une architecture complète, capable de représenter et de suivre les modèles mentaux des agents, de reconnaître les intentions, de gérer des plans collaboratifs et d'agir de façon proactive. Dans \cite{talamadupula2014coordination}, les auteurs utilisent la planification classique, avec une stratégie de replanification efficace, afin d'en déduire les intentions de l'utilisateur. Le système a été mis en œuvre sur un robot PR2 et testé sur un scénario de collaboration. \cite{BreazealGB09} présente une architecture dans laquelle le robot est capable d'utiliser ses propres schémas et modèles pour déduire les actions et les objectifs humains et d'aider activement à les atteindre. Les plans partagés ne sont pas explicitement représentés dans le système, et le robot aide l'humain en faisant correspondre les informations de but inférées avec ses propres croyances, et en choisissant les actions appropriées.
 
-L'une des contributions principale de ces travaux est l'introduction d'un module de reconnaissance d'intention basé sur le modèle de croyance des agents maintenu par notre système d'estimation de la situation. Ceci permet au robot d'interpréter correctement les intentions et d'aider de manière proactive et plus pertinente les humains (après avoir observé leurs comportements et en reconnaissant leurs intentions).
-Notre algorithme de reconnaissance de l'intention est basé sur une intégration de BNs et MDPs, qui sont utilisés pour évaluer comment les actions humaines se rapportent à différents objectifs possibles tout en considérant leurs croyances. Nous introduisons le contexte comme information a priori, que nous avons appris de l'homme dans une approche similaire à \cite{Liu2014}. En utilisant le contexte, nous pourrions représenter, par exemple, que l'homme est plus susceptible de prendre un parapluie au cours d'une journée pluvieuse lorsqu'il sort de chez lui. Nous évaluons ce module dans une étude utilisateur, en comparant les compétences de reconnaissance de l'intention du robot avec celles des humains. Une autre de nos contributions est l'intégration de ce module dans une architecture robotique complète, permettant au robot d'aider de manière proactive les humains après l'estimation de leurs intentions les plus probables.
+L'une des contributions principale des travaux présentés ici est l'introduction d'un module de reconnaissance d'intention basé sur le modèle de croyance des agents maintenu par notre système d'estimation de la situation. Ceci permet au robot d'interpréter correctement les intentions et d'aider de manière proactive et plus pertinente les humains (après avoir observé leurs comportements et en reconnaissant leurs intentions).
+Nous avons pour cela utilisé notre système d'évaluation de la situation pour fournir les observations des activités humaines nécessaires à la reconnaissance de ces actions et notre système de gestion des croyances.
+L'algorithme de reconnaissance de l'intention développé par Michelangelo Fiore est basé sur une intégration de BNs et MDPs, qui sont utilisés pour évaluer comment les actions humaines se rapportent à différents objectifs possibles tout en considérant leurs croyances. Nous introduisons le contexte comme information a priori, que nous avons appris de l'homme dans une approche similaire à \cite{Liu2014}. En utilisant le contexte, nous pourrions représenter, par exemple, que l'homme est plus susceptible de prendre un parapluie au cours d'une journée pluvieuse lorsqu'il sort de chez lui. Nous évaluons ce module dans une étude utilisateur, en comparant les compétences de reconnaissance de l'intention du robot avec celles des humains. Une autre de nos contributions est l'intégration de ce module dans une architecture robotique complète, permettant au robot d'aider de manière proactive les humains après l'estimation de leurs intentions les plus probables.
 
 Notre système est basé sur plusieurs travaux antérieurs. Dans \cite{fioreiser2014}, nous avons présenté un système capable d'exécuter des actions conjointes avec les partenaires humains de manière flexible en adaptant le processus aux préférences de l'utilisateur. L'exécution de la modalité du système peut changer au cours d'un plan, ce qui permet au robot ou à l'humain d'assumer un rôle de leader ou de traiter les participants comme des partenaires égaux. Nous avons également montré dans les chapitres précédents comment nous étions capable de comprendre la situation de l'interaction et notamment de maintenir un modèle d'état mental distinct et cohérent pour chaque agent.
 
@@ -101,9 +106,9 @@ Dans une utilisation classique, le robot va créer, pour chaque humain "surveill
 
 % In a typical usage, the robot will create, for each monitored human, an IG, formed by the Context and Intention Nodes, which we consider statically known by the robot, and a variable list of Action and Observation nodes, which depends on the human's belief model. The robot will create action nodes for each known action whose $preconditions$ are satisfied in the human's belief model, and their related Observation Nodes. These IGs will need to be updated every time that an agent performs an action, switching the previous Action and Observation nodes with new ones, that will depend on the state of the world after the action was performed.
 
-Lors de la "surveillance" d'un humain par le système, nous utilisons les nœuds de contexte et d'observation comme \textit{preuves}, ce qui revient à les considérer comme observables par le robot. Ces informations nous permettent d'avoir une bonne estimation des actions et des intentions les plus probables pour l'homme, comme expliqué dans \ref{sec:intentionactioninf}.
+Lors de la "surveillance" d'un humain par le système, nous utilisons les nœuds de contexte et d'observation comme \textit{preuves}, ce qui revient à les considérer comme observables par le robot. Ces informations nous permettent d'avoir une bonne estimation des actions et des intentions les plus probables pour l'homme, comme expliqué dans la section \ref{sec:intentionactioninf}.
 
-Un exemple d'IG, pris d'une expérience, peut être vu dans la figure \ref{fig: intention_graph}. Dans les paragraphes qui suivent, nous allons expliquer le rôle de ces couches de nœuds, et comment les dépendances conditionnelles les reliant sont calculées.
+Un exemple d'IG, pris d'une expérience, peut être vu dans la figure \ref{fig:intention_graph}. Dans les paragraphes qui suivent, nous allons expliquer le rôle de ces couches de nœuds, et comment les dépendances conditionnelles les reliant sont calculées.
 
 % When monitoring a human, we set Context Nodes and Observation Nodes as \textit{evidence}, considering them observable by the robot. These information will allow us to have a good estimation of the most likely actions and intentions of the human, as explained in \ref{intentiom and action inference}.
 
@@ -114,7 +119,7 @@ Un exemple d'IG, pris d'une expérience, peut être vu dans la figure \ref{fig: 
  \begin{figure}[h!]
 	\centering
 	\includegraphics[trim={2cm 11cm 11cm 17cm},clip,scale=0.56]{img/cookieScenario.pdf}
-	\caption{Une scène d'expérimentation. Les flèches jaunes montrent les actions possibles et leurs probabilités associées. Le diagramme représente l'IG (Intention Graph) actuel. Les cercles verts représentent les nœuds considérés comme preuves et les bleus sont les autres nœuds. Pour les nœuds de contexte, situés en haut du graphe, les nœuds ayant une valeur fausse sont grisés. Parmi les autres nœuds, ceux ayant la probabilité la plus forte sont entourés. Les nœuds d'observation ont étés regroupés en un seul bloc pour simplifier le diagramme.}
+	\caption{Une scène d'expérimentation. Les flèches jaunes montrent les actions possibles et leurs probabilités associées. Le diagramme représente l'IG (Intention Graph) associé. Les cercles verts représentent les nœuds considérés comme preuves et les bleus sont les autres nœuds. Pour les nœuds de contexte, situés en haut du graphe, les nœuds ayant une valeur fausse sont grisés. Parmi les autres nœuds, ceux ayant la probabilité la plus forte sont entourés. Les nœuds d'observation ont étés regroupés en un seul bloc pour simplifier le diagramme.}
 	\label{fig:intention_graph}
    	\vspace{-20pt}
 \end{figure}
@@ -139,7 +144,7 @@ Le souci principal des MDPs est de déterminer la fonction \(\pi(s)\) définissa
 
 
 
-Nous allons à présent expliquer comment nous utilisons la fonction de valeur d'action pour créer des dépendances conditionnelles entre nœuds d'intention et nœuds d'action dans l'IG. Commençons par définir \(P(a|I_i=1)\), la probabilité que l'action $a$ soit réalisée si l'intention $I_i$ est vraie. Nous modélisons cette probabilité comme \(P(a|I_i=1)=\frac{Q_i(s,a)}{\sum_b(Q_i(s,b))}\), où nous normalisons la fonction de valeur $Q_i(s,a)$ pour l'intention $i$ et l'action $a$ dans l'état de croyance de l'homme $s$, divisé par la fonction de valeur $Q_i(s,b)$ calculée sur toutes les actions surveillées $b$. Nous pouvons étendre ce calcul au cas où un nombre générique d'intentions sont vrais pour calculer la probabilité des nœuds d'action: \(P(a|I_1,I_2,...,I_m)=\frac{\sum_{i:I_i=1}Q_i(s,a)}{\sum_b\sum_{i:I_i=1}Q_i(s,b)}\).
+Nous allons à présent expliquer comment nous utilisons la fonction de valeur d'action pour créer des dépendances conditionnelles entre nœuds d'intention et nœuds d'action dans l'IG. Commençons par définir \(P(a|I_i=1)\), la probabilité que l'action $a$ soit réalisée si l'intention $I_i$ est vraie. Nous modélisons cette probabilité comme \(P(a|I_i=1)=\frac{Q_i(s,a)}{\sum_b(Q_i(s,b))}\), où nous normalisons la fonction de valeur $Q_i(s,a)$ pour l'intention $i$ et l'action $a$ dans l'état de croyance de l'homme $s$, divisé par la fonction de valeur $Q_i(s,b)$ calculée sur toutes les actions surveillées $b$. Nous pouvons étendre ce calcul au cas où un nombre générique d'intentions sont vraies pour calculer la probabilité des nœuds d'action: \(P(a|I_1,I_2,...,I_m)=\frac{\sum_{i:I_i=1}Q_i(s,a)}{\sum_b\sum_{i:I_i=1}Q_i(s,b)}\).
 
 L'idée principale dans ce problème est d'utiliser les croyances de l'humain comme entrées des fonctions de valeurs des MDPs. De cette façon, nous utilisons la prise de perspective au niveau de la planification. Cela traduit le fait que l'humain a des actions cohérentes avec son intention dans son propre état de croyance. Ainsi, même dans la situation où l'homme a des actions qui semblent incohérentes par rapport à l'état du monde courant (par exemple dans le cas où il a une croyance erronée), l'utilisation de la prise de perspective permet malgré tout de les interpréter et de les relier à une intention.
 
@@ -147,13 +152,43 @@ L'idée principale dans ce problème est d'utiliser les croyances de l'humain co
 
 \subsection{De l'action aux observations}
 \label{sec:action}
-Les intentions sont déduites des actions humaines, donc le robot a besoin de surveiller leur exécution. Pour chaque nœud d'action nous définissons un ensemble de quatre nœuds d'observation: la distance du corps de l'humain à la $cible$ de l'action, la variation de celle-ci, la distance de la main de l'humain à la $cible$ de l'action, et la variation de celle-ci.
+Les intentions sont déduites des actions humaines, donc le robot a besoin de surveiller leur exécution.
+Dans notre étude, les actions possibles de l'homme sont des actions de manipulation d'objet. Il nous faut donc pouvoir observer les mouvements de l'homme par rapport aux objets avec lesquels il peut interagir. Pour chaque nœud d'action nous définissons un ensemble de quatre nœuds d'observation: la distance du corps de l'humain à la $cible$ de l'action, la variation de celle-ci, la distance de la main de l'humain à la $cible$ de l'action, et la variation de celle-ci.
 Les dépendances conditionnelles des nœuds d'observation sont pré-calculées.
 
 \subsection{Déduction d'intention et d'action}
 \label{sec:intentionactioninf}
-Nous supposons ici, qu'à chaque moment, un humain ne peut exécuter qu'une action à la fois et que le robot réagira seulement à l'intention la plus probable. L'action et l'intention la plus probable sont déduites du BN de la façon suivante. Nous appelons $P(n)$ la probabilité inférée d'un nœud  $n$, $B(n)$ l'ensemble des frères de $n$ (c'est à dire les nœuds de la même couche), et $\delta_1$, $\delta_2$ deux seuils. Le robot déduit qu'une action a été réalisée, ou qu'un humain a une intention en suivant ces règles: 1) \(P(n_i)>\delta_1\) 2) \(\forall b \in B(n_i): P(n_i)>P(b)+\delta_2\), où $n_i$ est le nœud associé à l'intention ou l'action concernée.
+Nous supposons ici, qu'à chaque moment, un humain ne peut exécuter qu'une action à la fois et que le robot réagira seulement à l'intention la plus probable. L'action et l'intention la plus probable sont déduites du BN de la façon suivante. 
+
+\begin{itemize}
+\item $P(n)$ est la probabilité inférée d'un nœud $n$.
+\item $B(n)$ est l'ensemble des frères de $n$ (c'est à dire les nœuds de la même couche).
+\item $\delta_1$, $\delta_2$ sont deux seuils.
+\end{itemize}
+
+Le robot déduit qu'une action a été réalisée, ou qu'un humain a une intention en suivant ces règles:
+
+\begin{enumerate}
+\item \(P(n_i)>\delta_1\) 
+\item \(\forall b \in B(n_i): P(n_i)>P(b)+\delta_2\)
+\end{enumerate}
+
+$n_i$ étant le nœud associé à l'intention ou l'action concernée.
 La première condition permet de s'assurer que l'action ou l'intention est suffisamment probante et la seconde permet quant à elle de vérifier qu'elle se démarque des autres actions ou intentions potentielles.
+
+Pour illustrer ces règles, on reprend l'exemple présenté en \ref{fig:intention_graph}.
+Deux actions sont alors possible: $MoveToTable$ et $MoveToKitchen$.
+Imaginons dans un premier temps qu'on ait:
+
+\begin{itemize}
+\item $P(MoveToKitchen) = 0.4$
+\item $P(MoveToTable) = 0.83$
+\item $\delta_1 = 0.7$
+\item $\delta_2 = 0.5$
+\end{itemize}
+
+Dans cette situation, la première règle est valide pour l'action $MoveToTable$ (car $P(MoveToTable) > \delta_1$) et est invalide pour $MoveToKitchen$ (car $P(MoveToTable) < \delta_1$). Cela signifie que l'action $MoveToTable$ est suffisamment probable pour être considérée comme acceptable et non $MoveToKitchen$. Cependant, on a  $P(MoveToTable)<P(MoveToKitchen)+\delta_2$ La seconde condition n'est donc pas respectée. Cela signifie que, étant donné les seuils choisis, l'action de se diriger vers la table ne se démarque pas suffisamment, en terme de probabilité, des autres actions possibles (ici en l'occurrence de l'action $MoveToKitchen$).
+Ces deux règles permettent de réduire les faux positifs lorsqu'une situation est ambiguë.
 
 Lorsque le robot déduit qu'une action a été réalisée, il met à jour l'état du monde avec ses $postconditions$, déclenchant une mise à jour des croyances de tous les agents présents. Lorsque le robot déduit l'intention actuelle de l'homme, il choisit une réaction possible, comme expliqué dans la section \ref{sec:robot_reaction}.
 
@@ -168,7 +203,7 @@ Une fois que le robot est parvenu à estimer l'intention la plus probable, il pe
 \subsubsection{Correction de l'état de croyance}
 Avoir une croyance erronée ou incomplète sur l'environnement peut amener l'agent à exécuter des actions non optimales, inutiles, voir contre-productives ou dangereuses. Le robot a besoin de détecter ces situations afin de prévenir l'homme pour que celui-ci puisse corriger son état de croyance et accomplir les actions appropriées. Le robot suppose ici qu'il a toujours un état de croyance correct. Notre solution utilise la récompense attendue de l'action, introduite dans la partie \ref{action_evaluation}. Le principe est de comparer la récompense attendue lors de l'accomplissement d'une action, pour l'humain d'une part (basé sur son modèle de croyance) et pour le robot d'autre part. En d'autres termes, nous regardons si l'homme a une croyance erronée (différente du robot) sur l'influence que son action aura sur l'accomplissement du but. Pour formaliser: nous comparons la valeur d'action \(Q_m(s_h,a_h)\) et \(Q_m(s_r,a_h)\), où $m$ est l'intention la plus probable, $s_h$ et $s_r$ sont les états de croyance de l'homme et du robot, et $a_h$ est l'action la plus probable. Si ces valeurs ne sont pas égales, cela signifie que l'homme attend un résultat de son action qui est différent de ce qu'il va réellement faire.
 
-Nous proposons une solution simple, où le robot prévient l'homme de la croyance divergente détectée pour cette action. Par exemple, Bob veut boire du thé contenu dans une bouteille opaque. Cependant, le robot sait que cette bouteille est vide (par exemple parce qu'un agent a bu le dernier verre), mais Bob l'ignore. Lorsqu'il s'approche de la bouteille, le robot détecte que l'intention la plus probable (en utilisant le processus décrit en  \ref{sec:intention_recognition}) est de boire du thé. Le système calcule la récompense attendue par l'action de prendre la bouteille dans le modèle de Bob et du robot et obtient des valeurs différentes (ici la valeur serait plus élevée pour Bob). Le système vérifie les valeurs des propriétés associées à la bouteille dans les deux modèles mentaux et en extrait celles qui sont divergentes. En utilisant cette information, le robot corrige la croyance divergente en informant l'humain que la bouteille ne contient plus de thé.
+Nous proposons une solution simple, où le robot prévient l'homme de la croyance divergente détectée pour cette action. Par exemple, Bob veut boire du thé contenu dans une bouteille opaque. Cependant, le robot sait que cette bouteille est vide (par exemple parce qu'un agent a bu le dernier verre), mais Bob l'ignore. Lorsqu'il s'approche de la bouteille, le robot détecte que l'intention la plus probable (en utilisant le processus décrit en \ref{sec:intention_recognition}) est de boire du thé. Le système calcule la récompense attendue par l'action de prendre la bouteille dans le modèle de Bob et du robot afin de modéliser l'avancement du plan attendu par cette action par rapport à l'état de croyance de chacun. On obtient des valeurs différentes. Ici la valeur est plus élevée pour Bob signifiant qu'il pense que son action aura une conséquence "meilleure" (qui fera avancer l'état du monde vers son but) que celle prévue par le robot (la récompense dans l'état mental du robot étant inférieure). Le système vérifie les valeurs des propriétés associées à la bouteille dans les deux modèles mentaux et en extrait celles qui sont divergentes. En utilisant cette information, le robot corrige la croyance divergente en informant l'humain que la bouteille ne contient plus de thé.
 
 % In critical tasks, it may be important that the human has always a complete and correct belief state. In this situation, when the robot detects a human intention, it can check if there is a divergence between its and the human's belief states, and inform the human of this difference in order to synchronize their belief states, before even monitoring its actions.
 % Same for the following paragraph, using " the robot" make it sounds like it's magic XD
@@ -187,9 +222,13 @@ Pour estimer les performances de notre système en terme de reconnaissance d'int
 Nous avons réalisé un test d'équivalence TOST (Two One-Sided Test) où nous comparons les intentions telles qu'elles ont été estimées par les humains avec les estimations du robot. Nous choisissons comme seuil pour l'équivalence la déviation standard $\sigma$ des réponses des utilisateurs. L'idée derrière ce choix est que, si la réponse du robot est plus proche que la déviation standard de la réponse moyenne des humains, ses prédictions sont comparables à la réponse d'un utilisateur moyen présent dans notre groupe d'utilisateurs. 
 
 Nous définissons nos hypothèses:
-$H_0$: $\mu_{hi}-\mu_{ri}\leq-\sigma_{hi}$ OU $\mu_{hi}-\mu_{ri}\geq\sigma_{hi}$
-$H_A$: $-\sigma_{hi}<\mu_{hi}-\mu_{ri}<\sigma_{hi}$
-où $\mu_{hi}$ et $\mu_{ri}$ sont la moyenne humaine et la réponse du robot pour le test $i$, $\sigma_{hi}$ est la variance des réponses humaines pour le test $i$.
+
+\begin{enumerate}
+\item $H_0$: $\mu_{hi}-\mu_{ri}\leq-\sigma_{hi}$ OU $\mu_{hi}-\mu_{ri}\geq\sigma_{hi}$
+\item $H_A$: $-\sigma_{hi}<\mu_{hi}-\mu_{ri}<\sigma_{hi}$
+\end{enumerate}
+
+Où $\mu_{hi}$ et $\mu_{ri}$ sont la moyenne humaine et la réponse du robot pour le test $i$, $\sigma_{hi}$ est la variance des réponses humaines pour le test $i$.
 
 Nous avons effectué des tests pour évaluer: a) la prédiction sans indices (No clues), b) la prédiction en présence d'indices contextuels (Contextual clues), c) la prédiction en présence d'indices sur l'état mental (Divergent belief).
 
@@ -212,13 +251,13 @@ Nous établissons un environnement avec un ensemble de meubles: une \textit{Éta
 \begin{figure}[ht!]
   \centering
  \includegraphics[width=0.7\linewidth]{./intention/actors.png} 
-  \caption {Image représentant la configuration du scénario des cookies.}
+  \caption {Image représentant la configuration du scénario des cookies issu des vidéos présentées aux humains chargés d'estimer les intentions.}
   \label{fig:cookieScen}
 \end{figure}
 
 L'\textit{Événement de croyance divergente} a été montré aux utilisateurs et au robot entre le test \textit{Contextual clues} et le test \textit{Divergent belief Max}. 
 
-Nous avons volontairement inclu une intention, \textit{Reading the book}, sans mettre de livre dans l'environnement visible, afin d'introduire un élément incertain dans le scénario.
+Nous avons volontairement inclus une intention, \textit{Reading the book}, sans mettre de livre dans l'environnement visible, afin d'introduire un élément incertain dans le scénario.
 
 \subsubsection{Scénario des clés}
 \begin{itemize}
@@ -232,7 +271,7 @@ Nous avons volontairement inclu une intention, \textit{Reading the book}, sans m
 \begin{figure}[ht!]
   \centering
  \includegraphics[width=0.8\linewidth]{./intention/keys1.png} 
-  \caption {Image représentant la configuration du scénario des clés.}
+  \caption {Image représentant la configuration du scénario des clés issue des vidéos présentées aux utilisateurs chargés d'estimer les intentions.}
   \label{fig:keyScen}
 \end{figure}
 
@@ -256,9 +295,9 @@ Lorsqu'on observe les réponses des utilisateurs (voir figure \ref{fig:user_stud
 
 \subsection{Implémentation robotique}
 \label{sec:expeRobotIntent}
-Nous avons répliqué les deux scénarios avec un robot PR2 de Willow Garage\footnote{https://www.willowgarage.com/pages/pr2/overview}. Nous avons simplifié la perception, en utilisant de la capture de mouvement pour suivre les humains. Celle-ci est filtrée pour tenir compte des occlusions. Pour la détection d'objet nous utilisons un logiciel de reconnaissance de tags \footnote{Des vidéos d'expériences associées peuvent être vue sur  http://homepages.laas.fr/mfiore/roman2016.html}. 
+Nous avons répliqué les deux scénarios avec un robot PR2 de Willow Garage\footnote{https://www.willowgarage.com/pages/pr2/overview}. Nous avons simplifié la perception, en utilisant de la capture de mouvement pour suivre les humains. Pour la détection d'objet nous utilisons un logiciel de reconnaissance de tags \footnote{Des vidéos d'expériences associées peuvent être vue sur  http://homepages.laas.fr/mfiore/roman2016.html}. 
 
-Au début d'un scénario, le robot scanne l'environnement, construisant un modèle de l'état du monde. Avec notre perception, il n'est pas possible de savoir si la boîte de cookie est pleine ou vide et nous la considérons donc comme pleine au commencement d'un test, et ses valeurs sont mises à jour en utilisant les $postconditions$ des actions humaines inférées. Nous considérons que la boîte est vide lorsqu'un humain prend un cookie, et comme pleine lorsqu'un humain y a mis un cookie.
+Au début d'un scénario, le robot scanne l'environnement, construisant un modèle de l'état du monde. Avec notre perception, il n'est pas possible de savoir si la boîte de cookie est pleine ou vide et nous la considérons donc comme pleine au commencement d'un test, et ses valeurs sont mises à jour en utilisant les $postconditions$ (effets) des actions humaines inférées. Nous considérons que la boîte est vide lorsqu'un humain prend un cookie, et comme pleine lorsqu'un humain y met un cookie.
 
 Nous avons construit différents IGs pour les scénarios. Chaque test a un graphe différent, lié à l'agent principal dont on veut reconnaître l'intention. Nous considérons trois différents nœuds de contexte pour ces IGs: \textit{HotDay}, qui est vrai lorsque la journée est particulièrement chaude; BreakTime, qui est vrai lorsque les agents prennent une pause; TimeToLeave, qui est vrai lorsqu'il est tard dans la journée, et que les humains partent en général de leur lieu de travail pour rentrer chez eux.
 
@@ -296,14 +335,14 @@ Nous réalisons des tests TOST pour chaque intention contenu dans les scénarios
 
 Nous calculons les p-valeurs et réalisons nos tests en utilisant la valeur de signification $\alpha=0.05$.
 
-En analysant les résultats de nos tests d'équivalence, présentés dans la figure \ref{fig:user_study_results}, des informations intéressantes peuvent en être extraites. 1) Le comportement de notre système est généralement proche des capacités humaines. 19 tests sur les 21 valident notre hypothèse avec une p-valeur inférieur à la valeur de signification. 2) Le contexte et l'état de croyance de l'homme sont à prendre en compte. Un système qui ignorerait ces deux facteurs aurait pu reconnaître correctement que l'intention du test \textit{No Clues}. 3) Certains raisonnements présents chez l'homme sont encore manquants dans notre système. Nous avons échoué à rejeter l'hypothèse nulle pour deux cas. Dans \textit{Divergent Belief Bob} les humains ont donné une note plus importante à l'intention \textit{Eat Cookie} que l'intention \textit{Drink Water}. Une explication est qu'ils ont pens que, étant donné que \textit{Bob} a rempli la \textit{Boîte de cookies}, il y a plus de chance qu'il souhaite manger un \textit{Cookie}. Cela permet de mettre en valeur que l'homme utilise des raisonnements temporels complexes pour évaluer l'intention, en considérant tout l'historique des actions des agents pour deviner leur intention.
+En analysant les résultats de nos tests d'équivalence, présentés dans la figure \ref{fig:user_study_results}, des informations intéressantes peuvent en être extraites. 1) Le comportement de notre système est généralement proche des capacités humaines. 19 tests sur les 21 valident notre hypothèse avec une p-valeur inférieure à la valeur de signification. 2) Le contexte et l'état de croyance de l'homme sont à prendre en compte. Un système qui ignorerait ces deux facteurs aurait pu reconnaître correctement que l'intention du test \textit{No Clues}. 3) Certains raisonnements présents chez l'homme sont encore manquants dans notre système. Nous avons échoué à rejeter l'hypothèse nulle pour deux cas. Dans \textit{Divergent Belief Bob} les humains ont donné une note plus importante à l'intention \textit{Eat Cookie} que l'intention \textit{Drink Water}. Une explication est qu'ils ont pensé que, étant donné que \textit{Bob} a rempli la \textit{Boîte de cookies}, il y a plus de chance qu'il souhaite manger un \textit{Cookie}. Cela permet de penser que l'homme utilise des raisonnements temporels complexes pour évaluer l'intention, en considérant tout l'historique des actions des agents pour deviner leur intention.
 
 
 
  \begin{figure}[h!]
 	\centering
 	\includegraphics[clip,scale=0.52]{img/pvalues1.pdf}
-	\caption{Résultats expérimentaux. Les résultats pour les deux scénarios sont représentés sous forme de graphes. Les intentions, estimées par les hommes et le robot, sont représentées sous différentes couleurs (voir légende). L'estimation des mêmes intentions par le robot et par les hommes sont placées côte à côte. Chaque colonne représente la probabilité d'une intention exprimée en pour-cent. Les P-valeurs du test d'équivalence sont ajoutées au graphe.}
+	\caption{Résultats expérimentaux. Les résultats pour les deux scénarios sont représentés sous forme de graphes. Les intentions, estimées par les hommes et le système de reconnaissance d'intention, sont représentées sous différentes couleurs (voir légende). L'estimation des mêmes intentions par le système et par les hommes sont placées côte à côte. Chaque colonne représente la probabilité d'une intention exprimée en pour-cent. Les P-valeurs du test d'équivalence sont ajoutées au graphe.}
 	\label{fig:user_study_results}
   	\vspace{-16pt}
 \end{figure}

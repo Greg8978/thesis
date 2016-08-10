@@ -11,31 +11,34 @@
 \faketableofcontents
 \fi
 
-\chapter{Estimation de l'Expertise Humaine et Adaptation de la Collaboration}
+\chapter{Prise en compte de l'Expertise Humaine et Adaptation de la Collaboration}
 \label{chapter5}
 \minitoc
+
 
 \section{Contexte et motivation}
 % Expose the issue of plan verbalizing + why HTN as colaborative plan + why reasoning on agent knowledge
 L'un des défis de la robotique est de faire collaborer convenablement les robots avec des partenaires humains durant l'accomplissement de tâches. Collaborer avec un humain nécessite de la part du robot de planifier ses propres actions, d'anticiper les contributions de son partenaire au plan global, de surveiller les actions potentiellement complexes de l'homme et de maintenir un état du monde à jour. La collaboration doit, en plus de cela, avoir une dimension sociale suffisamment importante pour garantir le confort de l'homme ainsi qu'une lisibilité des actions et décisions du robot afin que le système soit intuitif. Le comportement social a également une influence importante sur l'acceptation du robot par l'homme.
 
 %Plan generation
-Nous définissons un plan collaboratif, ou plan partagé, comme un ensemble d'actions liées, impliquant plusieurs agents qui coopèrent afin d'avancer vers un objectif commun.
-Pour générer un plan partagé, le robot devrait prendre en compte non seulement la configuration de son environnement, mais également son/ses partenaire(s) humain(s). Un moyen pragmatique de prendre en compte l'humain consiste à calculer les affordances de celui-ci, lui permettant de générer des plans plus pertinents et pour lesquels l'homme est dans la capacité d'accomplir les tâches qui lui sont confiées. D'un point de vue social, le robot devrait également pouvoir adapter le plan aux préférences et à l'expertise de l'utilisateur. Idéalement, cette adaptation devrait pouvoir se faire au niveau de chaque tâche du plan.
+Nous définissons un plan collaboratif, ou plan partagé, comme un ensemble d'actions ordonnées, impliquant plusieurs agents qui coopèrent afin d'avancer vers un objectif commun.
+Pour produire un plan partagé, le robot devrait prendre en compte non seulement la configuration de son environnement, mais également son/ses partenaire(s) humain(s). Un moyen pragmatique de prendre en compte l'humain consiste à calculer les affordances de celui-ci, lui permettant de créer des plans plus pertinents et pour lesquels l'homme est dans la capacité d'accomplir les tâches qui lui sont confiées. D'un point de vue social, le robot devrait également pouvoir adapter le plan aux préférences et à l'expertise de l'utilisateur. Idéalement, cette adaptation devrait pouvoir se faire au niveau de chaque tâche du plan.
 
 %Plan explanation
-Une fois que le robot a généré un plan pour atteindre l'objectif des agents impliqués, il faut pouvoir le partager avec le partenaire humain afin de s'assurer qu'il soit informé des tâches qui lui incombent, et qu'il accepte de les mener à bien. Lorsque le plan et l'objectif sont suffisamment simples, les jeunes enfants sont capables de collaborer sans utiliser le langage. Dans les situations nécessitant des plans plus complexes, le langage est la modalité préférée \cite{Warneken2006,Warneken2007}. Cependant, expliquer la totalité du plan en détaillant chaque action "atomique" (par exemple "tendre le bras puis fermer la main" pour attraper un objet) d'un seul coup serait inefficace et ennuyeux pour le partenaire humain, tout particulièrement s'il a déjà la connaissance de la façon de réaliser certaines actions. Pour reprendre l'exemple d'attraper un objet, cette tâche fait partie des connaissances "universelles" chez l'homme, à savoir que le robot devrait estimer connue peu importe l'identité de l'humain avec lequel il collabore. Il serait donc inutile de décomposer la tâche d'attraper un objet pour détailler les actions (ou sous-tâches) liées à cette tâche. 
+Une fois que le robot a produit un plan pour atteindre l'objectif des agents (hommes et robots) impliqués, il faut pouvoir le partager avec le partenaire humain afin de s'assurer qu'il soit informé des tâches qui lui incombent, et qu'il accepte de les mener à bien. Lorsque le plan et l'objectif sont suffisamment simples, les jeunes enfants sont capables de collaborer sans utiliser le langage, simplement en estimant l'intention et les actions de l'autre. Dans les situations nécessitant des plans plus complexes, le langage est la modalité préférée \cite{Warneken2006,Warneken2007}. Cependant, expliquer la totalité du plan en détaillant chaque action unitaire (par exemple "tendre le bras puis fermer la main" pour attraper un objet) d'un seul coup serait inefficace et ennuyeux pour le partenaire humain, tout particulièrement s'il a déjà la connaissance de la façon de réaliser certaines actions. Pour reprendre l'exemple d'attraper un objet, cette tâche fait partie des connaissances "universelles" chez l'homme, à savoir que le robot devrait estimer connue peu importe l'identité de l'humain avec lequel il collabore. Il serait donc inutile de décomposer la tâche d'attraper un objet pour détailler les actions (ou sous-tâches) liées à cette tâche. 
 
 Les recherches menées en psychologie et en philosophie ont conduit à une meilleure compréhension du comportement humain durant l'action jointe et la collaboration, afin de savoir comment \cite{tomasello2005} et pourquoi \cite{tomasello2009} l'homme collabore et ce qui est partagé durant ce processus \cite{Butterfill2011}.
 %
 %
 %
 %
-Ces recherches sur l'action jointe ont été utilisées en robotique pour accomplir des tâches faisant intervenir un partenaire humain. Alors qu'un nombre substantiel de travaux dans le domaine cherchent à résoudre le problème de génération de plan pour les buts collaboratifs impliquant un partenaire humain \cite{lallement14}, seulement quelques uns étudient comment adapter efficacement la génération de plan et son exécution à l'expertise de l'homme. Nous pensons également que représenter et actualiser correctement les informations sur les connaissances de l'homme, qui évoluent au cours des interactions, est un problème clé. Nous affirmons qu'une telle adaptation à l'utilisateur améliorerait considérablement les capacités sociales du robot au cours de l'interaction collaborative avec un partenaire humain.
+Ces recherches sur l'action jointe ont été utilisées en robotique pour accomplir des tâches faisant intervenir un partenaire humain. Alors qu'un nombre substantiel de travaux dans le domaine cherchent à résoudre le problème de génération de plan pour les buts collaboratifs impliquant un partenaire humain \cite{lallement14}, seulement quelques uns étudient comment adapter efficacement la génération de plan et son exécution à l'expertise de l'homme. Jusqu'alors nos études portant sur des tâches collaboratives supposaient que les hommes avaient la connaissances suffisante pour exécuter les tâches du plan. Ici nous considérons que ces connaissances peuvent être insuffisantes, voir inexistantes et nous cherchons à représenter et actualiser correctement les informations sur les connaissances de l'homme, qui évoluent au cours des interactions. Nous affirmons qu'une telle adaptation à l'utilisateur améliore considérablement les capacités sociales du robot au cours de l'interaction collaborative avec un partenaire humain.
 
-Nous allons tout d'abord expliquer comment nous estimons et suivons l'évolution de la connaissance de l'homme sur chaque nœud présent dans le plan collaboratif (dans notre recherche nous utilisons des plans de type HTN, pour Hierarchical Task Network), depuis le haut niveau d'abstraction de tâches aux actions atomiques. Nous allons par la suite présenter comment nous sommes capables de prendre en compte l'homme durant la génération du plan pour la collaboration. Puis nous donnerons des détails sur la façon dont nous tirons avantage de la structure d'arbre du HTN généré pour 1) présenter et négocier le plan partagé,
+
+
+Nous allons tout d'abord expliquer comment nous estimons et suivons l'évolution de la connaissance de l'homme sur chaque nœud présent dans le plan collaboratif (dans notre recherche nous utilisons des plans de type HTN, pour Hierarchical Task Network), depuis le haut niveau d'abstraction de tâches aux actions atomiques. Nous allons par la suite présenter comment nous sommes capables de prendre en compte l'homme durant la génération du plan pour la collaboration. Puis nous donnerons des détails sur la façon dont nous tirons avantage de la structure d'arbre du HTN produit pour 1) présenter et négocier le plan partagé,
 %\footnote{We will not discuss the issue of negotiating a plan between the involved collaborators. The human will have to follow the plan generated by the robot considered here as an expert for the tasks to perform} 
-et 2) expliquer et surveiller les tâches en fonction du niveau de connaissance de l'utilisateur sur chaque tâche, afin de guider ou enseigner l'homme lorsque nécessaire et d'adapter la surveillance de ses actions. Enfin, nous présenterons une implémentation du système et une étude comparative impliquant deux groupes distincts d'utilisateurs dont nous discuterons les résultats obtenus\footnote{Une version en anglais présentant ces travaux est disponible dans l'article \cite{Milliez16}}.
+et 2) expliquer et surveiller les tâches en fonction du niveau de connaissance de l'utilisateur sur chaque tâche, afin de guider ou enseigner l'homme lorsque nécessaire et d'adapter la surveillance de ses actions. Enfin, nous présenterons une implémentation du système et une étude comparative impliquant deux groupes distincts d'utilisateurs et dont nous discuterons les résultats obtenus\footnote{Une version en anglais présentant ces travaux est disponible dans l'article \cite{Milliez16}}.
 
 % Should we also speak about related work in outline presentation?
 
@@ -54,8 +57,8 @@ et 2) expliquer et surveiller les tâches en fonction du niveau de connaissance 
 
 
 %shrink?
-Des recherches précédentes tel que \cite{Lallee2013}, ont permis de montrer la pertinence d'utiliser un plan commun pour la collaboration homme robot. Ainsi, l'utilisation de plan permet au robot de guider la prise de tour pour accomplir l'exécution. Les auteurs décrivent également des expériences réalisées avec des sujets naïfs et suggèrent que le plan commun devrait être totalement communiqué afin de soutenir une collaboration effective. Dans \cite{Petit2012}, le dialogue est utilisé pour apprendre de nouveaux plans au robot et pour modifier ces plans. Une des façons pour le robot d'apprendre est d'utiliser "la programmation par le langage". Pour ce faire, un humain explique verbalement les tâches au robot, à savoir quelle suite d'actions permet d'accomplir la tâche en question. Cependant, ce travail ne traite pas de la situation où c'est au robot d'expliquer une tâche à l'humain.
-Dans \cite{Sorce2015}, le système est capable d'apprendre un plan pour l'expliquer à un nouvel utilisateur. L'article illustre cette transmission de connaissance de tâches collaboratives homme-robot par un scénario sur une station spatiale où des cosmonautes se succèdent et sont amenés à collaborer avec un robot. Dans cette étude, le robot a deux modalités différentes pour adapter son comportement à l'utilisateur: un mode débutant et un mode expert.
+Des recherches précédentes tel que \cite{grosz1996collaborative,grosz1999evolution,bratman2013shared}, ont permis de montrer la pertinence d'utiliser un plan commun pour la collaboration, et notamment la collaboration homme-robot \cite{Lallee2013}. Ainsi, l'utilisation de plan permet au robot de guider la prise de tour pour accomplir l'exécution. Les auteurs décrivent également des expériences réalisées avec des sujets naïfs et suggèrent que le plan commun devrait être totalement communiqué afin de soutenir une collaboration effective. Dans \cite{Petit2012}, le dialogue est utilisé pour apprendre de nouveaux plans au robot et pour modifier ces plans. Une des façons pour le robot d'apprendre est d'utiliser "la programmation par le langage". Pour ce faire, un humain explique verbalement les tâches au robot, à savoir quelle suite d'actions permet d'accomplir la tâche en question. Cependant, ce travail ne traite pas de la situation où c'est au robot d'expliquer une tâche à l'humain.
+Dans \cite{Sorce2015}, le système est capable d'apprendre un plan (sous forme de décomposition de tâches de différents niveaux d'abstraction) d'un utilisateur afin de pouvoir le retransmettre à un autre utilisateur. L'article illustre cette transmission de connaissance de tâches collaboratives homme-robot par un scénario sur une station spatiale où des cosmonautes se succèdent et sont amenés à collaborer avec un robot. Dans cette étude, le robot a deux modalités différentes pour adapter son comportement à l'utilisateur: un mode débutant et un mode expert.
 %Miki: 
 % Extended this, look if there are papers that dinamically updates the user knowledge model and compare
 Notre contribution cherche à créer un système plus adaptatif en ayant un suivi du niveau de connaissances de chaque agent pour chaque tâche et sous-tâche avec une génération en ligne du plan collaboratif.
@@ -87,7 +90,7 @@ Notre contribution cherche à créer un système plus adaptatif en ayant un suiv
 %Previous research has shown how perspective-taking ability is a key feature for planning \cite{guitton2012}, understanding others' intentions \cite{talamadupula2014coordination} for coordination, efficient task learning by taking into account teacher's visual perspective ~\cite{breazeal2006}, and improving dialog \cite{Ferreira2015}. This research focused on the representation of other agents' visual perspective and belief state concerning the environment. In our work, we incorporate a model of the robot partner's (human) knowledge of the tasks contained in the collaborative plan to perform, in order to build a human-adaptive system for joint actions.
 
 
-Comme présenté dans les chapitres précédents, raisonner sur les capacités de l'homme et son état d'esprit (ce qui revient à le doter de la capacité de prise de perspective décrite dans le chapitre \ref{chapter2}) est essentiel pour avoir un robot qui soit capable d'interagir socialement, qui soit accepté par l'homme et qui soit un partenaire efficace et pertinent.
+Comme présenté dans les chapitres précédents, raisonner sur les capacités de l'homme et son état mental (ce qui revient à le doter de la capacité de prise de perspective décrite dans le chapitre \ref{chapter2}) est essentiel pour avoir un robot qui soit capable d'interagir socialement, qui soit accepté par l'homme et qui soit un partenaire efficace et pertinent.
 Dans les travaux présentés ici, nous incorporons un modèle de connaissance du partenaire (humain) concernant les tâches présentes dans le plan collaboratif à effectuer, et ce afin d'obtenir un système qui s'adapte à l'homme pour les actions jointes.
 % ITS
 Les recherches sur les systèmes de tuteurs intelligents (ITS pour Intelligent Tutoring System) \cite{brusilovskiy1994construction} ainsi que celles sur le e-learning \cite{brusilovskiy2005}, ont prouvé la nécessité de garder et mettre à jour un modèle de connaissances de l'apprenti afin d'enseigner correctement une tâche.
@@ -136,7 +139,7 @@ Dans \cite{clair2015robot} le dialogue est utilisé durant l'exécution du plan 
 %Vérifier problem ou process
 
 % Keep this?
-Des études en psychologie montrent que les humains forment une représentation jointe de la tâche, ce qui inclue les actions que chaque partenaire devrait accomplir \cite{sebanz2006joint}. La surveillance de l'exécution doit alors être liée à cette représentation partagée des tâches afin de mieux suivre le niveau d'engagement de chaque membre dans l'action jointe, et si il y a des erreurs qui ont besoin d'être prises en charge.
+Des études en psychologie montrent que les humains forment une représentation jointe de la tâche, ce qui inclut les actions que chaque partenaire devrait accomplir \cite{sebanz2006joint}. La surveillance de l'exécution doit alors être liée à cette représentation partagée des tâches afin de mieux suivre le niveau d'engagement de chaque membre dans l'action jointe, et si il y a des erreurs qui ont besoin d'être prises en charge.
 
 
 %TODO Michelangelo:
@@ -163,7 +166,7 @@ Des études en psychologie montrent que les humains forment une représentation 
 \subsection{Estimation de la situation et état mental}
 
 Pour évaluer l'état de connaissances de son collaborateur, le robot a besoin de comprendre la situation et d'en extraire des informations sur les agents.
-Pour ce faire, et pour maintenir un état du monde cohérent, nous utilisons l'infrastructure logicielle TOASTER décrite dans le premier chapitre de ce manuscrit. L'état du monde généré par ce module de raisonnement spatio-temporel sera utilisé par notre générateur de plan pour calculer un plan adapté à la situation.
+Pour ce faire, et pour maintenir un état du monde cohérent, nous utilisons l'infrastructure logicielle TOASTER décrite dans le premier chapitre de ce manuscrit. L'état du monde produit par ce module de raisonnement spatio-temporel sera utilisé par notre générateur de plan pour calculer un plan adapté à la situation.
 
 % To assess the knowledge state of its collaborator, the robot needs to understand the situation and extract information about agents.
 % To do so, and to maintain a consistent world state, we use a situation assessment component to perform spatio-temporal reasoning based on  
@@ -174,7 +177,7 @@ Pour ce faire, et pour maintenir un état du monde cohérent, nous utilisons l'i
 
 L'utilisation du système d'évaluation de la situation, a permis dans nos autres travaux de gérer avec succès un état de croyance pour chaque agent, robot et humain. Le modèle de l'état de croyance de chaque agent est indépendant et logiquement cohérent. La croyance du robot en ce qui concerne l'état mental de ses homologues sur l'environnement est représenté dans ces modèles (Comme expliqué dans les autres chapitres de ce manuscrit).
 
-Dans ces travaux, nous nous concentrons sur la connaissance de l'homme concernant divers tâches. Cette connaissance est représentée par un vecteur $<$ HUMAN, TASK, PARAMETERS, VALUE $> $.
+Dans ces travaux, nous nous concentrons sur la connaissance de l'homme concernant diverses tâches. Cette connaissance est représentée par un vecteur $<$ HUMAN, TASK, PARAMETERS, VALUE $> $.
 \textit{HUMAN} représente l'homme ayant cette connaissance, \textit{TASK} est le nom de la tâche, \textit{PARAMETERS} la liste des paramètres pertinents pour décrire la connaissance se rapportant à la tâche (voir ci-dessous) et \textit{VALUE} est la valeur (ou le niveau) de connaissance de l'homme concernant la tâche.
 
 % Using situation assessment, our previous work successfully managed a belief state for each agent, robot and human. Each belief-state model is independent and logically consistent. The robot belief regarding its counterparts' mental state about the environment is represented in these models.
@@ -199,7 +202,7 @@ Ce formalisme de représentation de la tâche exige un expert du domaine pour in
 \subsection{Niveau de connaissance de tâche}
 
 %How human update their knowledge
-Dans ce contexte où le robot génère le plan partagé, nous supposons qu'il connaît toutes les tâches contenues dans le plan.
+Dans ce contexte où le robot génère le plan partagé, nous supposons qu'il connaît toutes les tâches nécessaires dans le plan.
 En ce qui concerne le collaborateur, nous définissons quatre niveaux de connaissance de tâche qui mèneront à des comportements différents de la part du robot.
 
 \begin{itemize}
@@ -246,13 +249,15 @@ Ces niveaux de connaissance de tâche permettent l'adaptation de la génération
 %STRIPS \cite{strips71} is used to build plans that are sequences of actions.
 Une fois que le système est capable de suivre et modéliser les connaissances de l'homme sur diverses tâches, il doit également pouvoir générer un plan collaboratif.
 
+Dans cette étude, le choix a été fait d'utiliser HATP (Hierarchical Agent-based Task Planner). Ce planificateur est développé au LAAS-CNRS par Raphaël Lallement qui a contribué à l'étude présentée dans ce chapitre.
+
 Nous utilisons une approche hiérarchique de planification car cette méthode offre une meilleure compréhension du contexte dans lequel un agent est invité à effectuer une action. Ce contexte est bénéfique pour l'explication du plan. En effet, il met en œuvre un processus de raffinement contextuel itératif. Par conséquent, le système peut guider les utilisateurs en leur disant pourquoi ils devraient effectuer une action et la façon dont elle est liée à des parties précédentes et suivantes du plan.
 Nous utilisons un HTN, qui assure la représentation de domaine et une planification efficace.
 L'HTN est beaucoup plus efficace que la planification classique car l'expert du domaine peut guider le processus de recherche vers l'objectif en fournissant une représentation correcte.
 Une très célèbre application de HTN est SHOP \cite{Nau99}.
 
 %HATP
-Pour calculer des plans de collaboration, nous utilisons un planificateur HTN modifié, spécialement conçu pour la robotique \cite{lallement14}.
+Pour calculer des plans de collaboration, nous utilisons HATP, un planificateur HTN modifié, spécialement conçu pour la robotique \cite{lallement14}.
 Il est livré avec des fonctions spécifiques concernant la production du plan, telles que:
 
 \begin{itemize}
@@ -271,7 +276,7 @@ Il est livré avec des fonctions spécifiques concernant la production du plan, 
 
 
 
-Chaque action dans le domaine dispose d'une fonction qui permet d'estimer son coût si elle est ajoutée au plan. Donc, à tout moment il est possible de calculer le coût du plan partiel alors qu'il est en cours de construction. En outre, le score du meilleur plan actuel est stocké; si, à un moment, le coût du plan partiel courant dépasse ce score, le plan est rejeté et la recherche se poursuit. Cet élagage de plan permet d'accélérer la recherche du meilleur plan. Après que chaque plan ait été calculé, un ensemble de règles de filtrage sont appliquées pour sanctionner les plans qui ne présentent pas certains comportements sociaux. Une fois que le meilleur plan (notez que l'on peut limiter la recherche à un niveau de coût "suffisamment" bon) est récupéré, il est envoyé au superviseur sous la forme d'un arbre HTN. En outre, un ensemble de flux d'actions est élaboré; chaque flux représente les actions qu'un agent (humain ou robot) doit effectuer. Pour assurer le séquençage de l'action appropriée et la synchronisation entre les agents, les liens de causalité sont intégrés. Par ailleurs, le plan peut inclure des actions conjointes attribuées simultanément à deux ou plusieurs agents parce qu'ils ont besoin d'être en étroite collaboration (par exemple dans le cas d'un "handover", ou transfert d'objet). La figure \ref{fig:treePlan}
+Chaque action dans le domaine dispose d'une fonction qui permet d'estimer son coût si elle est ajoutée au plan. Donc, à tout moment il est possible de calculer le coût du plan partiel alors qu'il est en cours de construction. En outre, le score du meilleur plan actuel est stocké; si, à un moment, le coût du plan partiel courant dépasse ce score, le plan est rejeté et la recherche se poursuit. Cet élagage de plan permet d'accélérer la recherche du meilleur plan. Après que chaque plan ait été calculé, un ensemble de règles de filtrage sont appliquées pour sanctionner les plans qui ne présentent pas certains comportements sociaux. Une fois que le meilleur plan (notez que l'on peut limiter la recherche à un niveau de coût "suffisamment" bon) est récupéré, il est envoyé au superviseur sous la forme d'un arbre de décomposition. En outre, un ensemble de flux d'actions est élaboré; chaque flux représente les actions qu'un agent (humain ou robot) doit effectuer. Pour assurer le séquençage de l'action appropriée et la synchronisation entre les agents, les liens de causalité sont intégrés. Par ailleurs, le plan peut inclure des actions conjointes attribuées simultanément à deux ou plusieurs agents parce qu'ils ont besoin d'être en étroite collaboration (par exemple dans le cas d'un "handover", ou transfert d'objet). La figure \ref{fig:treePlan}
 dépeint une partie de la décomposition de l'arbre d'un plan solution.
 
 \begin{figure}[ht!]
@@ -284,7 +289,7 @@ dépeint une partie de la décomposition de l'arbre d'un plan solution.
  \label{fig:treePlan}
  \end{figure}
  
-Pour prendre l'expertise en compte lors de la planification, une nouvelle règle sociale est nécessaire. L'objectif est de sélectionner le meilleur plan adapté à la politique choisie. Nous proposons deux politiques: la préférence de l'enseignement où l'être humain peut apprendre du robot, ou le choix de l'efficacité. Avec la politique de l'enseignement, le planificateur tente de produire des plans afin de maximiser le nombre de tâches humaines où l'humain a l'occasion d'apprendre, alors que l'efficacité pousse le planificateur à sélectionner des plans avec le moins de tâches inconnues pour l'être humain, afin de veiller à ce qu'il puisse être plus efficace (le robot peut cependant s'assigner certaines tâches inconnues à l'homme).
+Pour prendre l'expertise en compte lors de la planification, une nouvelle règle sociale est nécessaire. L'objectif est de sélectionner le meilleur plan adapté à la politique choisie. Nous proposons deux politiques: la préférence de l'enseignement (sous forme de démonstration ou de réalisation accompagnée d'explications) où l'être humain peut apprendre du robot, ou le choix de l'efficacité. Avec la politique de l'enseignement, le planificateur tente de produire des plans afin de maximiser le nombre de tâches humaines où l'humain a l'occasion d'apprendre, alors que l'efficacité pousse le planificateur à sélectionner des plans avec le moins de tâches inconnues pour l'être humain, afin de veiller à ce qu'il puisse être plus efficace (le robot peut cependant s'assigner certaines tâches inconnues à l'homme).
 Dans le cas d'une politique visant à favoriser l'efficacité, la règle est tout simplement d'appliquer une pénalité à chaque fois qu'un humain doit effectuer une action qu'il ignore. Cette pénalité serait inversée pour la règle de l'enseignement.
 
 Pour illustrer notre planification et la nouvelle règle sociale nous prenons l'exemple où un être humain et un robot doivent cuisiner une tarte aux pommes. Une partie du plan solution est représenté sur la figure \ref{fig:treePlan}. Dans ce contexte, on peut considérer que l'homme sait comment mener à bien toutes les actions (prendre, poser, couper, et ainsi de suite), mais il se peut qu'il ignore  l'ordre exact des différentes étapes de préparation (tâche de niveau supérieur). Si nous sommes favorables à l'enseignement, le plan devrait contenir un moyen de réaliser la recette avec un niveau de connaissance minimal sur chaque tâche et, autant que possible, l'homme sera en charge de ces étapes. D'autre part, si nous sommes favorables à l'efficacité, le plan devrait contenir la plus petite quantité de tâches inconnues à effectuer par l'utilisateur.
@@ -310,19 +315,21 @@ En ce qui concerne les préférences des utilisateurs, l'étape de la négociati
 \label{planPresentation}
 
 % intro
-Une fois que le système robotique a généré un plan collaboratif adapté à la politique choisie (prenant en compte l'apprentissage, les capacités et les préférences), le plan doit être partagé avec le partenaire humain.
+Une fois que le système robotique a produit un plan collaboratif adapté à la politique choisie (prenant en compte l'apprentissage, les capacités et les préférences), le plan doit être transmis au partenaire humain.
 La parole est une "modalité puissante pour l'entretien continu de l'interaction coopérative" \cite{Lallee2013}. En effet, Tomasello suggère même que la principale fonctionnalité du langage est d'établir et de négocier des plans coopératifs \cite{tomasello2005}.
 En considérant cela, nous décidons d'utiliser la parole pour présenter le plan au collaborateur.
 
 \subsection{Prétraitement du plan}
-L'arbre HTN généré représente une solution pour accomplir le but. Cependant, il se peut qu'en l'état il ne convienne pas à la présentation ou à l'explication du plan au collaborateur, car il peut contenir des étapes de raffinement qui rendraient l'explication confuse. Pour adapter le plan à l'explication nous utilisons deux règles.
+%TODO: expliquer le rôle des tâches récursives et pourquoi il ne faut pas les traiter.
+
+L'arbre HTN créé représente une solution pour accomplir le but. Cependant, il se peut qu'en l'état il ne convienne pas à la présentation ou à l'explication du plan au collaborateur, car il peut contenir des étapes de raffinement qui rendraient l'explication confuse. Pour adapter le plan à l'explication nous utilisons deux règles.
 %
 (1) Nous retirons les tâches récursives. Si un nœud $n$ de l'arbre HTN contient la même méthode (en utilisant la fonction $compare$) que son parent $parent(n)$, il sera remplacé dans l'arbre par ses enfants $children(n)$. (2) Nous remplaçons également les nœuds avec un enfant unique par cet enfant.
 \begin{enumerate}
 \item $\textbf{if}$ $(compare(n, parent(n)))$ \textbf{then} $n \leftarrow children(n)$
 \item $\textbf{if}$ $(children(n).size() = 1)$ \textbf{then} $n \leftarrow children(n)$
 \end{enumerate}
-Ces règles permettent de construire un arbre plus léger à traiter.
+Ces règles permettent réduire la taille de l'arbre à traiter et de le rendre plus adapté à la verbalisation et à la surveillance de l'activité de l'homme.
 Ces traitements sont illustrés par la figure \ref{fig:pretraitement}.
 
 \begin{figure}[ht!]
@@ -485,7 +492,7 @@ Nous utilisons une procédure d'exploration du plan en profondeur, ou "depth fir
 Lorsque le processus atteint un nœud, plusieurs situations peuvent se présenter.
 % Monitor function is responsible for: knowledge update(success = upgrade, fail = downgrade) and replan in case of failure. 
 
-\subsubsection{Le robot est le seul impliqué (lignes ~\ref{alg:onlyRobotStart}-~\ref{alg:onlyRobotEnd})} Si le robot est le seul agent en charge du nœud courant, si le collaborateur a un niveau de connaissance égal à \textit{NEW} pour la tâche actuelle et si la politique choisie pour l'interaction est l'apprentissage, le robot va exécuter les sous-tâches en mode "démonstration", ce qui signifie qu'il va verbaliser chaque tâche-enfant avant de la réaliser. Une fois la tâche accomplie, le robot mets à jour la connaissance de l'homme sur le nœud courant en lui donnant la valeur \textit{BEGINNER}. La même procédure sera appliquée aux enfants, afin que le robot verbalise chaque tâche qui doit être apprise par le collaborateur (et uniquement celles-ci).
+\subsubsection{Le robot est le seul impliqué (lignes ~\ref{alg:onlyRobotStart}-~\ref{alg:onlyRobotEnd})} Si le robot est le seul agent en charge du nœud courant, si le collaborateur a un niveau de connaissance égal à \textit{NEW} pour la tâche actuelle et si la politique choisie pour l'interaction est l'apprentissage, le robot va exécuter les sous-tâches en mode "démonstration", ce qui signifie qu'il va verbaliser chaque tâche-enfant avant de la réaliser. Une fois la tâche accomplie, le robot met à jour la connaissance de l'homme sur le nœud courant en lui donnant la valeur \textit{BEGINNER}. La même procédure sera appliquée aux enfants, afin que le robot verbalise chaque tâche qui doit être apprise par le collaborateur (et uniquement celles-ci).
 Si le robot est en charge du nœud, mais que le collaborateur humain a déjà les connaissances suffisantes sur le nœud, ou que la politique d'interaction est l'efficacité, le robot ne verbalisera que la tâche de plus haut niveau qu'il a à accomplir.
 
 Dans le cas où l'humain est impliqué dans le nœud courant, le comportement du robot va dépendre des connaissances de l'humain sur la tâche, car il se peut que le robot doive expliquer celle-ci ou adapter la surveillance des tâches à accomplir par l'homme.
@@ -502,7 +509,7 @@ Lorsque le robot guide verbalement l'utilisateur, si le nœud courant a des enfa
 \subsubsection{Le collaborateur est \textit{BEGINNER} (lignes ~\ref{alg:beginnerStart}-~\ref{alg:beginnerEnd})} Si l'humain a un niveau de connaissance à \textit{BEGINNER} pour la tâche courante, nous demandons s'il a besoin d'explications. Si c'est le cas, nous dégradons son niveau de connaissance, pour la tâche actuelle, à \textit{NEW} et appliquons le même procédé que le niveau \textit{NEW}. Si l'utilisateur refuse les explications, le robot va simplement surveiller l'exécution du nœud courant, sans aller plus profondément dans l'arbre. En cas de succès, le niveau de connaissance pour la tâche courante est amélioré pour être mis à \textit{INTERMEDIATE}. Ce niveau de connaissance (\textit{BEGINNER}) sera également utilisé comme niveau par défaut. De cette façon, lorsque le niveau de connaissance de l'utilisateur est inconnu sur la tâche, nous demanderons tout simplement s'il a besoin d'explication et le robot adaptera son comportement en fonction de sa réponse.
 
 % if intermediate
-\subsubsection{Le collaborateur est \textit{INTERMEDIATE} (lignes~\ref{alg:interStart}-~\ref{alg:interEnd})} Si l'humain a un niveau  \textit{INTERMEDIATE} pour la tâche courante, le robot verbalise la tâche courante et ne propose pas de l'expliquer, car l'homme a réussi à faire au moins une fois la tâche sans explications. D'autre part, nous n'allons pas plus loin dans l'arbre et surveillons directement la tâche courante. Si l'utilisateur échoue, le robot dégrade son niveau de connaissance à \textit{BEGINNER}, sinon il l'améliore en \textit{EXPERT}.
+\subsubsection{Le collaborateur est \textit{INTERMEDIATE} (lignes~\ref{alg:interStart}-~\ref{alg:interEnd})} Si l'humain a un niveau  \textit{INTERMEDIATE} pour la tâche courante, le robot verbalise la tâche et ne propose pas de l'expliquer, car l'homme a réussi à faire au moins une fois la tâche sans explications. D'autre part, nous n'allons pas plus loin dans l'arbre et surveillons directement la tâche courante. Si l'utilisateur échoue, le robot dégrade son niveau de connaissance à \textit{BEGINNER}, sinon il l'améliore en \textit{EXPERT}.
 
 % if expert
 \subsubsection{Le collaborateur est \textit{EXPERT} (lignes~\ref{alg:interStart}-~\ref{alg:interEnd})} Dans le cas du niveau \textit{EXPERT}, sur la tâche courante, nous procédons comme le niveau de connaissance précédent, en dégradant à \textit{INTERMEDIATE} si l'utilisateur fait une erreur et en gardant le niveau \textit{EXPERT} s'il l'accomplit comme prévu.
@@ -537,8 +544,9 @@ Nous avons implémenté les mécanismes proposés dans notre architecture\footno
 Le module de gestion de l'exécution du HTN (\textit{htn execution manager}) contient l'algorithme présenté en section \ref{sec:algo}.
 Il est contrôlé par le superviseur et envoie des requêtes au superviseur pour surveiller ou exécuter une tâche.
 
-Pour nos tests, nous utilisons le PR2 de Willow Garage\footnote{https://www.willowgarage.com/pages/pr2/overview}. Comme la perception n'est pas l'aspect principal de ces travaux, nous utilisons simplement la Motion Capture pour suivre les humains, et un système de reconnaissance de tag pour le suivit d'objets.
-Au commencement du scénario, le robot scan l'environnement, ce qui lui permet de construire un modèle de l'état du monde.
+Pour nos tests, nous utilisons le PR2 de Willow Garage\footnote{https://www.willowgarage.com/pages/pr2/overview}. Comme la perception n'est pas l'aspect principal de ces travaux, nous utilisons simplement la Motion Capture pour suivre les humains, et un système de reconnaissance de tag pour le suivi d'objets.
+De même, due à la complexité des tâches de manipulation contenues dans le scénario, l'exécution de ces tâches est simulée pour le robot.
+Au commencement du scénario, le robot scanne l'environnement, ce qui lui permet de construire un modèle de l'état du monde.
 % TODO Make it fit better
 Nous avons choisi pour cette première implémentation une stratégie simple de surveillance. Le robot observe l'environnement, met à jour son modèle d'état du monde en conséquence, et surveille les conséquences attendues des actions. Les actions réalisées sont inférées en utilisant la distance entre le bras de l'homme et un point d'intérêt (par exemple une boîte). Nous considérons une action comme "échouée" si elle n'a pas été réalisée avant une durée prédéfinie.
 
@@ -594,7 +602,7 @@ Après la première étape, l'humain aura acquis la connaissance pour faire la p
 %MB give the task representation to explain class / instance
 %
 
-Après avoir cuisiné le premier dessert, à savoir la tourte aux pommes, le robot génère un plan pour cuisiner la tarte à la banane. Cette fois-ci, nous considérons que les deux agents peuvent accomplir toutes les tâches (tout est atteignable pour les deux parties). La tarte à la banane requière les même tâches avec différents paramètres. La mixture est différente, ainsi que les fruits mais la méthode de préparation de ceux-ci est la même (couper et répartir dans le moule). De plus, la tarte à la banane n'aura pas de pâte sur le dessus et aura un temps de cuisson différent. Le plan généré est présenté dans la figure \ref{fig:bananaPlan}. Nous pouvons observer que la politique favorise l'efficacité en donnant les tâches connues à l'utilisateur (\textit{PrepareDough} et \textit{PrepareFruits}). Pendant l'exécution, comme l'utilisateur a un niveau de connaissance à \textit{INTERMEDIATE} sur comment préparer la pâte, le robot ne va pas l'expliquer. Concernant la tâche de préparation de fruits (\textit{prepareFruits}), le robot va proposer de fournir des explications à l'humain car celui-ci ne l'a accomplie qu'une fois avec des explications.
+Après avoir cuisiné le premier dessert, à savoir la tourte aux pommes, le robot génère un plan pour cuisiner la tarte à la banane. Cette fois-ci, nous considérons que les deux agents peuvent accomplir toutes les tâches (tout est atteignable pour les deux parties). La tarte à la banane requiert les même tâches avec différents paramètres. La mixture est différente, ainsi que les fruits mais la méthode de préparation de ceux-ci est la même (couper et répartir dans le moule). De plus, la tarte à la banane n'aura pas de pâte sur le dessus et aura un temps de cuisson différent. Le plan produit est présenté dans la figure \ref{fig:bananaPlan}. Nous pouvons observer que la politique favorise l'efficacité en donnant les tâches connues à l'utilisateur (\textit{PrepareDough} et \textit{PrepareFruits}). Pendant l'exécution, comme l'utilisateur a un niveau de connaissance à \textit{INTERMEDIATE} sur comment préparer la pâte, le robot ne va pas l'expliquer. Concernant la tâche de préparation de fruits (\textit{prepareFruits}), le robot va proposer de fournir des explications à l'humain car celui-ci ne l'a accomplie qu'une fois avec des explications.
 
 
 %TODO: try to add streams?
@@ -606,7 +614,7 @@ Après avoir cuisiné le premier dessert, à savoir la tourte aux pommes, le rob
  \begin{tabular}{c}
   \includegraphics[width=1.0\textwidth]{img/bananaPie.pdf}
  \end{tabular}
- \caption{L'arbre HTN associé au plan partagé généré pour réaliser la tarte à la banane de façon collaborative.}
+ \caption{L'arbre HTN associé au plan partagé créé pour réaliser la tarte à la banane de façon collaborative.}
  \label{fig:bananaPlan}
  %  \vspace{-10pt}
 \end{sidewaysfigure}
@@ -638,7 +646,7 @@ Après avoir cuisiné le premier dessert, à savoir la tourte aux pommes, le rob
 \label{study}
 
 \subsection{Étude utilisateur}
-Nous avons conduit une étude comparative afin d'avoir une première évaluation de la façon dont l'adaptabilité du système est perçue par les utilisateurs. Deux groupes d'utilisateurs ont été constitués, auxquels il a été demandé de suivre le scénario des deux desserts. Le premier groupe a interagir avec un robot simulé équipé d'un système basique (BS). BS a le même comportement que notre système, à ceci prêt qu'il n'a pas le mécanisme permettant de connaître le niveau de connaissance de l'homme. Le deuxième groupe interagi avec un second système, appelé système de connaissance (KS pour Knowledge System), exhibant un comportement similaire à celui fourni par notre système.
+Nous avons conduit une étude comparative afin d'avoir une première évaluation de la façon dont l'adaptabilité du système est perçue par les utilisateurs. Deux groupes d'utilisateurs ont été constitués, auxquels il a été demandé de suivre le scénario des deux desserts. Le premier groupe a interagir avec un robot simulé équipé d'un système basique (BS). BS a le même comportement que notre système, à ceci prêt qu'il n'a pas le mécanisme permettant de connaître le niveau de connaissance de l'homme. Le deuxième groupe a interagi avec un second système, appelé système de connaissance (KS pour Knowledge System), exhibant un comportement similaire à celui fourni par notre système.
 Tous les participants ont par la suite évalué l'interaction sur plusieurs critères.
 %
 La répartition de tâche présentée dans la section \ref{sec:experiment} 
@@ -671,7 +679,7 @@ Nous avons recueilli les résultats pour chaque groupe d'utilisateurs, et calcul
 La figure \ref{fig:results} résume les résultats obtenus en affichant la moyenne des notes, l'écart type sous forme de barres d'erreurs ainsi que la p-valeur. En comparant les réponses des utilisateurs, nous pouvons voir que l'adaptation du robot au niveau de connaissance de l'homme concernant les explications fournies est bien perçue avec une moyenne de 3.74 pour KS contre 2.05 pour BS. Les utilisateurs interagissant avec KS ont globalement remarqué que la répartition des tâches prenait en compte leur connaissance en donnant une notation moyenne de 3.42 pour KS et 2.58 pour BS. La dernière question concerne la liberté de choisir la manière d'accomplir une tâche, liée au suivi de plus haut niveau en cas de connaissance suffisante de la tâche. La moyenne est de 2.58 pour KS contre 1.89 pour BS, et la p-valeur est inférieur à 0.05. On peut donc conclure que même sur cet aspect l'adaptabilité a été perçue.
 %As some users just performed the task as the robot teach them, they may not have noticed that they could perform it in a different way. However, 
 Avec le système KS, les utilisateurs ont attribué une moyenne de 3.11 pour l'adaptabilité globale du système contre 1.89 pour le système basique.
-Nous avons également demandé comment le partenaire robotique était perçu. Bien que en BS le robot ne soit pas perçu comme plus verbeux (2.53 pour KS contre 2.47 pour BS), il semble que les utilisateurs ont trouvé l'interaction légèrement plus naturelle (2.74 contre 2.42) et le robot est apparu comme plus intelligent (2.79 contre 2.26). Même si ces résultats renforcent notre idée, comme la p-valeur est supérieur à 0.1 pour l'aspect naturel, cela ne permet pas de prouver qu'il y a une différence notable entre les deux systèmes (cela ne permet pas de rejeter l'hypothèse nulle).
+Nous avons également demandé comment le partenaire robotique était perçu. Bien que en BS le robot ne soit pas perçu comme plus verbeux (2.53 pour KS contre 2.47 pour BS), il semble que les utilisateurs ont trouvé l'interaction légèrement plus naturelle (2.74 contre 2.42) et le robot est apparu comme plus intelligent (2.79 contre 2.26). Même si ces résultats renforcent notre idée, comme la p-valeur est supérieure à 0.1 pour l'aspect naturel, cela ne permet pas de prouver qu'il y a une différence notable entre les deux systèmes (cela ne permet pas de rejeter l'hypothèse nulle).
 Nous pensons que d'autres paramètres ont été pris en compte par les utilisateurs, comme la parole elle-même, ce qui a conduit les utilisateurs des deux expériences à évaluer l'interaction comme étant peu naturelle. Améliorer la verbalisation avec l'usage d'un dictionnaire de synonymes pourrait aider à avoir des résultats plus significatifs.
 
 
@@ -713,7 +721,7 @@ Nous avons également mis en place deux politiques d'interaction, l'apprentissag
 Notre méthode incorpore le suivi des actions humaines de haut niveau, en se focalisant sur la complétion de la tâche plutôt que sur la façon dont la tâche est accomplie. Cela permet de donner une certaine flexibilité à l'humain lorsqu'il réalise les tâches qui lui sont assignées.
 
 %In the future we would like to conduct a user study enlightening the necessity of segmentation of the plan verbalization and execution according to the number of actions to verbalize for each partner to ensure scalability of our solution.
-Nous avons mener une étude comparative en ligne. Les résultats sont encourageants, les utilisateurs ont été capables de percevoir l'adaptabilité du robot sur les aspects de génération, d'accompagnement et de surveillance de tâches.
+Nous avons mené une étude comparative en ligne. Les résultats sont encourageants, les utilisateurs ont été capables de percevoir l'adaptabilité du robot sur les aspects de génération, d'accompagnement et de surveillance de tâches.
 %
 À l'heure actuelle, cette approche nécessite que le robot connaisse toutes les méthodes à réaliser (incluant la décomposition de chaque tâche). Ajouter la possibilité d'enseigner une décomposition de tâches au robot comme dans  \cite{Mohseni2015} permettrait de surmonter cette restriction.
 Pour la partie de négociation, nous avons fourni un premier mécanisme, en donnant un coût différent à une tâche lorsque l'utilisateur exprime son souhait de la faire ou non. Cependant, cela pourrait être amélioré en utilisant des travaux précédents tel que \cite{chu2000conflict} qui expose une infrastructure de Proposition/Évaluation/Modification pour prendre en charge la négociation.
