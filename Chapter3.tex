@@ -305,7 +305,7 @@ Nous présentons à la figure \ref{fig:archiphase1}, l'architecture détaillée 
 \end{figure}
 
 Il est possible d'identifier plusieurs sous parties dans cette architecture.
-La première est en charge des entrées multimodales de l'utilisateur. Une deuxième partie est responsable de l'acquisition et du maintien de l'état du monde ainsi que de la génération de données symboliques. Le gestionnaire de dialogue, ou DM (Dialogue Manager) permet de décider, en fonction des entrées interprétées de l'utilisateur et du contexte de l'interaction de la réponse donnée par le robot afin de parvenir à qualifier la demander de l'utilisateur.
+La première est en charge des entrées multimodales de l'utilisateur. Une deuxième partie est responsable de l'acquisition et du maintien de l'état du monde ainsi que de la génération de données symboliques. Le gestionnaire de dialogue, ou DM (Dialogue Manager) permet de décider, en fonction des entrées interprétées de l'utilisateur et du contexte de l'interaction de la réponse donnée par le robot afin de parvenir à qualifier la demande de l'utilisateur.
 La dernière partie s'attache à restituer sous forme multimodale la sortie du système de dialogue décidée par le gestionnaire de dialogue.
 Certains modules relevant d'avantage du dialogue proprement parlé que de l'usage du système d'évaluation de la situation, une description brève en sera donnée. Pour plus de renseignements sur ces modules et une description plus exhaustive de la partie dialogue, nous invitons le lecteur à consulter les articles \cite{Ferreira13a,Ferreira13b} ainsi que la thèse \cite{ferreira2015phd}.
 
@@ -1103,7 +1103,7 @@ Nous observons également que la politique apprise prenant en compte l'état de 
 %Phase 2 et 3 (démo avec Sandra)
 
 Pour compléter cette première implémentation et ces tests sur simulateurs dans lesquels les phases deux et trois décrites en \ref{sec:troisPhases} ont été simulées afin de mener à bien l'apprentissage de la politique du système de gestion de dialogue \cite{simpar_2014} et tester la prise en compte des croyances divergentes \cite{Ferreira2015}, nous avons implémenté et testé les éléments nécessaires pour la mise en place des phases deux et trois de la boucle d'interaction sur un Pr2.
-Cette étude a été réalisée avec l'aide de Sandra Devin.
+Cette étude a été réalisée avec l'aide des doctorants du LAAS-CNRS, Sandra Devin et de Michelangelo Fiore, pour la partie supervision.
 
 L'environnement est constitué de trois pièces (\textit{Bedroom}, \textit{Livingroom} et \textit{Kitchen}) correspondant à des zones, dans lesquels ce trouvent des zones de manipulation définies au niveau des différents meubles présents dans l'environnement.
 %TODO ajouté photo ou lien vers homepage/MaRDi?
@@ -1158,6 +1158,16 @@ Lorsque tous les meubles ont été scannés, le fait \textit{hasScanned} passe �
 
 \item \textit{Localise(O)}: cette méthode vise à trouver un objet \textit{O}. Contrairement à la méthode \textit{LocaliseInRoom}, le robot n'a pas d'indication sur la pièce où peut se trouver l'objet. Il va donc effectuer la méthode \textit{LocaliseInRoom} pour chaque pièces dont le fait \textit{hasScanned} est faux puis la fonction \textit{Localise} est rappelée de façon récursive.
 \end{itemize}
+
+La hiérarchie de ces différentes méthodes et actions est illustrée par la figure \ref{fig:MardiDom}.
+
+
+\begin{figure}[ht!]
+ \centering
+  \includegraphics[width=0.99\linewidth]{./img/mardiDom.jpg}
+  \caption {Hiérarchie des divers méthodes et actions du domaine de planification définit pour le projet MaRDi.}
+  \label{fig:MardiDom}
+\end{figure}
 
 Ce domaine ainsi définit permet de mettre au point les plans nécessaires à la résolution des buts susceptibles d'être demandés par l'utilisateur dans le cadre de notre scénario d'interaction homme-robot.
 
@@ -1242,7 +1252,7 @@ Au début du scénario, le robot n'a pas encore exploré son environnement et ig
 Nous démarrons l'expérimentation avec l'homme et le robot se trouvant au niveau de  la table du salon \textit{Livingroom\_table}. Pour induire une croyance divergente, on informe l'homme que le DVD Bilbo Le Hobit \textit{Bilbo} se trouve sur la table de la cuisine.
 
 Les croyances sur l'état du monde perçu par le robot sont représentées ci-dessous.
-Tous les faits présents sont vrais. Ils ont été simplifiés pour plus de clarté et le type est indiqué seulement lorsqu'il s'agit d'une information obtenue par le dialogue (les autres ayant été obtenus par perception). Dans le système les faits provenant du dialogue ont un flag pour indiquer la différence.
+Tous les faits présents sont vrais. Ils ont été simplifiés pour plus de clarté et le type est indiqué seulement lorsqu'il s'agit d'une information obtenue par le dialogue (les autres ayant été obtenus par perception). Dans le système les faits provenant du dialogue ont un flag pour indiquer la différence avec les autres faits.
 
 %TODO représenté chaque états avec toaster?
 
@@ -1273,6 +1283,16 @@ LOTR isInRoom Bedroom  (dialogue)
 \end{verbatim}
 \end{scriptsize}
 
+
+Cette première partie de l'interaction est illustrée par la figure \ref{fig:mardiDemo1}.
+
+\begin{figure}[ht!]
+ \centering
+  \includegraphics[width=0.99\linewidth]{./img/mardiDemo1b.jpg}
+  \caption {L'homme et le robot se trouvent près de la table du salon. À droite la représentation de l'état du monde dans Rviz et à gauche la même scène dans le monde réel.}
+  \label{fig:mardiDemo1}
+\end{figure}
+
 Suite à cela, la supervision va demander la génération d'un premier plan pour obtenir la localisation exacte de l'objet. Pour cela, le planificateur cherche à trouver comment effectuer la tâche \textit{LocaliseInRoom(Bedroom, LOTR)}.
 Pour exécuter cette première tâche, le robot se rend dans la chambre, au niveau de la table de nuit. Il scanne l'emplacement et y trouve le DVD \textit{Bilbo}.
 
@@ -1295,6 +1315,26 @@ Il y découvre le DVD du Seigneur des Anneaux.
 Le plan de recherche est donc accompli, le robot informe l'homme qu'il a trouvé l'objet en utilisant le \textit{TTS}.
 Pendant l'accomplissement de ce plan, l'humain s'est rendu à la table basse du salon.
 
+L'évolution de la situation est présentée par la figure \ref{fig:mardiDemo2} dans laquelle nous montrons l'état du monde tel qu'il est représenté par TOASTER avant et après l'exploration de la chambre.
+
+% \begin{figure}[ht!]
+%  \centering
+%   \includegraphics[width=0.99\linewidth]{./img/mardiDemo2b.jpg} &
+%    \includegraphics[width=0.99\linewidth]{./img/mardiDemo2c.jpg}
+%   \caption {Représentation de l'évolution de l'état du monde après l'exploration de la chambre. L'image de gauche est la visualisation de l'état du monde dans Rviz avant que le robot explore et celle de droite est la même visualisation après l'exploration et la mise à jour de l'état du monde. }
+%   \label{fig:mardiDemo2}
+% \end{figure}
+
+
+\begin{figure*}[ht!]
+  \begin{center}
+    \subfigure[Visualisation dans Rviz de l'état du monde maintenu par TOASTER avant que le robot explore la chambre.]{\includegraphics[width=0.83\textwidth]{./img/mardiDemo2b.jpg}}
+    \subfigure[Visualisation dans Rviz de l'état du monde maintenu par TOASTER après que le robot explore la chambre.]{\includegraphics[width=0.83\textwidth]{./img/mardiDemo2c.jpg}}
+    \caption {Représentation de l'évolution de l'état du monde après l'exploration de la chambre.}
+  \label{fig:mardiDemo2}
+  \end{center}
+\end{figure*}
+
 Nous présentons les modèles d'état de croyance simplifiés (certains faits isInRoom ont étés enlevés lorsqu'un fait isAt avec le même sujet est présent):
 
 \begin{scriptsize}
@@ -1313,11 +1353,19 @@ Pr2   hasScanned Bedroom
 \end{scriptsize}
 
 La supervision demande alors au planificateur de produire un plan pour résoudre le but courant, à savoir \textit{Bring(LOTR, Human)}.
-La supervision va gérer l'exécution pour la génération de mouvement pour attraper l'objet, la navigation vers l'emplacement de l'homme et la génération de mouvement pour transmettre l'objet à l'homme.
+La supervision va gérer l'exécution pour la génération de mouvement pour attraper l'objet, la navigation vers l'emplacement de l'homme et la génération de mouvement pour transmettre l'objet à l'homme comme illustré par la figure \ref{fig:mardiDemo3}.
+
+
+\begin{figure}[ht!]
+ \centering
+  \includegraphics[width=0.99\linewidth]{./img/real2.jpg} 
+  \caption {Le robot réalise un "Bring": il va chercher le DVD du Seigneur des Anneaux, le prends puis se déplace vers l'emplacement de l'homme pour lui donner.}
+  \label{fig:mardiDemo3}
+\end{figure}
 
 Cette première étape permet de montrer comment le robot est capable d'acquérir une information manquante afin d'accomplir une tâche demandée par l'utilisateur. En effet, le robot a demandé à l'homme la position de l'objet, ce qui réduit l'espace de recherche. La réponse de l'homme n'étant pas suffisamment précise pour permettre une exécution directe, la supervision a ordonné au planificateur la production d'un premier plan de recherche d'objet afin d'obtenir l'emplacement précis de l'objet, tout en prenant en compte les indications de l'homme.
 
-Après l'accomplissement de ce premier but, l'homme fait une autre demande au robot. Il demande cette fois que le robot déplace le livre Cendrillon (\textit{Cinderella}) pour le mettre sur la table basse du salon.
+Après la réalisation de sa première requête, l'homme fait une autre demande au robot. Il demande cette fois que le robot déplace le livre Cendrillon (\textit{Cinderella}) pour le mettre sur la table basse du salon.
 Tout comme l'étape précédente, le robot ne connaissant pas l'emplacement de cet objet, il demande à l'homme s'il sait où trouver ce livre.
 L'homme répond qu'il ignore sa position.
 Hors, le robot sait que l'homme connaît les éléments qui se trouvent dans le salon (\textit{Human hasScanned  Livingroom}), donc si l'homme ignore la position de cet objet c'est qu'il n'est probablement pas dans le salon. De plus, le robot a déjà exploré la chambre (\textit{Pr2 hasScanned Bedroom}). Le superviseur va donc éliminer ces deux zones de sa recherche et directement demander une génération de plan pour résoudre \textit{LocaliseInRoom(Kitchen Cinderella)}. Cette zone n'ayant pas été indiquée par l'homme le robot demande d'abord l'autorisation avant de se rendre à la cuisine. Ceci permet d'éviter que le robot soit perçu comme intrusif.
@@ -1327,7 +1375,14 @@ Le superviseur exécute alors le plan \textit{LocaliseInRoom(Livingroom Cinderel
 Le robot scanne alors les deux emplacements du salon sans succès.
 Le robot ayant exploré toutes les zones de l'appartement, il décide alors d'effectuer une relâche de contrainte sur l'objet et propose un objet similaire s'il a connaissance d'un objet similaire présent dans l'environnement.
 Ici \textit{Peter\_Pan} est considéré comme un objet similaire car il est du même type (livre) et du même genre (compte pour enfant).
-L'humain accepte la proposition, le robot déplace donc \textit{Peter\_Pan} de la cuisine à la table basse du salon.
+L'humain accepte la proposition, le robot déplace donc \textit{Peter\_Pan} de la cuisine à la table basse du salon, cette action est illustrée par la figure \ref{fig:mardiDemo4}.
+
+\begin{figure}[ht!]
+ \centering
+  \includegraphics[width=0.99\linewidth]{./img/mardiDemo4.jpg} 
+  \caption {Le robot propose de ramener le livre de Peter Pan (ici représenter par un cube pour faciliter la manipulation) car il n'a pas trouver Cendrillon et que ces deux objets sont proches car ils ont le même type (livre) et le même genre (conte pour enfant). L'image de gauche montre le robot attrapant l'objet dans le monde réel et l'image de droite montre la même scène dans Rviz.}
+  \label{fig:mardiDemo4}
+\end{figure}
 
 Cette deuxième étape illustre la capacité du système à raisonner sur les emplacements possibles en utilisant la prise de perspective perceptuelle pour savoir ce que l'homme a pu observer ou non et pouvoir réduire le champ des possibles concernant l'emplacement de l'objet désiré. Cette expérimentation permet également de montrer comment le robot est capable de relâcher certaines contraintes en cas d'échec de localisation de l'objet désiré, permettant ainsi de proposer une alternative cohérente (proposition d'objet similaire) en cas d'incapacité d'accomplissement du but initial.
 
