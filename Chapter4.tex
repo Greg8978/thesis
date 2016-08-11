@@ -102,7 +102,7 @@ Un IG est composé des couches de nœuds suivants:
 \end{itemize}
 
 
-Dans une utilisation classique, le robot va créer, pour chaque humain "surveillé" (monitored human), un IG, formé par les nœuds de contexte et d'intention, que nous considérons statiquement connus par le robot, et une liste variable de nœuds d'action et d'observation, qui dépend du modèle de croyance de l'homme. Le système va créer un nœud d'action pour chaque action connue dont les  $preconditions$ sont satisfaites dans le modèle de croyance de l'humain, et leurs nœuds d'observation associées. L'IG de chaque agent devra être mis à jour chaque fois qu'un agent exécute une action A. Pour se faire, le système change dans chaque IG, les nœuds d'action et d'observation de la version précédent A pour les remplacer par de nouveaux, qui correspondent à l'état du monde après que A a été effectuée. En effet, chaque action modifiant l'État du monde, elle modifie potentiellement les actions possibles en validant ou invalidant certaines préconditions.
+Dans une utilisation classique, le robot va créer, pour chaque humain "surveillé" (monitored human), un IG, formé par les nœuds de contexte et d'intention, que nous considérons statiquement connus par le robot, et une liste variable de nœuds d'action et d'observation, qui dépend du modèle de croyance de l'homme. Le système va créer un nœud d'action pour chaque action connue dont les  $preconditions$ sont satisfaites dans le modèle de croyance de l'humain, et leurs nœuds d'observation associées. Le modèle de croyance de l'humain pouvant être différent de celui du robot, certaines $preconditions$ d'actions peuvent être valides chez l'homme et invalides chez le robot et inversement, ce qui explique que certaines actions soient envisageable et donc présent dans l'IG d'un agent et pas chez un autre et donc que les IGs de chaque agent peuvent diverger. L'IG de chaque agent devra être mis à jour chaque fois qu'un agent exécute une action A. Pour se faire, le système change dans chaque IG, les nœuds d'action et d'observation de la version précédent A pour les remplacer par de nouveaux, qui correspondent à l'état du monde après que A a été effectuée. En effet, chaque action modifiant l'État du monde, elle modifie potentiellement les actions possibles en validant ou invalidant certaines préconditions.
 
 % In a typical usage, the robot will create, for each monitored human, an IG, formed by the Context and Intention Nodes, which we consider statically known by the robot, and a variable list of Action and Observation nodes, which depends on the human's belief model. The robot will create action nodes for each known action whose $preconditions$ are satisfied in the human's belief model, and their related Observation Nodes. These IGs will need to be updated every time that an agent performs an action, switching the previous Action and Observation nodes with new ones, that will depend on the state of the world after the action was performed.
 
@@ -201,6 +201,7 @@ Lorsque le robot déduit qu'une action a été réalisée, il met à jour l'éta
 Une fois que le robot est parvenu à estimer l'intention la plus probable, il peut essayer d'aider l'homme à atteindre son but. Nous définissons deux types d'attitudes proactives que le robot peut exécuter à tout moment: corriger l'état de croyance de l'homme et accomplir une partie du plan pour atteindre le but.
 
 \subsubsection{Correction de l'état de croyance}
+\label{sec:correctingBf}
 Avoir une croyance erronée ou incomplète sur l'environnement peut amener l'agent à exécuter des actions non optimales, inutiles, voir contre-productives ou dangereuses. Le robot a besoin de détecter ces situations afin de prévenir l'homme pour que celui-ci puisse corriger son état de croyance et accomplir les actions appropriées. Le robot suppose ici qu'il a toujours un état de croyance correct. Notre solution utilise la récompense attendue de l'action, introduite dans la partie \ref{action_evaluation}. Le principe est de comparer la récompense attendue lors de l'accomplissement d'une action, pour l'humain d'une part (basé sur son modèle de croyance) et pour le robot d'autre part. En d'autres termes, nous regardons si l'homme a une croyance erronée (différente du robot) sur l'influence que son action aura sur l'accomplissement du but. Pour formaliser: nous comparons la valeur d'action \(Q_m(s_h,a_h)\) et \(Q_m(s_r,a_h)\), où $m$ est l'intention la plus probable, $s_h$ et $s_r$ sont les états de croyance de l'homme et du robot, et $a_h$ est l'action la plus probable. Si ces valeurs ne sont pas égales, cela signifie que l'homme attend un résultat de son action qui est différent de ce qu'il va réellement faire.
 
 Nous proposons une solution simple, où le robot prévient l'homme de la croyance divergente détectée pour cette action. Par exemple, Bob veut boire du thé contenu dans une bouteille opaque. Cependant, le robot sait que cette bouteille est vide (par exemple parce qu'un agent a bu le dernier verre), mais Bob l'ignore. Lorsqu'il s'approche de la bouteille, le robot détecte que l'intention la plus probable (en utilisant le processus décrit en \ref{sec:intention_recognition}) est de boire du thé. Le système calcule la récompense attendue par l'action de prendre la bouteille dans le modèle de Bob et du robot afin de modéliser l'avancement du plan attendu par cette action par rapport à l'état de croyance de chacun. On obtient des valeurs différentes. Ici la valeur est plus élevée pour Bob signifiant qu'il pense que son action aura une conséquence "meilleure" (qui fera avancer l'état du monde vers son but) que celle prévue par le robot (la récompense dans l'état mental du robot étant inférieure). Le système vérifie les valeurs des propriétés associées à la bouteille dans les deux modèles mentaux et en extrait celles qui sont divergentes. En utilisant cette information, le robot corrige la croyance divergente en informant l'humain que la bouteille ne contient plus de thé.
@@ -212,6 +213,35 @@ Nous proposons une solution simple, où le robot prévient l'homme de la croyanc
 \label{robot_acts}
 Il y a des situations dans lesquelles le robot devrait aider l'homme à accomplir son but en agissant. Dans ces cas là, le robot crée un plan partagé pour accomplir le but lié à l'intention reconnue, et exécute les actions qui lui incombent. Le robot est capable de surveiller les actions de l'homme et replanifier si ses actions diffèrent du plan qu'il a établi, permettant ainsi d'être flexible aux choix de l'homme et de s'adapter dynamiquement de la même façon que décrite en \cite{fioreiser2014}.
 \vspace{-5pt}
+
+
+\section{Architecture}
+
+Dans section nous présentons l'architecture permettant de mettre en place les processus détaillés ci-dessus.
+Pour détailler les différents modules nous nous appuierons sur la figure \ref{fig:intentionArch}
+
+\begin{figure}[ht!]
+  \centering
+ \includegraphics[width=1.0\linewidth]{./intention/intentionArch.jpg} 
+  \caption {Schéma d'architecture des différents modules impliqués dans la reconnaissance et l'utilisation de l'intention.}
+  \label{fig:intentionArch}
+\end{figure}
+
+Dans un premier temps, on peut retrouver les différents modules présentés dans les chapitres \ref{chapter1} et \ref{chapter2}. Ces modules sont chargés de collecter les données au près des capteurs et de produire des faits au \textit{Belief Manager} qui se charge de maintenir un modèle d'état du monde pour chaque agent.
+
+Le module appelé \textit{Intention Graph Manager} est chargé de créer l'IG de chaque humain. Pour ce faire, il utilise les données de contexte et les intentions du domaine d'application considérés comme connus par le robot. Puis le module va récupérer, au près du \textit{Belief Manager}, l'état du monde tel qu'il est perçu par l'humain concerné par l'IG en construction. À partir de cet état du monde, le module peut identifier quelles actions sont réalisables et va ajouter ces actions et les observations associées à l'IG, comme expliqué en section \ref{sec:intention_recognition}.
+Enfin, pour créer les dépendances conditionnelles entre les nœuds d'intention et les nœuds d'action, le module de gestion des IGs fait une demande au module de gestion des MDPs pour connaître la probabilité \(P(a|I=1)\) pour chaque action $a$ et intention I contenues dans l'IG, comme expliqué dans la section \ref{action_evaluation}.
+
+Par la suite, pour obtenir et mettre à jour les valeurs des nœuds d'observation, le module qui gère les IGs va utiliser les faits exportés par le module \textit{Agent Monitor}.
+
+Enfin, le module décide de valider une intention lorsque les règles présentées en section \ref{sec:intentionactioninf} sont valides. À ce moment, le module de gestion des IGs envoie l'intention reconnue au superviseur.
+
+Le superviseur vérifie alors que l'action courante de l'humain est "valide" par rapport à l'état du monde réel (comme expliqué en section \ref{sec:correctingBf}).
+Le superviseur informe l'humain si nécessaire de sa croyance erronée, puis utilise le module de planification de tâches (Task Planner) pour produire un plan permettant d'accomplir le but lié à l'intention de l'humain.
+Si dans ce plan le robot peut accomplir certaines actions pour aider l'homme à réaliser son but, le superviseur va alors piloter les différents modules permettant l'exécution de ces actions.
+
+
+
 
 
 \section{Étude expérimentale}

@@ -22,10 +22,11 @@ L'un des défis de la robotique est de faire collaborer convenablement les robot
 
 %Plan generation
 Nous définissons un plan collaboratif, ou plan partagé, comme un ensemble d'actions ordonnées, impliquant plusieurs agents qui coopèrent afin d'avancer vers un objectif commun.
-Pour produire un plan partagé, le robot devrait prendre en compte non seulement la configuration de son environnement, mais également son/ses partenaire(s) humain(s). Un moyen pragmatique de prendre en compte l'humain consiste à calculer les affordances de celui-ci, lui permettant de créer des plans plus pertinents et pour lesquels l'homme est dans la capacité d'accomplir les tâches qui lui sont confiées. D'un point de vue social, le robot devrait également pouvoir adapter le plan aux préférences et à l'expertise de l'utilisateur. Idéalement, cette adaptation devrait pouvoir se faire au niveau de chaque tâche du plan.
+Pour produire un plan partagé, le robot devrait prendre en compte non seulement la configuration de son environnement, mais également son/ses partenaire(s) humain(s). Un moyen pragmatique de prendre en compte l'humain consiste à calculer les affordances de celui-ci, lui permettant de créer des plans plus pertinents et pour lesquels l'homme est dans la capacité "physique" d'accomplir les tâches qui lui sont confiées. La plupart des travaux menés jusque là prennent au mieux ces limitations liées aux capacités ou à l'effort humain en compte lors de la planification de tâches, supposant ainsi que l'humain sait comment réaliser les actions qui lui sont assignées.
+Nous pensons que pour améliorer l'interaction d'un point de vue social, le robot devrait également pouvoir adapter le plan aux préférences et à l'expertise de l'utilisateur. Idéalement, cette adaptation devrait pouvoir se faire au niveau de chaque tâche du plan.
 
 %Plan explanation
-Une fois que le robot a produit un plan pour atteindre l'objectif des agents (hommes et robots) impliqués, il faut pouvoir le partager avec le partenaire humain afin de s'assurer qu'il soit informé des tâches qui lui incombent, et qu'il accepte de les mener à bien. Lorsque le plan et l'objectif sont suffisamment simples, les jeunes enfants sont capables de collaborer sans utiliser le langage, simplement en estimant l'intention et les actions de l'autre. Dans les situations nécessitant des plans plus complexes, le langage est la modalité préférée \cite{Warneken2006,Warneken2007}. Cependant, expliquer la totalité du plan en détaillant chaque action unitaire (par exemple "tendre le bras puis fermer la main" pour attraper un objet) d'un seul coup serait inefficace et ennuyeux pour le partenaire humain, tout particulièrement s'il a déjà la connaissance de la façon de réaliser certaines actions. Pour reprendre l'exemple d'attraper un objet, cette tâche fait partie des connaissances "universelles" chez l'homme, à savoir que le robot devrait estimer connue peu importe l'identité de l'humain avec lequel il collabore. Il serait donc inutile de décomposer la tâche d'attraper un objet pour détailler les actions (ou sous-tâches) liées à cette tâche. 
+Une fois que le robot a produit un plan pour atteindre l'objectif des agents (hommes et robots) impliqués, il faut pouvoir le partager avec le partenaire humain afin de s'assurer qu'il soit informé des tâches qui lui incombent, et qu'il accepte de les mener à bien. Lorsque le plan et l'objectif sont suffisamment simples, les jeunes enfants sont capables de collaborer sans utiliser le langage, simplement en estimant l'intention et les actions de l'autre. Dans les situations nécessitant des plans plus complexes, le langage est la modalité préférée \cite{Warneken2006,Warneken2007}. Cependant, expliquer la totalité du plan en détaillant chaque action unitaire (par exemple "tendre le bras puis fermer la main" pour attraper un objet) d'un seul coup serait inefficace et ennuyeux pour le partenaire humain, tout particulièrement s'il a déjà la connaissance de la façon de réaliser certaines actions. Se pose donc la question du niveau de détail à donner comme indication au partenaire humain. Pour reprendre l'exemple d'attraper un objet, cette tâche fait partie des connaissances "universelles" chez l'homme, à savoir que le robot devrait estimer connue peu importe l'identité de l'humain avec lequel il collabore. Il serait donc inutile de décomposer la tâche d'attraper un objet pour détailler les actions (ou sous-tâches) liées à cette tâche. 
 
 Les recherches menées en psychologie et en philosophie ont conduit à une meilleure compréhension du comportement humain durant l'action jointe et la collaboration, afin de savoir comment \cite{tomasello2005} et pourquoi \cite{tomasello2009} l'homme collabore et ce qui est partagé durant ce processus \cite{Butterfill2011}.
 %
@@ -257,7 +258,7 @@ L'HTN est beaucoup plus efficace que la planification classique car l'expert du 
 Une très célèbre application de HTN est SHOP \cite{Nau99}.
 
 %HATP
-Pour calculer des plans de collaboration, nous utilisons HATP, un planificateur HTN modifié, spécialement conçu pour la robotique \cite{lallement14}.
+Le planificateur utilisé, HATP, est un HTN modifié spécialement conçu pour la robotique \cite{lallement14}.
 Il est livré avec des fonctions spécifiques concernant la production du plan, telles que:
 
 \begin{itemize}
@@ -276,18 +277,27 @@ Il est livré avec des fonctions spécifiques concernant la production du plan, 
 
 
 
-Chaque action dans le domaine dispose d'une fonction qui permet d'estimer son coût si elle est ajoutée au plan. Donc, à tout moment il est possible de calculer le coût du plan partiel alors qu'il est en cours de construction. En outre, le score du meilleur plan actuel est stocké; si, à un moment, le coût du plan partiel courant dépasse ce score, le plan est rejeté et la recherche se poursuit. Cet élagage de plan permet d'accélérer la recherche du meilleur plan. Après que chaque plan ait été calculé, un ensemble de règles de filtrage sont appliquées pour sanctionner les plans qui ne présentent pas certains comportements sociaux. Une fois que le meilleur plan (notez que l'on peut limiter la recherche à un niveau de coût "suffisamment" bon) est récupéré, il est envoyé au superviseur sous la forme d'un arbre de décomposition. En outre, un ensemble de flux d'actions est élaboré; chaque flux représente les actions qu'un agent (humain ou robot) doit effectuer. Pour assurer le séquençage de l'action appropriée et la synchronisation entre les agents, les liens de causalité sont intégrés. Par ailleurs, le plan peut inclure des actions conjointes attribuées simultanément à deux ou plusieurs agents parce qu'ils ont besoin d'être en étroite collaboration (par exemple dans le cas d'un "handover", ou transfert d'objet). La figure \ref{fig:treePlan}
-dépeint une partie de la décomposition de l'arbre d'un plan solution.
+Chaque action dans le domaine dispose d'une fonction qui permet d'estimer son coût si elle est ajoutée au plan. Donc, à tout moment il est possible de calculer le coût du plan partiel alors qu'il est en cours de construction. En outre, le score du meilleur plan actuel est stocké; si, à un moment, le coût du plan partiel courant dépasse ce score, le plan est rejeté et la recherche se poursuit. Cet élagage de plan permet d'accélérer la recherche du meilleur plan. Après que chaque plan ait été calculé, un ensemble de règles de filtrage sont appliquées pour sanctionner les plans qui ne présentent pas certains comportements sociaux. Une fois que le meilleur plan (notez que l'on peut limiter la recherche à un niveau de coût "suffisamment" bon) est récupéré, il est envoyé au superviseur sous la forme d'un arbre de décomposition. En outre, un ensemble de flux d'actions est élaboré; chaque flux représente les actions qu'un agent (humain ou robot) doit effectuer. Pour assurer le séquençage de l'action appropriée et la synchronisation entre les agents, les liens de causalité sont intégrés. Par ailleurs, le plan peut inclure des actions conjointes attribuées simultanément à deux ou plusieurs agents parce qu'ils ont besoin d'être en étroite collaboration (par exemple dans le cas d'un "handover", ou transfert d'objet). La figure \ref{fig:TreeBanana}
+dépeint la décomposition de l'arbre d'un plan solution pour cuisiner une tarte à la banane. La figure \ref{fig:StreamBanana} présente le flux d'actions associé au plan pour cuisiner la tarte.
+ 
+ 
+\clearpage
 
-\begin{figure}[ht!]
- \centering
- %  \vspace{-8pt}
-  \includegraphics[width=0.77
- \textwidth]{img/plan.png}
+\begin{sidewaysfigure}[t!]
 %   \vspace{-10pt}
- \caption{Extrait d'un arbre de décomposition pour cuisiner une tarte aux pommes.}
- \label{fig:treePlan}
- \end{figure}
+ \centering
+  \includegraphics[width=1.0\textwidth]{img/bananaPieMulti.jpg}
+    \caption{Arbre de décomposition d'un plan pour faire une tarte à la banane.}
+  \label{fig:TreeBanana}
+  \includegraphics[width=1.0\textwidth]{img/bananaPieStream.jpg}
+    \caption{Flux d'actions lié au plan pour faire une tarte à la banane.}
+  \label{fig:StreamBanana}
+ %  \vspace{-10pt}
+\end{sidewaysfigure}
+
+
+\clearpage
+ 
  
 Pour prendre l'expertise en compte lors de la planification, une nouvelle règle sociale est nécessaire. L'objectif est de sélectionner le meilleur plan adapté à la politique choisie. Nous proposons deux politiques: la préférence de l'enseignement (sous forme de démonstration ou de réalisation accompagnée d'explications) où l'être humain peut apprendre du robot, ou le choix de l'efficacité. Avec la politique de l'enseignement, le planificateur tente de produire des plans afin de maximiser le nombre de tâches humaines où l'humain a l'occasion d'apprendre, alors que l'efficacité pousse le planificateur à sélectionner des plans avec le moins de tâches inconnues pour l'être humain, afin de veiller à ce qu'il puisse être plus efficace (le robot peut cependant s'assigner certaines tâches inconnues à l'homme).
 Dans le cas d'une politique visant à favoriser l'efficacité, la règle est tout simplement d'appliquer une pénalité à chaque fois qu'un humain doit effectuer une action qu'il ignore. Cette pénalité serait inversée pour la règle de l'enseignement.
@@ -322,14 +332,21 @@ En considérant cela, nous décidons d'utiliser la parole pour présenter le pla
 \subsection{Prétraitement du plan}
 %TODO: expliquer le rôle des tâches récursives et pourquoi il ne faut pas les traiter.
 
-L'arbre HTN créé représente une solution pour accomplir le but. Cependant, il se peut qu'en l'état il ne convienne pas à la présentation ou à l'explication du plan au collaborateur, car il peut contenir des étapes de raffinement qui rendraient l'explication confuse. Pour adapter le plan à l'explication nous utilisons deux règles.
+L'arbre HTN créé représente une solution pour accomplir le but. Cependant, il se peut qu'en l'état il ne convienne pas à la présentation ou à l'explication du plan au collaborateur, car il peut contenir des étapes de raffinement qui allongeraient l'explication ou même pourrait la rendre confuse.
+
+Par exemple, lors de la planification, certaines méthodes peuvent être récursives. En effet, si on reprend le domaine de planification décrit dans le chapitre \ref{chapter3} en section \ref{sec:domainehatp}, le robot devait explorer les pièces n'ayant pas encore étaient explorées. Une telle méthode peut être décrite de façon récursive en commençant par explorer une première zone A non explorée puis en rappelant la méthode d'exploration. Le second appel à la même méthode explorera alors une autre zone car la zone A est déjà explorée, et ainsi de suite jusqu'à ce que toutes les salles soient explorées. 
+Ici, pour expliquer ce type de méthode récursives, nous avons fait le choix de retirer l'aspect récursif qui est un aspect intéressant pour la planification mais qui complexifie les explications à procurer. Le robot dirait donc simplement à l'homme d'explorer la première salle puis la seconde puis la suivante...
+
+D'autres méthodes peuvent avoir qu'un seul enfant. Par exemple la méthode consistant à donner un objet au robot peut contenir un déplacement vers l'objet, une préhension puis un autre déplacement vers le robot pour enfin tendre l'objet au robot. Cependant si l'agent en charge de cette tâche est déjà en face du robot et a l'objet dans la main, il n'aura plus qu'à tendre l'objet au robot. Dans ce second cas, la méthode "donner l'objet au robot" aura une seule méthode fille qui est "tendre l'objet au robot". Nous faisons le choix ici de ne pas verbaliser la méthode "donner l'objet au robot" et "tendre l'objet au robot" mais uniquement la seconde.
+
+ Pour adapter le plan à l'explication nous utilisons deux règles.
 %
 (1) Nous retirons les tâches récursives. Si un nœud $n$ de l'arbre HTN contient la même méthode (en utilisant la fonction $compare$) que son parent $parent(n)$, il sera remplacé dans l'arbre par ses enfants $children(n)$. (2) Nous remplaçons également les nœuds avec un enfant unique par cet enfant.
 \begin{enumerate}
 \item $\textbf{if}$ $(compare(n, parent(n)))$ \textbf{then} $n \leftarrow children(n)$
 \item $\textbf{if}$ $(children(n).size() = 1)$ \textbf{then} $n \leftarrow children(n)$
 \end{enumerate}
-Ces règles permettent réduire la taille de l'arbre à traiter et de le rendre plus adapté à la verbalisation et à la surveillance de l'activité de l'homme.
+Ces règles permettent de réduire la taille de l'arbre à traiter et de le rendre plus adapté à la verbalisation et à la surveillance de l'activité de l'homme.
 Ces traitements sont illustrés par la figure \ref{fig:pretraitement}.
 
 \begin{figure}[ht!]
@@ -367,17 +384,17 @@ Pour assurer le bon fonctionnement du système avec des plans de différentes ta
 \hline
    agents(root) $+$ have\_to $+$ root  & "We have to cook an apple pie." \\
    \hline
-   introduce\_presentation & "I will tell you the steps." \\
+   introduce\_presentation & "I will tell you the first steps." \\
    \hline
-   agents(child[0]) $+$ first $+$ child[0] & "You will first fetch the ingredients," \\
+   agents(child[0]) $+$ first $+$ child[0] & "You will first prepare the dough," \\
    \hline
-   then $+$ agents(child[1]) $+$  child[1] & "Then I will assemble the apple pie," \\
+   then $+$ agents(child[1]) $+$  child[1] & "Then I will prepare the mixture," \\
    \hline
-   finally $+$ agents(child[2]) $+$  child[2] & "Finally, you will bake \\
-   & the apple pie in the oven." \\
+   finally $+$ agents(child[2]) $+$  child[2] & "Finally, you will prepare the banana." \\
    \hline
 \end{tabular}
-\caption{Présentation d'un plan pour cuisiner une tarte aux pommes. \textit{root} désigne la racine de l'arbre et \textit{child} est la liste de ses enfants.}
+\caption{Présentation d'un plan pour cuisiner une tarte à la banane comme celui présenter à la figure \ref{fig:TreeBanana}. \textit{root} désigne la racine de l'arbre et \textit{child} est la liste de ses enfants. Une vidéo avec la présentation d'un plan similaire peut être consultée sur \url{http://homepages.laas.fr/gmilliez/hri2016/}
+}
  \label{table:pie-present}    
 \end{table}
  
