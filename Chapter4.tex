@@ -102,7 +102,7 @@ Un IG est composé des couches de nœuds suivants:
 \end{itemize}
 
 
-Dans une utilisation classique, le robot va créer, pour chaque humain "surveillé" (monitored human), un IG, formé par les nœuds de contexte et d'intention, que nous considérons statiquement connus par le robot, et une liste variable de nœuds d'action et d'observation, qui dépend du modèle de croyance de l'homme. Le système va créer un nœud d'action pour chaque action connue dont les  $preconditions$ sont satisfaites dans le modèle de croyance de l'humain, et leurs nœuds d'observation associées. Le modèle de croyance de l'humain pouvant être différent de celui du robot, certaines $preconditions$ d'actions peuvent être valides chez l'homme et invalides chez le robot et inversement, ce qui explique que certaines actions soient envisageable et donc présent dans l'IG d'un agent et pas chez un autre et donc que les IGs de chaque agent peuvent diverger. L'IG de chaque agent devra être mis à jour chaque fois qu'un agent exécute une action A. Pour se faire, le système change dans chaque IG, les nœuds d'action et d'observation de la version précédent A pour les remplacer par de nouveaux, qui correspondent à l'état du monde après que A a été effectuée. En effet, chaque action modifiant l'État du monde, elle modifie potentiellement les actions possibles en validant ou invalidant certaines préconditions.
+Dans une utilisation classique, le robot va créer, pour chaque humain "surveillé" (monitored human), un IG, formé par les nœuds de contexte et d'intention, que nous considérons statiquement connus par le robot, et une liste variable de nœuds d'action et d'observation, qui dépend du modèle de croyance de l'homme. Le système va créer un nœud d'action pour chaque action connue dont les  $preconditions$ sont satisfaites dans le modèle de croyance de l'humain, et leurs nœuds d'observation associées. Le modèle de croyance de l'humain pouvant être différent de celui du robot, certaines $preconditions$ d'actions peuvent être valides chez l'homme et invalides chez le robot et inversement, ce qui explique que certaines actions soient envisageables et donc présentes dans l'IG d'un agent et pas chez un autre et donc que les IGs de chaque agent peuvent diverger. L'IG de chaque agent devra être mis à jour chaque fois qu'un agent exécute une action A. Pour se faire, le système change dans chaque IG, les nœuds d'action et d'observation de la version précédent A pour les remplacer par de nouveaux, qui correspondent à l'état du monde après que A a été effectuée. En effet, chaque action modifiant l'État du monde, elle modifie potentiellement les actions possibles en validant ou invalidant certaines préconditions.
 
 % In a typical usage, the robot will create, for each monitored human, an IG, formed by the Context and Intention Nodes, which we consider statically known by the robot, and a variable list of Action and Observation nodes, which depends on the human's belief model. The robot will create action nodes for each known action whose $preconditions$ are satisfied in the human's belief model, and their related Observation Nodes. These IGs will need to be updated every time that an agent performs an action, switching the previous Action and Observation nodes with new ones, that will depend on the state of the world after the action was performed.
 
@@ -118,11 +118,12 @@ Un exemple d'IG, pris d'une expérience, peut être vu dans la figure \ref{fig:i
 
  \begin{figure}[h!]
 	\centering
-	\includegraphics[trim={2cm 11cm 11cm 17cm},clip,scale=0.56]{img/cookieScenario.pdf}
+	\includegraphics[width=0.63\linewidth]{intention/cookieScenario.jpg}
 	\caption{Une scène d'expérimentation. Les flèches jaunes montrent les actions possibles et leurs probabilités associées. Le diagramme représente l'IG (Intention Graph) associé. Les cercles verts représentent les nœuds considérés comme preuves et les bleus sont les autres nœuds. Pour les nœuds de contexte, situés en haut du graphe, les nœuds ayant une valeur fausse sont grisés. Parmi les autres nœuds, ceux ayant la probabilité la plus forte sont entourés. Les nœuds d'observation ont étés regroupés en un seul bloc pour simplifier le diagramme.}
 	\label{fig:intention_graph}
    	\vspace{-20pt}
 \end{figure}
+
 
 \subsection{Du contexte à l'intention}
 Nous introduisons un ensemble de contextes dans notre domaine. Nous considérons comme contexte n'importe quelle information qui peut être utilisée pour caractériser et motiver une intention \cite{abowd1999towards}. Nous modélisons un contexte sous la forme d'une propriété, qui peut prendre différentes valeurs et influencer la probabilité d'un utilisateur d'avoir une intention donnée. Par exemple, on établit qu'un humain a plus de chances de vouloir cuisiner à l'heure du dîner, ou de boire une boisson chaude lorsqu'il fait froid.
@@ -153,7 +154,7 @@ L'idée principale dans ce problème est d'utiliser les croyances de l'humain co
 \subsection{De l'action aux observations}
 \label{sec:action}
 Les intentions sont déduites des actions humaines, donc le robot a besoin de surveiller leur exécution.
-Dans notre étude, les actions possibles de l'homme sont des actions de manipulation d'objet. Il nous faut donc pouvoir observer les mouvements de l'homme par rapport aux objets avec lesquels il peut interagir. Pour chaque nœud d'action nous définissons un ensemble de quatre nœuds d'observation: la distance du corps de l'humain à la $cible$ de l'action, la variation de celle-ci, la distance de la main de l'humain à la $cible$ de l'action, et la variation de celle-ci.
+Dans notre étude, les actions possibles de l'homme sont des actions de manipulation d'objets. Il nous faut donc pouvoir observer les mouvements de l'homme par rapport aux objets avec lesquels il peut interagir. Pour chaque nœud d'action nous définissons un ensemble de quatre nœuds d'observation: la distance du corps de l'humain à la $cible$ de l'action, la variation de celle-ci, la distance de la main de l'humain à la $cible$ de l'action, et la variation de celle-ci.
 Les dépendances conditionnelles des nœuds d'observation sont pré-calculées.
 
 \subsection{Déduction d'intention et d'action}
@@ -177,7 +178,7 @@ $n_i$ étant le nœud associé à l'intention ou l'action concernée.
 La première condition permet de s'assurer que l'action ou l'intention est suffisamment probante et la seconde permet quant à elle de vérifier qu'elle se démarque des autres actions ou intentions potentielles.
 
 Pour illustrer ces règles, on reprend l'exemple présenté en \ref{fig:intention_graph}.
-Deux actions sont alors possible: $MoveToTable$ et $MoveToKitchen$.
+Deux actions sont alors possibles: $MoveToTable$ et $MoveToKitchen$.
 Imaginons dans un premier temps qu'on ait:
 
 \begin{itemize}
@@ -227,9 +228,9 @@ Pour détailler les différents modules nous nous appuierons sur la figure \ref{
   \label{fig:intentionArch}
 \end{figure}
 
-Dans un premier temps, on peut retrouver les différents modules présentés dans les chapitres \ref{chapter1} et \ref{chapter2}. Ces modules sont chargés de collecter les données au près des capteurs et de produire des faits au \textit{Belief Manager} qui se charge de maintenir un modèle d'état du monde pour chaque agent.
+Dans un premier temps, on peut retrouver les différents modules présentés dans les chapitres \ref{chapter1} et \ref{chapter2}. Ces modules sont chargés de collecter les données auprès des capteurs et de produire des faits au \textit{Belief Manager} qui se charge de maintenir un modèle d'état du monde pour chaque agent.
 
-Le module appelé \textit{Intention Graph Manager} est chargé de créer l'IG de chaque humain. Pour ce faire, il utilise les données de contexte et les intentions du domaine d'application considérés comme connus par le robot. Puis le module va récupérer, au près du \textit{Belief Manager}, l'état du monde tel qu'il est perçu par l'humain concerné par l'IG en construction. À partir de cet état du monde, le module peut identifier quelles actions sont réalisables et va ajouter ces actions et les observations associées à l'IG, comme expliqué en section \ref{sec:intention_recognition}.
+Le module appelé \textit{Intention Graph Manager} est chargé de créer l'IG de chaque humain. Pour ce faire, il utilise les données de contexte et les intentions du domaine d'application considérées comme connues par le robot. Puis le module va récupérer, auprès du \textit{Belief Manager}, l'état du monde tel qu'il est perçu par l'humain concerné par l'IG en construction. À partir de cet état du monde, le module peut identifier quelles actions sont réalisables et va ajouter ces actions et les observations associées à l'IG, comme expliqué en section \ref{sec:intention_recognition}.
 Enfin, pour créer les dépendances conditionnelles entre les nœuds d'intention et les nœuds d'action, le module de gestion des IGs fait une demande au module de gestion des MDPs pour connaître la probabilité \(P(a|I=1)\) pour chaque action $a$ et intention I contenues dans l'IG, comme expliqué dans la section \ref{action_evaluation}.
 
 Par la suite, pour obtenir et mettre à jour les valeurs des nœuds d'observation, le module qui gère les IGs va utiliser les faits exportés par le module \textit{Agent Monitor}.
